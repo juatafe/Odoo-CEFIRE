@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../personalitzacio.md:1
+msgid "Personalització"
+msgstr ""
+
+#: ../../personalitzacio.md:3
+msgid ""
+"El fitxer `conf.py` és el cor del projecte Sphinx. Ací pots configurar el"
+" tema, els estils, els logos, les opcions de navegació, i la generació "
+"del PDF."
+msgstr ""
+
+#: ../../personalitzacio.md:7
+msgid "Tema i opcions visuals"
+msgstr ""
+
+#: ../../personalitzacio.md:9
+msgid ""
+"El tema utilitzat és **PyData Sphinx Theme**, un tema modern i molt "
+"configurable:"
+msgstr ""
+
+#: ../../personalitzacio.md:32
+msgid "Logos i favicon"
+msgstr ""
+
+#: ../../personalitzacio.md:34
+msgid "Es defineixen així dins del bloc HTML:"
+msgstr ""
+
+#: ../../personalitzacio.md:41
+msgid ""
+"Pots substituir-los per les teues pròpies imatges mantenint la ruta dins "
+"de `docs/_static/...`."
+msgstr ""
+
+#: ../../personalitzacio.md:45
+msgid "Fulls d’estil (CSS)"
+msgstr ""
+
+#: ../../personalitzacio.md:47
+msgid ""
+"El paràmetre `html_css_files` permet carregar fulls d’estil "
+"personalitzats. L’ordre és important: van del més general al més "
+"específic."
+msgstr ""
+
+#: ../../personalitzacio.md:57
+msgid ""
+"Els fitxers han d’estar dins de `docs/_static/`. Recomanat: crea "
+"subcarpetes (`assets/stylesheets/`) per mantindre net el projecte."
+msgstr ""
+
+#: ../../personalitzacio.md:61
+msgid "Plantilles HTML i rutes"
+msgstr ""
+
+#: ../../personalitzacio.md:63
+msgid ""
+"Si necessites modificar la distribució HTML, declara la carpeta de "
+"plantilles:"
+msgstr ""
+
+#: ../../personalitzacio.md:69
+msgid ""
+"Aquesta ruta conté fitxers `.html` que sobreescriuen parcialment els del "
+"tema. Pots personalitzar, per exemple, el layout base, els blocs de la "
+"barra lateral o la capçalera."
+msgstr ""
+
+#: ../../personalitzacio.md:73
+msgid "PDF: títol, fonts i llengua"
+msgstr ""
+
+#: ../../personalitzacio.md:75
+msgid "La generació del PDF via LaTeX es configura amb:"
+msgstr ""
+
+#: ../../personalitzacio.md:94
+msgid ""
+"Aquest fragment assegura que el PDF utilitza fonts modernes i correcte "
+"llengua (valencià/català). Pots substituir les fonts si ho necessites."
+msgstr ""
+
+#: ../../personalitzacio.md:98
+msgid "PDF: nom fix segons el repositori"
+msgstr ""
+
+#: ../../personalitzacio.md:100
+msgid "El nom del PDF es genera automàticament a partir del repositori GitHub:"
+msgstr ""
+
+#: ../../personalitzacio.md:108
+msgid ""
+"Això assegura que el fitxer `.pdf` tinga un nom coherent amb el repo "
+"(ideal per a repositoris educatius)."
+msgstr ""
+

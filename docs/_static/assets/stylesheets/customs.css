@@ -1,0 +1,11 @@
+.card-icon {
+  max-width: 100%;       /* mai sobrepassa l’amplada de la card */
+  height: auto;          /* proporció mantinguda */
+  display: block;
+  margin: 0 auto 0.5rem; /* centrat + separació amb el text */
+}
+
+/* Amaga el segon índex (el del llibre) per a la versió web */
+.only-pdf {
+    display: none;
+}

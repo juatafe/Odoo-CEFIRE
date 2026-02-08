@@ -1,0 +1,688 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../index.md:357
+msgid "Tema 1"
+msgstr ""
+
+#: ../../index.md:1
+msgid "Unitat 1. Identificació de sistemes ERP"
+msgstr ""
+
+#: ../../index.md:2
+msgid "1. Introducció a la gestió empresarial"
+msgstr ""
+
+#: ../../index.md:4
+msgid ""
+"La **gestió empresarial** és la ciència social que té per objecte "
+"l’estudi de les organitzacions i la tècnica encarregada de la "
+"**planificació, organització, direcció i control** dels recursos (humans,"
+" financers, materials, tecnològics, coneixement, etc.) d’una "
+"organització, per obtenir eficiència o el màxim benefici possible."
+msgstr ""
+
+#: ../../index.md:6
+msgid ""
+"Aquest benefici pot ser **social, econòmic o estratègic**, depenent dels "
+"fins perseguits per l’organització."
+msgstr ""
+
+#: ../../index.md:10
+msgid "Quadre de comandament integral"
+msgstr ""
+
+#: ../../index.md:43
+msgid "Característiques de l’administració"
+msgstr ""
+
+#: ../../index.md:45
+msgid ""
+"L’**administració** organitza i coordina els recursos d’un organisme "
+"social per aconseguir els seus objectius de manera **eficaç** (arribar al"
+" que es proposa) i **eficient** (optimitzar els mitjans).   Es fonamenta "
+"en la **planificació, organització, integració de personal, direcció i "
+"control**, i té en la **presa de decisions** el seu nucli fonamental."
+msgstr ""
+
+#: ../../index.md:50
+msgid "Taula comparativa de característiques"
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Característica**"
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Definició / Explicació breu**"
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Universalitat**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"Present en qualsevol organisme social (empresa, estat, exèrcit, escola, "
+"església…). Els elements bàsics són els mateixos encara que hi haja "
+"variants."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Especificitat**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"L’administració és un fenomen propi, no es pot confondre amb altres "
+"ciències o tècniques. Encara que s’hi recolze, manté la seua identitat."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Unitat temporal**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"És un procés **continu**: planificar, organitzar, dirigir i controlar "
+"tenen lloc de manera simultània en la vida de l’empresa."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Unitat jeràrquica**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"Tots els nivells jeràrquics participen de la mateixa funció "
+"administrativa, des del gerent general fins a l’últim supervisor."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Valor instrumental**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"No és un fi en si mateixa: és un **mitjà** per assolir els objectius de "
+"manera eficient."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Amplitud d’exercici**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"Es pot aplicar a tots els nivells i rols: presidents, gerents, "
+"supervisors… fins i tot a la gestió domèstica (ex. una ama de casa)."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Interdisciplinarietat**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"Integra coneixements d’altres ciències: matemàtiques, estadística, "
+"economia, comptabilitat, dret, sociologia, psicologia, filosofia, "
+"antropologia, ciència política."
+msgstr ""
+
+#: ../../index.md:12
+msgid "**Flexibilitat**"
+msgstr ""
+
+#: ../../index.md:12
+msgid ""
+"Els seus principis i tècniques s’adapten a diferents empreses, sectors i "
+"contextos socials."
+msgstr ""
+
+#: ../../index.md:65
+msgid "Diagrama visual de les característiques"
+msgstr ""
+
+#: ../../index.md:90
+msgid "2 Evolució de la informàtica de gestió empresarial"
+msgstr ""
+
+#: ../../index.md:92
+msgid ""
+"El terme **Sistemes d’Informació (SI)** és genèric i pot tindre diferents"
+" significats:"
+msgstr ""
+
+#: ../../index.md:94
+msgid ""
+"**En informàtica:** qualsevol sistema o subsistema de telecomunicacions o"
+" computació interconnectat per a obtindre, emmagatzemar, manipular, "
+"administrar, transmetre o rebre dades i veu. Inclou tant el programari "
+"com el maquinari."
+msgstr ""
+
+#: ../../index.md:95
+msgid ""
+"**En teoria de sistemes:** un sistema (manual o automatitzat) format per "
+"persones, màquines i mètodes organitzats per a la recol·lecció, "
+"processament i transmissió de dades que representen informació per a "
+"l’usuari."
+msgstr ""
+
+#: ../../index.md:99
+msgid "Tipus de sistemes d’informació"
+msgstr ""
+
+#: ../../index.md:101
+msgid "Segons la funció o l’usuari final (Laudon & Laudon, 2004):"
+msgstr ""
+
+#: ../../index.md:103
+msgid ""
+"**TPS (Transaction Processing Systems).** Gestionen la informació de les "
+"transaccions d’una empresa."
+msgstr ""
+
+#: ../../index.md:104
+msgid ""
+"**MIS (Management Information Systems).** Orientats a solucionar "
+"problemes generals de gestió."
+msgstr ""
+
+#: ../../index.md:105
+msgid ""
+"**DSS (Decision Support Systems).** Analitzen variables de negoci per a "
+"donar suport a la presa de decisions."
+msgstr ""
+
+#: ../../index.md:106
+msgid ""
+"**EIS (Executive Information Systems).** Per a directius: monitoren "
+"l’estat de les variables internes i externes d’una unitat de l’empresa."
+msgstr ""
+
+#: ../../index.md:107
+msgid ""
+"**OAS (Office Automation Systems).** Aplicacions per a facilitar el "
+"treball diari administratiu."
+msgstr ""
+
+#: ../../index.md:108
+msgid ""
+"**SE (Sistemes Experts).** Emulen el comportament d’un expert en un "
+"domini concret."
+msgstr ""
+
+#: ../../index.md:109
+msgid ""
+"**ERP (Enterprise Resource Planning).** Integren informació i processos "
+"de tota l’organització en un únic sistema."
+msgstr ""
+
+#: ../../index.md:112
+msgid "Tipus de sistemes d'Informació"
+msgstr ""
+
+#: ../../index.md:119
+msgid "Evolució històrica dels SI en l’empresa"
+msgstr ""
+
+#: ../../index.md:121
+msgid "Evolució històrica dels SI"
+msgstr ""
+
+#: ../../index.md:129
+msgid "Organització d’una empresa i els seus entorns"
+msgstr ""
+
+#: ../../index.md:131
+msgid ""
+"L’**entorn de l’empresa** està format per tots els elements i factors "
+"externs que poden influir en el seu funcionament. Es distingeixen dos "
+"tipus:"
+msgstr ""
+
+#: ../../index.md:133
+msgid "Macroentorn"
+msgstr ""
+
+#: ../../index.md:134
+msgid "Factors que afecten totes les empreses:"
+msgstr ""
+
+#: ../../index.md:135
+msgid "Tecnològics"
+msgstr ""
+
+#: ../../index.md:136
+msgid "Jurídics"
+msgstr ""
+
+#: ../../index.md:137
+msgid "Demogràfics"
+msgstr ""
+
+#: ../../index.md:138
+msgid "Socioculturals"
+msgstr ""
+
+#: ../../index.md:139
+msgid "Econòmics"
+msgstr ""
+
+#: ../../index.md:141
+msgid "Quadre macro i microentorn"
+msgstr ""
+
+#: ../../index.md:147
+msgid "Microentorn"
+msgstr ""
+
+#: ../../index.md:148
+msgid "Factors que afecten individualment una empresa:"
+msgstr ""
+
+#: ../../index.md:149
+msgid "Proveïdors"
+msgstr ""
+
+#: ../../index.md:150
+msgid "Clients"
+msgstr ""
+
+#: ../../index.md:151
+msgid "Intermediaris"
+msgstr ""
+
+#: ../../index.md:152
+msgid "Competidors"
+msgstr ""
+
+#: ../../index.md:158
+msgid "3 Introducció a Odoo i als sistemes ERP"
+msgstr ""
+
+#: ../../index.md:160
+msgid ""
+"Els **ERP (Enterprise Resource Planning)** són programes de **gestió "
+"empresarial integrada**.   Permeten unificar en una sola plataforma àrees"
+" com:"
+msgstr ""
+
+#: ../../index.md:163
+msgid "Comptabilitat"
+msgstr ""
+
+#: ../../index.md:164
+msgid "Inventari"
+msgstr ""
+
+#: ../../index.md:165
+msgid "Vendes"
+msgstr ""
+
+#: ../../index.md:166
+msgid "Producció"
+msgstr ""
+
+#: ../../index.md:167
+msgid "Recursos humans"
+msgstr ""
+
+#: ../../index.md:168
+msgid "Atenció ciutadana"
+msgstr ""
+
+#: ../../index.md:172
+msgid "Avantatges dels ERP en una empresa"
+msgstr ""
+
+#: ../../index.md:174
+msgid "👉 Un ERP ajuda a:"
+msgstr ""
+
+#: ../../index.md:176
+msgid "Evitar duplicitat de dades"
+msgstr ""
+
+#: ../../index.md:177
+msgid "Reduir errors humans"
+msgstr ""
+
+#: ../../index.md:178
+msgid "Facilitar la presa de decisions en temps real"
+msgstr ""
+
+#: ../../index.md:179
+msgid "Millorar la coordinació entre departaments"
+msgstr ""
+
+#: ../../index.md:197
+msgid "Tipus d’ERP"
+msgstr ""
+
+#: ../../index.md:199
+msgid "**Propietaris:** *SAP, Dynamics, Sage*"
+msgstr ""
+
+#: ../../index.md:200
+msgid "**Lliures:** *Odoo, Dolibarr*"
+msgstr ""
+
+#: ../../index.md:204
+msgid "El cas d’Odoo"
+msgstr ""
+
+#: ../../index.md:206
+msgid "Odoo destaca per:"
+msgstr ""
+
+#: ../../index.md:208
+msgid "💰 **Cost inicial baix** (Community gratis, Enterprise amb subscripció)"
+msgstr ""
+
+#: ../../index.md:209
+msgid "🧩 **Arquitectura modular i escalable**"
+msgstr ""
+
+#: ../../index.md:210
+msgid "🖥️ **Interfície moderna i fàcil d’usar**"
+msgstr ""
+
+#: ../../index.md:211
+msgid "🌍 **Gran comunitat de desenvolupadors i mòduls**"
+msgstr ""
+
+#: ../../index.md:213
+msgid "➡️ En aquest mòdul utilitzarem **Odoo Community 16** com a referència."
+msgstr ""
+
+#: ../../index.md:218
+msgid "Concepte d’ERP (Sistemes de planificació de recursos empresarials)"
+msgstr ""
+
+#: ../../index.md:220
+msgid ""
+"Un **ERP** és un sistema de planificació creat per reduir temps de "
+"resposta, optimitzar la qualitat, millorar la gestió d’actius i reduir "
+"costos, integrant processos de negoci de manera unificada."
+msgstr ""
+
+#: ../../index.md:222
+msgid "Funcionalitats principals:"
+msgstr ""
+
+#: ../../index.md:223
+msgid "Ordres de compra, facturació, inventari, comptabilitat."
+msgstr ""
+
+#: ../../index.md:224
+msgid "Processos modulars i integrats."
+msgstr ""
+
+#: ../../index.md:225
+msgid "Universalitat i estandardització."
+msgstr ""
+
+#: ../../index.md:227
+msgid "Concepte d'ERP"
+msgstr ""
+
+#: ../../index.md:232
+msgid "Característiques dels ERP"
+msgstr ""
+
+#: ../../index.md:233
+msgid "**Integrals:** controlen tots els processos i eviten duplicitats."
+msgstr ""
+
+#: ../../index.md:234
+msgid ""
+"**Modulars:** cada funcionalitat està dividida en mòduls (Vendes, "
+"Finances, Magatzem, etc.)."
+msgstr ""
+
+#: ../../index.md:235
+msgid "**Adaptables:** es configuren segons les necessitats de cada empresa."
+msgstr ""
+
+#: ../../index.md:239
+msgid "Avantatges i inconvenients"
+msgstr ""
+
+#: ../../index.md:240
+msgid ""
+"Els ERP ofereixen grans beneficis, però també inconvenients (costos, "
+"complexitat, necessitat de formació)."
+msgstr ""
+
+#: ../../index.md:250 ../../index.md:256
+msgid "ERP actuals i llicències"
+msgstr ""
+
+#: ../../index.md:252
+msgid ""
+"Dins del mercat hi ha ERP **privatius** (SAP, Oracle, Microsoft) i ERP "
+"**lliures** (Odoo, Openbravo)."
+msgstr ""
+
+#: ../../index.md:253
+msgid "**Privatius:** llicència de pagament, orientats a grans empreses."
+msgstr ""
+
+#: ../../index.md:254
+msgid ""
+"**Lliures:** sense cost de llicència, amb comunitats de desenvolupadors i"
+" serveis opcionals."
+msgstr ""
+
+#: ../../index.md:261
+msgid ""
+"[ERP a la "
+"Viquipèdia](https://en.wikipedia.org/wiki/list_of_erp_software_packages)"
+"   [Informe anual del mercat "
+"ERP](http://www.gartner.com/technology/home.jsp/)"
+msgstr ""
+
+#: ../../index.md:266
+msgid "Exemples d’ERP"
+msgstr ""
+
+#: ../../index.md:268
+msgid "SAP"
+msgstr ""
+
+#: ../../index.md:269
+msgid ""
+"Suite de programes integrats (finances, producció, logística, recursos "
+"humans). Basada en la plataforma NetWeaver."
+msgstr ""
+
+#: ../../index.md:271
+msgid "Oracle"
+msgstr ""
+
+#: ../../index.md:272
+msgid ""
+"Família de productes (JD Edwards, PeopleSoft) amb llarga trajectòria en "
+"ERP i bases de dades."
+msgstr ""
+
+#: ../../index.md:274
+msgid "Microsoft"
+msgstr ""
+
+#: ../../index.md:275
+msgid ""
+"**Dynamics ERP** (NAV, AX, GP, SL), orientat a empreses mitjanes i "
+"divisions de grans companyies."
+msgstr ""
+
+#: ../../index.md:277
+msgid "Openbravo"
+msgstr ""
+
+#: ../../index.md:278
+msgid ""
+"ERP lliure basat en web, modular i extensible, amb integració amb altres "
+"aplicacions lliures."
+msgstr ""
+
+#: ../../index.md:280
+msgid "Odoo (antic OpenERP)"
+msgstr ""
+
+#: ../../index.md:281
+msgid ""
+"ERP lliure i modular, amb una gran comunitat i múltiples mòduls (CRM, "
+"projectes, compres, vendes, magatzem, fabricació, comptabilitat…)."
+msgstr ""
+
+#: ../../index.md:283
+msgid "Logo Odoo"
+msgstr ""
+
+#: ../../index.md:290
+msgid "Concepte de CRM (Gestió de les relacions amb clients)"
+msgstr ""
+
+#: ../../index.md:292
+msgid ""
+"Els **CRM** donen suport a la gestió de les relacions amb clients, vendes"
+" i màrqueting."
+msgstr ""
+
+#: ../../index.md:293
+msgid "Part **operacional:** registre i gestió de contactes i activitats."
+msgstr ""
+
+#: ../../index.md:294
+msgid "Part **analítica:** anàlisi de dades per a millorar les decisions."
+msgstr ""
+
+#: ../../index.md:296
+msgid "Concepte de CRM"
+msgstr ""
+
+#: ../../index.md:302
+msgid ""
+"[CRM a la "
+"Viquipèdia](http://en.wikipedia.org/wiki/comparison_of_crm_systems)   "
+"[Què és un CRM?](http://es.slideshare.net/alfredovela/qu-es-un-crm-"
+"utilidad-y-software)"
+msgstr ""
+
+#: ../../index.md:307
+msgid "Arquitectura d’un sistema ERP-CRM"
+msgstr ""
+
+#: ../../index.md:309
+msgid ""
+"Els ERP actuals integren tots els elements interns i externs d’una "
+"empresa, recullen i processen informació i la presenten a diferents "
+"nivells."
+msgstr ""
+
+#: ../../index.md:311
+msgid ""
+"Odoo (antic OpenERP) utilitza **OpenObject**, un framework RAD amb "
+"arquitectura **MVC** i capa **ORM** sobre PostgreSQL."
+msgstr ""
+
+#: ../../index.md:313
+msgid "Característiques:"
+msgstr ""
+
+#: ../../index.md:314
+msgid "ORM que gestiona models i dades."
+msgstr ""
+
+#: ../../index.md:315
+msgid "Arquitectura multi-tenant."
+msgstr ""
+
+#: ../../index.md:316
+msgid "Workflows i dissenyadors d’informes."
+msgstr ""
+
+#: ../../index.md:317
+msgid "Traducció multilingüe."
+msgstr ""
+
+#: ../../index.md:318
+msgid "Client web i API XML-RPC/JSON-RPC."
+msgstr ""
+
+#: ../../index.md:320
+msgid "Arquitectura ERP-CRM"
+msgstr ""
+
+#: ../../index.md:326
+msgid "Client-Servidor Odoo"
+msgstr ""
+
+#: ../../index.md:332
+msgid "Components Odoo"
+msgstr ""
+
+#: ../../index.md:340
+msgid "Tipus de llicències de programari"
+msgstr ""
+
+#: ../../index.md:342
+msgid ""
+"En el mercat existeixen dos grans grups: **programari privatiu** i "
+"**programari lliure**."
+msgstr ""
+
+#: ../../index.md:343
+msgid ""
+"**Privatiu:** cal pagar llicència i manteniment, les actualitzacions "
+"estan garantides pel proveïdor."
+msgstr ""
+
+#: ../../index.md:344
+msgid ""
+"**Lliure:** sense cost de llicència, però depén de la comunitat per a "
+"actualitzacions i correccions."
+msgstr ""
+
+#: ../../index.md:346
+msgid "Avantatges del programari lliure:"
+msgstr ""
+
+#: ../../index.md:347
+msgid "Cost zero de llicència i actualitzacions."
+msgstr ""
+
+#: ../../index.md:348
+msgid "Gran comunitat i documentació."
+msgstr ""
+
+#: ../../index.md:349
+msgid "Varietat d’ERP lliures (Odoo, Openbravo…)."
+msgstr ""
+
+#: ../../index.md:351
+msgid ""
+"Openbravo (espanyol): [Web oficial](http://www.openbravo.com/es)   Odoo "
+"(belga): [Web oficial](https://www.odoo.com/es_es/)"
+msgstr ""
+

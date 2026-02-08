@@ -1,0 +1,88 @@
+[Begin Log]
+[Is Devel is 0 ]
+[calling ResourceManager::InitializeInMainThread]
+   [OK]
+[Creating Main Window]
+ [MainWindow] [Creating Menu]
+ [MainWindow] setting thread count to 15
+ [MainWindow] [Initializing Actions]
+ [MainWindow] [Updating Action Bar]
+ [MainWindow] [Initializing 3D View]
+   [MainWindow::Initialize3DView] [Creating 3D View]
+   [MainWindow::Initialize3DView] [Creating GraphicsView]
+  [LMMBackgroundReadThread] Thread Starting...
+   [MainWindow::Initialize3DView] [Creating ToolHelpWidget]
+  [LMMBackgroundReadThread] Thread Starting...
+[AppendPrintersFromXML] reading printers from C:/users/juatafe/Documents/meshmixer/printers\printers.xml
+[QPrinterSelectionWidget::MatchPrintersToSoftware] Getting print software
+[MainWindow::Initialize3DView] Got print software, now assigning printers to software 
+[MainWindow::Initialize3DView] Saved printer configs to disk
+ [MainWindow] [Initializing Connections]
+ [MainWindow] [Restoring Application State]
+  [Initializing]
+ [MainWindow] [Initializing the UI]
+[LibraryManager::InitializeFromPath] path C:/users/juatafe/Documents/meshmixer/libraries\
+[RemoteStoredCommandServer::Initialize] initializing Server
+[RemoteStoredCommandServer] TCP Server: failed
+[RemoteStoredCommandServer] UDP Server: failed
+  [Initializing spacemouse]
+  [Showing]
+[Setting up global event filter]
+[Importing file for cmd line]
+  [GraphicsViewScene3D::Initialize] drawFboId: 1
+[System Information] Machine OS:Windows; Platform: x64; Graphics Card Vendor : NVIDIA Corporation; GLVersion : 4.6.0 NVIDIA 565.77; Graphics Renderer : NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2;
+  [GraphicsViewScene3D::initializeGL] Creating Camera
+  [GraphicsViewScene3D::initializeGL] Creating Renderer
+  [GraphicsViewScene3D] [HaveGLBlit 1   HaveGLFBO 1]
+   [Renderer::InitializeShaders] Has Shader Support: 1
+   [Shader::ValidateShade] Trying to compile shader //PHONG
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //TEXTURED
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //TEXTURED_UNLIT
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //TEXTURED_TILED
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //OVERHANG
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //XRAY
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //UVCHECKER
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Shader::ValidateShade] Trying to compile shader //IMAGELIGHT
+   [Shader Vertex Compile Log]
+   [Shader Fragment Compile Log]
+   [Shader LinkLog]
+   [Renderer::InitializeShaders] All shaders compiled!
+    [Renderer::InitializeShaders] completed
+  [GraphicsViewScene3D::initializeGL] Initializing OpenGL State
+     [GraphicsViewScene3D::initializeGL] done SetupState()
+     [GraphicsViewScene3D::initializeGL] done configuring Advanced OpenGL
+  [PartLibraryLoader] Thread Starting...
+  [GraphicsViewScene3D::initializeFrameCache] Trying to create FBO with type CombinedDepthStencil...
+  [GraphicsViewScene3D::initializeFrameCache] framebuffer created.
+  [PartLibraryLoader] Thread Starting...
+  [ShaderLibraryLoader] Thread Starting...
+  [BrushTextureLibraryLoader] Thread Starting...
+  [PolygonLibraryLoader] Thread Starting...
+[MainWindow::Import] reading file Z:\home\juatafe\Descargas\files\diseño_anycubic\pieza 1.stl
+[MainWindow::Import] discarding Materials/UVs for object 0, as some parts were missing (read 0 materials, 0 uv layers)
+[MainWindow::Import] done reading objects
+[Checking if user has set analytics preferences]
+[Calling Application.exec()]
+  [LiveAnalysisThread] Thread Starting...
+  [AutoSaveWriterThread] Thread Starting...

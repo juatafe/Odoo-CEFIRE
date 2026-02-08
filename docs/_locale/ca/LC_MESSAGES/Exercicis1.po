@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../Exercicis1.md:1
+msgid "Exercicis"
+msgstr ""
+
+#: ../../Exercicis1.md:3
+msgid "Exercici 1. Què és la gestió empresarial? Quins objectius té?"
+msgstr ""
+
+#: ../../Exercicis1.md
+msgid "Solució"
+msgstr ""
+
+#: ../../Exercicis1.md:8 ../../Exercicis1.md:30 ../../Exercicis1.md:49
+#: ../../Exercicis1.md:68 ../../Exercicis1.md:110 ../../Exercicis1.md:127
+#: ../../Exercicis1.md:143 ../../Exercicis1.md:160
+msgid "<span class=\"release-date\" data-release=\"2025-09-25\"></span>"
+msgstr ""
+
+#: ../../Exercicis1.md:10
+msgid ""
+"Podríem definir la **gestió empresarial** com l'habilitat per organitzar,"
+" controlar i dirigir una empresa o organització per assolir els objectius"
+" proposats utilitzant diverses estratègies."
+msgstr ""
+
+#: ../../Exercicis1.md:13
+msgid "**Objectius principals:**"
+msgstr ""
+
+#: ../../Exercicis1.md:14
+msgid "**Planificació:** Identificar objectiu (què fer, com, quan i on)."
+msgstr ""
+
+#: ../../Exercicis1.md:15
+msgid "**Organització:** Indicar qui, quant temps i com realitzarà cada tasca."
+msgstr ""
+
+#: ../../Exercicis1.md:16
+msgid ""
+"**Direcció:** Líder influent i responsable que coordini totes les "
+"actuacions."
+msgstr ""
+
+#: ../../Exercicis1.md:17
+msgid ""
+"**Control:** Supervisió i control d'objectius marcats als diferents "
+"departaments."
+msgstr ""
+
+#: ../../Exercicis1.md:18
+msgid "**Dotació de personal:** Contractació de personal adequat."
+msgstr ""
+
+#: ../../Exercicis1.md:19
+msgid "**Coordinació:** Integració i sincronització d’esforços."
+msgstr ""
+
+#: ../../Exercicis1.md:24
+msgid "Exercici 2. Què entens per ERP i què gestiona en una empresa?"
+msgstr ""
+
+#: ../../Exercicis1.md:25
+msgid ""
+"[Fes un resum de paquets "
+"ERP](https://en.wikipedia.org/wiki/List_of_ERP_software_packages)."
+msgstr ""
+
+#: ../../Exercicis1.md:32
+msgid ""
+"Els **ERP** són sistemes d’informació gerencial que integren i gestionen "
+"processos de producció i distribució."
+msgstr ""
+
+#: ../../Exercicis1.md:34
+msgid "**Exemples del llistat:**"
+msgstr ""
+
+#: ../../Exercicis1.md:35
+msgid ""
+"**Apache OFBiz:** Java, Javascript, Groovy; llicència Apache 2.0, Open "
+"Source."
+msgstr ""
+
+#: ../../Exercicis1.md:36
+msgid "**Kuali:** ERP per institucions d’educació superior; Java; llicència AGPL."
+msgstr ""
+
+#: ../../Exercicis1.md:37
+msgid ""
+"**Openbravo:** ERP i punt de venda; Java + PostgreSQL/Oracle; llicència "
+"OBPL."
+msgstr ""
+
+#: ../../Exercicis1.md:38
+msgid ""
+"**Odoo:** Gestió empresarial modular (CRM, comerç electrònic, "
+"facturació...); Python + XML; LGPL per comunitat, Enterprise propietària."
+msgstr ""
+
+#: ../../Exercicis1.md:43
+msgid "Exercici 3. Què és un CRM?"
+msgstr ""
+
+#: ../../Exercicis1.md:44
+msgid ""
+"[Fes un resum de sistemes "
+"CRM](https://en.wikipedia.org/wiki/Comparison_of_CRM_systems)."
+msgstr ""
+
+#: ../../Exercicis1.md:51
+msgid ""
+"Un **CRM** és un sistema d’informació que ajuda a gestionar la relació "
+"amb els clients, amb dues parts:"
+msgstr ""
+
+#: ../../Exercicis1.md:52
+msgid "Lògica operacional (tasques)."
+msgstr ""
+
+#: ../../Exercicis1.md:53
+msgid "Lògica analítica (explotació de dades)."
+msgstr ""
+
+#: ../../Exercicis1.md:55
+msgid "**Exemples:**"
+msgstr ""
+
+#: ../../Exercicis1.md:56
+msgid "**Capsule CRM** (SaaS, MySQL, Java, Javascript)."
+msgstr ""
+
+#: ../../Exercicis1.md:57
+msgid ""
+"**SugarCRM** (PHP, multiplataforma, BD: MySQL, SQL Server, Oracle; SaaS o"
+" propietari)."
+msgstr ""
+
+#: ../../Exercicis1.md:58
+msgid "**Base CRM** (Ruby on Rails, Python; apps mòbils; SaaS)."
+msgstr ""
+
+#: ../../Exercicis1.md:63
+msgid "Exercici 4. Descriu l’arquitectura MVC d’Odoo."
+msgstr ""
+
+#: ../../Exercicis1.md:70
+msgid ""
+"L’arquitectura d’Odoo és de tipus **Model–Vista–Controlador (MVC)**.   "
+"Això vol dir que, utilitzant aquest patró de tres components, es pot "
+"separar la lògica d’aplicació de la lògica de vista (interfície gràfica) "
+"a través d’un controlador."
+msgstr ""
+
+#: ../../Exercicis1.md:73
+msgid ""
+"Aquesta separació permet modificar o personalitzar parts de l’aplicació "
+"sense afectar la resta del sistema.   El **framework d’Odoo** (anomenat "
+"*OpenObject*, de tipus RAD) permet ampliar ràpidament Odoo amb mòduls "
+"mitjançant la capa ORM, i facilita diversos components que permeten "
+"construir l’aplicació seguint l’arquitectura MVC."
+msgstr ""
+
+#: ../../Exercicis1.md:76
+msgid "**Model:** s’encarrega de les dades (ORM i taules PostgreSQL)."
+msgstr ""
+
+#: ../../Exercicis1.md:77
+msgid "**Vista:** representació gràfica (XML)."
+msgstr ""
+
+#: ../../Exercicis1.md:78
+msgid ""
+"**Controlador:** rep peticions, sol·licita dades al model i les envia a "
+"la vista."
+msgstr ""
+
+#: ../../Exercicis1.md:105
+msgid ""
+"Exercici 5. Explica les diferents formes d’instal·lar un ERP. Quina "
+"utilitzarem nosaltres?"
+msgstr ""
+
+#: ../../Exercicis1.md:112
+msgid "Instal·lació en **màquina virtual**."
+msgstr ""
+
+#: ../../Exercicis1.md:113
+msgid "Instal·lació amb **paquets gràfics** (assistents)."
+msgstr ""
+
+#: ../../Exercicis1.md:114
+msgid "Instal·lació **personalitzada** des de codi font."
+msgstr ""
+
+#: ../../Exercicis1.md:115
+msgid "**Accés online** (SaaS/demos)."
+msgstr ""
+
+#: ../../Exercicis1.md:117
+msgid "Nosaltres utilitzarem la **màquina virtual + personalitzada**."
+msgstr ""
+
+#: ../../Exercicis1.md:122
+msgid ""
+"Exercici 6. Què entenem per mòdul base? Quins components en formen part "
+"en Odoo?"
+msgstr ""
+
+#: ../../Exercicis1.md:129
+msgid "El **mòdul base** és el conjunt mínim perquè Odoo funcione."
+msgstr ""
+
+#: ../../Exercicis1.md:131
+msgid "Inclou:"
+msgstr ""
+
+#: ../../Exercicis1.md:132
+msgid "**Empreses:** Fitxa de clients."
+msgstr ""
+
+#: ../../Exercicis1.md:133
+msgid "**Administració:** Configuració i funcionalitat bàsica."
+msgstr ""
+
+#: ../../Exercicis1.md:138
+msgid ""
+"Exercici 7. Nomena els tipus de mòduls que podem instal·lar en un ERP i "
+"com es relacionen."
+msgstr ""
+
+#: ../../Exercicis1.md:145
+msgid "**Gestió comptable i financera** (integrada amb compres i vendes)."
+msgstr ""
+
+#: ../../Exercicis1.md:146
+msgid "**Compres, vendes i magatzem.**"
+msgstr ""
+
+#: ../../Exercicis1.md:147
+msgid "**Facturació.**"
+msgstr ""
+
+#: ../../Exercicis1.md:148
+msgid "**Gestió de personal (RRHH).**"
+msgstr ""
+
+#: ../../Exercicis1.md:149
+msgid "**CRM.**"
+msgstr ""
+
+#: ../../Exercicis1.md:151
+msgid "Els mòduls estan interconnectats i comparteixen informació."
+msgstr ""
+
+#: ../../Exercicis1.md:156
+msgid "Exercici 8. Per què és important la localització del país en un ERP?"
+msgstr ""
+
+#: ../../Exercicis1.md:162
+msgid ""
+"La **localització** configura normativa fiscal, idioma, impostos i "
+"documents oficials."
+msgstr ""
+
+#: ../../Exercicis1.md:164
+msgid ""
+"Exemple: IVA Espanya 21% vs. França 20%. Sense localització correcta, les"
+" factures serien errònies."
+msgstr ""
+

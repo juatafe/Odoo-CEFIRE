@@ -1,0 +1,7 @@
+_build/
+.venv/
+*.aux
+*.log
+*.fdb_latexmk
+texput.*
+__pycache__/

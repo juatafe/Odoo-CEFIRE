@@ -1,0 +1,23 @@
+{% extends "!components/header-article.html" %}
+{% block header_buttons %}
+  {{ super() }}
+  <div class="dropdown dropdown-downloads">
+    <button class="btn btn-sm dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"
+            title="Descarrega aquesta pàgina">
+      <i class="fa-solid fa-download"></i>
+    </button>
+    <ul class="dropdown-menu">
+      <!-- Enllaç al .md font generat per Sphinx en _sources (acabada en .txt) -->
+      <li>
+        <a class="dropdown-item"
+           href="{{ pathto('_sources/' + pagename + '.md.txt', 1) }}">.md</a>
+      </li>
+      <!-- Enllaç al PDF global publicat a gh-pages/pdf -->
+      <li>
+        <a class="dropdown-item"
+           href="{{ pathto('', 1) }}pdf/ApuntsdOdoo.pdf">.pdf</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}

@@ -1,0 +1,238 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../informe.md:1
+msgid "Informe individual: Exemple resolt"
+msgstr ""
+
+#: ../../informe.md:3
+msgid "1. Introducció"
+msgstr ""
+
+#: ../../informe.md:4
+msgid ""
+"Un **ERP (Enterprise Resource Planning)** és un sistema integrat de "
+"gestió que permet controlar en un únic lloc àrees com la facturació, la "
+"comptabilitat, els recursos humans, l’estoc o els projectes.   Un **CRM "
+"(Customer Relationship Management)** és un sistema per gestionar la "
+"relació amb clients o ciutadania, fent seguiment de contactes, consultes "
+"i serveis."
+msgstr ""
+
+#: ../../informe.md:7
+msgid ""
+"A nivell públic, un Ajuntament podria utilitzar un ERP-CRM per coordinar "
+"la gestió econòmica, el personal i l’atenció a la ciutadania."
+msgstr ""
+
+#: ../../informe.md:11
+msgid "2. Exemples d’ERP-CRM"
+msgstr ""
+
+#: ../../informe.md:12
+msgid ""
+"**Odoo**: programari lliure i modular, amb mòduls de facturació, RRHH, "
+"contractes, projectes i atenció ciutadana."
+msgstr ""
+
+#: ../../informe.md:13
+msgid ""
+"**SAP**: un dels ERP més coneguts en grans empreses, amb un cost elevat i"
+" gran complexitat."
+msgstr ""
+
+#: ../../informe.md:14
+msgid ""
+"**Microsoft Dynamics 365**: orientat a empreses mitjanes i grans, amb "
+"integració nativa amb Office i serveis al núvol."
+msgstr ""
+
+#: ../../informe.md:18
+msgid "3. Comparació de sistemes"
+msgstr ""
+
+#: ../../informe.md
+msgid "Sistema ERP-CRM"
+msgstr ""
+
+#: ../../informe.md
+msgid "Característiques principals"
+msgstr ""
+
+#: ../../informe.md
+msgid "SO recomanat"
+msgstr ""
+
+#: ../../informe.md
+msgid "Gestor de dades"
+msgstr ""
+
+#: ../../informe.md
+msgid "Odoo"
+msgstr ""
+
+#: ../../informe.md
+msgid "Programari lliure, modular, fàcil d’adaptar."
+msgstr ""
+
+#: ../../informe.md
+msgid "Linux, Windows"
+msgstr ""
+
+#: ../../informe.md
+msgid "PostgreSQL"
+msgstr ""
+
+#: ../../informe.md
+msgid "SAP Business One"
+msgstr ""
+
+#: ../../informe.md
+msgid "Molt complet, per a grans organitzacions, cost alt."
+msgstr ""
+
+#: ../../informe.md
+msgid "Windows/Linux"
+msgstr ""
+
+#: ../../informe.md
+msgid "SAP HANA, SQL Server"
+msgstr ""
+
+#: ../../informe.md
+msgid "Microsoft Dynamics"
+msgstr ""
+
+#: ../../informe.md
+msgid "Integració amb Office i serveis al núvol."
+msgstr ""
+
+#: ../../informe.md
+msgid "Windows, Cloud"
+msgstr ""
+
+#: ../../informe.md
+msgid "SQL Server, Azure DB"
+msgstr ""
+
+#: ../../informe.md:28
+msgid "4. Aplicació al meu Ajuntament"
+msgstr ""
+
+#: ../../informe.md:30
+msgid "4.1 Necessitats bàsiques"
+msgstr ""
+
+#: ../../informe.md:31
+msgid ""
+"En el cas de l’Ajuntament de **Tavernes de la Valldigna**, les "
+"necessitats principals serien:"
+msgstr ""
+
+#: ../../informe.md:32
+msgid "Centralitzar la gestió pressupostària i factures."
+msgstr ""
+
+#: ../../informe.md:33
+msgid "Portar un control clar del personal contractat."
+msgstr ""
+
+#: ../../informe.md:34
+msgid "Evitar duplicitats i pèrdues de documents."
+msgstr ""
+
+#: ../../informe.md:35
+msgid "Donar resposta més ràpida a consultes i tràmits ciutadans."
+msgstr ""
+
+#: ../../informe.md:37
+msgid "4.2 Àrees prioritàries"
+msgstr ""
+
+#: ../../informe.md:38
+msgid "Per a una primera fase, l’Ajuntament podria començar amb:"
+msgstr ""
+
+#: ../../informe.md:39
+msgid "**Gestió econòmica i facturació** (pressupost i pagaments)."
+msgstr ""
+
+#: ../../informe.md:40
+msgid "**Recursos humans** (personal fix i eventual)."
+msgstr ""
+
+#: ../../informe.md:41
+msgid ""
+"**Atenció a la ciutadania** (consultes, queixes i seguiment de "
+"sol·licituds)."
+msgstr ""
+
+#: ../../informe.md:45
+msgid "5. Possibles incidències"
+msgstr ""
+
+#: ../../informe.md:46
+msgid ""
+"**Compatibilitat**: alguns programes antics de l’Ajuntament podrien no "
+"integrar-se amb l’ERP."
+msgstr ""
+
+#: ../../informe.md:47
+msgid ""
+"**Formació del personal**: caldria sessions formatives perquè el personal"
+" conega Odoo."
+msgstr ""
+
+#: ../../informe.md:48
+msgid ""
+"**Cost inicial**: encara que Odoo és lliure, la implantació requereix "
+"temps i recursos."
+msgstr ""
+
+#: ../../informe.md:49
+msgid ""
+"**Resistència al canvi**: part del personal podria preferir seguir amb "
+"Excel o programes antics."
+msgstr ""
+
+#: ../../informe.md:53
+msgid "6. Conclusions"
+msgstr ""
+
+#: ../../informe.md:54
+msgid ""
+"Un sistema ERP-CRM com **Odoo** ajudaria a millorar la coordinació entre "
+"departaments i a oferir un millor servei a la ciutadania.   En una "
+"primera fase, cobriria sobretot l’àrea econòmica i de recursos humans, "
+"però a mitjà termini podria integrar tota la gestió municipal."
+msgstr ""
+
+#: ../../informe.md:59
+msgid "7. Annexos"
+msgstr ""
+
+#: ../../informe.md:60
+msgid "Captura d’una taula comparativa dels sistemes ERP-CRM."
+msgstr ""
+
+#: ../../informe.md:61
+msgid "Esquema de com es distribuirien els mòduls d’Odoo en un Ajuntament."
+msgstr ""
+

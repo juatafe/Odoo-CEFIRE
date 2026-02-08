@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../_index.md:1
+msgid "Plantilla Sphinx (HTML + PDF)"
+msgstr ""
+
+#: ../../_index.md:3
+msgid ""
+"Benvinguda! Esta és la portada de la plantilla. Baix tens una vista "
+"ràpida i enllaços útils."
+msgstr ""
+
+#: ../../_index.md:8
+msgid "Guia ràpida"
+msgstr ""
+
+#: ../../_index.md:10
+msgid "**Comandes** i flux bàsic per a treballar en local i publicar."
+msgstr ""
+
+#: ../../_index.md:13
+msgid "Personalització"
+msgstr ""
+
+#: ../../_index.md:15
+msgid "Canvia tema, logo, CSS i opcions del `conf.py`."
+msgstr ""
+
+#: ../../_index.md:18
+msgid "Duplicar amb un script"
+msgstr ""
+
+#: ../../_index.md:20
+msgid "Com usar `scripts/nou_sphinx_repo.sh` per a clonar i personalitzar."
+msgstr ""
+
+#: ../../_index.md:25
+msgid "Estat del projecte"
+msgstr ""
+
+#: ../../_index.md:26
+msgid "Tema: **pydata-sphinx-theme**"
+msgstr ""
+
+#: ../../_index.md:27
+msgid ""
+"PDF: es publica en `pdf/<slug>.pdf` i apareix com a icona a la barra "
+"superior."
+msgstr ""
+
+#: ../../_index.md:28
+msgid "Build & Deploy: automàtic via **GitHub Actions** → `gh-pages`."
+msgstr ""
+

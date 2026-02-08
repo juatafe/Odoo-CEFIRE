@@ -1,0 +1,98 @@
+/* ======= TABLAS (solo dentro del contenido) ======= */
+.bd-content table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; }
+.bd-content th, .bd-content td { border:1px solid #ccc; padding:8px; vertical-align:top; text-align:left; }
+.bd-content tbody tr:nth-child(even) { background-color:#E8F6F3; }
+
+/* Encabezados verticales y variantes de color */
+.header-vertical{ background:#1A486E; color:#fff; writing-mode:vertical-lr; text-align:center; font-weight:bold; }
+.header-vertical-ra{ background:#1A486E; color:#fff; }
+.header-vertical-ce{ background:#2F4F4F; color:#fff; }
+.header-vertical-bc{ background:#663A8F; color:#fff; }
+.header-vertical-cb{ background:#034b21; color:#fff; }
+
+.header-secondary{ background:#C6D9E1; font-weight:bold; text-align:center; }
+.competencias-header{ background:#C6E0B4; color:#000; text-align:center; font-weight:bold; }
+.saber-hacer, .saber-estar{ background:#E2EFDA; padding:8px; }
+
+.highlight-red{ color:red; }
+.bold{ font-weight:bold; }
+
+/* ======= TABLA "custom-table" ======= */
+.bd-content table.custom-table{ width:90%; border-collapse:collapse; margin:auto; }
+.bd-content table.custom-table th{ background:#00796b; color:#fff; padding:10px; text-align:center; }
+.bd-content table.custom-table td{ background:#e0f2f1; color:#000; padding:10px; border:1px solid #00796b; }
+.bd-content table.custom-table tr:nth-child(even) td{ background:#b2dfdb; }
+.table-title{ text-align:center; font-size:1.2em; font-weight:bold; margin-bottom:10px; }
+
+/* Celdas con colores específicos */
+.celda-objetivo{ background:#0ed4aa; font-weight:bold; }
+.celda-competencia{ background:#C6E0B4; font-weight:bold; }
+.celda-competencia-especifica{ background:#F0F4C3; font-weight:bold; }
+.celda-competencia-profesional{ background:#FFECB3; font-weight:bold; }
+.celda-resultados{ background:#FFF9C4; font-weight:bold; }
+.celda-criterios{ background:#FFE0B2; font-weight:bold; }
+.celda-saberes{ background:#e2d773; font-weight:bold; }
+
+/* ======= TABLA de evaluación ======= */
+.bd-content .custom-evaluation-table{ border-collapse:collapse; width:100%; }
+.bd-content .custom-evaluation-table th{ background:#4CAF50; color:#fff; text-align:center; padding:10px; }
+.bd-content .custom-evaluation-table td:first-child{ background:#D9EAD3; padding:10px; }
+.bd-content .custom-evaluation-table td:last-child{ background:#F4CCCC; padding:10px; }
+.bd-content .custom-evaluation-table,
+.bd-content .custom-evaluation-table th,
+.bd-content .custom-evaluation-table td{ border:1px solid #ddd; }
+
+/* ======= Etiquetas de materias ======= */
+.informatica{ background:#ffcccc; }
+.sistemas{ background:#7e9fca; }
+.fol{ background:#ffe6ff; }
+.ingles{ background:#f0f4c3; }
+
+/* ======= Pirámide ======= */
+.pyramid-container{ display:flex; flex-direction:column; align-items:center; width:200px; margin:0 auto; font-family:Arial,sans-serif; }
+.level{ width:100%; padding:15px; text-align:center; color:#fff; font-weight:bold; border-radius:5px; margin:5px 0; }
+.level-1{ background:#3498db; width:120%; }
+.level-2{ background:#2ecc71; width:100%; }
+.level-3{ background:#f1c40f; width:80%; }
+.level-4{ background:#e74c3c; width:50%; }
+
+/* ======= Intro / notas / entregas ======= */
+.intro-text{ text-align:center; font-style:italic; font-size:1.5em; margin:20px 0; color:#333; }
+.note-box{ background:#fff9c4; border-left:4px solid #ffeb3b; padding:10px; margin-top:15px; border-radius:4px; font-size:1em; color:#795548; }
+.delivery-section{ background:#f1f8e9; border-left:4px solid #8bc34a; padding:10px; margin-top:15px; border-radius:4px; font-size:1em; color:#33691e; }
+
+/* ======= Layouts en grid ======= */
+.container{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1200px; margin:auto; }
+.concept-box{ border:2px dashed #333; padding:20px; border-radius:8px; background:#f9f9f9; text-align:center; }
+.concept-box h2{ background:#2E7D32; color:#fff; padding:10px; border-radius:5px; }
+.concept-box p{ margin:10px 0; }
+.concept-box ul{ list-style:none; padding:0; }
+.concept-box ul li{ font-weight:bold; }
+.context-box{ grid-column:span 3; background:#d3e4cd; border-radius:8px; padding:15px; text-align:center; font-weight:bold; }
+
+.grid-cards{ display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px; margin:20px 0; }
+.grid-cards>*{ background:#f0f0f0; padding:15px; border-radius:8px; color:#333; font-weight:bold; text-align:center; }
+/* Paleta por posición */
+.grid-cards>*:nth-child(1){ background:#f28b66; color:#fff; }
+.grid-cards>*:nth-child(2){ background:#b0b0b0; color:#fff; }
+.grid-cards>*:nth-child(3){ background:#ffc107; color:#000; }
+.grid-cards>*:nth-child(4){ background:#4a90e2; color:#fff; }
+.grid-cards>*:nth-child(5){ background:#4caf50; color:#fff; }
+.grid-cards>*:nth-child(6){ background:#f28b66; color:#fff; }
+.grid-cards>*:nth-child(7){ background:#b0b0b0; color:#fff; }
+.grid-cards>*:nth-child(8){ background:#ffc107; color:#000; }
+.grid-cards>*:nth-child(9){ background:#4a90e2; color:#fff; }
+.grid-cards>*:nth-child(10){ background:#4caf50; color:#fff; }
+.grid-cards>*:nth-child(11){ background:#f28b66; color:#fff; }
+.grid-cards>*:nth-child(12){ background:#b0b0b0; color:#fff; }
+.grid-cards>*:nth-child(13){ background:#ffc107; color:#000; }
+.grid-cards>*:nth-child(14){ background:#4a90e2; color:#fff; }
+.grid-cards>*:nth-child(15){ background:#4caf50; color:#fff; }
+.grid-cards>*:nth-child(16){ background:#f28b66; color:#fff; }
+.grid-cards>*:nth-child(17){ background:#b0b0b0; color:#fff; }
+.grid-cards>*:nth-child(18){ background:#ffc107; color:#000; }
+.grid-cards>*:nth-child(19){ background:#4a90e2; color:#fff; }
+.grid-cards>*:nth-child(20){ background:#4caf50; color:#fff; }
+
+
+

@@ -1,0 +1,275 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../situacio.md:1
+msgid "Situació inicial"
+msgstr ""
+
+#: ../../situacio.md:4
+msgid ""
+"Cada Ajuntament ha de gestionar molts àmbits diferents: tresoreria, "
+"recursos humans, cultura, esports, urbanisme, atenció ciutadana...   "
+"Moltes vegades, cada departament utilitza programes diferents, fulls "
+"Excel o fins i tot carpetes en paper, la qual cosa pot generar problemes:"
+msgstr ""
+
+#: ../../situacio.md:7
+msgid "Retards en la resposta a la ciutadania."
+msgstr ""
+
+#: ../../situacio.md:8
+msgid "Pèrdua de factures o documents importants."
+msgstr ""
+
+#: ../../situacio.md:9
+msgid "Dificultat per controlar el pressupost real."
+msgstr ""
+
+#: ../../situacio.md:10
+msgid "Descoordinació entre departaments."
+msgstr ""
+
+#: ../../situacio.md:12
+msgid ""
+"Per això, molts organismes públics i empreses implanten **sistemes ERP "
+"(Enterprise Resource Planning)** i **CRM (Customer Relationship "
+"Management)**. Un d’ells és **Odoo**, un programari lliure i modular que "
+"pot adaptar-se a diferents necessitats."
+msgstr ""
+
+#: ../../situacio.md:16
+msgid "Tasca individual"
+msgstr ""
+
+#: ../../situacio.md:17
+msgid ""
+"La teua tasca consistix en investigar i elaborar un informe breu que "
+"responga a les qüestions següents:"
+msgstr ""
+
+#: ../../situacio.md:19
+msgid ""
+"**Què és un ERP i un CRM?** Explica-ho amb les teues paraules i cita "
+"exemples reals (Odoo, SAP, Dynamics, Zoho, etc.)."
+msgstr ""
+
+#: ../../situacio.md:20
+msgid ""
+"**Comparació de sistemes ERP-CRM:** tria almenys dos i compara les seues "
+"característiques, requisits de sistema operatiu i gestor de bases de "
+"dades."
+msgstr ""
+
+#: ../../situacio.md:21
+msgid ""
+"**Aplicació al teu entorn:** pensa en l’Ajuntament de la teua localitat "
+"(o un altre que tries) i analitza:"
+msgstr ""
+
+#: ../../situacio.md:22
+msgid "Quines necessitats bàsiques podria cobrir inicialment amb un ERP."
+msgstr ""
+
+#: ../../situacio.md:23
+msgid ""
+"Quines àrees serien prioritàries per implantar en una primera fase (per "
+"exemple: facturació, RRHH, gestió de subvencions, arxiu de documents…)."
+msgstr ""
+
+#: ../../situacio.md:24
+msgid ""
+"**Incidències i dificultats:** descriu possibles problemes que podrien "
+"aparéixer en el procés (compatibilitat, resistència al canvi, formació "
+"del personal…)."
+msgstr ""
+
+#: ../../situacio.md:28
+msgid "Pregunta guia"
+msgstr ""
+
+#: ../../situacio.md:29
+msgid ""
+"👉 **Com podria l’Ajuntament de la teua localitat millorar la gestió i "
+"l’atenció a la ciutadania implantant un ERP com Odoo? Quines necessitats "
+"reals cobriria en una primera fase?**"
+msgstr ""
+
+#: ../../situacio.md:33
+msgid "Rúbrica d’avaluació"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Criteris de l’RA"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Excel·lent (3)"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Bé (2)"
+msgstr ""
+
+#: ../../situacio.md
+msgid "En procés (1)"
+msgstr ""
+
+#: ../../situacio.md
+msgid "a) Reconeixement de sistemes ERP-CRM del mercat"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Identifica més de 3 sistemes, amb descripció clara i exemples reals."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Identifica almenys 2 sistemes amb una descripció bàsica."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Només identifica 1 o confon ERP i CRM."
+msgstr ""
+
+#: ../../situacio.md
+msgid "b) Comparació de sistemes ERP-CRM"
+msgstr ""
+
+#: ../../situacio.md
+msgid ""
+"Presenta taula comparativa amb característiques, avantatges i "
+"inconvenients ben explicats."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Compara 2 sistemes amb alguns detalls generals."
+msgstr ""
+
+#: ../../situacio.md
+msgid "La comparació és superficial o incompleta."
+msgstr ""
+
+#: ../../situacio.md
+msgid "c) Identificació del sistema operatiu adequat"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Justifica quin SO necessita cada sistema i raona la seua elecció."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Indica el SO adequat però sense molta justificació."
+msgstr ""
+
+#: ../../situacio.md
+msgid "No relaciona bé els sistemes amb el SO."
+msgstr ""
+
+#: ../../situacio.md
+msgid "d) Identificació del gestor de dades adequat"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Relaciona correctament ERP-CRM amb el seu SGBD i explica els motius."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Relaciona alguns ERP-CRM amb un SGBD, però amb poc detall."
+msgstr ""
+
+#: ../../situacio.md
+msgid "No identifica els gestors de dades."
+msgstr ""
+
+#: ../../situacio.md
+msgid "e) Verificació de configuracions"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Descriu clarament els requisits i comprova la coherència entre SO i BBDD."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Fa una verificació bàsica però incompleta."
+msgstr ""
+
+#: ../../situacio.md
+msgid "No verifica ni descriu les configuracions."
+msgstr ""
+
+#: ../../situacio.md
+msgid "f) Documentació de les operacions realitzades"
+msgstr ""
+
+#: ../../situacio.md
+msgid ""
+"L’informe és complet, estructurat i amb captures o esquemes que "
+"il·lustren el procés."
+msgstr ""
+
+#: ../../situacio.md
+msgid "L’informe descriu les operacions però amb poca profunditat."
+msgstr ""
+
+#: ../../situacio.md
+msgid "L’informe és molt bàsic o inexistent."
+msgstr ""
+
+#: ../../situacio.md
+msgid "g) Documentació d’incidències"
+msgstr ""
+
+#: ../../situacio.md
+msgid "Recull incidències trobades i proposa solucions realistes."
+msgstr ""
+
+#: ../../situacio.md
+msgid "Recull algunes incidències però sense propostes de millora."
+msgstr ""
+
+#: ../../situacio.md
+msgid "No identifica incidències."
+msgstr ""
+
+#: ../../situacio.md:47
+msgid "Resultat esperat"
+msgstr ""
+
+#: ../../situacio.md:48
+msgid ""
+"Al final de la tasca hauràs d’entregar un **informe individual** on quede"
+" clar:"
+msgstr ""
+
+#: ../../situacio.md:49
+msgid "Què són els ERP-CRM i exemples reals."
+msgstr ""
+
+#: ../../situacio.md:50
+msgid "Quins sistemes has comparat i amb quins criteris."
+msgstr ""
+
+#: ../../situacio.md:51
+msgid "Quines necessitats reals cobriria un Ajuntament amb un ERP."
+msgstr ""
+
+#: ../../situacio.md:52
+msgid "Quines dificultats i incidències poden aparéixer en la implantació."
+msgstr ""
+

@@ -1,0 +1,10 @@
+@media print {
+    .admonition .admonition-title::before {
+        display: inline-block !important;
+        margin-left: -20px !important;
+        margin-right: 10px !important;  /* Desplaza el ícono a la derecha */
+        margin-top: 4px !important;    /* Desplaza el ícono hacia abajo */
+    }
+
+}
+

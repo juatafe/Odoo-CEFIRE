@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C)
+# This file is distributed under the same license as the Sistemes de Gestió
+# Empresarial package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sistemes de Gestió Empresarial \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-11 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../ud1_intro.md:1
+msgid "Unitat 1. Identificació de sistemes ERP"
+msgstr ""
+
+#: ../../ud1_intro.md:3
+msgid "Introducció a Odoo i als sistemes ERP"
+msgstr ""
+
+#: ../../ud1_intro.md:5
+msgid ""
+"Els **ERP (Enterprise Resource Planning)** són programes de **gestió "
+"empresarial integrada**.   Permeten unificar en una sola plataforma àrees"
+" com:"
+msgstr ""
+
+#: ../../ud1_intro.md:8
+msgid "Comptabilitat"
+msgstr ""
+
+#: ../../ud1_intro.md:9
+msgid "Inventari"
+msgstr ""
+
+#: ../../ud1_intro.md:10
+msgid "Vendes"
+msgstr ""
+
+#: ../../ud1_intro.md:11
+msgid "Producció"
+msgstr ""
+
+#: ../../ud1_intro.md:12
+msgid "Recursos humans"
+msgstr ""
+
+#: ../../ud1_intro.md:13
+msgid "Atenció ciutadana"
+msgstr ""
+
+#: ../../ud1_intro.md:17
+msgid "Avantatges dels ERP en una empresa"
+msgstr ""
+
+#: ../../ud1_intro.md:19
+msgid "👉 Un ERP ajuda a:"
+msgstr ""
+
+#: ../../ud1_intro.md:21
+msgid "Evitar duplicitat de dades"
+msgstr ""
+
+#: ../../ud1_intro.md:22
+msgid "Reduir errors humans"
+msgstr ""
+
+#: ../../ud1_intro.md:23
+msgid "Facilitar la presa de decisions en temps real"
+msgstr ""
+
+#: ../../ud1_intro.md:24
+msgid "Millorar la coordinació entre departaments"
+msgstr ""
+
+#: ../../ud1_intro.md:41
+msgid "Tipus d’ERP"
+msgstr ""
+
+#: ../../ud1_intro.md:43
+msgid "**Propietaris:** *SAP, Dynamics, Sage*"
+msgstr ""
+
+#: ../../ud1_intro.md:44
+msgid "**Lliures:** *Odoo, Dolibarr*"
+msgstr ""
+
+#: ../../ud1_intro.md:48
+msgid "El cas d’Odoo"
+msgstr ""
+
+#: ../../ud1_intro.md:50
+msgid "Odoo destaca per:"
+msgstr ""
+
+#: ../../ud1_intro.md:52
+msgid "💰 **Cost inicial baix** (Community gratis, Enterprise amb subscripció)"
+msgstr ""
+
+#: ../../ud1_intro.md:53
+msgid "🧩 **Arquitectura modular i escalable**"
+msgstr ""
+
+#: ../../ud1_intro.md:54
+msgid "🖥️ **Interfície moderna i fàcil d’usar**"
+msgstr ""
+
+#: ../../ud1_intro.md:55
+msgid "🌍 **Gran comunitat de desenvolupadors i mòduls**"
+msgstr ""
+
+#: ../../ud1_intro.md:57
+msgid "➡️ En aquest mòdul utilitzarem **Odoo Community 16** com a referència."
+msgstr ""
+

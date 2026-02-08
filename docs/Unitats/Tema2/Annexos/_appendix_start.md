@@ -1,0 +1,5 @@
+```rst
+```{only} latex
+\appendix
+```
+```

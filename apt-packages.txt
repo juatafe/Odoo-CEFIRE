@@ -1,0 +1,13 @@
+texlive-xetex
+texlive-latex-recommended
+texlive-latex-extra
+texlive-fonts-recommended
+texlive-lang-european
+latexmk
+lmodern
+inkscape
+imagemagick
+poppler-utils
+ghostscript
+python3-lxml
+python3-bs4

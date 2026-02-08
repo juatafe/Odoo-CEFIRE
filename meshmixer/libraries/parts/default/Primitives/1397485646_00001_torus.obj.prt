@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PartInfo>
+	<RecordID>122</RecordID>
+	<RecordType>PartInfo</RecordType>
+	<Values>
+		<PartType>1</PartType>
+		<PartFrame>0 -1 0 0 0 1 -1 0 0 0 0 -1 -1 0 0 0 1 0 0 0 0 </PartFrame>
+	</Values>
+	<SubRecords />
+</PartInfo>
+<Boundary>
+	<RecordID>123</RecordID>
+	<RecordType>Boundary</RecordType>
+	<Values>
+		<BoundaryType>Smooth</BoundaryType>
+		<BoundaryLoopIndex>-1</BoundaryLoopIndex>
+		<BoundarySize>0</BoundarySize>
+		<BoundaryLoop>0 </BoundaryLoop>
+		<BoundaryUV>0 </BoundaryUV>
+		<BoundaryNormal>0 </BoundaryNormal>
+	</Values>
+	<SubRecords />
+</Boundary>

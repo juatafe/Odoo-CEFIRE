@@ -1,0 +1,1290 @@
+<?xml version="1.0"?>
+<PrinterList>
+	<Printer>
+		<UUID>a6c64aea-a658-4c52-ae56-a3b114e2a72a</UUID>
+		<Name>Mark Two</Name>
+		<Manufacturer>MarkForged</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>MarkForged Mark Two</DisplayName>
+		<PrintVolume>320 132 154</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>34043662-242b-4c92-8af7-a38ee78fd995</UUID>
+		<Name>Ember</Name>
+		<Manufacturer>Autodesk</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Autodesk Ember</DisplayName>
+		<PrintVolume>64 40 134</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ded1e144-389e-40e8-8c91-c702abfd19bf</UUID>
+		<Name>A2XX</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam A2XX</DisplayName>
+		<PrintVolume>350 350 380</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>751eafcc-56b9-4e83-9cfa-9e7f71effbdd</UUID>
+		<Name>M2 cusing Multilaser</Name>
+		<Manufacturer>ConceptLaser</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ConceptLaser M2 cusing Multilaser</DisplayName>
+		<PrintVolume>250 250 280</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>59fe96cb-0d1a-46cf-9a33-bf3a79117cb6</UUID>
+		<Name>A2 (Tall)</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam A2 (Tall)</DisplayName>
+		<PrintVolume>200 200 350</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>d49ba6bb-7294-4c0b-add8-2af25208e048</UUID>
+		<Name>X line 2000R</Name>
+		<Manufacturer>ConceptLaser</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ConceptLaser X line 2000R</DisplayName>
+		<PrintVolume>800 400 500</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>545d83f1-aa36-4e9e-8088-454595249d99</UUID>
+		<Name>A2 (Wide)</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam A2 (Wide)</DisplayName>
+		<PrintVolume>300 300 200</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>09b1e01b-61f5-4e7d-890e-95afca014ec8</UUID>
+		<Name>A2X</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam A2X</DisplayName>
+		<PrintVolume>200 200 380</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>bd60d03a-9bef-4dab-9a40-636b2d4c0abc</UUID>
+		<Name>M1 cusing</Name>
+		<Manufacturer>ConceptLaser</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ConceptLaser M1 cusing</DisplayName>
+		<PrintVolume>250 250 250</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>f299c153-ba76-486f-8385-114ecbdfcafc</UUID>
+		<Name>Replicator Mini</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator Mini</DisplayName>
+		<PrintVolume>100 100 125</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>44e084c0-9fa3-4842-a845-2abf47274977</UUID>
+		<Name>Matrix 300+</Name>
+		<Manufacturer>Mcor</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Mcor Matrix 300+</DisplayName>
+		<PrintVolume>256 169 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>d</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>05fa2e5b-f4e6-4bda-b7c2-60ea0036a48c</UUID>
+		<Name>Q20</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam Q20</DisplayName>
+		<PrintVolume>350 350 380</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>3e36554f-0429-466a-bf5b-b36bbe08c026</UUID>
+		<Name>M-Flex</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne M-Flex</DisplayName>
+		<PrintVolume>400 250 250</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>694d6d5f-a1b5-40a4-aad9-26835862a720</UUID>
+		<Name>S-Print</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne S-Print</DisplayName>
+		<PrintVolume>800 500 400</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>10ddf365-5439-4794-bc38-fa54e7b0b83f</UUID>
+		<Name>Play</Name>
+		<Manufacturer>PrintrBot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>PrintrBot Play</DisplayName>
+		<PrintVolume>100 100 130</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>p</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>57b587b2-e156-4da9-8c2e-604d5c19094a</UUID>
+		<Name>Q10</Name>
+		<Manufacturer>Arcam</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Arcam Q10</DisplayName>
+		<PrintVolume>200 200 180</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>5f2ae697-3b58-42b8-b06b-497fcaf1cab1</UUID>
+		<Name>Mlab cusing</Name>
+		<Manufacturer>ConceptLaser</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ConceptLaser Mlab cusing</DisplayName>
+		<PrintVolume>90 90 80</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>021ae4ba-19f5-4572-b270-c548e9a2d8e5</UUID>
+		<Name>EOSINT M290</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOSINT M290</DisplayName>
+		<PrintVolume>250 250 325</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>32cdb4fd-71ea-4920-825a-b5fdaeaced4d</UUID>
+		<Name>Cupcake CNC</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Cupcake CNC</DisplayName>
+		<PrintVolume>100 100 130</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>de261689-e6b0-4e20-a102-0a32d7482773</UUID>
+		<Name>M2 cusing</Name>
+		<Manufacturer>ConceptLaser</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ConceptLaser M2 cusing</DisplayName>
+		<PrintVolume>250 250 280</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>f4018158-5430-496e-b3c7-a2b9f28cf600</UUID>
+		<Name>Replicator 5th Gen</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator 5th Gen</DisplayName>
+		<PrintVolume>252 199 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a4854a23-bb8b-40a2-9f5b-8017af990bb9</UUID>
+		<Name>J750</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys J750</DisplayName>
+		<PrintVolume>490 390 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon></Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>e7a8c122-4f7a-408d-a4cc-6d27aa0d7bed</UUID>
+		<Name>Innovent</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne Innovent</DisplayName>
+		<PrintVolume>160 65 65</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a46daaef-defe-4e91-9742-9adcef1ce7f0</UUID>
+		<Name>Orion Delta</Name>
+		<Manufacturer>SeeMeCNC</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>SeeMeCNC Orion Delta</DisplayName>
+		<PrintVolume>150 150 235</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>463a310e-656b-4eab-9688-e32c1e9803f3</UUID>
+		<Name>Objet24</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet24</DisplayName>
+		<PrintVolume>234 192 148.6</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>83e8f2f2-b543-4f88-9c59-4e3267144d65</UUID>
+		<Name>EOSINT P800</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOSINT P800</DisplayName>
+		<PrintVolume>700 380 580</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>e479e0d5-3aaf-4a03-ab21-5260e10d3202</UUID>
+		<Name>Objet30</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet30</DisplayName>
+		<PrintVolume>294 192 148.6</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>6a2eff14-be6c-4ad6-8929-6f694a4f64c1</UUID>
+		<Name>Explorer</Name>
+		<Manufacturer>FlashForge</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FlashForge Explorer</DisplayName>
+		<PrintVolume>51.2 38.4 100</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a212460b-b5dd-476b-adab-7ec035d79f5b</UUID>
+		<Name>ARKe</Name>
+		<Manufacturer>Mcor</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Mcor ARKe</DisplayName>
+		<PrintVolume>240 205 125</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>d</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>9fc9d0dc-856f-4eea-85c8-c14e64119dd9</UUID>
+		<Name>Objet30 Prime</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet30 Prime</DisplayName>
+		<PrintVolume>294 192 148.6</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>498a4051-8ee6-47f4-9dd6-957b867e590d</UUID>
+		<Name>Objet350 Connex3</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet350 Connex3</DisplayName>
+		<PrintVolume>342 342 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>577a6860-699b-4dd6-82b8-09677996332d</UUID>
+		<Name>2+ Extended</Name>
+		<Manufacturer>Ultimaker</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Ultimaker 2+ Extended</DisplayName>
+		<PrintVolume>223 223 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>61a30d4a-3678-424b-9ec1-c85a4c3b4b86</UUID>
+		<Name>M-Print</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne M-Print</DisplayName>
+		<PrintVolume>800 500 400</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>9323ee0b-0714-4f75-aa7f-0ab2a783bfc7</UUID>
+		<Name>Objet30 Pro</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet30 Pro</DisplayName>
+		<PrintVolume>294 192 148.6</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>1e55f9e8-463e-40c8-a681-ca60c83f80c6</UUID>
+		<Name>Objet Eden260VS</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet Eden260VS</DisplayName>
+		<PrintVolume>255 252 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>22aa161e-9f54-46e3-ab11-62b36577a669</UUID>
+		<Name>Objet260 Connex3</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet260 Connex3</DisplayName>
+		<PrintVolume>255 252 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a4999eac-d44f-4645-8e0c-f7068dc015f6</UUID>
+		<Name>Mojo</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Mojo</DisplayName>
+		<PrintVolume>127 127 127</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>3421e8a6-04d2-4b7e-b0f0-b2a3ebcd4880</UUID>
+		<Name>Objet500 Connex3</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet500 Connex3</DisplayName>
+		<PrintVolume>490 390 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>780a1514-0eff-408e-8641-50510a5a5adf</UUID>
+		<Name>Thing-O-Matic</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Thing-O-Matic</DisplayName>
+		<PrintVolume>100 100 100</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>b6e2242b-1d1c-4d0f-9aa1-61443ec4ece1</UUID>
+		<Name>Ditto Pro</Name>
+		<Manufacturer>Tinkerines</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Tinkerines Ditto Pro</DisplayName>
+		<PrintVolume>370 390 436</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a264ecfc-7c8c-4db2-b0f2-c4b5953adb63</UUID>
+		<Name>Mark One</Name>
+		<Manufacturer>MarkForged</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>MarkForged Mark One</DisplayName>
+		<PrintVolume>320 132 154</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>08993475-5bf0-4844-b908-eb0f1e44cca4</UUID>
+		<Name>Connex 500</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Connex 500</DisplayName>
+		<PrintVolume>490 390 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>dd835022-6fe5-42f5-9a6a-b9a23cf331aa</UUID>
+		<Name>Taz 5</Name>
+		<Manufacturer>Lulzbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Lulzbot Taz 5</DisplayName>
+		<PrintVolume>290 275 250</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>3bf3a99a-4804-4681-b208-2bcc92c0eb2c</UUID>
+		<Name>Objet1000 Plus</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Objet1000 Plus</DisplayName>
+		<PrintVolume>1000 800 500</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>06c9c7d0-21fd-41bb-a5ec-3269df40dfdd</UUID>
+		<Name>3D Idea Builder</Name>
+		<Manufacturer>Dremel</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Dremel 3D Idea Builder</DisplayName>
+		<PrintVolume>230 150 140</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>d</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>235dc90d-06df-4464-b9ed-e1ed542bd124</UUID>
+		<Name>FORMIGA P110</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS FORMIGA P110</DisplayName>
+		<PrintVolume>200 250 330</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>48317dd1-d71b-4b9b-9a4d-4a48fd90415b</UUID>
+		<Name>EOS P396</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOS P396</DisplayName>
+		<PrintVolume>340 340 600</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>27de02b8-075b-4bb7-b5dc-014454ebd020</UUID>
+		<Name>EOSINT P760</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOSINT P760</DisplayName>
+		<PrintVolume>700 380 580</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>410469b8-203f-46d6-a17b-a74803634d2e</UUID>
+		<Name>Steel</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Steel</DisplayName>
+		<PrintVolume>762 393 393</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>c9e012be-055a-4976-aa78-55d0565fd246</UUID>
+		<Name>EOSINT M280</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOSINT M280</DisplayName>
+		<PrintVolume>250 250 325</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>7a0d503c-7f65-462d-816e-6f3a95e96c2e</UUID>
+		<Name>S-Max+</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne S-Max+</DisplayName>
+		<PrintVolume>1800 1000 600</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>459a7434-0109-4d1b-932b-42d9d0522039</UUID>
+		<Name>EOSINT M100</Name>
+		<Manufacturer>EOS</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>EOS EOSINT M100</DisplayName>
+		<PrintVolume>100 100 95</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>84d910a0-5f82-4c68-9d0b-34dd555be678</UUID>
+		<Name>Exerial</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne Exerial</DisplayName>
+		<PrintVolume>2200 1200 700</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>69d02b3f-55f0-4d2e-9b1b-90dba89c6b7d</UUID>
+		<Name>S-Max</Name>
+		<Manufacturer>ExOne</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>ExOne S-Max</DisplayName>
+		<PrintVolume>1800 1000 700</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a3aea073-33ac-4544-a345-8af8aaebae3d</UUID>
+		<Name>Finder</Name>
+		<Manufacturer>FlashForge</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FlashForge Finder</DisplayName>
+		<PrintVolume>140 140 140</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>4528249c-f666-4185-8b32-2f2a7f269577</UUID>
+		<Name>Dreamer</Name>
+		<Manufacturer>FlashForge</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FlashForge Dreamer</DisplayName>
+		<PrintVolume>230 150 140</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>c1c543a0-4bb2-440a-afc2-0318aea93e5e</UUID>
+		<Name>Creator Pro</Name>
+		<Manufacturer>FlashForge</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FlashForge Creator Pro</DisplayName>
+		<PrintVolume>227 148 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>4869846f-47d3-4f8a-9c24-65136a67a0be</UUID>
+		<Name>Form 1</Name>
+		<Manufacturer>FormLabs</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FormLabs Form 1</DisplayName>
+		<PrintVolume>125 125 165</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>44167fb6-886e-4cb3-9a59-e0180497dcae</UUID>
+		<Name>Form 2</Name>
+		<Manufacturer>FormLabs</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FormLabs Form 2</DisplayName>
+		<PrintVolume>145 145 175</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a1b94f51-ddd5-4b17-8de1-48d194903118</UUID>
+		<Name>Form 1+</Name>
+		<Manufacturer>FormLabs</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>FormLabs Form 1+</DisplayName>
+		<PrintVolume>125 125 165</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>fa2c7e41-8cc6-4a04-93d5-e80dffe00b8f</UUID>
+		<Name>Mini</Name>
+		<Manufacturer>Lulzbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Lulzbot Mini</DisplayName>
+		<PrintVolume>152 152 158</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>475b20dd-93ec-4879-a06d-260d1327ec2f</UUID>
+		<Name>Replicator</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator</DisplayName>
+		<PrintVolume>225 145 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>e7ada430-f642-40c0-b843-cecbd46701f2</UUID>
+		<Name>IRIS HD</Name>
+		<Manufacturer>Mcor</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Mcor IRIS HD</DisplayName>
+		<PrintVolume>256 169 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>d</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>d667c8dd-2f19-47e2-8eee-f90b91af64cc</UUID>
+		<Name>Replicator 2</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator 2</DisplayName>
+		<PrintVolume>285 153 155</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ac34be8c-b9c7-4852-95a3-03a35b410b1b</UUID>
+		<Name>Replicator Z18</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator Z18</DisplayName>
+		<PrintVolume>300 305 457</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ec38d809-f58f-4669-bd8f-dd23befa5b3b</UUID>
+		<Name>Plus</Name>
+		<Manufacturer>PrintrBot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>PrintrBot Plus</DisplayName>
+		<PrintVolume>250 250 265</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>p</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>f27e6650-7d91-4a21-b6c4-cc3363100c65</UUID>
+		<Name>Replicator 2X</Name>
+		<Manufacturer>Makerbot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Makerbot Replicator 2X</DisplayName>
+		<PrintVolume>285 153 155</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ee6fad2e-e259-415a-9128-74be534a4b31</UUID>
+		<Name>Metallic Plastic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Metallic Plastic</DisplayName>
+		<PrintVolume>230 180 310</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>d2d500d1-6a57-4ccc-884a-2fbde09f33ff</UUID>
+		<Name>M2</Name>
+		<Manufacturer>MakerGear</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>MakerGear M2</DisplayName>
+		<PrintVolume>203 254 203</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>m</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>7c33d33c-3344-405f-b219-0376dbf5a6f7</UUID>
+		<Name>Simple</Name>
+		<Manufacturer>PrintrBot</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>PrintrBot Simple</DisplayName>
+		<PrintVolume>150 150 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>p</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>c40b77e1-2637-4270-962e-856474530e73</UUID>
+		<Name>AM 250</Name>
+		<Manufacturer>Renishaw</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Renishaw AM 250</DisplayName>
+		<PrintVolume>250 250 300</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>dedcade4-d9dc-4609-b2a7-fe71262d6d3a</UUID>
+		<Name>AM 400</Name>
+		<Manufacturer>Renishaw</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Renishaw AM 400</DisplayName>
+		<PrintVolume>250 250 300</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>7148e6ea-a020-4939-9ae0-430e03e453f2</UUID>
+		<Name>Castable Wax</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Castable Wax</DisplayName>
+		<PrintVolume>75 75 50</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>40e6e43f-c231-4fcc-b9ec-316c593600ba</UUID>
+		<Name>RenAM 500M</Name>
+		<Manufacturer>Renishaw</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Renishaw RenAM 500M</DisplayName>
+		<PrintVolume>250 250 350</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>29cc224d-1a27-4770-a7a1-ba78828e51e5</UUID>
+		<Name>Rostock MAX</Name>
+		<Manufacturer>SeeMeCNC</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>SeeMeCNC Rostock MAX</DisplayName>
+		<PrintVolume>280 280 375</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>46706036-e712-429e-aade-9a02afed3039</UUID>
+		<Name>Acrylic Plastic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Acrylic Plastic</DisplayName>
+		<PrintVolume>250 250 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>e8fb9c50-4a10-4b6e-8821-ea7f46d6fb86</UUID>
+		<Name>Aluminum</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Aluminum</DisplayName>
+		<PrintVolume>250 250 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ddc7c536-2e24-405b-8f8a-d49e7ea0674d</UUID>
+		<Name>Elasto Plastic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Elasto Plastic</DisplayName>
+		<PrintVolume>300 300 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>93e25f1e-57c7-4d42-9fd6-8b9aa47945b7</UUID>
+		<Name>Frosted Detail Plastic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Frosted Detail Plastic</DisplayName>
+		<PrintVolume>284 184 203</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>e9659d28-98fc-48b4-9167-a2a19546a1e8</UUID>
+		<Name>Frosted Extreme Detail</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Frosted Extreme Detail</DisplayName>
+		<PrintVolume>50 50 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>918bb4ae-89b5-4fe0-b3e9-6bf5facb16a7</UUID>
+		<Name>Full Color Sandstone</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Full Color Sandstone</DisplayName>
+		<PrintVolume>250 380 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>45f5b407-bf8c-4398-8df3-aaf1151bc5c0</UUID>
+		<Name>Polished Metallic Plastic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Polished Metallic Plastic</DisplayName>
+		<PrintVolume>150 150 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a5cbac00-eaa2-4ff6-aa10-7ef81abd5711</UUID>
+		<Name>Porcelain Ceramic</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Porcelain Ceramic</DisplayName>
+		<PrintVolume>125 125 200</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>d68d70dd-35dd-47da-b143-bac2ccce7101</UUID>
+		<Name>Steel (Precious Metal Finish)</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Steel (Precious Metal Finish)</DisplayName>
+		<PrintVolume>330 190 228</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>384c3758-07d9-42c6-8dad-5f7be0a7d5ad</UUID>
+		<Name>Fortus 250mc</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Fortus 250mc</DisplayName>
+		<PrintVolume>254 254 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>312b0a17-4315-4478-9f2d-bfb92532eea1</UUID>
+		<Name>Strong and Flexible (White)</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Strong and Flexible (White)</DisplayName>
+		<PrintVolume>650 350 550</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>214ebc5c-450f-453a-ba39-e2c78a84772d</UUID>
+		<Name>Strong and Flexible (Black)</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Strong and Flexible (Black)</DisplayName>
+		<PrintVolume>230 180 320</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>7fec6d7e-905b-42e2-9fba-f10d68868774</UUID>
+		<Name>Strong and Flexible (Polished)</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Strong and Flexible (Polished)</DisplayName>
+		<PrintVolume>200 150 150</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>1fcc7960-664c-499d-bb53-6d5f5a6598a9</UUID>
+		<Name>Precious Metals</Name>
+		<Manufacturer>Shapeways</Manufacturer>
+		<IsPrintService>true</IsPrintService>
+		<DisplayName>Shapeways Precious Metals</DisplayName>
+		<PrintVolume>89 89 100</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>S</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>21b13d11-a2be-4aef-9940-ef204cdf8303</UUID>
+		<Name>uPrint SE</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys uPrint SE</DisplayName>
+		<PrintVolume>203 152 152</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>3f7b2f8d-cbd8-4665-89cb-93452dfa20c9</UUID>
+		<Name>uPrint SE Plus</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys uPrint SE Plus</DisplayName>
+		<PrintVolume>203 203 152</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>62e702ee-2881-4120-b84b-4363a3b0cd27</UUID>
+		<Name>Dimension BST 1200es</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Dimension BST 1200es</DisplayName>
+		<PrintVolume>254 254 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>12333b53-1129-41fe-b65f-6dbb560d2ee7</UUID>
+		<Name>Dimension SST 1200es</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Dimension SST 1200es</DisplayName>
+		<PrintVolume>254 254 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>8459ec40-d8c1-4ffc-b8cc-05b18ec4399d</UUID>
+		<Name>Dimension Elite</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Dimension Elite</DisplayName>
+		<PrintVolume>203 203 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>9c151964-1fe9-4f8a-bf4c-ce0b796205bb</UUID>
+		<Name>Fortus 380mc</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Fortus 380mc</DisplayName>
+		<PrintVolume>355 305 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>9e6ea11e-dfaa-47f6-8446-0a998ac79520</UUID>
+		<Name>Fortus 450mc</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Fortus 450mc</DisplayName>
+		<PrintVolume>406 355 406</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>19aa5d72-19e7-483f-b899-60ddc4e72981</UUID>
+		<Name>Fortus 900mc</Name>
+		<Manufacturer>Stratasys</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Stratasys Fortus 900mc</DisplayName>
+		<PrintVolume>914.4 609.6 914.4</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>s</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>69987c0a-d621-4223-84da-3d024e9ba53d</UUID>
+		<Name>Litto</Name>
+		<Manufacturer>Tinkerines</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Tinkerines Litto</DisplayName>
+		<PrintVolume>135 120 175</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>4a351f9a-d1c6-47e6-bf1d-9b706591662a</UUID>
+		<Name>Ditto+</Name>
+		<Manufacturer>Tinkerines</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Tinkerines Ditto+</DisplayName>
+		<PrintVolume>210 185 230</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>69210fe4-29a2-4fd0-be59-f4f21bf9b72f</UUID>
+		<Name>Series 1 (2013)</Name>
+		<Manufacturer>Type A</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Type A Series 1 (2013)</DisplayName>
+		<PrintVolume>305 305 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>c40850a5-7dbc-4748-86ca-964264d2f4ac</UUID>
+		<Name>Series 1 (2014)</Name>
+		<Manufacturer>Type A</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Type A Series 1 (2014)</DisplayName>
+		<PrintVolume>305 305 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ffdb911c-43e3-4e1a-b717-fff7d867feff</UUID>
+		<Name>Series 1 Pro</Name>
+		<Manufacturer>Type A</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Type A Series 1 Pro</DisplayName>
+		<PrintVolume>305 305 305</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>t</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>57a13157-19a5-4365-af1e-fdf724a27b10</UUID>
+		<Name>Original</Name>
+		<Manufacturer>Ultimaker</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Ultimaker Original</DisplayName>
+		<PrintVolume>210 210 205</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>3966efae-1c6e-4c07-a3e7-f07971ade1bc</UUID>
+		<Name>Original+</Name>
+		<Manufacturer>Ultimaker</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Ultimaker Original+</DisplayName>
+		<PrintVolume>210 210 205</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>f2895d5d-6a27-42e3-bd05-84d3dec5fac1</UUID>
+		<Name>2 Go</Name>
+		<Manufacturer>Ultimaker</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Ultimaker 2 Go</DisplayName>
+		<PrintVolume>120 120 115</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ff59b7b0-d629-44fe-a8cb-74d4daa7dd24</UUID>
+		<Name>2+</Name>
+		<Manufacturer>Ultimaker</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Ultimaker 2+</DisplayName>
+		<PrintVolume>223 223 205</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>78e4c993-b277-487c-a192-68ab2de20a25</UUID>
+		<Name>Mini</Name>
+		<Manufacturer>Up</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Up Mini</DisplayName>
+		<PrintVolume>120 120 120</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>049ae66e-80d3-409d-8e6a-c31dc940742b</UUID>
+		<Name>Plus 2</Name>
+		<Manufacturer>Up</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Up Plus 2</DisplayName>
+		<PrintVolume>138 138 135</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>1b7fb73c-fe5e-468f-bc5c-391d585bf22e</UUID>
+		<Name>Box</Name>
+		<Manufacturer>Up</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Up Box</DisplayName>
+		<PrintVolume>255 205 205</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>u</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ba2c08fb-b5bd-4eee-b3da-d7dc36d37197</UUID>
+		<Name>DeltaWASP 20 40</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP DeltaWASP 20 40</DisplayName>
+		<PrintVolume>200 200 400</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ad9bcc34-bd2c-4dca-93e0-7d2c025765b2</UUID>
+		<Name>DeltaWASP 40 70</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP DeltaWASP 40 70</DisplayName>
+		<PrintVolume>400 400 700</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ac643f17-0484-4081-b9a1-3bc5251d3261</UUID>
+		<Name>DeltaWASP 60 100</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP DeltaWASP 60 100</DisplayName>
+		<PrintVolume>600 600 1000</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>a861d5c0-1794-437e-a693-6da4d1d44341</UUID>
+		<Name>Delta Open</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP Delta Open</DisplayName>
+		<PrintVolume>200 200 290</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>d50f3844-da2c-478b-b62b-de45edbc0ea5</UUID>
+		<Name>DeltaWASP 20 40 Turbo</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP DeltaWASP 20 40 Turbo</DisplayName>
+		<PrintVolume>200 200 400</PrintVolume>
+		<BedShape>Circular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>6d02df75-d74b-499e-bedb-e03e0101e1c0</UUID>
+		<Name>PowerWASP EVO</Name>
+		<Manufacturer>WASP</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>WASP PowerWASP EVO</DisplayName>
+		<PrintVolume>260 195 190</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>ac171cd2-89f8-4605-9d8e-7867806aaa3c</UUID>
+		<Name>Inventure</Name>
+		<Manufacturer>Zortrax</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Zortrax Inventure</DisplayName>
+		<PrintVolume>140 140 140</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+	<Printer>
+		<UUID>8cefc263-e3e7-4118-a66b-ef8b75cb6959</UUID>
+		<Name>M200</Name>
+		<Manufacturer>Zortrax</Manufacturer>
+		<IsPrintService>false</IsPrintService>
+		<DisplayName>Zortrax M200</DisplayName>
+		<PrintVolume>200 200 180</PrintVolume>
+		<BedShape>Rectangular</BedShape>
+		<Icon>z</Icon>
+		<Visible>true</Visible>
+	</Printer>
+</PrinterList>

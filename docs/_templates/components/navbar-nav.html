@@ -1,0 +1,11 @@
+{% extends "!components/navbar-nav.html" %}
+
+{# Eliminem la inserció automàtica del toctree al navbar #}
+{% block navbar_nav %}
+  {# No mostrem el toctree al menú superior #}
+{% endblock %}
+
+{# Mantinguem la resta de la navbar (logo, botons, etc.) #}
+{% block navbar_start %}
+  {{ super() }}
+{% endblock %}
