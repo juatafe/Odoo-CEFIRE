@@ -23,7 +23,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-xetex texlive-fonts-recommended \
-                                  texlive-latex-extra latexmk graphviz
+                texlive-latex-extra \
+                texlive-lang-catalan \
+                fonts-freefont-otf \
+                latexmk \
+                graphviz
 
       - name: Python deps
         run: |
