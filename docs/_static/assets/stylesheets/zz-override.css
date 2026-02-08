@@ -54,6 +54,17 @@
   margin-top: 2px;
 }
 
+/* Logo Odoo (només mòbil) */
+.jb-navbar-logos .logo-odoo {
+  height: 36px;
+}
+
+/* Logo institucional gran */
+.jb-navbar-logos .logo-institucional {
+  height: 48px;
+}
+
+
 /* Amagar el segon logo en mòbil */
 @media (max-width: 992px) {
   /* .jb-navbar-logos .logo-gvanext { display: none; } */

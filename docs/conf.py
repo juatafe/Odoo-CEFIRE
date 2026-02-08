@@ -40,7 +40,7 @@ myst_heading_anchors = 3
 # Pots triar via variable d'entorn: SPHINX_THEME=pydata_sphinx_theme make html
 html_theme = os.environ.get("SPHINX_THEME", "sphinx_book_theme")  # "furo" | "sphinx_rtd_theme" | "pydata_sphinx_theme" | "alabaster"
 html_title = "Sistemes de Gestió Empresarial"
-html_baseurl = "https://juatafe.github.io/2nDAM-SGE/"
+html_baseurl = "https://juatafe.github.io/Odoo-CEFIRE/"
 html_static_path = ["_static"]
 # afegir script JS
 html_js_files = [
