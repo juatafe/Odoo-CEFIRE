@@ -7,7 +7,7 @@ Aquest material recull la teoria, exemples i pràctiques del mòdul, orientades 
 
 Aquests apunts han sigut elaborats per **Juan Bautista Talens** i **Alicia González**, docents del cicle formatiu de **Desenvolupament d’Aplicacions Multiplataforma (DAM)**, que treballem al mateix centre, l’**IES Jaume II el Just de Tavernes de la Valldigna**. El document naix aprofitant l’experiència compartida en la docència del mòdul i en el marc d’un curs de formació del **CEFIRE**, amb la voluntat de transformar eixa formació en un recurs útil, reutilitzable i obert.
 
-Un dels motius principals per apostar per Odoo és el seu **caràcter gratuït en la versió Community**, que el converteix en una eina ideal tant per a l’aprenentatge com per a la implantació real en empreses xicotetes i mitjanes. En coherència amb aquest esperit, aquesta guia també es concep com un material obert i accessible, pensat per a compartir coneixement i facilitar l’aprenentatge pràctic sense barreres artificials.
+Un dels motius principals per apostar per Odoo és el seu **caràcter gratuït en la versió Community**, que el converteix en una eina ideal tant per a l’aprenentatge com per a la implantació real en empreses xicotetes i mitjanes. En coherència amb aquest esperit, aquesta guia també es concep com un material obert i accessible, alineat amb els principis del programari lliure i la compartició del coneixement en l’àmbit educatiu.
 
 El document naix de la pràctica docent quotidiana: de les preguntes que sempre ixen a classe, dels errors que es repeteixen curs rere curs i de la necessitat de disposar d’una guia que vaja més enllà de la teoria. No és un manual oficial ni una traducció de la documentació d’Odoo, sinó un material pensat **per a aprendre fent**, amb exemples, pràctiques guiades i situacions que simulen el funcionament real d’una empresa.
 
@@ -25,25 +25,6 @@ En definitiva, és un camí que es recorre fent-lo, no mirant-lo des de la vorer
 
 Dit d’una altra manera: **ací no venim només a estudiar Odoo; venim a aprendre a fer-lo servir de veritat.**
 
-## Llicència
 
-Aquest material es distribueix sota la llicència **Creative Commons Reconeixement – No Comercial – Compartir Igual (CC BY-NC-SA 4.0)**.
+Aquest material es distribueix sota una llicència **Creative Commons Reconeixement – No Comercial – Compartir Igual (CC BY-NC-SA)**, amb la voluntat de facilitar la reutilització, l’adaptació i la millora del contingut en contextos educatius, sempre que se’n reconega l’autoria i es mantinga el mateix esperit obert.
 
-Això significa que es permet:
-
-- **Compartir** — copiar i redistribuir el material en qualsevol mitjà o format.
-- **Adaptar** — remesclar, transformar i construir a partir del material.
-
-Sempre que es complisquen les condicions següents:
-
-- **Reconeixement (BY)**: cal citar adequadament l’autoria de l’obra original.
-- **No Comercial (NC)**: no es permet l’ús del material amb finalitats comercials.
-- **Compartir Igual (SA)**: si es crea una obra derivada, s’ha de distribuir sota la mateixa llicència.
-
-Autoria:  
-**Juan Bautista Talens** i **Alicia González**  
-CEFIRE de València  
-Any: 2026
-
-Més informació sobre la llicència:  
-https://creativecommons.org/licenses/by-nc-sa/4.0/
