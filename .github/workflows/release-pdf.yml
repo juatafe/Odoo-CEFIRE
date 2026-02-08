@@ -24,7 +24,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-xetex texlive-fonts-recommended \
                 texlive-latex-extra \
-                texlive-lang-catalan \
                 fonts-freefont-otf \
                 latexmk \
                 graphviz
