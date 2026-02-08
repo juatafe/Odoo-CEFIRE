@@ -36,4 +36,4 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: _build/latex/sistemes-de-gestio-empresarial.pdf
+          files: _build/latex/Odoo-CEFIRE.pdf

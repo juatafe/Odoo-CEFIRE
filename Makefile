@@ -21,7 +21,7 @@ pdf:
 	-cd $(BUILDDIR)/latex && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
 	@echo "-------------------------------------------------------"
 	@echo "Procés finalitzat. Revisa el PDF a:"
-	@echo "$(BUILDDIR)/latex/sistemes-de-gestio-empresarial.pdf"
+	@echo "$(BUILDDIR)/latex/Odoo-CEFIRE.pdf"
 	@echo "-------------------------------------------------------"
 
 serve: html

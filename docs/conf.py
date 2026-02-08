@@ -66,6 +66,7 @@ def slugify(s: str) -> str:
 _repo = os.environ.get("GITHUB_REPOSITORY", "")
 _repo_name = _repo.split("/")[-1] if _repo else ""
 site_slug = _repo_name or slugify(project)
+site_slug = os.environ.get("SITE_SLUG", "Odoo-CEFIRE")
 
 # Enllaç relatiu al PDF dins del site (p. ex. pdf/plantilla-sphinx.pdf)
 pdf_url = f"pdf/{site_slug}.pdf"
@@ -73,7 +74,7 @@ pdf_url = f"pdf/{site_slug}.pdf"
 # ──────────────── Opcions per tema (cada tema entén les seues) ────────────────
 _book_opts = {
     #"logo_only": False,  # mostra nom i logo
-    "repository_url": "https://github.com/juatafe/2nDAM-SGE",
+    "repository_url": "https://github.com/juatafe/Odoo-CEFIRE",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_download_button": True,
@@ -90,8 +91,8 @@ _pydata_opts = {
     "show_toc_level": 2,
     "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "icon_links": [
-        {"name": "GitHub", "url": "https://github.com/juatafe/2nDAM-SGE", "icon": "fa-brands fa-github"},
-        {"name": "Issues", "url": "https://github.com/juatafe/2nDAM-SGE", "icon": "fa-solid fa-circle-exclamation"},
+        {"name": "GitHub", "url": "https://github.com/juatafe/Odoo-CEFIRE", "icon": "fa-brands fa-github"},
+        {"name": "Issues", "url": "https://github.com/juatafe/Odoo-CEFIRE", "icon": "fa-solid fa-circle-exclamation"},
         {"name": "PDF", "url": pdf_url, "icon": "fa-solid fa-file-pdf"},
     ],
     # Els teus logos en la navbar només quan el tema és PyData:
@@ -112,7 +113,7 @@ _furo_opts = {
     "dark_logo": html_logo,
     "sidebar_hide_name": False,
     # Equivalent a "Edita esta pàgina" en Furo:
-    "source_repository": "https://github.com/juatafe/2nDAM-SGE",
+    "source_repository": "https://github.com/juatafe/Odoo-CEFIRE",
     "source_branch": "main",
     "source_directory": "docs/",
 }
@@ -145,7 +146,7 @@ html_theme_options["navigation_with_keys"] = True
 # Context per a botó "Edita a GitHub" (el tenies actiu)
 html_context = {
     "github_user": "juatafe",
-    "github_repo": "plantilla-sphinx",
+    "github_repo": "Odoo-CEFIRE",
     "github_version": "main",
     "doc_path": "docs",
 }
