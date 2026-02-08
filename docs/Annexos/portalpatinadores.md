@@ -1,4 +1,4 @@
-# 🛼 Pràctica Tema 7 · Portal de patinadores
+# Annex M Exercici pràctic 9: Portal de patinadores
 
 ## Context de la pràctica
 El club de patinatge vol que les patinadores puguen consultar les seues dades des del portal d’usuari, sense entrar al backend d’Odoo. Ja tenim:

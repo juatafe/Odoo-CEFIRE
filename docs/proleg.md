@@ -1,92 +1,49 @@
 Pròleg
 ======
 
-Apunts del curs **Sistemes de Gestió Empresarial (2n DAM)**.
+Apunts del curs **Sistemes de Gestió Empresarial**.
 
-Aquest material recull la teoria, exemples i pràctiques del mòdul, orientades a la
-identificació, instal·lació i configuració de sistemes ERP-CRM, amb especial atenció
-a **Odoo**.
+Aquest material recull la teoria, exemples i pràctiques del mòdul, orientades a la identificació, instal·lació i configuració de sistemes **ERP-CRM**, amb una atenció especial a **Odoo**, una de les solucions de gestió empresarial més potents i flexibles del mercat actual.
 
-L’objectiu del curs és proporcionar a l’alumnat una visió pràctica i aplicada
-dels sistemes de gestió empresarial, combinant fonaments teòrics amb activitats
-i projectes reals.
+Aquests apunts han sigut elaborats per **Juan Bautista Talens** i **Alicia González**, docents del cicle formatiu de **Desenvolupament d’Aplicacions Multiplataforma (DAM)**, que treballem al mateix centre, l’**IES Jaume II el Just de Tavernes de la Valldigna**. El document naix aprofitant l’experiència compartida en la docència del mòdul i en el marc d’un curs de formació del **CEFIRE**, amb la voluntat de transformar eixa formació en un recurs útil, reutilitzable i obert.
 
-```{only} html
+Un dels motius principals per apostar per Odoo és el seu **caràcter gratuït en la versió Community**, que el converteix en una eina ideal tant per a l’aprenentatge com per a la implantació real en empreses xicotetes i mitjanes. En coherència amb aquest esperit, aquesta guia també es concep com un material obert i accessible, pensat per a compartir coneixement i facilitar l’aprenentatge pràctic sense barreres artificials.
 
-:::{grid} 1 2 2 2
-:gutter: 3
+El document naix de la pràctica docent quotidiana: de les preguntes que sempre ixen a classe, dels errors que es repeteixen curs rere curs i de la necessitat de disposar d’una guia que vaja més enllà de la teoria. No és un manual oficial ni una traducció de la documentació d’Odoo, sinó un material pensat **per a aprendre fent**, amb exemples, pràctiques guiades i situacions que simulen el funcionament real d’una empresa.
 
+L’objectiu no és només que l’alumnat aprenga a instal·lar Odoo, sinó que siga capaç d’entendre’l, modificar-lo i adaptar-lo a contextos reals, desenvolupant criteri tècnic, autonomia i capacitat d’anàlisi; competències clau per al futur professional dins del sector tecnològic.
 
-:::{grid-item-card} 🏁 Tema 1 · Introducció
-:link: Unitats/Tema1/index
-:img-top: _static/assets/img/icons/intro.png
-:class-img-top: card-icon
-Conceptes bàsics d’ERP/CRM i primera presa de contacte amb Odoo.
-:::
+Aquest document **no està pensat per a llegir-se d’una tirada**, com si fora una novel·la (encara que Odoo, a voltes, tinga més drama que Netflix). És una **guia de treball pràctica**: cada apartat cobra sentit quan el lector va fent els exercicis, proves i pràctiques que es proposen.
 
-:::{grid-item-card} ⚙️ Tema 2 · Desplegament i Configuració
-:link: Unitats/Tema2/index
-:img-top: _static/assets/img/icons/docker.png
-:class-img-top: card-icon
-Instal·lació d’Odoo, configuració i pràctiques amb Docker i serveis auxiliars.
-:::
+Al llarg dels capítols es construeix un entorn Odoo real. Es comença per entendre els processos bàsics d’una empresa i s’avança cap a la configuració, la personalització i l’ampliació del sistema. No es tracta només de saber *on fer clic*, sinó d’entendre **per què**, quines conseqüències té dins del sistema i com afecta la resta de mòduls.
 
-:::{grid-item-card} 🏭 Tema 3 · Implantació ERP-CRM
-:link: Unitats/Tema3/index
-:img-top: _static/assets/img/icons/tema3index.png
-:class-img-top: card-icon
-Implantació d’Odoo en una empresa: interfície web, mòduls i configuració bàsica.
-:::
+El model d’aprenentatge és clarament **pràctic i progressiu**: primer com a usuari final, després com a administrador funcional i, finalment, com a desenvolupador que adapta Odoo a necessitats concretes. Molts exemples parteixen de casos reals, amb errors habituals i decisions que obliguen a parar-se a pensar.
 
-:::{grid-item-card} 🗂️ Tema 4 · Organització i consulta de la informació
-:link: Unitats/Tema4/index
-:img-top: _static/assets/img/icons/pgadmin.png
-:class-img-top: card-icon
-Accés a la base de dades d’Odoo amb pgAdmin. Consulta, gestió i anàlisi de la informació emmagatzemada en PostgreSQL.
-:::
+Estos apunts volen ser una guia per aprendre a **personalitzar Odoo**: crear mòduls propis, definir models de dades, dissenyar vistes, controlar permisos, integrar serveis externs i adaptar l’ERP a un context empresarial concret. Si es segueix el ritme del document i es fan les pràctiques quan toca, al final del curs no sols s’entendrà Odoo, sinó que **se sabrà tocar-lo sense por**.
 
-:::{grid-item-card} 📦 Tema 5 · Creació de mòduls
-:link: Unitats/Tema5/index
-:img-top: _static/assets/img/icons/python.png
-:class-img-top: card-icon
-Estructura del manifest, cicle de vida (hooks) i definició de models de dades amb l'ORM.
-:::
+En definitiva, és un camí que es recorre fent-lo, no mirant-lo des de la vorera. Llegir sense practicar ací serveix de poc: la clau està en provar, equivocar-se, tornar enrere i ajustar, tal com passa en qualsevol implantació real d’un ERP.
 
-:::{grid-item-card} 🖥️ Tema 6 · Creació de vistes
-:link: Unitats/Tema6/index
-:img-top: _static/assets/img/icons/xml.png
-:class-img-top: card-icon
-Disseny de la interfície del backend: menús, accions i vistes de tipus llistat (tree) i formulari (form).
-:::
+Dit d’una altra manera: **ací no venim només a estudiar Odoo; venim a aprendre a fer-lo servir de veritat.**
 
-:::{grid-item-card} 🌐 Tema 7 · Creació de frontend
-:link: Unitats/Tema7/index
-:img-top: _static/assets/img/icons/web.png
-:class-img-top: card-icon
-Desenvolupament web amb QWeb: modificació del portal, creació de rutes i controladors HTTP.
-:::
+## Llicència
 
-:::{grid-item-card} 🔐 Tema 8 · Permisos i rols
-:link: Unitats/Tema8/index
-:img-top: _static/assets/img/icons/security.png
-:class-img-top: card-icon
-Seguretat avançada: definició de grups, permisos de model (CSV) i regles de registre (Record Rules).
-:::
+Aquest material es distribueix sota la llicència **Creative Commons Reconeixement – No Comercial – Compartir Igual (CC BY-NC-SA 4.0)**.
 
+Això significa que es permet:
 
-:::{grid-item-card} 📈 Tema 9 · Comptabilitat amb Odoo Community i mòduls OCA
-:link: Unitats/Tema9/index
-:img-top: _static/assets/img/icons/plangeneralcontable1.png
-:class-img-top: card-icon
-Gestió financera: Pla General Comptable, configuració de diaris de banc, importació de contactes amb IBAN i gestió de remeses SEPA amb mòduls de l'OCA.
-:::
+- **Compartir** — copiar i redistribuir el material en qualsevol mitjà o format.
+- **Adaptar** — remesclar, transformar i construir a partir del material.
 
-:::{grid-item-card} 🔌 Tema 10 · Odoo API XML-RPC
-:link: Unitats/Tema10/index
-:img-top: _static/assets/img/icons/api.png
-:class-img-top: card-icon
-Interacció amb Odoo des de programes externs utilitzant la seva API XML-RPC.
-:::
+Sempre que es complisquen les condicions següents:
 
-:::
-```
+- **Reconeixement (BY)**: cal citar adequadament l’autoria de l’obra original.
+- **No Comercial (NC)**: no es permet l’ús del material amb finalitats comercials.
+- **Compartir Igual (SA)**: si es crea una obra derivada, s’ha de distribuir sota la mateixa llicència.
+
+Autoria:  
+**Juan Bautista Talens** i **Alicia González**  
+CEFIRE de València  
+Any: 2026
+
+Més informació sobre la llicència:  
+https://creativecommons.org/licenses/by-nc-sa/4.0/

@@ -1,6 +1,3 @@
-# Integració de sistemes mitjançant l’API d’Odoo
-En aquest tema explorarem com connectar aplicacions externes amb Odoo utilitzant el seu protocol XML-RPC i l'API externa.
-
 
 ## Introducció a la integració de sistemes d’informació
 
@@ -424,11 +421,3 @@ En aquest tema hem vist:
 - i les operacions bàsiques mitjançant XML-RPC.
 
 Odoo no és només una aplicació de gestió, sinó **una plataforma integrable** dins d’un ecosistema de sistemes d’informació.
-
-
-## Practica del Tema 10
-```{toctree}
-:maxdepth: 2
-
-practica_tema10
-```

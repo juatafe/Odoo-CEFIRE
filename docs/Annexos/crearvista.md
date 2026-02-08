@@ -1,8 +1,8 @@
-# ✍️ Pràctica 1 · Vistes per als models Grup i Entrenament
+# Annex L Exercici pràctic 7: Vistes per als models Grup i Entrenament
 
-## 1. Objectiu de la pràctica
+## 1. Objectiu de l'exercici
 
-L’objectiu d’aquesta pràctica és **aplicar els coneixements del Tema 6** a la resta de models del mòdul `patinatge`, concretament:
+L’objectiu d’aquesta pràctica és **aplicar els coneixements del capitol 5** a la resta de models del mòdul `patinatge`, concretament:
 
 - `patinatge.grup`
 - `patinatge.entrenament`

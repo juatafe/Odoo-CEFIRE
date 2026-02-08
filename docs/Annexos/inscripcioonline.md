@@ -1,4 +1,4 @@
-# 🛼 Pràctica Guiada Inscripció online d’una patinadora amb signatura
+# Annex LL Exercici pràctic 8: Inscripció online d’una patinadora amb signatura
 
 ```{toctree}
 :maxdepth: 2

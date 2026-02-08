@@ -1,4 +1,5 @@
-# ✍️ Pràctica 2: Desplegament d'Odoo amb Docker Compose
+Annex G Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
+==================================================================
 
 **Objectiu:** Aprendre a desplegar **Odoo 16** utilitzant Docker i Docker Compose de manera pràctica i guiada.  
 
@@ -8,7 +9,7 @@
 ---
 
 ## Introducció
-  En la pràctica anterior has après a instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
+  En l'exercici pràctic anterior has après a instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
   
   En aquesta segona pràctica explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
   
@@ -40,9 +41,9 @@ Altres requisits tècnics:
 
 ---
 
-# Fase 1: Preparació de l'entorn
+## Fase 1: Preparació de l'entorn
 
-## Pas 1: Instal·lació de Docker
+### Pas 1: Instal·lació de Docker
 ```bash
 # 1. Actualitzar el sistema
 sudo apt update
@@ -67,7 +68,7 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-## Pas 2: Configurar permisos d'usuari
+### Pas 2: Configurar permisos d'usuari
 ```bash
 # Afegir el teu usuari al grup docker
 sudo usermod -aG docker $USER
@@ -86,7 +87,7 @@ Docker version 24.0.x, build...
 Docker Compose version v2.x.x
 ```
 
-## Pas 3: Crear l'estructura del projecte
+### Pas 3: Crear l'estructura del projecte
 ```bash
 # Crear directori del projecte
 mkdir ~/odoo-docker
@@ -109,9 +110,9 @@ logs/
 
 ---
 
-# Fase 2: Configuració de Docker Compose
+## Fase 2: Configuració de Docker Compose
 
-## Pas 4: Crear el fitxer *docker-compose.yml*
+### Pas 4: Crear el fitxer *docker-compose.yml*
 ```bash
 nano docker-compose.yml
 ```
@@ -177,7 +178,7 @@ networks:
 
 ---
 
-## Pas 5: Configuració personalitzada d'Odoo
+### Pas 5: Configuració personalitzada d'Odoo
 ```bash
 nano config/odoo.conf
 ```
@@ -215,16 +216,16 @@ without_demo = False
 
 ---
 
-# Fase 3: Desplegament i verificació
+## Fase 3: Desplegament i verificació
 
-## Pas 6: Iniciar els serveis
+### Pas 6: Iniciar els serveis
 ```bash
 docker compose config
 docker compose pull
 docker compose up -d
 ```
 
-## Pas 7: Verificar que tot funciona
+### Pas 7: Verificar que tot funciona
 ```bash
 docker compose ps
 ```
@@ -236,15 +237,15 @@ odoo_app        odoo:16.0     Up (healthy)             0.0.0.0:8069->8069/tcp
 odoo_postgres   postgres:15   Up (healthy)             5432/tcp
 ```
 
-## Pas 8: Accedir a Odoo
+### Pas 8: Accedir a Odoo
 Obre el navegador i ves a:  
 👉 http://localhost:8069
 
 ---
 
-# Fase 4: Gestió operativa
+## Fase 4: Gestió operativa
 
-## Pas 9: Operacions bàsiques
+### Pas 9: Operacions bàsiques
 ```bash
 docker compose down         # Aturar serveis
 docker compose up -d        # Iniciar serveis
@@ -253,7 +254,7 @@ docker compose logs web     # Veure logs
 docker compose exec web bash # Accedir al contenidor
 ```
 
-## Pas 10: Monitoratge del sistema
+### Pas 10: Monitoratge del sistema
 ```bash
 nano scripts/monitor.sh
 ```
@@ -284,7 +285,7 @@ chmod +x scripts/monitor.sh
 
 ---
 
-# Fase 6: Resolució de problemes
+## Fase 6: Resolució de problemes
 
 🔧 **Problema 1: Els contenidors no s'inicien**
 ```bash
@@ -308,7 +309,7 @@ docker system prune -f
 
 ---
 
-# Entrega de la pràctica
+## Entrega de la pràctica
 
 **Has de lliurar:**
 
@@ -341,7 +342,7 @@ Practica2_NomCognom/
 
 ---
 
-# Criteris d'avaluació
+## Criteris d'avaluació
 
 | Criteri                  | Puntuació |
 |---------------------------|-----------|
@@ -352,7 +353,7 @@ Practica2_NomCognom/
 
 ---
 
-# Recursos addicionals
+## Recursos addicionals
 
 ```bash
 docker images        # Veure imatges

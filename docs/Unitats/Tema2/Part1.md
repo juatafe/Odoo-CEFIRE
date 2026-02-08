@@ -1,3 +1,6 @@
+Instal·lació tradicional d'Odoo en Ubuntu Server
+================================================
+
 Aquest document cobreix la instal·lació completa d'Odoo 16 utilitzant el mètode tradicional en Ubuntu Server. Aquest enfocament proporciona el màxim control sobre l'entorn i permet entendre profundament tots els components del sistema.
 
 ## Introducció
@@ -916,7 +919,7 @@ La configuració completa d'Apache com a reverse proxy és un tema extens que in
 - Monitoratge i logging avançat
 - Resolució de problemes habituals
 
-**📋 Documentació completa:** {doc}`Annex A: Apache com a Reverse Proxy per a Odoo <Annexos/Apache_ReverseProxy>`
+**📋 Documentació completa:** {doc}`Annex A: Apache com a Reverse Proxy per a Odoo <../../Annexos/Apache_ReverseProxy>`
 :::
 
 ### Avantatges del reverse proxy

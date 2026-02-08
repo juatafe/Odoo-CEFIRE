@@ -1,9 +1,11 @@
-# ✍️ Pràctica 1  
+Annex F Exercici pràctic 1: Instal·lació i configuració d'Odoo en Ubuntu Server
+===============================================================================
+
 ## Instal·lació i configuració d'Odoo
 
 ### Introducció
 
-En aquesta pràctica aprendràs a instal·lar i configurar **Odoo**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Odoo és una plataforma modular que permet gestionar diferents aspectes d'una empresa: vendes, compres, inventari, comptabilitat, recursos humans, etc.
+En aquest exercici pràctic aprendràs a instal·lar i configurar **Odoo**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Odoo és una plataforma modular que permet gestionar diferents aspectes d'una empresa: vendes, compres, inventari, comptabilitat, recursos humans, etc.
 
 Com a futur tècnic superior en Desenvolupament d'Aplicacions Multiplataforma, és important que coneguis aquestes eines, ja que moltes empreses les utilitzen per gestionar els seus processos de negoci. A més, treballaràs amb tecnologies com Linux, bases de dades PostgreSQL i aplicacions web, competències clau en el teu perfil professional.
 

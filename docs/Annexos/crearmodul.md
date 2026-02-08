@@ -1,15 +1,16 @@
-# ✍️ Pràctica 1  · Creació d’un mòdul bàsic en Odoo per al Club de Patinatge
+Annex K Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge
+===============================================================================
 
 ## 1. Objectiu de la pràctica
 
-Aquesta pràctica té com a objectiu crear un mòdul senzill d’Odoo utilitzant els coneixements del **Tema 5**:
+Aquesta pràctica té com a objectiu crear un mòdul senzill d’Odoo utilitzant els coneixements del **Capitol 4**:
 
 - Crear un mòdul amb `scaffold`.
 - Entendre i configurar el fitxer `__manifest__.py`.
 - Crear models en Python i relacionar-los (Many2one / One2many).
 - Generar el fitxer de permisos `ir.model.access.csv`.
 - Instal·lar el mòdul i observar les vistes automàtiques que genera Odoo.
-- Deixar preparat el mòdul per a afegir vistes XML en el **Tema 6**.
+- Deixar preparat el mòdul per a afegir vistes XML en el **Capitol 5**.
 
 El mòdul representarà un **sistema bàsic de gestió d’un club de patinatge**.
 
@@ -34,7 +35,7 @@ Amb aquest mòdul farem un primer pas per a informatitzar el club, i en pràctiq
 - Models: `patinatge.patinadora`, `patinatge.grup`, `patinatge.entrenament`
 - Vistes: Generades automàticament per Odoo (sense vistes XML en aquesta pràctica)
 - Permisos: Accés complet als models per a usuaris interns
-- Estructura mínima preparada per a afegir vistes en el Tema 6
+- Estructura mínima preparada per a afegir vistes en el Capitol 5
 - Entrega: `.zip` amb el mòdul i PDF amb captures i explicació
 ---
 
@@ -175,7 +176,7 @@ _(La pràctica completa conté també els exemples per a `grup` i `entrenament`.
     'name': "Gestió Club Patinatge",
     'version': '16.0.1.0.0',
     'summary': "Mòdul bàsic per a gestionar patinadores i grups.",
-    'description': "Pràctica del Tema 5.",
+    'description': "Pràctica del Capitol 4.",
     'author': "Nom de l’alumne",
     'license': 'LGPL-3',
     'category': 'Sports',
@@ -215,12 +216,12 @@ access_patinatge_entrenament,access_patinatge_entrenament,model_patinatge_entren
 
 ::::{admonition} Nota
 :class: tip
-Odoo genera vistes automàtiques a partir del model, però perquè es vegin cal, com a mínim, una acció de finestra; i la forma normal de llançar eixa acció és mitjançant un menú. Si no es crea un menú bàsic, no podrem visualitzar les vistes des de la interfície d’usuari. En el **Tema 6** aprendrem a crear vistes i menús XML personalitzats.
+Odoo genera vistes automàtiques a partir del model, però perquè es vegin cal, com a mínim, una acció de finestra; i la forma normal de llançar eixa acció és mitjançant un menú. Si no es crea un menú bàsic, no podrem visualitzar les vistes des de la interfície d’usuari. En el **Capitol 5** aprendrem a crear vistes i menús XML personalitzats.
 ::::
 
 ---
 
-## 9. Preparació per al Tema 6
+## 9. Preparació per al Capitol 5
 
 La carpeta `views/` queda preparada per a afegir les vistes XML i menús.
 

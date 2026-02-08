@@ -49,7 +49,7 @@ html_js_files = [
 ]
 templates_path = ["_templates"]
 # Logos i favicon (com ja tenies)
-html_logo = "_static/assets/img/logos/logoJust.png"
+html_logo = "_static/assets/img/logos/odoo_logo.svg"
 html_favicon = "_static/assets/img/logos/logo50.ico"
 
 # CSS personalitzat (ordre: general → específic)
