@@ -1,27 +1,23 @@
 # Directori de les fonts i de la build
-SOURCEDIR     = docs
-BUILDDIR      = _build
-
-# Activa l'entorn virtual (ajusta la ruta si el teu .venv està en un altre lloc)
-VENV = .venv/bin/activate
+SOURCEDIR = docs
+BUILDDIR  = _build
 
 .PHONY: help html pdf clean serve
 
 help:
 	@echo "Ordres disponibles:"
 	@echo "  make html   -> genera la documentació HTML"
-	@echo "  make pdf    -> genera el PDF (optimitzat per a Amazon/XeLaTeX)"
+	@echo "  make pdf    -> genera el PDF amb XeLaTeX"
 	@echo "  make serve  -> compila i obri un servidor local"
 	@echo "  make clean  -> neteja els _build"
 
 html:
-	. $(VENV) && sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
+	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
 
 pdf:
 	# 1. Genera el codi LaTeX
-	. $(VENV) && sphinx-build -b latex $(SOURCEDIR) $(BUILDDIR)/latex
-	# 2. Compila el PDF usant xelatex
-	# El guionet '-' inicial evita que el Makefile s'ature pels warnings de caràcters de LaTeX
+	sphinx-build -b latex $(SOURCEDIR) $(BUILDDIR)/latex
+	# 2. Compila el PDF amb XeLaTeX
 	-cd $(BUILDDIR)/latex && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
 	@echo "-------------------------------------------------------"
 	@echo "Procés finalitzat. Revisa el PDF a:"
