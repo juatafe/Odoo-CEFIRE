@@ -1,4 +1,6 @@
 _build/
+!_build/latex/
+!_build/latex/sistemes-de-gestio-empresarial.pdf
 .venv/
 *.aux
 *.log
