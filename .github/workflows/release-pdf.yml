@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build PDF
-        run: make latexpdf
+        run: make pdf
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
