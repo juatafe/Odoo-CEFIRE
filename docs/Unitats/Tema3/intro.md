@@ -65,7 +65,7 @@ OdooBot és un usuari virtual que apareix per defecte i que serveix per donar-te
 A la part central apareixen els missatges rebuts. Si encara no hi ha activitat, la bústia es mostra buida.
 
 
-**Un cop dins d’Odoo:**  
+**Una vegada dins d’Odoo:**  
 Per accedir a la resta d’aplicacions i configuracions, fes clic a la icona dels 9 quadrets (app switcher) situada a la part superior esquerra.
 Des d’allí veuràs el menú principal amb tots els mòduls disponibles i podràs:
 
@@ -123,7 +123,7 @@ Així cada vegada que afegim o modifiquem un mòdul, es veurà reflectit dins de
 
 ## Configuració bàsica de l’empresa
 
-Un cop tenim la base de dades, cal configurar els paràmetres generals de l’empresa.  
+Una vegada tenim la base de dades, cal configurar els paràmetres generals de l’empresa.  
 
 | **Element** | **Exemple** |
 |-------------|-------------|

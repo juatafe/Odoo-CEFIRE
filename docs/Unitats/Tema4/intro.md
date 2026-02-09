@@ -1,7 +1,7 @@
 
 ## Introducció
 
-Als temes anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades.  Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**.  Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”.  Anirem poc a poc, que açò té faena, però no és cap mur de Berlín.
+Als capítols anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades. Si no és així, caldria realitzar un dels dos exercicis pràctics proposats a []{../../Annexos/Tema2_prac1.md} o []{../../Annexos/Tema2_prac2.md}.  Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**.  Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”.  Anirem poc a poc, que açò té faena, però no és cap mur de Berlín.
 
 ## Què és un mòdul en Odoo?
 
@@ -464,7 +464,11 @@ from . import alumne
 ``` 
 Al fixer models/alumne.py hem definit un model anomenat `centre.alumne` amb tres camps: `name`, `edat` i `curs`. Aquest model es traduirà en una taula a la base de dades amb les columnes corresponents.
 
-![curs-alumne](../../_static/assets/img/Tema5/curs-alumne.png)
+:::{image} /_static/assets/img/Tema5/curs-alumne.png
+:alt: Model centre.alumne
+:width: 50%
+:align: center
+:::
 
 En Python la classe `Alumne` hereta de `models.Model`, que és la manera que té Odoo de saber que volem crear un model propi dins del framework. A la base de dades, Odoo crearà automàticament una taula anomenada `centre_alumne` amb les columnes `name`, `edat` i `curs`. 
 

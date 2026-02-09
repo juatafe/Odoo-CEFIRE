@@ -1,7 +1,7 @@
 Desplegament d'Odoo amb Docker
 ==============================
 
-Aquest document cobreix el desplegament complet d'Odoo 16 utilitzant contenidors Docker i Docker Compose. Aquesta metodologia moderna ofereix avantatges significatius en portabilitat, escalabilitat i gestió d'entorns, sent especialment valuosa per a desenvolupament ràpid i desplegaments professionals.
+Aquest document cobreix el desplegament complet d’Odoo 16 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, et recomanem realitzar l’Exercici pràctic 2 — Desplegament d’Odoo amb Docker Compose, a la [Guia pràctica: Desplegament d’Odoo amb Docker](../../Annexos/Tema2_prac2.md), on trobaràs una guia pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
 
 ## Introducció
 
@@ -738,13 +738,13 @@ docker compose exec web odoo -i nom_modul --test-enable --stop-after-init
 :class: note
 Per a configuracions més avançades, consulta aquests documents complementaris:
 
-**[Annex B: Operacions habituals amb Docker per a Odoo](../../Annexos/Docker_Operations.md)**
+**[Operacions habituals amb Docker per a Odoo](../../Annexos/Docker_Operations.md)**
 - Gestió avançada de contenidors i serveis
 - Scripts d'automatització professionals
 - Monitoratge de rendiment detallat
 - Gestió de repositoris Git i mòduls
 
-**[Annex C: Configuració avançada i producció d'Odoo](../../Annexos/Configuracio_Avancada.md)**
+**[Configuració avançada i producció d'Odoo](../../Annexos/Configuracio_Avancada.md)**
 - Seguretat multicapa (firewall, SSL/TLS, aplicació)
 - Optimització de PostgreSQL i Odoo per a producció
 - Monitoratge professional amb mètriques i alertes
