@@ -1,4 +1,4 @@
-# Annex O Exercici pràctic 11: Odoo API XML-RPC amb HTTPS i Ngrok
+# Exercici pràctic 11: Odoo API XML-RPC amb HTTPS i Ngrok
 
 Aquesta guia descriu com connectar-se a l'API d'Odoo de forma segura, utilitzant un túnel HTTPS per simular un entorn de producció.
 

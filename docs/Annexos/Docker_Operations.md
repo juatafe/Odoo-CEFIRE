@@ -1,4 +1,4 @@
-# Annex B: Operacions habituals amb Docker per a Odoo
+# Operacions habituals amb Docker per a Odoo
 
 Aquest annex cobreix les operacions més freqüents en la gestió diària d'entorns Odoo desplegats amb Docker, basant-se en la pràctica real de desenvolupament i manteniment.
 

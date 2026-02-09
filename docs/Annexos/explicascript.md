@@ -1,4 +1,4 @@
-# Annex I Exercici pràctic 4: Automatització de la instal·lació d’Odoo amb Docker
+# Exercici pràctic 4: Automatització de la instal·lació d’Odoo amb Docker
 
 ## Introducció
 

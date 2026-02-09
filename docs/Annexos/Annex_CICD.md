@@ -1,4 +1,4 @@
-# Annex D: Integració i Desplegament Continu (CI/CD) per a Odoo
+# Integració i Desplegament Continu (CI/CD) per a Odoo
 
 Aquest annex explica què és CI/CD, com implementar-lo amb Odoo i Docker, i els beneficis que aporta als projectes de desenvolupament empresarial moderns.
 

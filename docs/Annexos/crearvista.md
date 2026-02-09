@@ -1,4 +1,4 @@
-# Annex L Exercici pràctic 7: Vistes per als models Grup i Entrenament
+# Exercici pràctic 7: Vistes per als models Grup i Entrenament
 
 ## 1. Objectiu de l'exercici
 

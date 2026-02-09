@@ -1,4 +1,4 @@
-Annex G Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
+Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
 ==================================================================
 
 **Objectiu:** Aprendre a desplegar **Odoo 16** utilitzant Docker i Docker Compose de manera pràctica i guiada.  

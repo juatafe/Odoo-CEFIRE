@@ -1,4 +1,4 @@
-# Annex C: Configuració avançada i producció d'Odoo
+# Configuració avançada i producció d'Odoo
 
 Aquest annex cobreix tots els aspectes necessaris per a un desplegament professional d'Odoo en entorns de producció, incloent seguretat, rendiment, monitoratge, backup i manteniment segons estàndards empresarials.
 

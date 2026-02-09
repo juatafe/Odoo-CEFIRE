@@ -1,4 +1,4 @@
-# Annex E: Redis com a Cache i Broker de Missatges per a Odoo
+# Redis com a Cache i Broker de Missatges per a Odoo
 
 Redis transforma Odoo d'una aplicació funcional en una solució empresarial d'alt rendiment. Aquest annex explica què és Redis, per què és fonamental per a entorns Odoo de producció, i com implementar-lo correctament tant en instal·lacions tradicionals com amb Docker.
 

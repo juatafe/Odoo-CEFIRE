@@ -364,9 +364,15 @@ latex_elements = {
 
 % ───── Tornar a estat normal ─────
 \nopagecolor
-\clearpage
-\pagenumbering{arabic}
+# \clearpage
+# \pagenumbering{arabic}
 }
+% ───── Annexos: que diga "Annex" i no "Capítol" ─────
+\makeatletter
+\g@addto@macro\appendix{%
+  \renewcommand{\chaptername}{Annex}%
+}
+\makeatother
 
 % ───── Contraportada morada estil Odoo (robusta) ─────
 \AtEndDocument{

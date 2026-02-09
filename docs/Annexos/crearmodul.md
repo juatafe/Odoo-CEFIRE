@@ -1,4 +1,4 @@
-Annex K Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge
+Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge
 ===============================================================================
 
 ## 1. Objectiu de la pràctica

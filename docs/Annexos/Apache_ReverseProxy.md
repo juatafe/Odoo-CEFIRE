@@ -1,4 +1,4 @@
-# Annex A: Apache com a Reverse Proxy per a Odoo
+# Apache com a Reverse Proxy per a Odoo
 
 Aquest annex cobreix la configuració d'Apache HTTP Server com a reverse proxy per a Odoo, una configuració essencial per a entorns de producció que requereixen SSL, gestió de tràfic, seguretat avançada i compliment normatiu.
 

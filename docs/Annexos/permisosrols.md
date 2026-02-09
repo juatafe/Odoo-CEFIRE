@@ -1,4 +1,4 @@
-# Annex N Exercici pràctic 10: Permisos i rols en Odoo (club de patinatge)
+# Exercici pràctic 10: Permisos i rols en Odoo (club de patinatge)
 
 ## Context de la pràctica
 El club de patinatge ja utilitza Odoo per gestionar inscripcions, grups i patinadores.  

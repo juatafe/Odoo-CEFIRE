@@ -919,7 +919,7 @@ La configuració completa d'Apache com a reverse proxy és un tema extens que in
 - Monitoratge i logging avançat
 - Resolució de problemes habituals
 
-**📋 Documentació completa:** {doc}`Annex A: Apache com a Reverse Proxy per a Odoo <../../Annexos/Apache_ReverseProxy>`
+**[📋 Documentació completa: Apache com a Reverse Proxy per a Odoo](../../Annexos/Apache_ReverseProxy)**
 :::
 
 ### Avantatges del reverse proxy

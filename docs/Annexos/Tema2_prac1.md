@@ -1,4 +1,4 @@
-Annex F Exercici pràctic 1: Instal·lació i configuració d'Odoo en Ubuntu Server
+Exercici pràctic 1: Instal·lació i configuració d'Odoo en Ubuntu Server
 ===============================================================================
 
 ## Instal·lació i configuració d'Odoo

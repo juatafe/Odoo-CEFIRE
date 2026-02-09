@@ -1,4 +1,4 @@
-# Annex J Exercici pràctic 5: Organització i consulta de la informació amb pgAdmin
+# Exercici pràctic 5: Organització i consulta de la informació amb pgAdmin
 
 
 ## Introducció
