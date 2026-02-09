@@ -1,7 +1,7 @@
 Instal·lació tradicional d'Odoo en Ubuntu Server
 ================================================
 
-Aquest document cobreix la instal·lació completa d'Odoo 16 utilitzant el mètode tradicional en Ubuntu Server. Aquest enfocament proporciona el màxim control sobre l'entorn i permet entendre profundament tots els components del sistema.
+Aquest document cobreix la instal·lació completa **d'Odoo 16** utilitzant el mètode tradicional en **Ubuntu Server**. Aquest enfocament proporciona el màxim control sobre l'entorn i permet entendre profundament tots els components del sistema.
 
 ## Introducció
 

@@ -25,6 +25,7 @@ En definitiva, és un camí que es recorre fent-lo, no mirant-lo des de la vorer
 
 Dit d’una altra manera: **ací no venim només a estudiar Odoo; venim a aprendre a fer-lo servir de veritat.**
 
+S'ha utilitzat diverses fonts per a la redacció d’aquest document, incloent la documentació oficial d’Odoo, tutorials en línia, diverses intel·ligències artificials per a la redacció i estructuració del contingut, aportacions de la comunitat i l’experiència directa en la implantació i personalització del sistema. Tot aquest coneixement s’ha sintetitzat i adaptat per a crear una guia coherent, pràctica i orientada a l’aprenentatge.
 
 Aquest material es distribueix sota una llicència **Creative Commons Reconeixement – No Comercial – Compartir Igual (CC BY-NC-SA)**, amb la voluntat de facilitar la reutilització, l’adaptació i la millora del contingut en contextos educatius, sempre que se’n reconega l’autoria i es mantinga el mateix esperit obert.
 

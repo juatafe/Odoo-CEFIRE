@@ -1,5 +1,5 @@
 # Cas Pràctic: Odoo Scale Up!
-Per a comprendre el funcionament real d'un ERP, utilitzarem el joc de simulació **Scale Up!**, on gestionaràs una empresa de mobles anomenada "Mi Negocio S.A.". Utilitzarem Odoo 19 en la versió Enterprise. 
+Per a comprendre el funcionament real d'un ERP, utilitzarem el joc de simulació **Scale Up!**, on gestionaràs una empresa de mobles anomenada "Mi Negocio S.A.". Utilitzarem Odoo 19 en la versió Enterprise. No anem a fer una reproducció literal del joc, sinó que seguirem el fil conductor de les primeres situacions plantejades per a entendre la lògica dels processos de negoci i la connexió entre les diferents aplicacions d'Odoo i deixem el tutorial del joc per a que el lector aprofundeixi en el seu moment.
 
 ## Flux de Treball Inicial: Compra i Venda
 Hauràs de configurar Odoo per a completar el següent cicle operatiu:
@@ -124,7 +124,7 @@ Cal validadar la recepció per a actualitzar l'inventari i registrar l'entrada d
 :align: center
 :::
 
-1. **Gestió de Factures**: Després de rebre els productes, és important registrar la factura del proveïdor. Al mòdul de Comptabilitat es pot observar el tauler de control on es mostren les vendes, els bancs que es poden connectar, les compres i altres funcionalitats. 
+**Gestió de Factures**: Després de rebre els productes, és important registrar la factura del proveïdor. Al mòdul de Comptabilitat es pot observar el tauler de control on es mostren les vendes, els bancs que es poden connectar, les compres i altres funcionalitats. 
 
 :::{image} /_static/assets/img/Tema1b/taulercompatibilitat.png
 :alt: Comptabilitat
@@ -161,7 +161,7 @@ Per aquest motiu, és imprescindible que l’usuari revise el document creat per
 
 Aquest exemple mostra clarament que la intel·ligència artificial és una eina d’ajuda, però no substitueix el criteri de l’usuari. L’OCR automatitza la introducció de dades, però la decisió comptable final sempre ha de recaure en la persona que gestiona l’ERP. Aquest pas és fonamental per entendre el funcionament real d’Odoo abans d’entrar en automatitzacions o desenvolupament avançat.
 
-En Auto-completar, selecciona la comanda P0001, així la factura quedarà vinculada a la compra. Revisa que no duplique linies i que els imports siguin correctes. Un cop revisada, valida la factura per a registrar-la oficialment al sistema. El banc del destinatari sols cal si després vols simular el pagament de la factura. En aquest cas, pots deixar-lo en blanc ja que no realitzarem aquesta acció en aquest moment. La referencia de pagament és un camp opcional que pots utilitzar per a associar la factura amb un número de referència de pagament, però no és necessari per a completar el registre de la factura al sistema.
+En Auto-completar, selecciona la comanda P0001, així la factura quedarà vinculada a la compra. Revisa que no duplique linies i que els imports siguen correctes. Un cop revisada, valida la factura per a registrar-la oficialment al sistema. El banc del destinatari sols cal si després vols simular el pagament de la factura. En aquest cas, pots deixar-lo en blanc ja que no realitzarem aquesta acció en aquest moment. La referencia de pagament és un camp opcional que pots utilitzar per a associar la factura amb un número de referència de pagament, però no és necessari per a completar el registre de la factura al sistema.
 :::{image} /_static/assets/img/Tema1b/factura-avalidar.png
 :alt: Factura Validada
 :width: 85%
@@ -204,6 +204,6 @@ En aquest curs, **no es tracta de reproduir literalment el joc ni de copiar el s
 
 Per continuar amb el joc complet i accedir a tots els escenaris disponibles, es pot descarregar el material oficial de Scale Up! des del següent enllaç:
 
-https://www.odoo.com/es_ES/r/Scale_Up_Download_ES
+[https://www.odoo.com/es_ES/r/Scale_Up_Download_ES](https://www.odoo.com/es_ES/r/Scale_Up_Download_ES)
 
 A partir d’aquest punt, el joc servirà com a base per aprofundir en els processos empresarials, mentre que el criteri de l’usuari serà l’element clau abans de passar a configuracions avançades, automatitzacions o desenvolupament de mòduls.

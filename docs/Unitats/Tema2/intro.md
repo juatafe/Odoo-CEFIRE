@@ -1,10 +1,10 @@
 ## Introducció
 
-En aquest capítol aprendrem les diferents metodologies per desplegar **Odoo 16**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Explorarem tant la instal·lació tradicional en servidors Linux com les solucions modernes amb contenidors Docker, analitzant els avantatges i inconvenients de cada aproximació.
+En aquest capítol aprendrem les diferents metodologies per desplegar **Odoo Community**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Explorarem tant la instal·lació tradicional en servidors Linux com les solucions modernes amb contenidors Docker, analitzant els avantatges i inconvenients de cada aproximació.
 
 ::: {admonition} Decisió de versió: Odoo 16 vs 19
 :class: note
-Tot i que existeix **Odoo 19**, en aquest tema utilitzem **Odoo 16** per aprofitar l’ecosistema de mòduls de la comunitat. Les versions més noves encara no ofereixen suport estable per a diversos paquets (addons comunitaris i integracions) que necessitarem al llarg de les pràctiques.
+Tot i que existeix **Odoo 19**, en aquest vegada utilitzem **Odoo 16** per aprofitar l’ecosistema de mòduls de la comunitat. Les versions més noves encara no ofereixen suport estable per a diversos paquets de comptabilitat (addons comunitaris i integracions) que necessitarem al llarg de les pràctiques.
 
 - Compatibilitat més àmplia amb paquets de la comunitat
 - Integracions provades i documentació consolidada
@@ -23,12 +23,12 @@ Odoo és un sistema modular que permet administrar diferents aspectes d'una orga
 
 ### Per què estudiem Odoo?
 
-Com a futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, és essencial que conegues aquestes eines perquè:
+Un futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, és essencial que conega aquestes eines perquè:
 
 - **Moltes empreses** utilitzen ERPs per gestionar els seus processos de negoci
-- **Treballaràs amb tecnologies clau**: Linux, bases de dades PostgreSQL, aplicacions web, Docker
-- **Desenvoluparàs competències** en administració de sistemes i DevOps
-- **Aprendràs metodologies modernes** de desplegament i automatització
+- **Treballa amb tecnologies clau**: Linux, bases de dades PostgreSQL, aplicacions web, Docker
+- **Desenvolupa competències** en administració de sistemes i DevOps
+- **Aprèn metodologies modernes** de desplegament i automatització
 
 ### Requisits del sistema
 
@@ -40,7 +40,7 @@ Com a futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma*
 - **Disc**: 20 GB d'espai lliure
 - **Sistema**: Ubuntu 20.04 LTS o superior
 
-**Requisits recomanats (producció petita-mitjana):**
+**Requisits recomanats (producció xicoteta-mitjana):**
 - **CPU**: 4+ cores (2.5+ GHz)
 - **RAM**: 8+ GB
 - **Disc**: 50+ GB SSD
@@ -70,10 +70,11 @@ Consulta **[l'Annex E: Redis](../../Annexos/Annex_Redis.md)** per a una guia com
 :::
 
 ## Metodologies de desplegament
+No és necessari ser un expert en sistemes per a desplegar Odoo, però és important comprendre les diferents metodologies disponibles i les seves implicacions. La metodologia escollida dependrà de diversos factors, com ara els requisits de l'organització, el pressupost, els recursos tècnics disponibles i les necessitats de personalització. La recomanació general és utilitzar **Docker** per a entorns de desenvolupament i proves, i considerar una **instal·lació tradicional** o **SaaS** per a producció, segons les necessitats específiques de l'organització.
 
 ### Visió general de les opcions
 
-Aquest tema cobreix tres aproximacions principals per desplegar Odoo, cadascuna amb els seus avantatges específics:
+Aquest capítol cobreix tres aproximacions principals per desplegar Odoo, cadascuna amb els seus avantatges específics:
 
 ```{mermaid}
 :width: 120%
@@ -192,7 +193,7 @@ graph TD
 :::{admonition} SaaS (Odoo.com)
 :class: important
 **Recomanada per a:**
-- Petites i mitjanes empreses
+- Xicotetes i mitjanes empreses
 - Accés ràpid sense inversió tècnica
 - Equips sense recursos IT especialitzats
 - Projectes amb pressupost limitat

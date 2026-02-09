@@ -1,21 +1,10 @@
-## Context i objectius
+## Introducció
 
-Als temes anteriors hem après:  
-- **Tema 1:** què és un ERP/CRM i per què són importants per a la gestió empresarial.  
-- **Tema 2:** com instal·lar i configurar Odoo en diferents entorns i gestionar les bases de dades.  
+Aquest capítol fa el primer pas d’implantació d’Odoo en un entorn real. Partirem d’una instal·lació funcional per recórrer la interfície web, activar aplicacions, incorporar mòduls externs sense alterar els natius i establir la configuració essencial de l’empresa (identitat visual, correu i localització comptable). L’objectiu és entendre el flux inicial de treball, les bones pràctiques d’organització de mòduls i com deixar el sistema preparat per començar a operar.
 
-Ara farem un pas més: veurem **com implantar un ERP dins d’una empresa real**.  
-Ens centrarem en l’ús de la interfície web, la instal·lació de mòduls i la configuració inicial de l’empresa.
+Al llarg del capítol també veurem com el “Website Builder” facilita la creació i reconfiguració del lloc web, i quines opcions tenim per repetir l’assistent inicial de selecció de tema en entorns de pràctiques.
 
-:::{admonition} Objectius del tema
-:class: note
-- Accedir a la part web d’Odoo amb un usuari administrador.  
-- Instal·lar mòduls propis i externs de manera ordenada.  
-- Comprendre que **no s’han de modificar mòduls natius** sinó heretar-los en espais separats.  
-- Configurar les dades bàsiques de l’empresa: logo, icona, correu i pla comptable.  
-:::
 
----
 
 ## Accés a la interfície web
 
