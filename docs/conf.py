@@ -197,9 +197,16 @@ latex_elements = {
 # \AtBeginDocument{
 #   \frontmatter
 # }
+% ───── Netejar numeració estranya del TOC ─────
+\usepackage{tocloft}
 
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{2}
+\renewcommand{\cftsecnumwidth}{2.5em}
+\renewcommand{\cftsubsecnumwidth}{3.5em}
+\renewcommand{\cftsubsubsecnumwidth}{4.5em}
+
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
 
 \titleformat{\chapter}[display]
   {\bfseries\Huge}

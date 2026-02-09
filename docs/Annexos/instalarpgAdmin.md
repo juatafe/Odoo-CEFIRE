@@ -394,7 +394,7 @@ Després d’iniciar sessió, ja podràs afegir una connexió al servidor Postgr
 
 ---
 
-### ⚙️ Exemple d’accés des del host
+### Exemple d’accés des del host
 
 Amb la redirecció de ports configurada com a dalt, des del teu navegador (al teu ordinador host) pots accedir-hi amb:
 
