@@ -182,6 +182,7 @@ latex_elements = {
 \usepackage{polyglossia}
 \setmainlanguage{catalan}
 
+\usepackage{qrcode}
 
 % ───── Espai entre figures i text ─────
 \setlength{\textfloatsep}{10pt}
@@ -193,18 +194,34 @@ latex_elements = {
 \setmonofont{FreeMono}
 % ───── Capítols ─────
 \usepackage{titlesec}
-\AtBeginDocument{
-  \frontmatter
-}
+# \AtBeginDocument{
+#   \frontmatter
+# }
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 
 \titleformat{\chapter}[display]
   {\bfseries\Huge}
-  {Capítol \thechapter}
+  {\chaptername\ \thechapter}
   {1em}
   {\Huge}
+
+  
+% ───── Marques de capçalera per a Fancyhdr (Sphinx fix) ─────
+\makeatletter
+
+% Capítol → leftmark
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\chaptername\ \thechapter\ --\ #1}{}%
+}
+
+% Secció → rightmark
+\renewcommand{\sectionmark}[1]{%
+  \markright{#1}%
+}
+
+\makeatother
 
 % ───── Convertir Mermaid en no-flotant ─────
 \usepackage{float}
@@ -229,7 +246,32 @@ latex_elements = {
 \makeatother
 
 % ───── Estil de pàgina ─────
-\pagestyle{plain}
+%\pagestyle{plain}
+% ───── Capçaleres i peus de pàgina professionals ─────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % neteja tot
+
+% ─── Capçaleres ───
+% Pàgines parells (esquerra): Capítol
+\fancyhead[LE]{\small\itshape \leftmark}
+
+% Pàgines senars (dreta): Tema / secció
+\fancyhead[RO]{\small\itshape \rightmark}
+
+% ─── Peu de pàgina ───
+% Número de pàgina al centre
+\fancyfoot[C]{\thepage}
+
+% Peu esquerra: autoria
+\fancyfoot[LE,RO]{\scriptsize Juan Bautista Talens \& Alicia González}
+
+% Peu dreta (alternatiu si vols llicència)
+% \fancyfoot[RE,LO]{\scriptsize CC BY-NC-SA}
+
+% ─── Línies fines (elegant, no escandalós) ───
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.2pt}
 
 % ───── Suport per a llistes molt profundes (fins a 20 nivells) ─────
 \usepackage{enumitem}
@@ -249,35 +291,156 @@ latex_elements = {
 \usepackage{graphicx}
 \setkeys{Gin}{width=1\linewidth,keepaspectratio}
 
+% ───── Portada estil Odoo amb logos ─────
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage{tikz}
+\usepackage{graphicx}
 
-% ───── Portada neta i professional ─────
+% ───── Portada en color Odoo (LaTeX pur) ─────
+\definecolor{odoopurple}{RGB}{113,75,103}
+\definecolor{odoopurplelight}{RGB}{245,240,243}
+
 \renewcommand{\maketitle}{
-    \begin{titlepage}
-        \centering
+\begin{titlepage}
+\pagecolor{odoopurple}
+\color{white}
 
-        % ───── Logos institucionals ─────
-        \vspace*{1cm}
-        \noindent{%
-          \hspace*{\fill}%
-          \sphinxincludegraphics[width=\textwidth]{logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf}
-        }
-        % ───── Títol ─────
-        {\Huge\bfseries Sistemes de Gestió Empresarial \par}
-        \vspace{0.8cm}
-        {\Large Apunts del curs (2n DAM) \par}
+% ───── Fons amb franja inferior clara + logos ─────
+\begin{tikzpicture}[remember picture,overlay]
 
-        \vfill
+    % Franja blanca inferior (BLANC PUR)
+    \fill[white]
+    (current page.south west)
+    rectangle ([yshift=3.8cm]current page.south east);
 
-        % ───── Autoria ─────
-        {\large Juan Bautista Talens \par}
-        {\large Alicia González \par}
+  % Logos institucionals (grans i centrats)
+  \node[
+    anchor=south,
+    yshift=1.9cm
+  ] at (current page.south) {
+    \includegraphics[width=1.3\textwidth]{logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf}
+  };
 
-        \vspace{0.8cm}
-        {\large 2026 \par}
+  % Llicència baix dels logos
+  \node[
+    anchor=south,
+    yshift=0.6cm
+  ] at (current page.south) {
+    {\scriptsize
+    Material docent publicat sota llicència Creative Commons BY-NC-SA}
+  };
 
-    \end{titlepage}
-    \clearpage
-    \pagenumbering{arabic}
+\end{tikzpicture}
+
+\vspace{2cm}
+\centering
+
+% ───── Títol principal ─────
+{\Huge\bfseries Sistemes de Gestió Empresarial\par}
+
+\vspace{1cm}
+
+% ───── Subtítol ─────
+{\Large
+26FP32CF013 – Odoo: entorn, desenvolupament de mòduls i projectes reals
+\par}
+
+\vfill
+
+% ───── Autoria ─────
+{\Large Juan Bautista Talens\par}
+{\Large Alicia González\par}
+
+\vspace{1cm}
+
+% ───── Any ─────
+{\large 2026\par}
+
+\vspace*{1.2cm}
+
+
+\end{titlepage}
+
+% ───── Tornar a estat normal ─────
+\nopagecolor
+\clearpage
+\pagenumbering{arabic}
+}
+
+% ───── Contraportada morada estil Odoo (robusta) ─────
+\AtEndDocument{
+  \clearpage
+  \thispagestyle{empty}
+
+  % Colors
+  \definecolor{odoopurple}{RGB}{113,75,103}
+
+  \begin{tikzpicture}[remember picture,overlay]
+
+    % ───── FONS COMPLET MORAT ODOO ─────
+    \fill[odoopurple]
+      (current page.north west)
+      rectangle (current page.south east);
+
+    % ───── FRANJA BLANCA INFERIOR ─────
+    \fill[white]
+      (current page.south west)
+      rectangle ([yshift=3.8cm]current page.south east);
+
+    % ───── LOGOS (grans) ─────
+    \node[
+      anchor=south,
+      yshift=1.8cm
+    ] at (current page.south) {
+      \includegraphics[width=1.3\textwidth]{logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf}
+    };
+
+  \end{tikzpicture}
+
+  % ───── TEXT ─────
+  \color{white}
+  \begin{center}
+    \vspace*{2.8cm}
+
+    {\Large\bfseries Sistemes de Gestió Empresarial\par}
+    \vspace{0.9cm}
+
+    {\large
+    Aquest material recull els continguts del mòdul de
+    \textbf{Sistemes de Gestió Empresarial} del cicle de
+    \textbf{Desenvolupament d’Aplicacions Multiplataforma (DAM)}.
+    \par}
+
+    \vspace{0.7cm}
+
+    {\large
+    El llibre ofereix una aproximació pràctica als sistemes
+    \textbf{ERP--CRM}, amb especial atenció a \textbf{Odoo},
+    abordant tant la configuració de l’entorn com el
+    desenvolupament de mòduls i la realització de projectes reals.
+    \par}
+
+    \vspace{0.7cm}
+
+    {\large
+    Està pensat com a suport docent i d’aprenentatge,
+    amb exemples contextualitzats, pràctiques guiades
+    i una orientació clarament aplicada a l’aula.
+    \par}
+
+    \vspace{1.8cm}
+
+    % ───── QR BLANC ─────
+    {\color{white}
+    \qrcode[height=3.5cm]{https://github.com/juatafe/Odoo-CEFIRE}
+    }
+
+    \vspace{0.5cm}
+
+    {\small Accés al repositori oficial del curs (GitHub)\par}
+
+  \end{center}
 }
 """,
 }

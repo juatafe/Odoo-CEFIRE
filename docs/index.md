@@ -4,7 +4,7 @@ Sistemes de Gestió Empresarial
 ```{toctree}
 :maxdepth: 2
 :hidden:
-:numbered:
+
 
 proleg
 _mainmatter
@@ -17,8 +17,6 @@ Unitats/Tema6/index
 Unitats/Tema7/index
 Unitats/Tema8/index
 Unitats/Tema9/index
-
-
 Annexos/index
 llicencia
 ```

@@ -1,11 +1,17 @@
+
+```{raw} latex
+\backmatter
+\appendix
+```
+
 Annexos
 =======
 
 Annexos generals del curs **Sistemes de Gestió Empresarial**.
 
+
 ```{toctree}
 :maxdepth: 2
-:caption: Annexes
 :hidden:
 
 Apache_ReverseProxy

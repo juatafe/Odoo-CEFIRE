@@ -1,5 +1,0 @@
-```rst
-```{only} latex
-\appendix
-```
-```
