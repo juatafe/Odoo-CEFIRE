@@ -101,8 +101,9 @@ sudo apt-get autoclean
 | `autoremove` | Elimina paquets que es van instal·lar com a dependències i ja no són necessaris |
 | `autoclean` | Elimina fitxers .deb descarregats que ja no estan disponibles als repositoris |
 
-:::{admonition} apt vs apt-get: Quan usar cadascun
-:class: tip
+:::{tip} 
+**apt vs apt-get: Quan usar cadascun**
+
 **apt** (recomanat per a ús interactiu):
 - Interfície més amigable amb barres de progrés
 - Millor experiència d'usuari
@@ -196,8 +197,9 @@ sudo chmod 755 /opt/odoo
 ls -la /opt/ | grep odoo
 ```
 
-:::{admonition} Per què un usuari de sistema dedicat?
-:class: important
+:::{caution} 
+**Per què un usuari de sistema dedicat?**
+
 **Seguretat (Principi de mínims privilegis):**
 - L'usuari `odoo` només té accés als recursos necessaris
 - Si es compromet el servei, l'atacant no té privilegis d'administrador
@@ -273,8 +275,9 @@ sudo -u postgres createdb odoo_test
 | `\du` | Ordre SQL per llistar tots els usuaris de PostgreSQL |
 | `createdb odoo_test` | Crea una base de dades opcional per a proves |
 
-:::{admonition} Per què superusuari PostgreSQL?
-:class: note
+:::{caution} 
+**Per què superusuari PostgreSQL?**
+
 Odoo necessita privilegis de superusuari a PostgreSQL per:
 
 - **Crear i eliminar bases de dades** dinàmicament des de la interfície web

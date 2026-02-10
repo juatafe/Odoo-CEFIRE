@@ -62,9 +62,9 @@ Un futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, 
 | **Xarxa** | 100Mbps | 1Gbps | 10Gbps |
 | **Redis** | - | 1GB RAM | 2-4GB RAM |
 
-:::{admonition} Consideracions per Redis
-:class: tip
-Redis és **opcional** per a entorns de desenvolupament amb 1-2 usuaris, però esdevé **imprescindible** en entorns de producció amb més de 10 usuaris concurrents. 
+:::{tip} 
+**Consideracions per Redis**
+Redis és un sistema de cache que pot millorar significativament el rendiment d’Odoo, especialment en entorns amb molts usuaris o mòduls pesats. És **opcional** per a entorns de desenvolupament amb 1-2 usuaris, però esdevé **imprescindible** en entorns de producció amb més de 10 usuaris concurrents. 
 
 Consulta **[l'Annex E: Redis](../../Annexos/Annex_Redis.md)** per a una guia completa sobre quan i com implementar-lo.
 :::
@@ -248,8 +248,9 @@ graph TD
 
 ### Consideracions per a entorns de producció
 
-:::{admonition} Factors clau per a entorns professionals
-:class: warning
+:::{caution} 
+**Factors clau per a entorns professionals**
+
 **Seguretat:**
 - Autenticació multi-factor i autorització granular
 - Xifratge de dades en trànsit i en repòs

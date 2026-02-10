@@ -192,11 +192,22 @@ latex_elements = {
 \setmainfont{FreeSerif}
 \setsansfont{FreeSans}
 \setmonofont{FreeMono}
+
+
+
+% ───── Forçar que Pygments NO elimine indentació ─────
+\usepackage{fvextra}
+\fvset{
+  obeytabs=true,
+  tabsize=2,
+  gobble=0
+}
+
 % ───── Capítols ─────
 \usepackage{titlesec}
-# \AtBeginDocument{
-#   \frontmatter
-# }
+% \AtBeginDocument{
+%   \frontmatter
+% }
 % ───── Netejar numeració estranya del TOC ─────
 \usepackage{tocloft}
 
@@ -371,8 +382,8 @@ latex_elements = {
 
 % ───── Tornar a estat normal ─────
 \nopagecolor
-# \clearpage
-# \pagenumbering{arabic}
+% \clearpage
+% \pagenumbering{arabic}
 }
 % ───── Annexos: que diga "Annex" i no "Capítol" ─────
 \makeatletter
@@ -455,6 +466,22 @@ latex_elements = {
 
   \end{center}
 }
+% ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
+\AtBeginDocument{
+\makeatletter
+
+\def\sphinx@note@title{Nota}
+\def\sphinx@tip@title{Consell}
+\def\sphinx@warning@title{Advertència}
+\def\sphinx@important@title{Important}
+\def\sphinx@caution@title{Precaució}
+\def\sphinx@danger@title{Perill}
+
+\makeatother
+}
+
+
+
 """,
 }
 

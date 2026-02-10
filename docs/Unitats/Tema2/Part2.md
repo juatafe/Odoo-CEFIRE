@@ -460,8 +460,8 @@ server_wide_modules = base,web
 
 ### Script de desplegament complet
 
-:::{admonition} 📥 Script de desplegament disponible
-:class: note
+:::{tip} 
+
 **Pots descarregar l'script complet de desplegament:**
 
 **[deploy-odoo-docker.sh](../../../scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
@@ -505,9 +505,9 @@ L'script mostrarà una sortida similar a:
 ```
 
 
-:::{admonition} 📥 Scripts de verificació disponibles
-:class: note
-Pots descarregar els següents scripts per verificar la instal·lació:
+:::{tip} 
+
+**Pots descarregar els següents scripts per verificar la instal·lació:**
 
 - **[test-docker-installation.sh](../../../scripts/test-docker-installation.sh)**: Verificació completa de Docker
 - **[diagnostic.sh](../../../scripts/diagnostic.sh)**: Diagnòstic del sistema Docker
@@ -579,9 +579,8 @@ aa9ae22cf873   odoo_server-web-1   0.05%     412.2MiB / 5.74GiB   7.01%     405M
 
 ### Backup i restauració
 
-:::{admonition} 📥 Scripts de backup disponibles
-:class: note
-Pots descarregar els scripts de backup:
+:::{tip} 
+**Pots descarregar els scripts de backup:**
 
 - **[backup-docker.sh](../../../scripts/backup-docker.sh)**: Backup complet de base de dades, volums i configuració
 - **[restore-docker.sh](../../../scripts/restore-docker.sh)**: Restauració des de backups anteriors

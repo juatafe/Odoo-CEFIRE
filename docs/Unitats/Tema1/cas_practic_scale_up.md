@@ -13,8 +13,9 @@ L'objectiu és aprendre a configurar els processos de negoci sense necessitat de
 ## Passos a Seguir
 1. **Instal·lació d'Odoo**: Entra a [www.odoo.com/es_ES/trial](https://www.odoo.com/es_ES/trial) i tria les aplicacions  ventes, comptabilitat, inventari i compres. 
 
-::: {admonition} Selecció d'aplicacions
-:class: note
+::: {tip} 
+**Selecció d'aplicacions**
+
 Per al cas pràctic, assegura't de seleccionar les aplicacions «Vendes», «Comptabilitat», «Inventari» i «Compres» per cobrir el cicle complet compra–logística–venda–facturació.
 :::
 
@@ -33,15 +34,15 @@ Caldrà identificar-se o crear un compte per a accedir a la plataforma. Un cop d
 :::     
 El camp més important a configurar és el nom de l'empresa, que en aquest cas serà "edu-Mi Negocio". Odoo permet una empresa amb accés a l'ERP durant 24 mesos de manera gratuïta, amb totes les funcionalitats disponibles si s'utilitza la versió en línia amb el nom de l'empresa començant per "edu-". Això és ideal per a pràctiques i formació. En acabar el periode s'eliminara sense que pugues crear una copia de seguretat.
 
-::: {admonition} Avís
-:class: warning
+::: {danger} 
 El nom de l'empresa ha de començar per «edu-» per obtindre l'accés educatiu. En finalitzar el període (24 mesos), l'instància s'eliminarà i NO es podrà descarregar una còpia de seguretat.
 :::
 
 En el moment de començar Odoo t'enviarà un correu d'activació que expira en 3 h. Si no es confirma, s'esborrarà l'empresa i caldrà crear-ne una de nova. Per a evitar aquest problema, és recomanable utilitzar un correu electrònic que es puga accedir fàcilment.
 
-::: {admonition} Activació del compte
-:class: important
+::: {caution} 
+**Activació del compte**
+
 Confirma el correu d'activació dins de les 3 hores. Si no ho fas, l'empresa s'esborrarà automàticament i hauràs de repetir el procés de creació.
 :::
 
@@ -53,7 +54,7 @@ Una vegada creada l'empresa en accedir es vorà un panell de control on es poden
 :align: center
 :::
 
-2. **Configuració Inicial**: Configura l'empresa "Mi Negocio S.A." a Odoo, incloent informació bàsica i paràmetres de l'empresa. Ves a a Ajustos > Opcions generals > Actualitzar informació o Gestionar Companyies.
+1. **Configuració Inicial**: Configura l'empresa "Mi Negocio S.A." a Odoo, incloent informació bàsica i paràmetres de l'empresa. Ves a a Ajustos > Opcions generals > Actualitzar informació o Gestionar Companyies.
    
 :::{image} /_static/assets/img/Tema1b/parametresempresa.png
 :alt: Configuració Inicial
@@ -62,8 +63,9 @@ Una vegada creada l'empresa en accedir es vorà un panell de control on es poden
 :::
 
 En Ajustos també podem configurar l'idioma. 
-::: {admonition} Idiomes
-:class: tip
+::: {tip} 
+**Idiomes**
+
 Activa els idiomes necessaris (per exemple, «Català», «Español») i estableix la preferència d'idioma per usuari per millorar l'experiència d'ús.
 :::
 :::{image} /_static/assets/img/Tema1b/idiomes.png

@@ -114,8 +114,7 @@ Amb aquests passos, hauràs modificat amb èxit la pàgina principal del portal 
 :align: center
 :width: 80%
 ```
-:::{admonition} Nota
-:class: tip
+:::{note} 
 En este exemple no utilitzem controlador perquè no estem creant cap pàgina nova ni cap ruta nova. Només estem modificant una vista que Odoo ja genera i a la qual ja li passen les dades necessàries. El controlador serà necessari quan vulguem mostrar informació pròpia del nostre mòdul o crear pàgines noves. 
 :::
 

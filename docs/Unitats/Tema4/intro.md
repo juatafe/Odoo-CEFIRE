@@ -1,7 +1,10 @@
 
 ## Introducció
 
-Als capítols anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades. Si no és així, caldria realitzar un dels dos exercicis pràctics proposats a []{../../Annexos/Tema2_prac1.md} o []{../../Annexos/Tema2_prac2.md}.  Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**.  Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”.  Anirem poc a poc, que açò té faena, però no és cap mur de Berlín.
+Als capítols anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades.  
+Si no és així, caldria realitzar un dels dos exercicis pràctics proposats a  
+{doc}`Exercici pràctic 1: Instal·lació i configuració d'Odoo en Ubuntu Server <../../Annexos/Tema2_prac1>`  o  {doc}`Exercici pràctic 2: Desplegament d’Odoo amb Docker Compose <../../Annexos/Tema2_prac2>`. 
+Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**.  Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”. Anirem poc a poc, que açò té faena, però no és cap mur de Berlín.
 
 ## Què és un mòdul en Odoo?
 
@@ -67,10 +70,8 @@ Cada camp té una funció, però els importants per començar són:
 - **depends** → mòduls que necessita (quasi sempre `base`)
 - **data** → els XML que s’han de carregar: vistes, menús, permisos…
 - **application** → si ha d’aparéixer en el menú principal
-
-
-### `demo`: carrega dades de demostració
-Si poses `demo`, Odoo carregarà dades de prova quan el mòdul s’instal·le en una base de dades nova.
+- **demo**: carrega dades de demostració
+    Si poses `demo`, Odoo carregarà dades de prova quan el mòdul s’instal·le en una base de dades nova.
 Exemple:
 
 ```python
@@ -80,7 +81,7 @@ Exemple:
 ```
 
 
-#### 🧠 Com funciona?
+#### Com funciona?
 Si la base de dades es crea amb “Load demo data” → sí que es carreguen. Load demo data està en la pantalla de creació de bases de dades.
 
 ```{image} /_static/assets/img/Tema5/load_demo_data.png
@@ -90,17 +91,19 @@ Si la base de dades es crea amb “Load demo data” → sí que es carreguen. L
 ``` 
 
 
-#### ⚠️ Nota important
+#### Nota important
 
 Les dades demo dels mòduls NOMÉS es carregen si la base de dades es va crear amb “Load demo data”. Els demo no s’actualitzen quan actualitzes el mòdul. Només es carreguen en la instal·lació inicial.
 
 
 
-::: {admonition}  💬 I si vull carregar dades demo encara que la base de dades no tinga demo activat?
-:class: note
+:::{tip}   
+**I si vull carregar dades demo encara que la base de dades no tinga activada la demo?**
+
 
 Caldria afegir les dades a la secció `data` en lloc de `demo`. Però això no és recomanable, perquè les dades es carregarien sempre, fins i tot en producció.
 :::
+
 ### Hooks d’instal·lació
 Els hooks són funcions especials que Odoo crida en moments concrets del cicle de vida d’un mòdul. Hi ha quatre hooks principals relacionats amb la instal·lació i càrrega dels mòduls:
     - `post_load`
@@ -126,13 +129,13 @@ Quan Odoo executa alguns hooks especials durant la instal·lació d’un mòdul,
 - `cr`: és el cursor de la base de dades que permet executar consultes SQL directament.
 - `registry`: és el registre d’Odoo que conté informació sobre tots els models i dades carregades en el sistema.Només està disponible després que els models ja han sigut creats, per això sols apareix en `post_init_hook` i `uninstall_hook`.
 
-:::{admonition}  📌 Nota important!
-:class: tip
+```{caution} Resum dels hooks i els seus paràmetres
 ✔ `pre_init_hook(cr)`
 
 Sempre rep un únic paràmetre: el cursor SQL cr.
 
 ✔ `post_init_hook(cr, registry)`
+
 Rep dos paràmetres: SQL + models carregats.
 
 ✔ `uninstall_hook(cr, registry)`
@@ -141,7 +144,7 @@ Rep dos paràmetres.
 
 ✔ `post_load()`
 No rep cap paràmetre.
-:::
+```
 
 ### `post_load`: executar codi després de carregar el mòdul
 `post_load` és un hook que s’executa després que Odoo haja carregat tot el codi Python, però abans de crear models en la base de dades, instal·lar dades o arrancar el servidor.
@@ -151,18 +154,15 @@ No rep cap paràmetre.
     - Crida a la funció post_load (si existeix)
     - Després continua amb la resta de processos
 
-::: {admonition}  Important!
-:class: warning
-
+```{danger}  
 No té accés a la base de dades (no existeixen taules encara). És purament Python en memòria.
-
-:::
+```
 
 
 
 ### `pre_init_hook`: executar codi abans d’instal·lar el mòdul
 
-Quan l’usuari fa clic a **Instal·lar** en un mòdul, Odoo **no*** crea les taules de seguida.  
+Quan l’usuari fa clic a **Instal·lar** en un mòdul, Odoo **no** crea les taules de seguida.  
 Abans de començar la instal·lació crida, si existeix, la funció definida en `pre_init_hook`.
 
 L’ordre simplificat és:
@@ -186,9 +186,8 @@ En aquest punt:
 ```
 
 
-Exemple de funció en hooks.py
+Exemple de funció en **hooks.py**
 
-**hooks.py**
 ```python
 def check_before_install(cr):
     # Exemple: no volem instal·lar el mòdul si hi ha massa usuaris al sistema
@@ -210,14 +209,15 @@ Açò és útil per a tasques com:
 - Realitzar comprovacions post-instal·lació per assegurar que tot està correcte.
 - Integració amb altres mòduls que ja estan instal·lats.
 - Qualsevol altra lògica que necessite que el mòdul estiga totalment operatiu abans d’executar-se.
-  
+
+
 **Exemple al manifest**
 
 ```python
 'post_init_hook': 'setup_after_install',
 ``` 
-Exemple de funció en hooks.py
-**hooks.py**
+Exemple de funció en **hooks.py**
+
 ```python
 def setup_after_install(cr, registry):
     # Exemple: crear un registre inicial en una taula del mòdul
@@ -243,8 +243,9 @@ Açò és útil per a tasques com:
 ```python
 'uninstall_hook': 'cleanup_before_uninstall',
 ``` 
-Exemple de funció en hooks.py
-**hooks.py**
+
+Exemple de funció en **hooks.py**
+
 ```python
 def cleanup_before_uninstall(cr, registry):
     # Exemple: eliminar registres relacionats en altres taules
@@ -271,7 +272,7 @@ env = api.Environment(cr, SUPERUSER_ID, {})
 
 ## El fitxer `__init__.py`
 
-Cada carpeta d’un mòdul d’Odoo és també un “paquet Python”. El fitxer __init__.py és el que li diu a Python quins submòduls s’han de carregar quan Odoo carregue el mòdul. Sense aquest fitxer, Odoo no veurà els models ni les funcions que tingues dins.
+Cada carpeta d’un mòdul d’Odoo és també un “paquet Python”. El fitxer `__init__.py` és el que li diu a Python quins submòduls s’han de carregar quan Odoo carregue el mòdul. Sense aquest fitxer, Odoo no veurà els models ni les funcions que tingues dins.
 
 Exemple:
 
@@ -280,14 +281,12 @@ from . import models
 from . import hooks
 from . import controllers
 ```
-> Això indica que Odoo ha de carregar els submòduls `models`, `hooks` i `controllers` quan carregue el mòdul.
-> Cada submòdul és una carpeta amb el seu propi `__init__.py`.
-I dins de `models/__init__.py`:
+Això indica que Odoo ha de carregar els submòduls `models`, `hooks` i `controllers` quan carregue el mòdul.Cada submòdul és una carpeta amb el seu propi `__init__.py` i dins de `models/__init__.py`:
 
 ```python
 from . import alumne
 ```
-> Si no poses estos imports, Odoo no veurà les classes Python.
+Si no poses estos imports, Odoo no veurà les classes Python.
 
 
 
@@ -358,11 +357,11 @@ chown -R odoo:odoo /mnt/extra-addons/escola
 
 Açò genera automàticament tota l’estructura necessària.
 
-:::{admonition} Sobre `scaffold` en entorns Docker
-:class: warning
+:::{tip} 
+**Sobre `scaffold` en entorns Docker**
 
 En molts entorns Docker, Odoo **no inclou el fitxer `odoo-bin` ni el codi font complet**, ja que està instal·lat com a paquet Python.  
-Això vol dir que **no es pot utilitzar l’ordre `scaffold` directament**. És possible que estiga en una ruta diferent, com `/usr/bin/odoo`, o que no estiga disponible.
+Això vol dir que **no es pot utilitzar l’ordre `scaffold` directament**. Pot estar en una ruta diferent, com `/usr/bin/odoo`, o que no estiga disponible.
 
 És possible descarregar una còpia del codi font d’Odoo dins del contenidor (com hem fet per a proves) i usar `odoo-bin` només per a crear l’estructura d’un mòdul.  
 Ara bé, **açò no sol compensar**:
@@ -374,8 +373,9 @@ Per això, en pràctica, **crear el mòdul a mà és igual de vàlid i molt més
 `scaffold` només genera carpetes i fitxers bàsics: no aporta cap funcionalitat extra.
 :::
 
-::: {admonition} 🔧 Recordatori important si treballes amb Docker
-:class: warning
+:::{caution} 
+**Recordatori important si treballes amb Docker**
+
 
 Quan estàs fent mòduls en Docker, el codi real no viu dins del contenidor, sinó en el directori del teu ordinador que tens muntat com a volum (p. ex. ./extra-addons:/mnt/extra-addons).
 
@@ -394,7 +394,7 @@ en eixe cas sí que estaries escrivint dins del contenidor i es perdria tot quan
 
 
 ### Creació manual d’un mòdul  
-Si treballes amb docker vas a experimentar un problema de permisos. Per poder crear amb el comando scaffold has de ser usuari root dins del contenidor, però els fitxers creats així pertanyen a root i després Odoo no pot llegir-los i cal canviar els permisos manualment. Tampoc podras editar-los des de fora del contenidor ja que el teu usuari no tindrà permisos. Una solució poc elegant es canviar els permisos després de crear el mòdul amb scaffold:
+Si treballes amb docker vas a experimentar un problema de permisos. Per poder crear amb el comando scaffold has de ser usuari root dins del contenidor, però els fitxers creats així pertanyen a root i després Odoo no pot llegir-los i cal canviar els permisos manualment. Tampoc podràs editar-los des de fora del contenidor ja que el teu usuari no tindrà permisos. Una solució poc elegant es canviar els permisos després de crear el mòdul amb scaffold:
 ```bash
 chown -R odoo:odoo /mnt/extra-addons/nom_modul
 ``` 
@@ -405,8 +405,11 @@ chmod -R 777 /mnt/extra-addons/nom_modul
 
 Però canviar el propietari seria per a no tocar més el mòdul fora del contenidor. L'altra, donar-li permisos a tot l’usuari (777), no és gens recomanable.
 
-La solució passa per modificar el usuari al docker-compose.yml i posar el mateix usuari que tens a l’ordinador (normalment el teu UID és 1000). Així els fitxers creats dins del contenidor pertanyen al teu usuari i pots editar-los des de fora sense problemes.
+La solució passa per modificar el usuari al `docker-compose.yml` i posar el mateix usuari que tens a l’ordinador (normalment el teu UID és 1000). Així els fitxers creats dins del contenidor pertanyen al teu usuari i pots editar-los des de fora sense problemes. Pots obtenir el teu UID i GID amb el comando `id` a la terminal.
+:::{tip} 
+**Solució recomanada per a permisos en Docker**
 
+En el `docker-compose.yml`, afegir la línia `user: "${UID}:${GID}"` al servei de Odoo:
 ```yaml 
 services:
   web:
@@ -414,8 +417,7 @@ services:
     user: "${UID}:${GID}"
     ...
 ```
-
-i un fitxxer .env
+i un fitxer .env
 ```bash
 UID=1000
 GID=1000
@@ -425,8 +427,10 @@ Després d’això, cal reiniciar el contenidor per aplicar els canvis
 docker compose down
 docker compose up -d
 ```
+:::
 
-Si prefereixes crear el mòdul manualment, els passos bàsics són:
+
+Per a crear el mòdul manualment, els passos bàsics són:
 
 1. Crear carpeta nova dins d’`extra-addons`.
 2. Crear `__manifest__.py`.
@@ -466,7 +470,7 @@ Al fixer models/alumne.py hem definit un model anomenat `centre.alumne` amb tres
 
 :::{image} /_static/assets/img/Tema5/curs-alumne.png
 :alt: Model centre.alumne
-:width: 50%
+:scale: 20%
 :align: center
 :::
 
@@ -481,9 +485,13 @@ En Odoo, cada camp (`fields.*`) és com una entrada del **diccionari de dades** 
 - Com s’ha de mostrar a la interfície (string, help),
 - I com es relaciona amb altres taules (Many2one, One2many, Many2many).
 
-Un field no és només “una columna SQL”; és la definició completa del comportament d’eixa dada dins d’Odoo.
+:::{caution}
 
-🧩 Un field en Odoo equival a una entrada de metadades
+Un `field`  no és només “una columna SQL”; és la definició completa del comportament d’eixa dada dins d’Odoo.
+
+Un field en Odoo equival a una entrada de metadades
+
+:::
 
 Quan escrius:
 ```python
@@ -515,11 +523,11 @@ Així Odoo reutilitza adreces, telèfons, correus, NIF, imatges, etiquetes i tot
 Per tant, quan poses un camp Many2one cap a `res.partner`, estàs enllaçant el teu registre amb un contacte existent i aprofitant tota la seua informació.
 
 Camps clau de `res.partner`:
-- name, company_type (person/company), is_company
-- parent_id (empresa pare), child_ids (contactes fill)
-- email, phone, mobile
-- vat (NIF), category_id (etiquetes), image_1920 (foto)
-- active (arxiu lògic)
+- `name`, `company_type` (person/company), `is_company`
+- `parent_id` (empresa pare), `child_ids` (contactes fill)
+- `email`, `phone`, `mobile`
+- `vat` (NIF), `category_id` (etiquetes), `image_1920` (foto)
+- `active` (arxiu lògic)
 
 Exemple bàsic d’ús en el teu model:
 ```python
@@ -565,8 +573,8 @@ class ResPartner(models.Model):
 ```
 
 
-::: {admonition} Mantín `ondelete='set null'` en Many2one si no vols bloquejar l’esborrat de partners.
-:class: warning
+:::{caution} 
+**Mantín `ondelete='set null'` en Many2one si no vols bloquejar l’esborrat de partners.**
 `ondelete='restrict' `→ bloqueja l’esborrat del partner si hi ha alumnes que el fan servir.
 (I et quedaràs sense poder esborrar Fulanito que està duplicat tres voltes.)
 
@@ -610,8 +618,7 @@ Perquè Odoo:
 És com si en una classe hi hagueren dos xiquets amb el mateix nom i DNI: conflicte assegurat.
 
 #### 🎯 Solució recomanada per Odoo
-Utilitzar sempre el format:
-<prefix>.<nom_del_model>
+Utilitzar sempre el format: `<prefix>.<nom_del_model>`
 
 On:
 - `prefix` identifica el teu mòdul o àrea funcional.
@@ -656,10 +663,6 @@ Les vistes són fitxers XML que defineixen com es mostra la informació a l’us
 
 ### Què fa Odoo quan no té vistes?
 
-::: {admonition} 🪄 Quan no tens vistes declarades
-:class: tip
-Quan Odoo detecta que un model no té vistes definides, crea automàticament unes vistes bàsiques per a eixe model. Aquestes vistes automàtiques són molt senzilles i serveixen per a que pugues començar a treballar amb el model sense haver de definir res en XML. Això és especialment útil durant el desenvolupament, ja que et permet provar els models ràpidament.
-:::
 Quan instal·les un mòdul amb un model nou (p. ex. `centre.alumne`) i no has creat cap vista XML, Odoo:
 - Detecta que el model és nou.
 - Mira quins camps té (p. ex. name, edat, curs…).
@@ -669,6 +672,14 @@ Odoo crea tres elements bàsics:
 - Vista tree (llistat) amb tots els camps visibles.
 - Vista form minimalista amb els camps alineats de dalt a baix.
 - Una acció interna per poder veure dades des de Tècnic → Models → centre.alumne → Veure dades.
+- No crea cap menú ni accés directe, per això no podem veure aquestes vistes des del menú principal, però sí que existeixen i es poden utilitzar.
+
+:::{caution}  
+**Quan no tens vistes declarades**
+
+Quan Odoo detecta que un model no té vistes definides, crea automàticament unes vistes bàsiques per a eixe model. Aquestes vistes automàtiques són molt senzilles i serveixen per a que pugues començar a treballar amb el model sense haver de definir res en XML. Això és especialment útil durant el desenvolupament, ja que et permet provar els models ràpidament. No obstant això, sense menús, no podem accedir a aquestes vistes per tant, caldrà esperar al proper capítol per a veure el resultat.
+:::
+
 
 ### 🧼 Com són aquestes vistes automàtiques?
 Senzilles i “menjables”, però no per a producció:
@@ -677,21 +688,21 @@ Senzilles i “menjables”, però no per a producció:
 - Sense menú propi, tret que el crees manualment (o via XML).
 
 Per a començar són perfectes perquè pots comprovar que:
-- el model carrega,
-- els camps funcionen,
-- la taula s’ha creat,
-- i tot està al seu lloc.
+- El model carrega,
+- Els camps funcionen,
+- La taula s’ha creat,
+- I tot està al seu lloc.
 
 Així evitem anar a cegues mentre definim models.
 
 ### 📌 Què són exactament les vistes?
 Les vistes són fitxers XML que definixen:
-- com es mostra el formulari (form),
-- com es mostra el llistat (tree),
-- quins camps van junts en un group,
-- quines pestanyes hi ha,
-- què és editable i què no,
-- i tota la part visual declarativa (sense CSS).
+- Com es mostra el formulari (form),
+- Com es mostra el llistat (tree),
+- Quins camps van junts en un group,
+- Quines pestanyes hi ha,
+- Què és editable i què no,
+- I tota la part visual declarativa (sense CSS).
 
 És el “frontend” d’Odoo, però al seu estil: estructurat, declaratiu i en XML.  
 Com que tenen molta molla (tree, form, search, kanban, calendar, pivot, graph, activity…), les treballarem amb calma. Per ara, farem un exemple bàsic per al model `centre.alumne`.
@@ -839,7 +850,7 @@ Inclou el fitxer al manifest:
 ```
 
 Aplicació en vistes (exemples habituals):
-```xml
+```{code-block} xml
 <odoo>
   <!-- Formulari: botó només per a Professorat -->
   <record id="centre_alumne_form" model="ir.ui.view">
@@ -872,6 +883,7 @@ Aplicació en vistes (exemples habituals):
             action="centre_alumne_action" name="Alumnes"
             groups="gestio_alumnes.group_professorat"/>
 </odoo>
+
 ```
 
 Notes ràpides:

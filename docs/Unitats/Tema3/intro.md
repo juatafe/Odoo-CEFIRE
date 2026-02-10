@@ -23,8 +23,9 @@ Aquesta URL et portarà a la **pantalla inicial d’Odoo**, on podràs veure el 
 ```
 Cal iniciar sessió amb l’usuari administrador que has configurat durant la instal·lació d’Odoo. Aquest usuari té permisos per gestionar la plataforma i serà el punt de partida per afegir nous usuaris i configurar l’empresa.
 
-:::{admonition} Accés i gestió de bases de dades
-:class: note
+:::{tip} 
+**Accés i gestió de bases de dades**
+
 A la pantalla inicial d’Odoo, només pots iniciar sessió en una base de dades ja creada.  
 Per gestionar bases de dades (crear, duplicar o eliminar), cal accedir directament a la URL següent:
 
@@ -105,8 +106,9 @@ Bones pràctiques:
 - Guardar els mòduls externs en una carpeta separada, com `extra-addons` o `dev-addons`.  
 - Afegir la ruta d’aquesta carpeta al fitxer `odoo.conf`.  
 
-:::{admonition} Exemple amb Docker
-:class: note
+:::{tip} 
+**Exemple amb Docker**
+
 En `docker-compose.yml` podem muntar una carpeta local de mòduls:  
 
 ```{code-block} yaml
@@ -133,8 +135,7 @@ Una vegada tenim la base de dades, cal configurar els paràmetres generals de l�
 | Servidor de correu | SMTP per enviar notificacions des d’Odoo |
 | Pla comptable | Mòdul de localització `l10n_es` (PGC2008) descarregable des d’Aplicacions |
 
-:::{admonition} Pas important
-:class: warning
+:::{danger} 
 El mòdul de **localització del país** (en el nostre cas `l10n_es`) és imprescindible per tindre impostos i pla comptable correctes.  
 Sense això, Odoo no estarà preparat per a facturar correctament.
 
@@ -159,13 +160,13 @@ Quan instal·lem el mòdul **Website**, Odoo llança un **assistent inicial** qu
 ```
 *Pantalla de l’assistent inicial per a seleccionar un tema i crear la web.*
 
-:::{admonition} Tornar a llançar el wizard
-:class: tip
+:::{tip} 
+**Tornar a llançar el wizard**
 Encara que l’assistent només apareix la primera vegada, hi ha diverses maneres de repetir-lo o simular-lo:
 
 
 1. **Crear una web nova**  
-   - A partir d’Odoo 16 pots tindre més d’una web per base de dades.  
+   - A partir d’Odoo 16 es permet tenir més d’una web per base de dades.  
    - Menú: **Webs > Configuració > Webs > Crear**.  
    - En crear-ne una de nova, s’activa de nou l’assistent de selecció de tema.
 
@@ -175,9 +176,10 @@ Encara que l’assistent només apareix la primera vegada, hi ha diverses manere
    - ⚠️ Aquesta acció elimina també les pàgines i configuracions prèvies de la web.
 :::
 
-:::{admonition} Recomanació docent
-:class: warning
-Per a practicar a classe, és més segur **crear una web nova**, en lloc de reinstal·lar el mòdul.  
+:::{note} 
+**Recomanació docent**
+
+Per a practicar, és més segur **crear una web nova**, en lloc de reinstal·lar el mòdul.  
 La reinstal·lació pot provocar pèrdua de dades i només és viable en una base de dades de proves.
 :::
 

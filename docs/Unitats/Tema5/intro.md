@@ -164,8 +164,9 @@ En aquest punt el mòdul té:
 
 Aquestes vistes funcionen però són bàsiques: mostren pocs camps, sense estructura ni disseny específic. En el següent apartat definirem vistes XML pròpies, començant per la vista de llistat (tree) del model `patinatge.patinadora`
 
-:::{admonition} El comandament `scaffold` genera `templates.xml`de moment, NI TOCAR-LO!
-:class: warning
+:::{danger} 
+El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
+
 
 ```xml
 <template id="listing">
@@ -178,8 +179,8 @@ Aquestes vistes funcionen però són bàsiques: mostren pocs camps, sense estruc
 
 El fitxer views.xml que crea scaffolf són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
 
-:::{admonition} El codi que crea scaffold no és per a usar-lo directament, és només un exemple genèric, una guia visual de les estructures bàsiques que podem definir en XML.
-:class: warning
+:::{caution} 
+El codi que crea scaffold no és per a usar-lo directament, és només un exemple genèric, una guia visual de les estructures bàsiques que podem definir en XML.
 No cal copiar-lo ni utilitzar-lo directament, ja que no s’ajusta a les necessitats del nostre mòdul. En els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
 :::
 
@@ -249,30 +250,28 @@ Dins del registre de la vista, els camps més importants són:
   ```  
   Definició XML de l’estructura de la vista. En aquest cas, una vista de llistat (tree) que mostra els camps `name`, `cognoms` i `grup_id` del model `patinatge.patinadora`. L'arquitectura de la vista es defineix dins de l’etiqueta `<arch>`, utilitzant l’estructura XML específica per a vistes d’Odoo. El `<arch>` no defineix dades, només decideix com es mostren les dades del model.
 
-:::{admonition} I no cal tocar l’acció (de moment)
-:class: tip
-
-Esta part "../Tema6"és clau:
-
-<field name="view_mode">tree,form</field>
+:::{danger} 
+**No cal tocar l’acció (de moment)**
 
 
-👉 No cal modificar-la
-👉 Odoo trobarà automàticament la nova vista tree
-👉 I després continuarà mostrant el form automàtic
+Esta part [Creació de frontend en Odoo](../Tema6/intro.md) és clau:
 
-Açò és màgia… però màgia explicable 😏
+`<field name="view_mode">tree,form</field>`
+
+No cal modificar-la, Odoo trobarà automàticament la nova vista tree i després continuarà mostrant el form automàtic. Açò és màgia… però màgia explicable.
 Odoo fa això:
 
- - Busca un registre ir.ui.view de tipus tree per a eixe model, si el troba, l’utilitza, si no, crea una vista automàtica.
+ - Busca un registre `ir.ui.view` de tipus tree per a eixe model, si el troba, l’utilitza, si no, crea una vista automàtica.
 
-👉 Per això no cal tocar l’acció.
+Per això no cal tocar l’acció.
 
 :::
 
 En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `patinatge_menus.xml` conté menús i accions, mentre que el fitxer `patinatge_patinadora_views.xml` conté les vistes per al model `patinatge.patinadora`. Això facilita la lectura i manteniment del codi.
 
-📦 No oblides el manifest (important!). Com és un fitxer nou, cal afegir-lo al `__manifest__.py`:
+:::{caution}
+**No oblides el manifest (important!)**.
+ Com és un fitxer nou, cal afegir-lo al `__manifest__.py`:
 
 ```python
 'data': [
@@ -281,6 +280,7 @@ En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `pa
     'views/patinatge_patinadora_views.xml',
 ],
 ```
+:::
 
 Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (tree) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
 
@@ -392,12 +392,11 @@ En aquest cas el camp es mostra, però no es pot modificar des del formulari. Ú
 
 :::
 
-::: {admonition} Important
-:class: tip
+::: {danger} 
 `required` i `readonly` en la vista són validacions de UI. Si vols garantir-ho al 100%, declara-ho també en el model Python (p. ex. `required=True`).
 :::
 
 
 ## Resum i pròxims passos
-En aquest Tema 6 hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (tree) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul.
+En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (tree) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul.
 <!-- En el següent tema, continuarem explorant les possibilitats de personalització de vistes en Odoo, incloent la creació de vistes kanban, calendaris i gràfics, així com l’ús de filtres i grups per a millorar la navegació i gestió de dades. -->
