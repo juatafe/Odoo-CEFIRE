@@ -30,8 +30,8 @@ Permisos bàsics:
 
 Si un usuari **no té permís al model**, el sistema el frena encara que “veja” botons.
 
-::: {admonition} Idea clau
-:class: important
+:::{caution} 
+
 El que “es veu” és frontend. El que “es pot fer” és seguretat de servidor.  
 La seguretat real sempre va en CSV i record rules, no en les vistes.
 :::
@@ -95,8 +95,9 @@ En aquest exemple s’utilitza `base.module_category_tools`. En projectes grans 
 
 ⚠️ `noupdate="1"` evita que Odoo sobreescriga la seguretat en actualitzacions: conserva personalitzacions fetes per l’administrador.
 
-::: {admonition} Errors comuns
-:class: warning
+::: {danger} 
+**Errors comuns**
+
 - Crear grups però no incloure `security.xml` al manifest.  
 - Pensar que “categoria” dona permisos. No, només ordena.  
 :::
@@ -139,8 +140,8 @@ Traducció ràpida:
 - L’**entrenadora** pot vore i editar.
 - La **patinadora** només pot vore (i crear la seua).
 
-::: {admonition} ⚠️ Important
-:class: warning
+::: {caution} 
+
 El CSV diu “què es pot fer” sobre el model.  
 Les record rules diuen “sobre quins registres” exactament. Sense record rules, un grup amb lectura veu tots els registres del model.
 :::
@@ -244,3 +245,7 @@ I qui no controla els permisos… després plora 😄
 - Confiar la seguretat només a les vistes.  
 - No carregar `security.xml` al manifest.  
 :::
+
+
+## Resum i pròxims passos
+En aquest capítol hem après a crear grups d’usuaris, assignar permisos reals sobre models amb `ir.model.access.csv`, diferenciar entre permisos de servidor i visibilitat en les vistes, i aplicar record rules per limitar quins registres veu cada grup. Si no ho has fet encara, convidria realitzar [l'Exercici pràctic 10: Permisos i rols en Odoo per al Club de Patinatge](../../Annexos/permisosrols.md), on aplicarem aquests conceptes per a configurar els permisos dels diferents rols del club de patinatge. 

@@ -161,7 +161,8 @@ latex_toplevel_sectioning = "chapter"
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 latex_additional_files = [
-    '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf'
+  '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
+  '_static/scripts/comptabilitat.sh'
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",

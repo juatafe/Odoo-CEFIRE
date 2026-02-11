@@ -2,7 +2,7 @@
 SOURCEDIR = docs
 BUILDDIR  = _build
 
-.PHONY: help html pdf clean serve
+.PHONY: help html pdf clean serve sync-static
 
 help:
 	@echo "Ordres disponibles:"
@@ -11,10 +11,14 @@ help:
 	@echo "  make serve  -> compila i obri un servidor local"
 	@echo "  make clean  -> neteja els _build"
 
-html:
+sync-static:
+	@mkdir -p docs/_static/scripts
+	cp -f scripts/comptabilitat.sh docs/_static/scripts/comptabilitat.sh || true
+
+html: sync-static
 	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
 
-pdf:
+pdf: sync-static
 	# 1. Genera el codi LaTeX
 	sphinx-build -b latex $(SOURCEDIR) $(BUILDDIR)/latex
 	# 2. Compila el PDF amb XeLaTeX

@@ -967,3 +967,5 @@ Regla ràpida:
 - Afegixes una vista nova al manifest → update
 - Primera vegada que poses el mòdul → install
 
+## Resum del capítol i recomanacions
+En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge](../../Annexos/crear_modul_bàsic.md) per posar en pràctica aquests conceptes.

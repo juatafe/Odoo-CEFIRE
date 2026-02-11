@@ -183,3 +183,6 @@ Per a practicar, és més segur **crear una web nova**, en lloc de reinstal·lar
 La reinstal·lació pot provocar pèrdua de dades i només és viable en una base de dades de proves.
 :::
 
+## Resum i pròxims passos
+En aquest capítol hem vist com accedir a la interfície web d’Odoo, gestionar les bases de dades, activar mòduls i configurar els paràmetres bàsics de l’empresa. També hem explorat com funciona l’assistent de selecció de tema per a la web i com tornar a llançar-lo si cal.  
+Ara convidria realitzar [l'Exercici pràctic 2: Desplegament d’Odoo amb Docker Compose](../../Annexos/desplegar_docker.md) per posar en pràctica aquests conceptes i preparar l’entorn per als següents temes. També resulta interessant realitzar [l'Exercici pràctic 4: Automatització de la instaŀlació d’Odoo amb Docker)](../../Annexos/automatitzar_docker.md) per agilitzar el procés en futurs projectes.
