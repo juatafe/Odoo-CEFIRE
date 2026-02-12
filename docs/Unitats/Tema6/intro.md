@@ -196,28 +196,40 @@ Ací simplement importem les classes i mètodes necessaris per a definir el nost
 Ara sí: creem un controlador que gestione la ruta /my/custom_page i retorne una plantilla QWeb.
 
 Afegim el codi complet:
-```python
+
+```{code-block} python
+
 # -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request
 
-
 class PatinatgePortal(http.Controller):
-
-    @http.route('/my/custom_page', type='http', auth='user', website=True)
-    def custom_page(self, **kwargs):
-        return request.render('patinatge.portal_custom_page')
+    @http.route("/my/custom_page", type="http", auth="user", website=True)
+        def custom_page(self, **kwargs):#**kwargs és un diccionari que conté els paràmetres que es passen a la ruta. Per exemple, si la ruta fos /my/custom_page?name=John, kwargs seria {'name': 'John'}.
+            return request.render("patinatge.portal_custom_page")
 ```
+
+Amb aquest codi, hem creat un controlador anomenat `PatinatgePortal` que gestiona la ruta `/my/custom_page`. Quan un usuari autenticat accedeix a aquesta ruta, el mètode `custom_page` es crida i retorna la renderització de la plantilla QWeb `patinatge.portal_custom_page`. Aquesta plantilla serà la que es mostrarà a l’usuari quan accedisca a la ruta.
+
+
+:::{admonition} Explicació del codi
+:class: note
 Anem a desglossar aquest codi:
-- `class PatinatgePortal(http.Controller):`  Definim una nova classe anomenada `PatinatgePortal` que hereta de `http.Controller`. Aquesta classe contindrà els nostres mètodes de controlador.
-- `@http.route('/my/custom_page', type='http', auth='user', website=True)`  Aquest és un decorador que defineix una ruta web. Els paràmetres són:
+
+`class PatinatgePortal(http.Controller):`  Definim una nova classe anomenada `PatinatgePortal` que hereta de `http.Controller`. Aquesta classe contindrà els nostres mètodes de controlador.
+
+`@http.route('/my/custom_page', type='http', auth='user', website=True)`  Aquest és un decorador que defineix una ruta web. Els paràmetres són:
     - `'/my/custom_page'`: La ruta que volem gestionar.
     - `type='http'`: Indica que aquesta ruta és una sol·licitud HTTP normal.
     - `auth='user'`: Indica que l’usuari ha d’estar autenticat per a accedir a aquesta ruta.
     - `website=True`: Indica que aquesta ruta és per al frontend del lloc web.
-- `def custom_page(self, **kwargs):`  Definim un mètode anomenat `custom_page` que s’executarà quan un usuari accedisca a la ruta `/my/custom_page`.
-- `return request.render('patinatge.portal_custom_page')`  Aquest mètode retorna la renderització d’una plantilla QWeb anomenada `patinatge.portal_custom_page`. Aquesta plantilla serà la que es mostrarà a l’usuari quan accedisca a la ruta. 
-- `patinatge` és el nom del nostre mòdul personalitzat i `portal_custom_page` és l’identificador de la plantilla QWeb que crearem a continuació.
+
+`def custom_page(self, **kwargs):`  Definim un mètode anomenat `custom_page` que s’executarà quan un usuari accedisca a la ruta `/my/custom_page`.
+
+`return request.render('patinatge.portal_custom_page')`  Aquest mètode retorna la renderització d’una plantilla QWeb anomenada `patinatge.portal_custom_page`. Aquesta plantilla serà la que es mostrarà a l’usuari quan accedisca a la ruta. 
+
+`patinatge` és el nom del nostre mòdul personalitzat i `portal_custom_page` és l’identificador de la plantilla QWeb que crearem a continuació.
+:::
 
 ## Creació de la plantilla QWeb per a la pàgina personalitzada
 Ara que tenim el controlador definit, necessitem crear la plantilla QWeb que es mostrarà quan l’usuari accedisca a la ruta `/my/custom_page`. Crearem aquesta plantilla afegint-la al fitxer XML dins del nostre mòdul personalitzat, per exemple, `views/portal_templates.xml`:
@@ -256,5 +268,5 @@ Recorda que ara no sols cal actualitzar el mòdul perquè els canvis tinguen efe
 :width: 100%
 ``` 
 
-Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina.
+Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina. Si no ho has fet encara convidria realitzar els exercicis [Exercici pràctic 8: Inscripció online d’una patinadora amb signatura](../../Annexos/inscripcioonline.md) i [Exercici pràctic 9: Portal de patinadores](../../Annexos/portalpatinadores.md) per a posar en pràctica tot el que hem vist en aquest capítol.
 

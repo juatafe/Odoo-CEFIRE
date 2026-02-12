@@ -183,6 +183,7 @@ latex_elements = {
 \usepackage{polyglossia}
 \setmainlanguage{catalan}
 
+
 \usepackage{qrcode}
 
 % ───── Espai entre figures i text ─────

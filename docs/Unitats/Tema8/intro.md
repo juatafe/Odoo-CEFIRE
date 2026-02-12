@@ -1,8 +1,19 @@
 
 ## Introducció
-Odoo proporciona una base sòlida per a la gestió comptable, però per a adaptar-se a les necessitats específiques d’un país o sector, sovint cal instal·lar mòduls addicionals. A més, la versió Community d’Odoo no inclou totes les funcionalitats comptables que es troben a la versió Enterprise, per la qual cosa els mòduls addicionals són essencials per a una gestió completa. També cal assegurar-se que les dependències de Python estan correctament instal·lades per a evitar errors durant la instal·lació dels mòduls.
 
-Anem instal·lar una sèrie de mòduls per a gestionar la comptabilitat de l’empresa amb Odoo. Aquests mòduls permeten portar un control de finances, generar informes i complir amb obligacions fiscals. El mòdul comptable bàsic d’Odoo ja inclou molta funcionalitat; per a una gestió més avançada, afegirem la localització espanyola `l10n_es` i altres mòduls relacionats.
+Odoo ofereix una base sòlida per a la gestió comptable, però la versió Community no incorpora totes les funcionalitats avançades disponibles en Enterprise. Per això, quan treballem en un entorn real —com el d’un club esportiu— és imprescindible ampliar el sistema amb mòduls addicionals, especialment els de la comunitat OCA (Odoo Community Association).
+
+En aquest capítol aprendrem a preparar correctament l’entorn comptable d’Odoo 16 Community per a complir amb la normativa espanyola. Instal·larem la localització `l10n_es`, afegirem mòduls d’informes com `l10n_es_mis_report` i integrarem eines per a generar fitxers oficials de l’AEAT. A més, abordarem un aspecte fonamental que sovint es passa per alt: la gestió adequada de les dependències de Python dins de Docker.
+
+Però aquest tema no és només tècnic. L’objectiu real és entendre com s’estructura la comptabilitat dins d’Odoo: els diaris, el pla comptable, les factures, els informes fiscals i la relació amb el Pla General Comptable (PGC). No es tracta de convertir-se en assessor fiscal, sinó de comprendre com es classifiquen i interpreten els moviments econòmics d’una entitat.
+
+Aquest capítol connecta directament amb el cas pràctic del club de patinatge, on la correcta configuració del sistema marcarà la diferència entre una comptabilitat funcional i un entorn ple d’errors i inconsistències.
+
+
+
+```{danger}
+Si encara no domines la instal·lació de mòduls o la gestió bàsica d’Odoo, és recomanable que revises els temes anteriors abans de continuar. Un ordre incorrecte d’instal·lació o una dependència mal gestionada pot deixar la base de dades en un estat inconsistent. Fes còpies de seguretat abans de fer canvis importants i segueix els passos amb cura.
+```
 
 ::::{image} /_static/assets/img/Tema9/modul-l10n_es.png
 :alt: Odoo Comptabilitat
@@ -168,11 +179,7 @@ L'escript el que fa és:
 
 **Script d'instal·lació massiva de mòduls OCA per a comptabilitat espanyola**
 
-**Descarregar (HTML):** [comptabilitat.sh](https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/comptabilitat.sh)
-
-**GitHub (visualitzar):** https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/comptabilitat.sh
-
-**Descarregar (PDF/extern):** https://raw.githubusercontent.com/juatafe/Odoo-CEFIRE/main/scripts/comptabilitat.sh
+**Descarregar :** [comptabilitat.sh](https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/comptabilitat.sh)
 
 Aquest script desa automàticament els mòduls OCA en `./dev_addons` i fa una instal·lació bàsica. Alguns no els instal·la però els deixa a punt per a que els instal·les més endavant si cal. Això és per evitar problemes de dependències i recurrències.
 
@@ -186,14 +193,14 @@ Aquest és un pas crític. En Odoo Community, molts menús de comptabilitat roma
 
 Per a tindre accés total a la comptabilitat (factures, pla comptable, informes AEAT), cal configurar l'usuari que actuarà com a administrador comptable:
 
-- Activa el Mode desenvolupador.
-  - Activa’l així:
-    - Configuració → “Activar mode desenvolupador”, o
-    - Afegeix `?debug=1` a l’URL de Odoo i recarrega la pàgina.
-- Ves a _Configuració → Usuaris i empreses → Usuaris_.
-- Selecciona l'usuari en concret.
-- A la pestanya Permisos d'accés, busca la secció Accounting (o Comptabilitat).
-- Selecciona l'opció Administrador de facturació (Billing Administrator).
+1. Activa el Mode desenvolupador.
+   Pots fer-ho de dues maneres:
+      - Configuració → “Activar mode desenvolupador”
+      - Afegeix `?debug=1` a l’URL de Odoo i recarrega la pàgina.
+1. Ves a _Configuració → Usuaris i empreses → Usuaris_.
+1. Selecciona l'usuari en concret.
+1. A la pestanya Permisos d'accés, busca la secció Accounting (o Comptabilitat).
+1. Selecciona l'opció Administrador de facturació (Billing Administrator).
 
 :::{caution} 
 **Important: Permisos Tècnics**
@@ -218,10 +225,10 @@ Cal fer logout i login perquè tinga efecte
 :class: center-img
 :::
 
-:::{admonition} Recorda
-:class: note
+```{caution}
+
 Després d’assignar grups a un usuari, cal tancar sessió i tornar a entrar perquè els canvis tinguen efecte.
-:::
+```
 
 
 ## Verificació i diagnòstic ràpid
@@ -277,8 +284,7 @@ Aquest diagrama mostra l'ordre lògic de càrrega. Els mòduls de la base han d'
 
 ---
 
-``` {admonition} Consell per a l'alumne
-:class: tip
+``` {tip}
 
 Si intentes instal·lar un mòdul de la **Capa 4** sense haver passat per la **Capa 2**, Odoo intentarà instal·lar les dependències automàticament, però de vegades l'ordre de càrrega de les vistes falla (especialment en el frontend). L'script que hem proporcionat assegura que "pugem l'escala" graó a graó per evitar corrompre la base de dades.
 ```
@@ -338,13 +344,11 @@ docker compose restart web
 - Entra a Odoo amb `?debug=assets` a l’URL.  
 - Obri la icona de debug (“bestioleta”) i selecciona “Regenerate Assets Bundles”.
 
-``` {admonition} Recorda
-:class: note
+``` {caution}
 Aquest problema apareix quan la vista fa referència a camps d’un mòdul que encara no existeix. L’ordre d’instal·lació és clau.
 ```
 
-``` {admonition} Consell ràpid
-:class: tip
+``` {tip}
 Si tornes a vore l’error, repeteix el pas de neteja i assegura l’ordre: primer `account_asset_management`, després `l10n_es_aeat`.
 ```
 

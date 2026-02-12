@@ -1,14 +1,16 @@
 # Pla General Comptable aplicat a un club de patinatge
+Per tal d'aprendre compatibilitat amb Odoo, és fonamental entendre com funciona el Pla General Comptable (PGC) i per a fer-ho més pràctic, veure com s'aplica a la gestió financera d'un club de patinatge. Aquest capítol tracta de fer entendible per a un no expert en comptabilitat com es classifiquen els moviments econòmics d'una entitat com un club esportiu. Estudiant com funciona el PGC i com en Odoo s'organitzen els comptes, podrem gestionar millor els ingressos i despeses del club, mantenir un control clar dels diners i prendre decisions informades per a la salut financera de l'entitat.
+
 El Pla General Comptable (PGC) és un sistema de classificació dels moviments econòmics. Per al cas de l'entitat club de platinatge i la comptabilitat en Odoo en general en lloc de centrar-nos en com fer balanços o declaracions fiscals, el PGC ajuda a organitzar i categoritzar els ingressos i despeses de manera clara i estructurada. A més incorpora comptes específics per a diferents tipus de transaccions, facilitant la gestió financera i el seguiment dels fluxos de diners. Així com, enviar models de declaracions fiscals a Hisenda.
 
 ## Entendre el Pla General Comptable 
 El pla general comptable és com un gran llibre d’arxius on cada calaix té un número i un nom. Cada moviment econòmic del club (una factura, una quota, una subvenció…) s’ha de posar en el calaix correcte perquè la comptabilitat tinga sentit. A més, quan una patinadora paga la quota, no només és important saber que ha entrat diners, sinó també d’on ve eixos diners (quotes) i on estan ara (banc). El balanç final depèn de classificar bé cada moviment. 
 
-:::{admonition} No confondre's
-:class: warning
+```{caution} 
+**No confondre's** 
  Molta gent pensa que quan entra o ixen diners del banc, això és un ingrés o una despesa. Però no és així. El banc només ens diu on estan els diners físicament. La comptabilitat va de classificar cada moviment en dos comptes diferents: un per a l’origen o destí dels diners (ingrés o despesa) i un altre per a on estan ara (banc o caixa).
-Aquest tema no va de fer assentaments, va de prendre decisions bones.
-:::
+Aquest capítol no va de fer assentaments, va de prendre decisions bones.
+```
 
 Pensem per un moment, si una patinadora paga la quota mensual de 30 € per transferència bancària. Aquest moviment té dos aspectes importants:
 1. **Ingressos**: El club ha rebut 30 € com a quota mensual, que és un ingrés per al club.
