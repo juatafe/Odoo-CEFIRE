@@ -10,7 +10,7 @@ La **integració de sistemes d’informació** és el conjunt de tècniques i me
 
 En aquest context, els **ERP** actuen com a **nucli central d’informació** de l’organització.
 
----
+
 
 ## Sistemes integrats vs sistemes aïllats
 Els sistemes aïllats presenten diversos problemes que es resolen amb la integració mitjançant un ERP:
@@ -34,7 +34,7 @@ flowchart LR
     style D fill:#aed6f1,stroke:#2874a6,stroke-width:2px
 ```
 
----
+
 
 ## Concepte d’API (Application Programming Interface)
 
@@ -46,7 +46,7 @@ Dit d’una manera formal:
 
 En el cas d’Odoo, l’API permet consultar dades (clients, factures, productes…), crear o modificar registres, executar operacions del negoci sense utilitzar la interfície web.
 
----
+
 
 
 ## Arquitectura d’Odoo i accés mitjançant API
@@ -77,11 +77,11 @@ flowchart TD
 
 L’API accedeix **directament als models**, igual que la interfície web, però sense renderitzar vistes.
 
----
+
 
 ## Tipus d’API disponibles en Odoo
 
-Odoo proporciona diferents mecanismes d’accés remot:
+Odoo proporciona diferents mecanismes d’accés directe remot:
 
 ### XML-RPC
 L'acces amb **XML-RPC** és el mètode més tradicional i àmpliament suportat per interactuar amb Odoo. Característiques principals:
@@ -95,11 +95,106 @@ El **JSON-RPC** és una alternativa més moderna que utilitza JSON per a la seri
 - Variant moderna de XML-RPC.
 - Més habitual en entorns web.
 
-En aquest tema es treballarà **XML-RPC**, per la seua simplicitat i compatibilitat.
+En aquest capítol es treballarà **XML-RPC**, per la seua simplicitat i compatibilitat.
 
----
+## Integració segura amb tokens i middleware
 
-## Autenticació i seguretat en l’accés per API
+Encara que Odoo permet autenticació mitjançant **claus d'API**, en
+entorns professionals no és habitual que aplicacions externes es
+connecten directament contra l'ERP.
+
+En lloc d'això, s'utilitza una **API intermèdia** que actua com a capa
+de seguretat i control.
+
+
+
+### Arquitectura recomanada
+En entorns professionals, es recomana utilitzar una API intermèdia que gestione l'autenticació i les peticions cap a Odoo. Aquesta API pot generar **tokens JWT** per a cada client extern i aplicar validacions addicionals abans de cridar Odoo.
+
+```{mermaid}
+flowchart LR
+    C[Client extern] -->|Token JWT| A[API intermèdia]
+    A -->|XML-RPC / JSON-RPC| O[Odoo]
+    O --> DB[(PostgreSQL)]
+
+    style A fill:#d5f5e3,stroke:#1e8449,stroke-width:2px
+    style O fill:#d6eaf8,stroke:#2874a6,stroke-width:2px
+```
+
+
+
+### Per què no connectar directament contra Odoo?
+
+Si una aplicació externa es connecta directament a Odoo mitjançant
+XML-RPC:
+
+-   Necessita usuari i clau API.
+-   Té accés complet segons els permisos assignats.
+-   No es pot limitar fàcilment quines operacions pot fer.
+-   No es pot aplicar control de peticions (*rate limit*).
+-   Es complica el registre d'auditories externes.
+
+En canvi, amb una API intermèdia pròpia es pot:
+
+-   Generar **tokens temporals (JWT)**.
+-   Limitar els endpoints exposats.
+-   Aplicar validacions addicionals.
+-   Registrar logs d'accés.
+-   Canviar el backend sense afectar els clients.
+
+
+
+### Flux típic amb autenticació per token
+Si utilitzem una API intermèdia amb tokens, el flux típic seria:
+
+```text
+POST /login
+→ retorna access_token
+
+GET /partners
+Authorization: Bearer <token>
+```
+
+Procés:
+
+1.  El client envia credencials a la nostra API.
+2.  La nostra API valida contra Odoo.
+3.  Si l'autenticació és correcta, es genera un **token amb expiració**.
+4.  El client utilitza aquest token en cada petició posterior.
+5.  La nostra API verifica el token abans de cridar Odoo.
+
+
+
+### Comparativa: RPC vs REST
+La API d’Odoo és un sistema de **Remote Procedure Call (RPC)**, mentre que moltes APIs modernes segueixen l’estil **RESTful**. A continuació es mostra una comparativa entre ambdós enfocaments:
+| Aspecte    | API RPC d'Odoo | API REST típica |
+|------------|-----------------|-----------------|
+| Endpoints  | Un únic endpoint (`/xmlrpc/2/object`) | Diversos endpoints (`/clients`, `/orders`, etc.) |
+| Operacions | Mètode genèric `execute_kw` | Verbs HTTP: `GET`, `POST`, `PUT`, `DELETE` |
+| Adreçament | Model + mètode com a paràmetres | URL + verb HTTP |
+| Estil      | No és REST nativa (RPC) | Arquitectura RESTful |
+| Format de dades | XML-RPC / JSON-RPC | JSON (habitual) |
+| Especificació | Sense contracte estàndard | Sovint OpenAPI/Swagger |
+| Autenticació | Usuari + clau API d’Odoo | Token Bearer / API Keys / OAuth2 |
+
+
+
+### Model de seguretat recomanat en producció
+
+En un entorn professional es recomana seguir les següents pràctiques per a una integració segura amb Odoo:
+
+-   Crear un **usuari tècnic específic** en Odoo.
+-   Assignar-li únicament els permisos necessaris.
+-   Generar una **clau API exclusiva per a integracions**.
+-   Implementar una API intermèdia amb validació de tokens.
+-   Utilitzar sempre **HTTPS**.
+-   Aplicar rotació periòdica de claus.
+
+Aquesta arquitectura evita exposar directament el nucli de l'ERP i
+millora la seguretat global del sistema.
+
+
+## Autenticació i seguretat en l’accés per API en desevolupament
 
 L’accés a l’API d’Odoo està protegit per mecanismes d’autenticació. Per motius de seguretat **no s’ha d’utilitzar la contrasenya real de l’usuari**, s’utilitzen **claus d’API**.
 
@@ -114,6 +209,7 @@ Les claus d’API:
 ::::{image} /_static/assets/img/Tema10/elmeuperfil.png
 :alt: El meu perfil
 :class: img-fluid
+:height: 7cm
 ::::    
 
 1. Obri la pestanya "Seguretat del compte" i entra a "Claus API".
@@ -160,7 +256,7 @@ Per motius de seguretat, només es mostra la clau un cop generada. Podràs elimi
 - Limita permisos i rota claus periòdicament.
 ```
 
----
+
 
 ## Estructura d’un projecte de connexió amb l’API d’Odoo
 
@@ -239,7 +335,7 @@ Per eixir de l’entorn virtual:
 deactivate
 ```
 
----
+
 
 ## Operacions bàsiques amb l’API d’Odoo
 
@@ -409,15 +505,14 @@ Errors habituals i com abordar-los:
 - Permisos insuficients: comprova `check_access_rights` i rols.
 - Problemes de xarxa/SSL: revisa ports (8069/443) i certificats.
 
----
 
 ## Resum del tema
 
 En aquest tema hem vist:
-- el concepte d’integració de sistemes d’informació,
-- el paper de les APIs en els ERP,
-- l’arquitectura d’Odoo i el seu accés remot,
-- els mecanismes d’autenticació segura,
-- i les operacions bàsiques mitjançant XML-RPC.
+- El concepte d’integració de sistemes d’informació,
+- El paper de les APIs en els ERP,
+- L’arquitectura d’Odoo i el seu accés remot,
+- Els mecanismes d’autenticació segura,
+- Operacions bàsiques mitjançant XML-RPC.
 
 Odoo no és només una aplicació de gestió, sinó **una plataforma integrable** dins d’un ecosistema de sistemes d’informació.

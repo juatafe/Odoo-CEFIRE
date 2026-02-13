@@ -31,7 +31,7 @@ Si pel contrari fem un pagament de 50 € a la federació per una competició, t
 Si només registrem la despesa en el compte de diners (572), no sabrem a què s'ha destinat aquest diners. I si només registrem la despesa en el compte de despeses (623), no sabrem d'on han sortit aquests diners físicament. Per tant, és crucial classificar correctament cada moviment per mantenir una comptabilitat clara i precisa.
 
 
-::: {admonition} 🧠 Idea clau (abans de començar)
+::: {admonition} Idea clau (abans de començar)
 :class: note
 La comptabilitat no és sumar i restar. És classificar.  Cada moviment del club (una factura, una quota, una subvenció…) va a un calaix concret. Eixos calaixos són els comptes.
 
@@ -41,7 +41,7 @@ Afortunadament, Odoo ens ajuda molt en aquesta tasca tècnica. Quan importem l�
 
 ---
 
-## 📚 Estructura bàsica del Pla General Comptable (PGC)
+## Estructura bàsica del Pla General Comptable (PGC)
 
 Pla General Comptable funciona com una caixa d’arxius amb nivells. Com més llarg el número, més concret és i en Odoo es solen reservar 8 dígits per a diferents nivells d'especificitat.
 
@@ -49,7 +49,7 @@ Pla General Comptable funciona com una caixa d’arxius amb nivells. Com més ll
 ::: {imatge} /_static/assets/img/Tema9/estructura-pgc.png
 :alt: Estructura PGC
 :width: 40%
-:class: center-img
+:align: center
 :::
 
 
@@ -73,7 +73,7 @@ El PGC està dividit en 7 grans grups. Cada grup té un número i un nom que ind
 Si dubtes, pensa: “açò em costa diners o me’n dona?”
 :::
 
-#### 🟩 GRUP 7 · INGRESSOS (el que entra al club)
+####  GRUP 7 · INGRESSOS (el que entra al club)
 Tot allò que el club cobra.
 
 | Compte | Nom                  | Exemple                 |
@@ -83,10 +83,10 @@ Tot allò que el club cobra.
 | 740    | Subvencions          | Ajuntament              |
 | 752    | Donacions            | Aportacions puntuals    |
 
-🧠 Exemple:
+ Exemple:
 - Una patinadora paga la quota mensual → _700 – Prestació de serveis_
 
-#### 🟦 GRUP 6 · DESPESES (el que costa mantindre el club)
+####  GRUP 6 · DESPESES (el que costa mantindre el club)
 Tot allò que el club paga.
 
 Subgrups més habituals en un club de patinatge:
@@ -102,11 +102,11 @@ Subgrups més habituals en un club de patinatge:
 | 640    | Sous                | Entrenadores          |
 | 642    | Seguretat Social    | Quotes SS             |
 
-🧠 Exemple clar:
+Exemple:
 - Pagues 120 € de llum del pavelló → _628 – Subministraments_
 
 
-#### 🟨 GRUP 5 · DINERS (on estan els diners)
+####  GRUP 5 · DINERS (on estan els diners)
 Aquest grup no és ni gasto ni ingrés. És on estan els diners físicament.
 
 | Compte | Què és              |
@@ -114,11 +114,11 @@ Aquest grup no és ni gasto ni ingrés. És on estan els diners físicament.
 | 570    | Caixa (efectiu)     |
 | 572    | Banc                |
 
-🧠 Exemple:
+Exemple:
 - Et paguen una quota per transferència → entra a _572 – Banc_. Quan el banc t’ingressa els diners, ix de 572 i entra a _700 – Prestació de serveis_.
 - Traus diners per pagar llum en efectiu → ix de 572 i entra a 570 - Caixa. Quan aportes la factura de la llum i la pagues en efectiu, ix de 570 i entra a _628 – Subministraments_.
 
-#### 🟧 GRUP 4 · A cobrar i a pagar
+####  GRUP 4 · A cobrar i a pagar
 Quan encara no s’ha cobrat o pagat.
 
 | Compte | Significat     |
@@ -128,35 +128,35 @@ Quan encara no s’ha cobrat o pagat.
 | 475    | Hisenda        |
 | 476    | Seguretat Social |
 
-👉 Aquest grup és clau per no perdre el control.
+Aquest grup és clau per no perdre el control.
 
-🧠 Exemple :
+Exemple :
 - Emets una factura de quota a una patinadora → entra a _430 – Clients_. Quan la patinadora paga, ix de 430 i entra a 572 – Banc i en _700 – Prestació de serveis_. Però si no paga, el deute queda registrat a 430. 
 - Rep una factura de la federació → entra a _410 – Proveïdors_. Quan la pagues, ix de 410 i ix de _572 – Banc_ i entra en _623 – Serveis professionals_. Si no la pagues, el deute queda registrat a 410.
 
 
-#### 🟪 GRUP 3 · Existències (material per vendre)
+####  GRUP 3 · Existències (material per vendre)
 Si el club ven material (patins, roba…), es controla ací. Per exemple si montes una barra i vens begudes o menjar per a un event.  Si el club no ven material, no cal usar aquest grup.
 | Compte | Exemple               |
 |--------|-----------------------|
 | 300    | Mercaderies           |
 
-🧠 Exemple: 
+ Exemple:
 - Compres begudes per a vendre → 300, quan les vens ix de 300 i entra en 700. Però si es vol mesclar-ho amb ingressos de quotes, es pot crear un compte específic dins de 700 com per exemple _701 – Vendes begudes_. Si encara no has venut res, el cost de les begudes queda registrat a 300 i els diners que has pagat ixen de _572 – Banc_.
 - Compres patins per a vendre → 300
 - Vens patins → ix de 300
 - Benefici de la venda → _702 – Benefici venda patins_
   
-🧠 Exemple de càlcul de benefici:
+ Exemple de càlcul de benefici:
 - Cost dels patins venuts → 600 
 - Guany total = 701 - 600
 
-:::{admonition} ⚠️ El benefici no és un moviment de banc.
-:class: warning
+:::{caution} 
+**El benefici no és un moviment de banc.**
 El benefici és una diferència comptable entre ingressos (701) i despeses (600). No és un moviment físic de diners. Els diners ja han entrat al banc quan vas vendre els patins (572). El benefici només serveix per a saber si has guanyat o perdut diners en la venda.
 :::
 
-#### 🟥 GRUP 2 · Béns duradors (immobilitzat)
+#### GRUP 2 · Béns duradors (immobilitzat)
 Coses que duren anys, no mesos. La màquina de muntar i extraure rodaments dels patins o la carpa per a events són exemples típics. També els equips informàtics del club.
 
 | Compte | Exemple               |
@@ -165,14 +165,14 @@ Coses que duren anys, no mesos. La màquina de muntar i extraure rodaments dels 
 | 217    | Informàtica           |
 | 218    | Altres equips         |
 
-🧠 Exemple:
+ Exemple:
 - Compres patins per a ús del club (no per vendre) → 216. 
 - Equipament esportiu i ixen de _572 – Banc_ quan es paga.
 
-:::{dropdown} 🧠 Comprendre l'Amortització: De la Inversió a la Despesa
+:::{note} Comprendre l'Amortització: De la Inversió a la Despesa
 Quan el club compra un bé durador (com uns patins o una màquina), no es considera una “despesa total” el primer dia, sinó una inversió. El cost es reparteix durant la vida útil de l’objecte.
 
-### 1) El Moment de la Compra (Any 0)
+1. El Moment de la Compra (Any 0)
 Registrem que tenim un bé nou i que els diners han eixit del banc.
 
 | Compte | Concepte                       | Deure (Entra) | Haver (Surt) |
@@ -182,7 +182,7 @@ Registrem que tenim un bé nou i que els diners han eixit del banc.
 
 Nota: En aquest moment, el club no ha “perdut” diners; simplement ha canviat diners per una màquina del mateix valor.
 
-### 2) El Procés d’Amortització (Anual)
+2. El Procés d’Amortització (Anual)
 Si la màquina de 1.000 € dura 5 anys, la quota anual és: 1.000 € / 5 anys = 200 €/any.
 
 Cada any, durant 5 anys, farem aquest assentament per reflectir que la màquina és més vella i val menys:
@@ -192,7 +192,7 @@ Cada any, durant 5 anys, farem aquest assentament per reflectir que la màquina 
 | 681    | Amortització de l’immobilitzat   | 200 €  | Despesa: apareix al resultat de l’any       |
 | 281    | Amortització acumulada           | 200 €  | Correcció: redueix el valor del bé al balanç|
 
-### 3) Resum Visual del Cicle de Vida
+3. Resum Visual del Cicle de Vida
 | Any   | Valor al Balanç (216) | Despesa a l’any (681) | Valor Real (Net)     |
 |-------|------------------------|------------------------|----------------------|
 | Any 0 | 1.000 €                | 0 €                    | 1.000 €              |
@@ -211,7 +211,7 @@ En resum:
 
 
 
-#### 🟫 GRUP 1 · Capital propi (Patrimoni Net)
+#### GRUP 1 · Capital propi (Patrimoni Net)
 Aquest grup representa la base econòmica permanent del club. Són diners que no estan destinats a ser gastats en el dia a dia, sinó que formen l'estructura que permet al club existir i créixer. Reflecteix els fons que els socis han posat per a crear l'entitat i serveix per a saber la solidesa del club. Eixos diners no es gasten, són el patrimoni. El patrimoni no és una guardiola, és un termòmetre.
 
 Aquest grup és més rellevant en la creació del club que en la gestió diària.
@@ -221,21 +221,19 @@ Aquest grup és més rellevant en la creació del club que en la gestió diària
 | 101    | Fons social           |Diners aportats pels fundadors el dia que es va crear el club.
 | 110    | Reserves              |Beneficis d'anys anteriors que el club decideix no gastar per tenir un "matalàs".|
 
-🧠 Exemple
+ Exemple
 - Els socis aporten 1.000 € cadascun per crear el club → _101 – Fons Social_.
 
-:::{admonition} ⚠️ Nota important sobre les Inscripcions
-:class: warning
+```{caution}
+**Nota important sobre les Inscripcions**
 Tot i que sembla una "aportació inicial", la inscripció d'un nou soci en un club que ja funciona no es registra aquí. Eixos diners s'utilitzen per a la gestió de l'exercici actual (assegurances, fitxes, lloguer de pista).
 Així que la inscripció s'ha de registrar com a ingrés normal en el compte 700 – Prestació de serveis, igual que les quotes mensuals.
-:::
+```
 
 Gràcies a aquesta separació, si el club té 10.000 € al banc però 8.000 € són del Fons Social (Grup 1), la directiva sap que només pot disposar realment de 2.000 € per a gastar en patins nous, perquè la resta és el patrimoni sagrat del club.
 
 
-:::{dropdown} 💡 Com es "gasten" els diners del Patrimoni? 
-:class-container: tip
-
+**Com es "gasten" els diners del Patrimoni?**
 Tot i que el Grup 1 és el "patrimoni sagrat", de vegades el club necessita utilitzar aquests fons. Per exemple, si el club vol comprar una furgoneta nova per a transportar les patinadores a les competicions, pot decidir utilitzar part del Fons Social per a aquesta inversió. Però aquest procés ha de seguir unes regles clares:
 
 - L'aprovació: Per a tocar aquests diners, normalment cal una **reunió de la Junta Directiva** o una **Assemblea de Socis** que aprove la despesa (per exemple, comprar una furgoneta pel club).
@@ -255,27 +253,25 @@ Tot i que el Grup 1 és el "patrimoni sagrat", de vegades el club necessita util
     - Si fas servir el fons per pagar la llum perquè no hi ha socis, el teu patrimoni sí que es fa petit.
 
 Consell de gestió: Un club ben gestionat només "toca" el Grup 1 per a inversions que milloren l'entitat a llarg termini. 
-:::
 
 
-::: {admonition} 🎓 Recorda: en cada moviment hi ha sempre dos preguntes:
-:class: tip
-- per què entra o ix els diners? (ingrés o despesa)
-- i on estan ara? (banc o caixa).
+::: {note} Recorda: en cada moviment hi ha sempre dos preguntes:
+- Per què entra o ix els diners? (ingrés o despesa)
+- On estan ara? (banc o caixa).
 Odoo fa la resta.
 :::
 
-:::{dropdown} 🧠 Decidir QUÈ és cada moviment (classificar bé)
-:class-container: tip
+:::{caution}
 ## Decidir QUÈ és cada moviment (classificar bé)
 Aquest apartat **no és un pas del procés**.
 És la manera correcta de pensar **abans** de registrar res al programa.
 
 El banc no diu què és el moviment. Només diu que els diners s’han mogut.
+:::
 
 ### Moviments típics del club (mapa directe)
 - Pagaments grans i repetits (federació)
-  - 👉 GASTO → 623 – Serveis professionals  
+  -  GASTO → 623 – Serveis professionals  
   - Alternativa: 629 – Altres serveis (“Federació”) si vols afinar
 
 - Entrenadores (pagament a Irene Zuleme)
@@ -287,30 +283,29 @@ El banc no diu què és el moviment. Només diu que els diners s’han mogut.
 “No mirem el banc, mirem què estem pagant.” El banc és l’origen, el compte és la classificació. En el club ho simplificarem tot a 623 o 629, però el més important no és el número exacte, sinó no posar-ho mai en 572 com si fora un gasto.
 ```
 
-- Assegurances (Allianz)
-  - 👉 625 – Primes d’assegurances
+**Assegurances (Allianz)**
+  -  625 – Primes d’assegurances
 
-- Material / logística (Disvall Logistic)
-  - 👉 600 – Compres
+**Material / logística (Disvall Logistic)**
+  -  600 – Compres
 
-- Quotes xicotetes (10, 35, 80, 100 €) de patinadores
-  - 👉 INGRESSOS → 700 – Prestació de serveis  
+**Quotes xicotetes (10, 35, 80, 100 €) de patinadores**
+  - INGRESSOS → 700 – Prestació de serveis  
   - Client = la patinadora
 
-- Imports grans agrupats (ab.rem.2025…)
+**Imports grans agrupats (ab.rem.2025…)**
   - Normalment remeses de quotes o campus/activitats  
-  - 👉 700 (quotes / activitats)  
+  - 700 (quotes / activitats)  
   - Si és subvenció → 740 – Subvencions
 
-- Ajuntament (500 / 2000 €)
-  - 👉 740 – Subvencions
+**Ajuntament (500 / 2000 €)**
+  - 740 – Subvencions
 
-``` {admonition} No són donacions
-:class: warning
+``` {caution} 
+**No són donacions**
 Les quotes de patinadores no són donacions; són ingressos per servei → 700.
 ```
 
----
 
 ## Els comptes “estrella” del club (per començar)
 Domina aquests i ja cobriràs el 80% dels casos:
@@ -332,10 +327,9 @@ Domina aquests i ja cobriràs el 80% dels casos:
 - Grup 4 (Clients/Proveïdors) → a cobrar/pagar  
 ```
 
-:::
 
 ---
-## 🥇 PAS 1 · Definir en Odoo el BANC com a centre de tot
+## PAS 1 · Definir en Odoo el BANC com a centre de tot
 El club té un únic compte bancari (572001). Tots els moviments passen per ací: és el “fil conductor”.
 
 ### 1.1 Crear el diari de banc (tornem a Odoo)
@@ -346,12 +340,12 @@ El club té un únic compte bancari (572001). Tots els moviments passen per ací
 Si vas a _Facturació → Configuració → Diaris_ pots observar que ja hi han diaris creats per defecte. Anem a reutilitzar el diari de banc que ja està creat per defecte i només cal que l’editem per posar-li un nom més clar.
 :::{image} /_static/assets/img/Tema9/diaris.png
 :alt: Diaris Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
-:::{admonition} Reutilitzar diari existent
-:class: tip
+:::{tip} 
+
 **Reutilitzar el diari existent**
 
 A la llista de diaris es veu clarament un diari anomenat "Banc" amb el tipus "Banc". Aquest és el diari que Odoo ha creat per defecte per gestionar els moviments bancaris:
@@ -378,7 +372,7 @@ Què has de fer? Simplement clica a sobre de la línia on diu "Banc" per editar-
 
 :::{image} /_static/assets/img/Tema9/caixabanck.png
 :alt: Editar diari banc Odoo
-:class: center-img
+:align: center
 :width: 100% 
 :::
 
@@ -407,7 +401,7 @@ Dins de la configuració del Diari de Banc (ex: CaixaBank Club), trobem els camp
 Són els "comptes de seguretat" que permeten que el banc sempre quadre a zero, absorbint les diferències d'arredoniment de manera automàtica.
 
 
-### 1.2 El compte bancari 💳 (IBAN) i les Remeses SEPA
+### 1.2 El compte bancari (IBAN) i les Remeses SEPA
 
 Dins de la fitxa del Banc, el camp Número de compte és on s'ha d'introduir l'IBAN (el codi internacional que identifica el compte del club). Configurar-lo correctament és fonamental per a automatitzar el cobrament de les quotes.
 
@@ -433,7 +427,7 @@ Per a automatitzar el cobrament de quotes i el pagament a proveïdors, Odoo util
 
 :::{imatge} /_static/assets/img/Tema9/pagamentes-entrants.png
 :alt: Pagaments entrants SEPA
-:class: center-img
+:align: center
 :width: 100%
 ::: 
 
@@ -441,20 +435,20 @@ Per a automatitzar el cobrament de quotes i el pagament a proveïdors, Odoo util
 Per a generar remeses SEPA entrants, cal activar el mòdul específic d’Odoo. S'anomena `account_banking_sepa_direct_debit` i cal activar-lo des d'Apps.
 :::{imatge} /_static/assets/img/Tema9/activar-sepa.png
 :alt: Activar mòdul SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 Per a generar remeses SEPA sortints, cal activar el mòdul específic d’Odoo. S'anomena `account_banking_sepa_credit_transfer` i cal activar-lo des d'Apps.
 :::{imatge} /_static/assets/img/Tema9/activar-sepa-sortint.png
 :alt: Activar remeses SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
 Amb aquestos mòduls activats, ja apareixeran les opcions per a generar remeses SEPA de pagaments i cobraments.
 :::{imatge} /_static/assets/img/Tema9/pagamentes-sortints.png
 :alt: Pagaments sortints SEPA
-:class: center-img
+:align: center
 :width: 100%
 
 :::
@@ -470,7 +464,7 @@ Amb aquestos mòduls activats, ja apareixeran les opcions per a generar remeses 
 ---
 
 
-## 🥈 PAS 2 · Definir QUI són les persones i entitats
+## PAS 2 · Definir QUI són les persones i entitats
 Cal saber QUI és qui per a classificar bé els moviments. Per exemple, si veus un pagament a “Federació de Patinatge”, has de saber que és una despesa de llicències (623). Si veus un ingrés de “Ajuntament Local”, has de saber que és una subvenció (740). Això només ho pot saber una persona que coneix el club i té accés a l’extracte bancari.
 
 ### 2.1 Entendre l'extracte bancari
@@ -493,13 +487,13 @@ trf. ajuntament local           2.000,00   11.917,67     863           Ingrés: 
 ```
 Mira l’extracte i identifica actors: federacions, ajuntament, entrenadores, asseguradora, clubs, famílies etc.
 
-👉 Açò no són “comptes comptables”, són PERSONES i ENTITATS. Després d'analitzar els tipus de moviments caldrà definir qui és qui.
+Açò no són “comptes comptables”, són PERSONES i ENTITATS. Després d'analitzar els tipus de moviments caldrà definir qui és qui.
 
 
-:::{dropdown} 🔎 Diccionari de “Tipus de moviment” més habituals
-:class-container: tip
+:::{nota} Diccionari de “Tipus de moviment” més habituals
 
-##### 🔁 trf. → Transferència
+
+##### trf. → Transferència
 Algú envia diners o el club envia diners per transferència.
 
 Exemples reals:
@@ -507,7 +501,7 @@ Exemples reals:
 - trf. irene zuleme → pagament a entrenadora
 - trf. alumne/a → quota o activitat
 
-👉 En Odoo: contacte + ingrés o despesa, segons el signe.
+En Odoo: contacte + ingrés o despesa, segons el signe.
 
 ##### 🧾 rcbo. → Rebut domiciliat
 Un proveïdor ha passat un rebut automàticament pel banc.
@@ -516,21 +510,19 @@ Exemples:
 - rcbo.allianz seguros → assegurança
 - rcbo.disvall logistic → material / subministraments
 
-👉 Normalment:
+Normalment:
 - Proveïdor
 - Despesa periòdica
 - Molt típic d’assegurances, material etc.
 
-##### 💳 chq: → Xec
+#####  chq: → Xec
 Pagament fet amb xec (encara es veu en clubs antics).
 
 Exemples:
 - chq:82-0904841
 - chq:42-9351715
 
-👉 El banc no diu a qui, només diu que has pagat amb xec.  
-➡️ Ací és on el cap humà és imprescindible: entrenadora? compra gran? material?  
-Odoo no ho sap, algú ho sabrà.
+El banc no diu a qui, només diu que has pagat amb xec.  Ací és on el cap humà és imprescindible: entrenadora? compra gran? material?  Odoo no ho sap, algú ho sabrà.
 
 ##### 📦 ab.rem. → Abonament per remesa
 Entrada de diners agrupada (normalment SEPA).
@@ -539,20 +531,20 @@ Exemples:
 - ab.rem.20250072818
 - ab.rem.20250102958
 
-👉 Açò no és una persona, són moltes quotes juntes
+Açò no és una persona, són moltes quotes juntes
 
 
 En Odoo:
 - vindrà d’una remesa SEPA
 - després es reparteix entre socis
 
-##### ↩️ bel-liq.rem.devol → Devolució de rebut
+##### bel-liq.rem.devol → Devolució de rebut
 Un rebut ha sigut retornat pel banc.
 
 Exemples:
 - bel-liq.rem.devol20250102958
 
-👉 Importantíssim:
+Importantíssim:
 - No és una despesa
 - És un ingrés que ha fallat
 
@@ -565,7 +557,7 @@ Ingressos públics.
 Exemples:
 - trf. ayuntamiento de tavernes de la valldigna
 
-👉 En comptabilitat:
+En comptabilitat:
 - Ingrés
 - No és quota
 - No és donació
@@ -580,14 +572,14 @@ Exemples:
 - trf. cpa alginet
 - imports de 10 €, 35 €, 80 €, 100 €…
 
-👉 Normalment:
+Normalment:
 - Quotes
 - Activitats puntuals
 - Campus
 - Inscripcions
 :::
 
-::: {admonition} 🧠 Traducció mental obligatòria
+::: {admonition} Traducció mental obligatòria
 :class: tip
 El banc no diu què és el moviment.  
 Només diu què ha passat amb els diners.
@@ -669,7 +661,7 @@ Ves a _Contactes > Favorits > Importar registres_. Puja el fitxer CSV creat al p
 
 :::{image} /_static/assets/img/Tema9/importar-contactes.png
 :alt: Importació bank_ids Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
@@ -688,7 +680,7 @@ A la imatge d'importació, l'última fila diu:
 
 :::{image} /_static/assets/img/Tema9/importar-contactes2.png
 :alt: Importació bank_ids Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
@@ -697,7 +689,7 @@ A la imatge d'importació, l'última fila diu:
 
 :::{image} /_static/assets/img/Tema9/contacte-creat.png
 :alt: Contacte amb IBAN Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
@@ -711,7 +703,7 @@ Encara que l'IBAN s'haja importat, estiga activat el booleà "Enviar diners", pe
 
 :::{image} /_static/assets/img/Tema9/mandat1.png
 :alt: Mandat SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
@@ -720,26 +712,26 @@ Perquè un gir bancari siga legalment vàlid, el club ha de custodiar el documen
 
 :::{image} /_static/assets/img/Tema9/mandat2.png
 :alt: Mandat SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
 :::{image} /_static/assets/img/Tema9/mandat3.png
 :alt: Mandat SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
 :::{image} /_static/assets/img/Tema9/mandat4.png
 :alt: Mandat SEPA Odoo
-:class: center-img
+:align: center
 :width: 100%
 :::
 
 2. **Pujar el document signat:** Per tenir la prova documental vinculada al registre.
 ::: {important}
 Pots descarregar un model oficial del CPA Patinatge per a recollir els mandats signats pels socis i pujar-los a Odoo: 
-[📄 Descarregar Exemple de Mandat SEPA (PDF)](/_static/assets/img/Tema9/exemple_de_mandat.pdf)
+[Descarregar Exemple de Mandat SEPA (PDF)](https://juatafe.github.io/Odoo-CEFIRE/_static/assets/img/Tema9/exemple_de_mandat.pdf)
 :::
 En Odoo Community NO pots crear un mandat SEPA massiu. Cal anar d'un en un, bé pujant el fitxer del mandat signat pels socis i validar o bé crear-lo manualment. El permís legal és manual el que és automàtic és el cobrament. Altra cosa seria crear un mòdul específic que d'un formulari generara mandats signats i els pujara automàticament però això ja és un desenvolupament a mida.
 
@@ -750,12 +742,12 @@ Per llei, per a fer càrrecs directes SEPA (rebuts), cal que el titular del comp
 
 
 ---
-## 🥉 PAS 3 · Crear els productes de quotes 
+## PAS 3 · Crear els productes de quotes 
 Ara que ja tenim els contactes creats, el següent pas és generar els productes de quotes. Odoo necessita un producte per a cada tipus de quota que volem cobrar. Així, quan fem una factura o un rebut, només cal seleccionar el producte correcte i Odoo assigna automàticament el preu i el compte comptable adequat, necessitem un producte configurat.
 
 
-:::{dropdown}  ⛸️ Gestió de Productes i Quotes: CPA Patinatge
-:class-container: tip
+:::{note}  Gestió de Productes i Quotes: CPA Patinatge
+
 
 L'estructura del club s'organitza en dos grans blocs segons l'experiència de l'atleta. 
 
@@ -853,7 +845,7 @@ Ves a _Facturació > Clients > Productes > Favorits > Importar registres_. Puja 
 
 :::{image} /_static/assets/img/Tema9/crearcategoria.png
 :alt: Importació productes Odoo
-:class: center-img  
+:align: center 
 :width: 100%
 :::
 
@@ -867,15 +859,14 @@ Com que hem inclòs la columna `categ_id/name`, al test es queixa i et demana qu
 :::
 
 
-:::{admonition} 💡Consell d'usuari expert
-:class: tip
+:::{tip}
 Una vegada importats, pots agrupar els teus productes per la columna Categoria de producte (`categ_id`). Això et permetrà veure en un sol clic quants ingressos genera "Iniciació" vs "Federats" en els teus informes de vendes de final de mes.
 :::
 
 
 ---
 
-## 🥉 PAS 4 · Crear les FACTURES de quotes 
+## PAS 4 · Crear les FACTURES de quotes 
 Ara que ja tenim els contactes creats i les quotes definides, el següent pas és generar les factures de quotes per a cada soci. 
 
 Per poder cobrar una factura cal tenir configurat el diari de Banc (CaixaBank Club) i haver creat els contactes amb els seus IBANs i mandats SEPA. A més cal tenir creats els productes de quotes amb els seus preus i comptes comptables. Per últim, cal tenir el mòdul de remeses SEPA activat i crear un mode de pagament amb el mètode "ADEU DIRECTE SEPA".
@@ -887,45 +878,91 @@ Per a poder generar remeses SEPA de cobrament, cal crear un mode de pagament esp
 :class: center-img
 :width: 30%
 :::
-- Crea un de nou amb les següents dades:
-  - `Nom` Crea un de nou anomenat "ADEU DIRECTE SEPA".
-  - `Mètode de pagament`: Selecciona "`[sepa_direct_debit] Càrrec directe SEPA per a clients (inbound)`" (aquest camp apareix gràcies al mòdul que vas instal·lar anteriorment).
-  - `Enllaç al compte bancari`: "Fix" perquè el club sols té un compte.
-  - `Diari de banc fix`: Selecciona el diari de Banc que has creat com per exemple "CaixaBank Club".
-  - `Modalitat de pagament per a devolucions`: Deixa-ho buit per ara.
-    - Aquest camp serveix per a indicar quin mètode s'ha d'utilitzar si el club ha de tornar diners a un soci (per exemple, si s'ha cobrat una quota per error).
+
+
+#### 1.2 Crea un de nou amb les següents dades:
+
+`Nom` 
+: Crea un de nou anomenat "ADEU DIRECTE SEPA".
+
+`Mètode de pagament`
+: Selecciona "`[sepa_direct_debit] Càrrec directe SEPA per a clients (inbound)`" (aquest camp apareix gràcies al mòdul que vas instal·lar anteriorment).
+
+`Enllaç al compte bancari`
+: "Fix" perquè el club sols té un compte.
+
+`Diari de banc fix`
+: Selecciona el diari de Banc que has creat com per exemple "CaixaBank Club".
+
+`Modalitat de pagament per a devolucions`
+: Deixa-ho buit per ara.
+
+  ::: {note} 
+  **Modalitat de pagament per a devolucions**.
+  Aquest camp serveix per a indicar quin mètode s'ha d'utilitzar si el club ha de tornar diners a un soci (per exemple, si s'ha cobrat una quota per error).
       - **Per què no et deixa triar cap?** No apareixen opcions perquè encara no has creat un mode de pagament de tipus "Outbound" (eixida de diners) que siga compatible amb devolucions.
       - **Com actuar ara?**: De moment, pots deixar-ho buit. No és imprescindible per a generar les remeses de cobrament (ingrés) de les quotes. Si més endavant necessites fer devolucions massives, hauries de crear un mode de pagament per a "Transferència SEPA" (pagaments del club cap a fora) i llavors ja el podries seleccionar ací.
-  - `Transfer journal on payment/debit orders`:
-    - Aquest camp és una eina de control comptable per a situacions en què els diners no arriben immediatament al banc.
-      - **Què vol dir?** Si el selecciones, quan generes la remesa, Odoo no portarà els diners directament al compte del banc (572), sinó que els deixarà en un "Diari de trànsit" fins que tu confirmis que els diners han arribat realment.
-      - **Recomanació per al club:** 
+  :::
+
+  `Transfer journal on payment/debit orders`
+  : Aquest camp és una eina de control comptable per a situacions en què els diners no arriben immediatament al banc.
+
+  ::: {note} 
+  **Transfer journal on payment/debit orders**.
+  **Què vol dir?** Si el selecciones, quan generes la remesa, Odoo no portarà els diners directament al compte del banc (572), sinó que els deixarà en un "Diari de trànsit" fins que tu confirmis que els diners han arribat realment.
+  **Recomanació per al club:** 
         - **Si vols simplicitat:** Deixa-ho buit. D'aquesta manera, quan registres el pagament de la remesa, els diners aniran directament al diari de banc "CaixaBank Club".
         - **Si vols un control total (Professional):** Es podria crear un diari tipus "Efectiu/Transitoris". Això serveix per a reflectir que has enviat el fitxer al banc, però que el banc encara pot trigar 2-3 dies a fer-ho efectiu.
-- Opcions de Ordres de pagament:
-  - `No permetis el dèbit abans de la data de venciment`: Marca aquesta casella per a assegurar que els càrrecs no es facen abans de la data de venciment de la factura.
-    - Aquesta casella (que sol aparèixer com a "Do not allow debit before maturity date") és una mesura de seguretat legal i de gestió.
+  :::
+
+#### 1.3 Opcions d'Ordres de pagament:
+`No permetes el dèbit abans de la data de venciment`
+: Marca aquesta casella per a assegurar que els càrrecs no es facen abans de la data de venciment de la factura.
+
+  ::: {note} 
+  **No permetis el dèbit abans de la data de venciment**.
+  Aquesta casella (que sol aparèixer com a "Do not allow debit before maturity date") és una mesura de seguretat legal i de gestió.
       - **Què fa**: Si la marques, Odoo s'assegurarà que la data de cobrament que s'envia al banc en el fitxer XML mai siga anterior a la data de venciment que vas posar a la factura.
       - **Per què és important per al club**: Evita queixes de les famílies. Si la factura venç el dia 5, però tu generes la remesa el dia 1, el banc esperarà fins al dia 5 per a fer el càrrec si aquesta opció està activa.
       - **Recomanació**: Marca-la. Dóna serietat al club i garanteix que respecteu els terminis promesos als socis.
-  - `Data d'execució de pagament per defecte`
-    - Aquest camp defineix quina data portaran els rebuts de la remesa per defecte si no s'especifica una altra. Sol tindre tres opcions habituals:
+  :::
+
+`Data d'execució de pagament per defecte`
+: Aquest camp defineix quina data portaran els rebuts de la remesa per defecte si no s'especifica una altra. Sol tindre tres opcions habituals:
       - **Data de venciment de la factura**: Cada rebut es cobrarà el dia que venç la seua factura corresponent. És la més precisa.
       - **Data actual**: El banc intentarà cobrar-ho tan prompte com reba el fitxer.
       - **Data fixa**: Una data que tu tries manualment cada vegada que fas la remesa.
       - **Recomanació per al club**: Selecciona "Data de venciment de la factura".
       - **El motiu**: Si el club factura totes les quotes el dia 1 amb venciment el dia 1, totes s'executaran el mateix dia. Si un soci té un acord especial i la seua factura venç el dia 15, el sistema ho respectarà automàticament dins del mateix fitxer.
-  - `Agrupa les transaccions de les ordres de pagament`: Marca la casella "Agrupa les transaccions de les ordres de pagament" per a generar un sol assentament comptable per remesa.
+  
+`Agrupa les transaccions de les ordres de pagament`
+: Marca la casella "Agrupa les transaccions de les ordres de pagament" per a generar un sol assentament comptable per remesa.
 
-- Seleccioneu apunts per pagar - Valors per defecte:
-  - `Filtre de diaris`: Deixa-ho per defecte en Factures de client. Serveix per a limitar aquest mode de pagament a uns diaris de facturació concrets. En un club xicotet, normalment només tens un diari de "Factures de Client", així que no cal filtrar.
-  - `Mode de pagament de la factura`: Selecciona "Igual". Això obliga el sistema a buscar només les factures on hages posat específicament "ADEU DIRECTE SEPA" com a mètode de cobrament. És la forma més segura d'evitar cobrar per banc a algú que t'ha dit que et pagarà en efectiu.
-  - `Assentaments de destí`: Marca "Tots els assentaments assentats" (All posted entries). En el PGC, una factura només és vàlida i genera deute legal quan està "Assentada" (validada). No vols que el sistema intente cobrar factures que encara estan en estat "Esborrany", ja que podrien tindre errors o imports incorrectes.
-  - `Enllaç amb una factura o abonament`: Deixa-ho desmarcat. Si ho marques, el sistema podria intentar compensar factures amb abonaments (factures rectificatives) automàticament. Per a la gestió del club, és millor tindre el control manual de quan es fa un descompte o devolució a un soci.
-  - `Filtre de tipus de data`: Selecciona "venciment", Odoo filtrarà les factures segons la data límit que tenen per a ser pagades. Si generes les factures el dia 25 del mes anterior però el venciment (quan realment vols cobrar) és el dia 1, el sistema agafarà correctament el dia 1 com a referència per a la remesa. "Apunt" fa referència a la data en què es va registrar el moviment comptable al llibre diari. Si registres una factura avui amb una data de venciment a 15 dies, i filtres per "Apunt", el sistema podria intentar cobrar-la avui mateix, ignorant el termini de 15 dies acordat amb el soci.
-- Mostra compte bancari a l'informe de factura
-  - `Mostrar compte bancari`:  Selecciona "Complet". Encara que el pagament es faça per remesa SEPA, és una bona pràctica que a la factura aparega l'IBAN del club per a donar transparència i perquè, en cas que un rebut siga retornat, el soci sàpiga a quin compte ha de fer la transferència manual per regularitzar el deute.
-  - `Compte bancari dels diaris`: Deixa-la desmarcada. El sistema utilitzarà el compte bancari que has definit en aquest Mode de Pagament (el que has posat a "Enllaç al compte bancari: CaixaBank Club"). Com que per al club hem definit que el banc és el centre de tot i ja l'hem enllaçat dalt, és més segur deixar-ho desmarcat per evitar confusions si en un futur creares un altre diari.
+#### 1.4 Seleccioneu apunts per pagar - Valors per defecte:
+
+`Filtre de diaris`
+: Deixa-ho per defecte en Factures de client. Serveix per a limitar aquest mode de pagament a uns diaris de facturació concrets. En un club xicotet, normalment només tens un diari de "Factures de Client", així que no cal filtrar.
+
+`Mode de pagament de la factura`
+: Selecciona "Igual". Això obliga el sistema a buscar només les factures on hages posat específicament "ADEU DIRECTE SEPA" com a mètode de cobrament. És la forma més segura d'evitar cobrar per banc a algú que t'ha dit que et pagarà en efectiu.
+
+`Assentaments de destí`
+: Marca "Tots els assentaments assentats" (All posted entries). En el PGC, una factura només és vàlida i genera deute legal quan està "Assentada" (validada). No vols que el sistema intente cobrar factures que encara estan en estat "Esborrany", ja que podrien tindre errors o imports incorrectes.
+
+`Enllaç amb una factura o abonament`
+: Deixa-ho desmarcat. Si ho marques, el sistema podria intentar compensar factures amb abonaments (factures rectificatives) automàticament. Per a la gestió del club, és millor tindre el control manual de quan es fa un descompte o devolució a un soci.
+
+`Filtre de tipus de data`
+: Selecciona "venciment", Odoo filtrarà les factures segons la data límit que tenen per a ser pagades. Si generes les factures el dia 25 del mes anterior però el venciment (quan realment vols cobrar) és el dia 1, el sistema agafarà correctament el dia 1 com a referència per a la remesa. "Apunt" fa referència a la data en què es va registrar el moviment comptable al llibre diari. Si registres una factura avui amb una data de venciment a 15 dies, i filtres per "Apunt", el sistema podria intentar cobrar-la avui mateix, ignorant el termini de 15 dies acordat amb el soci.
+
+#### 1.5 Mostra compte bancari a l'informe de factura
+
+`Mostrar compte bancari`
+: Selecciona "Complet". Encara que el pagament es faça per remesa SEPA, és una bona pràctica que a la factura aparega l'IBAN del club per a donar transparència i perquè, en cas que un rebut siga retornat, el soci sàpiga a quin compte ha de fer la transferència manual per regularitzar el deute.
+
+`Compte bancari dels diaris`
+: Deixa-la desmarcada. El sistema utilitzarà el compte bancari que has definit en aquest Mode de Pagament (el que has posat a "Enllaç al compte bancari: CaixaBank Club"). Com que per al club hem definit que el banc és el centre de tot i ja l'hem enllaçat dalt, és més segur deixar-ho desmarcat per evitar confusions si en un futur creares un altre diari.
+
 
 
 ### 2. Crear les factures de quotes
@@ -935,10 +972,10 @@ Un error comú és no definir l'empresa CPA Patinantge com a "Empresa per defect
 
 Per a la creació de l'empresea caldra un CIF fictici (per exemple G98558232) i una adreça. Això només és necessari per a que Odoo funcione correctament. Pots generar un CIF fictici amb eines com [Generador de CIF](https://testingdatagenerator.com/doi.html).
 
-:::{admonition} 📄 Logotip oficial CPA Patinatge
+:::{admonition} Logotip oficial CPA Patinatge
 :class: tip
 Per a donar un toc més professional a les factures, pots pujar el logotip oficial del CPA Patinatge a la configuració de l'empresa dins d'Odoo. Això farà que el logotip aparega automàticament a totes les factures i documents generats pel sistema.
-[📄 Descarregar logotip CPA (jpeg)](/_static/assets/img/Tema9/cpa-logo.jpeg)
+[ Descarregar logotip CPA (jpeg)](https://juatafe.github.io/Odoo-CEFIRE/_static/assets/img/Tema9/cpa-logo.jpeg)
 
 :::
 
@@ -962,9 +999,8 @@ Amb aquest procediment podem crear ordes de cobrament SEPA per a tots els socis 
 
 Una vegada generades les ordes de cobrament, podem generar el fitxer SEPA (.xml) per a enviar-lo al banc. Primer cal confirmar pagaments i després generar fitxer de pagaments. 
 
-:::{admonition} Cal que l'usuari tinga permisos
-:class: warning
-Per a poder generar ordes de cobrament SEPA i fitxers XML, l'usuari d'Odoo ha de tindre els permisos adequats. Assegura't que l'usuari té activada "SEPA/PAIN Identifiers on Payment Modes" en TECHNICAL FEATURES dins de la seua fitxa d'usuari. Una vegada activat, desat i reiniciada la sessió, l'usuari podrà veure les opcions de SEPA en els modes de pagament i introduir el camp "Identificador del creditor SEPA".
+:::{caution} 
+Cal que l'usuari tinga permisos per a poder generar ordes de cobrament SEPA i fitxers XML, l'usuari d'Odoo ha de tindre els permisos adequats. Assegura't que l'usuari té activada "SEPA/PAIN Identifiers on Payment Modes" en TECHNICAL FEATURES dins de la seua fitxa d'usuari. Una vegada activat, desat i reiniciada la sessió, l'usuari podrà veure les opcions de SEPA en els modes de pagament i introduir el camp "Identificador del creditor SEPA".
 ::: 
 
 :::{image} /_static/assets/img/Tema9/identificadorSepa.png
@@ -975,8 +1011,8 @@ Per a poder generar ordes de cobrament SEPA i fitxers XML, l'usuari d'Odoo ha de
 
 
 
-:::{dropdown} 🏦 Identificador del creditor SEPA
-:class-container: info
+:::{note} 
+**Identificador del creditor SEPA**
 
 En configurar els cobraments per domiciliació SEPA, Odoo ens demana l'**Identificador del creditor SEPA**.
 Aquest codi no és inventat ni “a ull”: es valida amb un algorisme matemàtic (**MOD 97**) que calcula el residu de la divisió per 97. Finalment es resta el resultat de 98 menys aquest residu. Si el càlcul no quadra, Odoo el rebutja directament.
@@ -1004,17 +1040,15 @@ Quan aquest valor és matemàticament vàlid:
 * El mètode de pagament SEPA es guarda.
 * Ja es poden generar mandats i remeses.
 
-:::{admonition} Idea clau
-:class: tip
+```{note}
 Odoo no comprova si el banc t’ha assignat l’identificador, només comprova que el càlcul siga correcte (MOD 97).
-:::
+```
 
-:::{admonition} Atenció (vida real)
-:class: warning
+```{danger} 
 En producció, l’identificador del creditor SEPA l’ha de proporcionar el banc. Encara que el codi siga matemàticament correcte, si no és l’oficial, el banc rebutjarà la remesa.
-:::
+```
 
-**🧠 Traducció a llenguatge humà**
+**Traducció a llenguatge humà**
 La fórmula la podem calcular nosaltres. El segell final… eixe el té el banc.
 O dit més clar: **Odoo sap matemàtiques, però no telefona a CaixaBank.** 😄
 :::
@@ -1229,7 +1263,7 @@ Una vegada confirmat el pagament vol dir que el soci ha autoritzat el cobrament 
 
 
 
-## 🥉 PAS 5 · Rebre els diners al banc
+## PAS 5 · Rebre els diners al banc
 Un cop enviat el fitxer SEPA al banc, cal esperar que els diners entren al compte. Quan això passe, descarregarem l’extracte bancari en format CSV i l’importarem a Odoo per a conciliar els moviments.
 ::: {admonition} 📥 Descarregar extracte bancari
 :class: tip
@@ -1238,7 +1272,7 @@ Per a descarregar l’extracte bancari en format CSV, accedeix a la teua banca e
 
 
 
-### 📉 Simulació de l'extracte bancari (Noves Remeses)
+### Simulació de l'extracte bancari (Noves Remeses)
 Aquest seria l'escenari que et trobaràs al banc en uns dies per a aquestes noves remeses. Seguim el format que m'has passat anteriorment:
 
 ```text
@@ -1257,8 +1291,9 @@ Tens dues opcions principals segons el que et proporcione CaixaBank:
     - Aquí tens la representació del fitxer que hauries d'importar a Odoo per simular aquest extracte. Pots copiar aquest contingut en un bloc de notes i guardar-lo amb l'extensió .n43. 
 
 
-:::{dropdown} Exemple fitxer Norma 43 (.n43)
-:class-container: code-block info
+:::{note} 
+**Exemple fitxer Norma 43 (.n43)**
+
 ```text
 111001ES16008167231265575497770101260701261205467EUR2
 221600816723126557549777070126070126040100000000137000000000000867AB.REM. PAY0001        
@@ -1283,8 +1318,10 @@ Tens dues opcions principals segons el que et proporcione CaixaBank:
 :::
 
   - Format CSV/Excel (.csv): En moltes ocasions el banc sols et proporciona l'extracte en format CSV o Excel. En aquest cas, hauràs de revisar que les columnes estiguen ben organitzades perquè Odoo puga interpretar-les correctament. En aquest exemple anem a utilitzar: date,ref,name i amount (amb signe positiu o negatiu).
-:::{dropdown} Exemple fitxer CSV
-:class-container: code-block info
+  
+:::{note} 
+**Exemple fitxer CSV**
+
 ```text
 date,ref,name,amount
 07/01/2026,867,"ab.rem. PAY0001 - Ingrés: Remesa quotes (Marta + Pere)",137.00
@@ -1298,15 +1335,15 @@ date,ref,name,amount
 1. Vés al tauler de Facturació.
   - Localitza la targeta del diari CaixaBank Club. Aquest no és el diari de tipus banc que hem creat anteriorment, sinó el contacte bancari on es registren els moviments.
 
-:::{dropdown} 🖼️ Ubicació del diari bancari a Odoo
-:class-container: info
+**Ubicació del diari bancari a Odoo**
+
 ```{image} /_static/assets/img/Tema9/configurarcaixabank.png
 :alt: Diari bancari Odoo
 :class: center-img
-:width: 50%
+:width: 100%
 ```
 Cal tenir configurat un contacte bancari per al diari CaixaBank Club perquè Odoo puga associar correctament els moviments importats amb el compte bancari del club.
-:::
+
 
 
 Per importar l'extracte bancari en format n43 necessitem instalar el mòdul "Importació d'extractes bancaris" `l10n_es_account_statement_import_n43` si no està ja instal·lat. Aquest mòdul permet a Odoo llegir i processar fitxers d'extractes bancaris en diversos formats, facilitant la conciliació dels moviments amb les transaccions registrades al sistema.
@@ -1401,7 +1438,7 @@ Ara el diari bancari CaixaBank Club tindrà l'opció d'importar extractes en for
 :::
 ---
 
-### ⚙️ Configuració del Statement Sheet Mapping
+### Configuració del Statement Sheet Mapping
 Perquè Odoo puga interpretar el fitxer CSV, cal configurar el “traductor” de columnes. Si les capçaleres del fitxer no coincideixen exactament amb la configuració, el sistema donarà un error de lectura.
 :::{image} /_static/assets/img/Tema9/statement-csv.png
 :alt: Crear statement sheet mapping Odoo
@@ -1481,7 +1518,7 @@ Cal seleccionar el statement sheet mapping que has creat abans si és un CSV.
 :width: 100%
 :::
 
-:::{admonition} ⚠️ Evita duplicats
+:::{admonition} Evita duplicats
 :class: warning
 Si ja has importat aquest extracte abans, Odoo et mostrarà un avís de duplicats. Això és per evitar que carregues el mateix extracte dues vegades. Si estàs segur que és un extracte nou, pots ignorar l'avís.
 :::
@@ -1490,7 +1527,7 @@ Odoo processarà l'arxiu i et mostrarà una vista prèvia dels moviments detecta
   - Revisa que els imports i conceptes coincideixen amb els del banc.
   - Assegura't que els imports estan ben classificats (positius per a ingressos, negatius per a despeses).
   - Clica a Confirmar per a completar la importació.  
-:::{admonition} ⚠️ Si és un CSV, Odoo et demanarà "aparellar" les columnes.
+:::{admonition} Si és un CSV, Odoo et demanarà "aparellar" les columnes.
 :class: warning
  Revisa que l'import de 137,00 € (remesa) i el de -100,00 € (devolució) estiguen ben identificats.
 :::  
@@ -1501,7 +1538,7 @@ Odoo processarà l'arxiu i et mostrarà una vista prèvia dels moviments detecta
 :width: 100%
 :::
 
-### 🛠️ Com gestionar-ho a Odoo segons el PGC
+### Com gestionar-ho a Odoo segons el PGC
 
 Si has seguit tots els passos anteriors, en aquest punt tens:
 - ✔️ Les factures creades (Marta i Pere)
@@ -1510,7 +1547,7 @@ Si has seguit tots els passos anteriors, en aquest punt tens:
     - +137 €
     - −100 €
     - −3,50 €
-:::{admonition} ⚠️ Importar un extracte no paga factures.
+:::{admonition}  Importar un extracte no paga factures.
 :class: warning
 En Odoo Community, les factures només es paguen quan registres un pagament.
 Si has seguit tots els passos, ara tindràs l'extracte bancari importat a Odoo amb els moviments correctes. Pots tornar a ell mitjançant el tauler del diari CaixaBank Club, als tres puntets de la dreta i seleccionant "Extractes bancaris". També pots obrir més detalls com Referència  des de la vista de llista.
@@ -1522,7 +1559,7 @@ Si has seguit tots els passos, ara tindràs l'extracte bancari importat a Odoo a
 :::
 
 
-### 📚 Flux comptable
+### Flux comptable
 Ara que tens el lot creat, el flux comptable és el següent:
 
 :::{image} /_static/assets/img/Tema9/apuntscomptables.png
@@ -1532,8 +1569,8 @@ Ara que tens el lot creat, el flux comptable és el següent:
 :::
 
 
-:::{dropdown} 📋 Llista d’apunts en l’ordre exacte que apareixen
-:class-container: info
+:::{caution} Llista d’apunts en l’ordre exacte que apareixen
+
 #### 🟢 1. PCABK/2026/00001 – 431200 Efectes comercials en gestió de cobrament – 37 € (DEURE)
 👉 “La quota de Marta entra en la remesa SEPA”  
 Els diners deixen d’estar en el client i passen a estar en tràmit (encara no al banc).
@@ -1542,7 +1579,7 @@ Els diners deixen d’estar en el client i passen a estar en tràmit (encara no 
 👉 “Marta ja no deu diners al club”  
 La factura de Marta queda cobrada… però pendent de banc.
 
-📌 Aquestes dues línies són la remesa, no el cobrament.
+Aquestes dues línies són la remesa, no el cobrament.
 
 ---
 
@@ -1564,58 +1601,58 @@ Aquesta línia després quedarà compensada amb la remesa.
 
 ---
 
-### 💥 ARA ENTREM EN EL BANC (extracte importat)
+### ARA ENTREM EN EL BANC (extracte importat)
 
 #### 🔵 7. CABK/2026/00003 – 572001 Banc – 3,50 € (HAVER)
-👉 “El banc et lleva 3,50 € de comissió”  
+“El banc et lleva 3,50 € de comissió”  
 Eixos diners ixen del banc.
 
 #### 🔵 8. CABK/2026/00003 – 572998 Compte transitori – 3,50 € (DEURE)
-👉 “Registrem la comissió com a despesa”  
+“Registrem la comissió com a despesa”  
 La despesa es compensa contra el banc.
 
-📌 Aquest assentament és només la comissió, res a vore amb socis.
+Aquest assentament és només la comissió, res a vore amb socis.
 
 #### 🔴 9. CABK/2026/00002 – 572001 Banc – 100 € (HAVER)
-👉 “El banc diu: aquest rebut NO”  
+“El banc diu: aquest rebut NO”  
 El cobrament de Pere no entra (retorn).
 
 #### 🔴 10. CABK/2026/00002 – 572998 Compte transitori – 100 € (DEURE)
-👉 “Desfem el cobrament que pensàvem que arribaria”  
+“Desfem el cobrament que pensàvem que arribaria”  
 Els diners no arriben al banc, tornen enrere.
 
 #### 🟢 11. CABK/2026/00001 – 572001 Banc – 137 € (DEURE)
-👉 “Ingressen els diners de la remesa”  
+“Ingressen els diners de la remesa”  
 137 € = 37 € (Marta) + 100 € (Pere)  
 (encara que després Pere es retornarà)
 
 #### 🟢 12. CABK/2026/00001 – 572998 Compte transitori – 137 € (HAVER)
-👉 “Buidem el compte transitori”  
+“Buidem el compte transitori”  
 El que estava “en tràmit” passa al banc.
 
 ---
 
-### 🔁 CORRECCIÓ FINAL PEL REBUT RETORNAT (Pere)
+### CORRECCIÓ FINAL PEL REBUT RETORNAT (Pere)
 
-#### 🔴 13. / – 431200 Efectes comercials en gestió de cobrament – Pere – 100 € (DEURE)
-👉 “El rebut de Pere torna a estar pendent”  
+####  13. / – 431200 Efectes comercials en gestió de cobrament – Pere – 100 € (DEURE)
+“El rebut de Pere torna a estar pendent”  
 Odoo diu: aquest client torna a deure diners.
 
-#### 🔴 14. / – 430000 Clients – Pere – 100 € (HAVER)
-👉 “Reobrim el deute del client”  
+####  14. / – 430000 Clients – Pere – 100 € (HAVER)
+“Reobrim el deute del client”  
 La factura de Pere torna a estar impagada.
 
 ---
 
-### 🧠 RESUM CLAR (per a dir-ho a classe)
+### RESUM CLAR (per a dir-ho a classe)
 
-✔️ Marta: factura → remesa → banc → tot bé  
-❌ Pere: factura → remesa → retorn → factura impagada  
-🏦 Banc: comissió = despesa  
-📦 Compte transitori: només és un pas intermedi
+Marta: factura → remesa → banc → tot bé  
+Pere: factura → remesa → retorn → factura impagada  
+Banc: comissió = despesa  
+Compte transitori: només és un pas intermedi
 
-👉 No sobra cap apunt  
-👉 Tots expliquen una cosa diferent que ha passat de veritat
+No sobra cap apunt  
+Tots expliquen una cosa diferent que ha passat de veritat
 
 :::
 
@@ -1623,10 +1660,10 @@ La factura de Pere torna a estar impagada.
 
 ---
 
-### 🧭 ORDRE REAL DELS FETS
+### ORDRE REAL DELS FETS
 En aquest apartat veiem l’ordre exacte en què Odoo crea els apunts comptables per a aquest cas concret de factures, remesa, cobrament i devolució.
 
-#### 🟢 1️⃣ Es crea la factura de Marta
+#### Es crea la factura de Marta
 Apunts:
 - `INV/2026/00001 – 430000 Clients (euros) – Marta Beltran – DEURE 37,00 € – ADEU DIRECTE SEPA`
 - `INV/2026/00001 – 705000 Prestacions de serveis en Espanya – Marta Beltran – HAVER 37,00 €`
@@ -1635,11 +1672,11 @@ Què vol dir:
 - Marta passa a deure 37 € al club (430). El compte _430 Clients_ és “gent que ens deu diners”.
 - El club reconeix que ha fet un servei i ha guanyat 37 €. El compte _705000 Prestacions de serveis en Espanya_ és “ingressos per serveis”.
 
-📌 Això passa abans de qualsevol remesa o banc. L’ingrés naix amb la factura, no amb el cobrament.
+ Això passa abans de qualsevol remesa o banc. L’ingrés naix amb la factura, no amb el cobrament.
 
 ---
 
-#### 🟢 2️⃣ Es crea la factura de Pere
+#### Es crea la factura de Pere
 Apunts:
 - `INV/2026/00002 – 430000 Clients (euros) – Pere Estruch – DEURE 100,00 € – ADEU DIRECTE SEPA`
 - `INV/2026/00002 – 705000 Prestacions de serveis en Espanya – Pere Estruch – HAVER 100,00 €`
@@ -1648,19 +1685,19 @@ Què vol dir:
 - Pere passa a deure 100 € al club (430).
 - Ingrés reconegut pel club (705/700). En estar a l’HAVER, indica que el club ha guanyat diners pel servei prestat, encara que encara no els haja cobrat.
 
-📌 Fins ací:
+ Fins ací:
 - 2 factures
 - 2 clients deutors
 - 0 banc
 - 0 remesa
 
-:::{admonition} 🧠 Recorda
+:::{admonition} Recorda
 :class: tip
 Amb la factura de Pere, el club guanya 100 €, però Pere encara els deu.
 :::
 ---
 
-#### 🟡 3️⃣ Es crea la remesa SEPA (PAY0001)
+#### Es crea la remesa SEPA (PAY0001)
 Apunts:
 - `PCABK/2026/00001 – 431200 Efectes comercials en gestió de cobrament – Marta Beltran – PAY0001 – DEURE 37,00 €`
 - `PCABK/2026/00001 – 430000 Clients (euros) – Marta Beltran – PAY0001 – HAVER 37,00 €`
@@ -1677,14 +1714,14 @@ Què vol dir
   - Encara no hi ha cap moviment bancari real.
 En aquest moment el banc no ha ingressat res, no sabem si algun rebut serà retornat, només sabem que els cobraments estan en tràmit.
 
-:::{admonition} 📌 Clau important
+:::{admonition} Clau important
 :class: tip
 **Crear la remesa NO és cobrar**, és dir-li al banc “intenta cobrar aquests rebuts”.
 :::
 
 ---
 
-#### 🔵 4️⃣ El banc abona la remesa
+#### El banc abona la remesa
 Apunts:
 - `CABK/2026/00001 – 572001 Banc – ab.rem. PAY0001 – Ingrés: Remesa quotes (Marta + Pere) – DEURE 137,00 €`
 - `CABK/2026/00001 – 572998 Compte transitori – ab.rem. PAY0001 – Ingrés: Remesa quotes (Marta + Pere) – HAVER 137,00 €`
@@ -1704,13 +1741,13 @@ Odoo dona per bona la remesa completa. En aquest moment, el sistema assumeix:
  -  Pere ha pagat ✔️
 (encara que això després es corregirà)
 
-:::{admonition} 📌 Importantíssim
+:::{admonition} Importantíssim
 :class: tip
 El banc entra primer tot, encara que després (en un altre apunt) torne una part. És com funcionen els extractes reals.
 :::
 ---
 
-#### 🔴 5️⃣ El banc torna el rebut de Pere
+#### El banc torna el rebut de Pere
 Apunts:
 - `CABK/2026/00002 – 572001 Banc – bel.liq.rem.devol. – Devolució: Rebut de Pere Estruch retornat – HAVER 100,00 €`
 - `CABK/2026/00002 – 572998 Compte transitori – bel.liq.rem.devol. – Devolució: Rebut de Pere Estruch retornat – DEURE 100,00 €`
@@ -1732,13 +1769,13 @@ El compte 572998 Compte transitori **en DEURE** indica que:
     - Només s’ha corregit el moviment de banc,
     - Pere **encara no apareix com a deutor** en clients (això ve després).
 
-:::{admonition} 📌 Important
+:::{admonition} Important
 :class: tip
 Quan el banc retorna un rebut, trau els diners del banc i desfà el cobrament, però el client encara no torna a deure fins que Odoo ho reobri.”
 :::
 ---
 
-#### 🔁 6️⃣ Odoo reobri el deute de Pere
+#### Odoo reobri el deute de Pere
 Apunts:
 - `/ – 431200 Efectes comercials en gestió de cobrament – Pere Estruch – PAY0001 – DEURE 100,00 €`
 - `/ – 430000 Clients (euros) – Pere Estruch – PAY0001 – HAVER 100,00 €`
@@ -1759,7 +1796,7 @@ En aquest moment:
       - El client torna a aparéixer com a deutor,
       - La factura deixa d’estar cobrada.
 
-::: {admonition} 📌 Clau important
+::: {admonition} Clau important
 :class: tip
 Un retorn té dues parts:
 1) El banc trau els diners.  
@@ -1770,7 +1807,7 @@ Si no es fera aquest segon pas, la factura quedaria “cobrada”... però sense
 
 ---
 
-#### 🏦 7️⃣ Comissió bancària
+#### Comissió bancària
 Apunts:
 - `CABK/2026/00003 – 572998 Compte transitori – comis. devol. – Despesa: Comissió bancària per devolució – DEURE 3,50 €`
 - `CABK/2026/00003 – 572001 Banc – comis. devol. – Despesa: Comissió bancària per devolució – HAVER 3,50 €`
@@ -1786,12 +1823,12 @@ El compte 572998 Compte transitori (o el compte de despesa associat, segons conf
 - Aquesta despesa no té res a veure amb el client.
 Importantíssim:
   - No s’imputa a Pere, no afecta la seua factura, és un cost que el club es menja.
-:::{admonition} 📌 Important
+:::{admonition} Important
 :class: tip
 Les comissions bancàries són despeses pròpies, no deutes del client (excepte si després les refactures, clar).
 :::
 
-### 🟢 CAS NORMAL (Marta – tot va bé)
+### CAS NORMAL (Marta – tot va bé)
 ```text
 [ FACTURA ]
      │
@@ -1816,7 +1853,7 @@ Les comissions bancàries són despeses pròpies, no deutes del client (excepte 
 “Els diners ja estan al compte del club”
 ```
 
-#### 🔴 CAS PROBLEMÀTIC (Pere – rebut retornat)
+#### CAS PROBLEMÀTIC (Pere – rebut retornat)
 ```text
 [ FACTURA ]
      │
@@ -1850,47 +1887,47 @@ Les comissions bancàries són despeses pròpies, no deutes del client (excepte 
 ```
 
 
-### 📦 Regla d’or 
+### Regla d’or 
 Pensa els comptes com caixes. La regla depén del tipus de compte:
 
-#### 🟩 Comptes d’ACTIU
+#### Comptes d’ACTIU
 - Exemples: banc, caixa, clients, existències…
 - Regla:
   - DEURE → entra / augmenta
   - HAVER → ix / disminueix
-- 🧠 Exemple claríssim:
+-  Exemple claríssim:
   - Et lleven diners del banc → `572` a l’HAVER
   - T’ingressen diners → `572` al DEURE
-  - 👉 Ací sí: HAVER = “llevar”
+  - Ací sí: HAVER = “llevar”
 
-#### 🟥 Comptes de PASSIU i PATRIMONI
+#### Comptes de PASSIU i PATRIMONI
 - Exemples: proveïdors, hisenda, capital…
 - Regla:
   - DEURE → baixa el que deus
   - HAVER → puja el que deus
-- 🧠 Exemple:
+-  Exemple:
   - Deus més diners → HAVER
   - Pagues el deute → DEURE
-  - 👉 Ací HAVER no és “llevar”, és “deure més”.
+  - Ací HAVER no és “llevar”, és “deure més”.
 
-#### 🟦 Comptes d’INGRESSOS (7xx)
+#### Comptes d’INGRESSOS (7xx)
 - Regla:
   - HAVER → reconeixes ingrés
   - DEURE → correcció o anul·lació
-- 🧠 Quan factures:
+- Quan factures:
   - `700` a l’HAVER → “he guanyat diners”
   - No entra cap banc encara, però el resultat puja.
 
-#### 🟨 Comptes de DESPESES (6xx)
+#### Comptes de DESPESES (6xx)
 - Regla:
   - DEURE → reconeixes despesa
   - HAVER → anul·lació o ajust
-- 🧠 Quan pagues llum:
+- Quan pagues llum:
   - `628` al DEURE → “açò m’ha costat diners”
 
 ---
 
-### 📌 Taula màgica (què passa en cada tipus de compte)
+### Taula màgica (què passa en cada tipus de compte)
 
 | Tipus de compte                                 | DEURE (↑)                 | HAVER (↓)                  |
 |-------------------------------------------------|---------------------------|----------------------------|
@@ -1903,12 +1940,12 @@ Nota ràpida: ↑ puja/entra · ↓ baixa/ix. En 6xx/7xx reconeixes resultat; el
 
 
 
-### 🧾 Conciliació bancària 
+### Conciliació bancària 
 Ara que ja tenim l'extracte bancari importat, el següent pas és conciliar els moviments amb les factures i pagaments registrats a Odoo.
 Però ens adonem que ens faltava un mòdul `account_reconcile_oca` per a la conciliació bancària automàtica. El tenim descarregat sols cal anar a _Apps > Actualitza llista de mòduls_ i instal·lar-lo.
 :::{image} /_static/assets/img/Tema9/accountreconcile.png
 :alt: Conciliació bancària Odoo
-:class: center-img    
+:align: center   
 :width: 100%
 :::
 
@@ -1937,7 +1974,7 @@ Si seleccionem ADD ALL afig totes les relacionades i ja es pot conciliar. Ara ca
 
 :::{image} /_static/assets/img/Tema9/statementlines3.png
 :alt: Validar conciliació bancària Odoo
-:class: center-img    
+:align: center   
 :width: 100%
 :::
 
@@ -1945,7 +1982,7 @@ El següent moviment de l'extracte és la devolució del rebut de Pere. El compt
 
 :::{image} /_static/assets/img/Tema9/statementlines4.png
 :alt: Validar conciliació bancària Odoo
-:class: center-img    
+:align: center   
 :width: 100%
 ::: 
 
@@ -1956,16 +1993,15 @@ Finalment, l'últim moviment és la comissió bancària. Aquest moviment no té 
 :width: 100%
 :::
 
-::: {admonition} ⚠️ Resumint
+::: {admonition} Resumint
 :class: warning
 - La conciliació automàtica és una ajuda, però no sempre encerta. Revisa sempre les propostes.  
 - Per a moviments sense factura/pagament associat, utilitza l'Operació manual per a assignar el compte correcte.  
 - Assegura't que tots els moviments bancaris estan correctament classificats després de la conciliació.
 :::
 
----
 
-### 📊 Informes financers personalitzats
+### Informes financers personalitzats
 El mòdul `account_financial_report` permet generar informes financers personalitzats a Odoo, com ara balanços i comptes de pèrdues i guanys. Aquest mòdul és especialment útil per a organitzacions que necessiten complir amb requisits comptables específics o que volen adaptar els seus informes a les seves necessitats particulars.
 :::{image} /_static/assets/img/Tema9/accountfinancialreport.png
 :alt: Mòdul informes financers Odoo
@@ -1973,11 +2009,11 @@ El mòdul `account_financial_report` permet generar informes financers personali
 :width: 100%
 :::
 
-Una vegada instal·lat el mòdul, podem accedir a la configuració dels informes financers des de _Facturació > Informes_. Aquí podem crear nous informes o modificar els existents segons les nostres necessitats.
 
 :::{image} /_static/assets/img/Tema9/accountfinancialreport1.png
 :alt: Configuració informes financers Odoo
-:class: center-img  
-:width: 100%
+:align: center
+:height: 8cm
 ::: 
 
+Una vegada instal·lat el mòdul, podem accedir a la configuració dels informes financers des de _Facturació > Informes_. Aquí podem crear nous informes o modificar els existents segons les nostres necessitats.
