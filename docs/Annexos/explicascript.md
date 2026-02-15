@@ -7,41 +7,36 @@ Quan desenvolupem projectes amb **Odoo** és fonamental **mantindre el control s
 Ara que ja saps com instal·lar Odoo tant en local com dins de Docker, podem donar un pas més:  
 crear un **script Bash** que instal·le totes les dependències, genere els fitxers de configuració i arranque el servidor completament configurat amb només una ordre.
 
-<p align="center">
-  <a href="../../_static/assets/scriptsetupodoo.sh" download="setup_odoo.sh">
-    <button style="background:#2b6cb0;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;">
-      ⬇️ Descarrega l’script <code>setup_odoo.sh</code>
-    </button>
-  </a>
-</p>
+
+```{raw} latex
+\href{https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/scriptsetupodoo.sh}{Descarrega l'script complet ací.}
+```
 
 
-> ⚙️ **Abans d'executar l’script**, recorda modificar el nom del repositori personalitzat
-> que es clona automàticament a la línia:
->
-> ```bash
-> CUSTOM_REPO="odoo-cpa-addons"
-> git clone https://github.com/juatafe/$CUSTOM_REPO.git
-> ```
->
-> Si tens els teus propis mòduls, substitueix:
->
-> ```bash
-> juatafe/odoo-cpa-addons
-> ```
->
-> pel teu repositori, per exemple:
->
-> ```bash
-> githubuser/odoo-myaddons
-> ```
->
-> També pots crear el teu repositori buit a GitHub abans d'executar l’script perquè es clone
-> automàticament dins de `dev_addons/`.
+**Abans d'executar l’script**, recorda modificar el nom del repositori personalitzat
+que es clona automàticament a la línia:
 
----
+```bash
+CUSTOM_REPO="odoo-cpa-addons"
+git clone https://github.com/juatafe/$CUSTOM_REPO.git
+```
+Si tens els teus propis mòduls, substitueix:
 
-## 🎯 Objectiu
+```bash
+juatafe/odoo-cpa-addons
+```
+
+pel teu repositori, per exemple:
+
+ ```bash
+ githubuser/odoo-myaddons
+ ```
+
+ També pots crear el teu repositori buit a GitHub abans d'executar l’script perquè es clone
+ automàticament dins de `dev_addons/`.
+
+
+## Objectiu
 
 Aprendre a comprendre i executar un **script Bash d’automatització** que:
 
@@ -51,18 +46,16 @@ Aprendre a comprendre i executar un **script Bash d’automatització** que:
 - Crea la base de dades i instal·la mòduls automàticament.
 - Controla l’estat de cada fase mitjançant fitxers de senyal (`.phase1_docker_done`, etc.).
 
----
 
-## 🧠 Vista general de l’script
+## Vista general de l’script
 
 L’script complet es pot dividir en tres fases principals:  
-1️⃣ Instal·lació de Docker i dependències.  
-2️⃣ Creació de l’estructura d’Odoo i arrancada dels contenidors.  
-3️⃣ Instal·lació de mòduls i configuració final.
+  - Instal·lació de Docker i dependències.  
+  - Creació de l’estructura d’Odoo i arrancada dels contenidors.  
+  - Instal·lació de mòduls i configuració final.
 
 A continuació veurem el codi i explicarem cada secció pas a pas.
 
----
 
 ## Capçalera i configuració inicial
 
@@ -76,7 +69,6 @@ set -e
 
 Això és important per a evitar que continue un procés d’instal·lació si alguna fase ha fallat.
 
----
 
 ## Definició de variables
 
@@ -93,7 +85,6 @@ ADDONS_DIR=$PROJECT_DIR/dev_addons
 
 Aquestes variables determinen on es crearà el projecte i quins ports, noms i contrasenyes es faran servir.  Per exemple, `PROJECT_DIR` defineix el directori base (`~/odoo_server`) i `ODOO_PORT` el port pel qual accedirem a Odoo. També hi ha variables per a la base de dades (`ODOO_DB_NAME`, `ODOO_PG_PORT`) i les carpetes on es guardaran els *addons* o mòduls personalitzats.
 
----
 
 ## Fitxers de control i mòduls per defecte
 
@@ -108,9 +99,8 @@ CUSTOM_REPO="odoo-cpa-addons"
 
 Aquests fitxers de control serveixen per a indicar quina fase s’ha completat.  L’script és **idempotent**: si el tornes a executar, només farà les parts pendents.  També es defineix una llista de mòduls base i el repositori personalitzat (`odoo-cpa-addons`).
 
----
 
-## 📦 Fase 1 — Instal·lació de Docker i dependències
+## Fase 1 — Instal·lació de Docker i dependències
 
 Aquesta fase comprova si Docker està instal·lat. Si no, el configura completament.
 
@@ -135,13 +125,12 @@ Primer desinstal·la versions antigues i instal·la paquets essencials per a tre
 I finalment instal·la Docker i `docker-compose-plugin`, habilita el servei i afegeix l’usuari al grup `docker` per no haver d’usar `sudo`. Al final crea el fitxer `.phase1_docker_done` per indicar que la fase ha acabat correctament.
 
 ```text
-✅ Docker instal·lat correctament.
-🔁 Reinicia la màquina perquè s'apliquen els permisos.
+Docker instal·lat correctament.
+Reinicia la màquina perquè s'apliquen els permisos.
 ```
 
----
 
-## 🧱 Fase 2 — Creació de l’estructura i configuració d’Odoo
+## Fase 2 — Creació de l’estructura i configuració d’Odoo
 
 Quan Docker ja està llest, l’script passa a preparar l’entorn Odoo.
 
@@ -223,9 +212,9 @@ docker compose up -d
 
 Quan tot està funcionant, crea la base de dades inicial i assigna la contrasenya a l’administrador.
 
----
 
-## 🧩 Fase 3 — Instal·lació de mòduls
+
+## Fase 3 — Instal·lació de mòduls
 
 Ara que el servidor Odoo està funcionant, s’instal·len els mòduls automàticament.
 
@@ -246,7 +235,7 @@ Aquesta part busca tots els mòduls dins del repositori personalitzat i els afeg
 ```bash
 for modul in "${DEFAULT_MODULES[@]}" "${CUSTOM_MODULES[@]}"; do
     docker compose exec web odoo -i "$modul" -d "$ODOO_DB_NAME" --without-demo=all --stop-after-init
-    echo "✅ Instal·lat: $modul"
+    echo " Instal·lat: $modul"
 done
 ```
 
@@ -257,9 +246,8 @@ docker compose exec web odoo -d "$ODOO_DB_NAME" -i web_asset --stop-after-init
 docker compose restart web
 ```
 
----
 
-## ⚙️ Execució
+## Execució
 
 Guarda l’script amb el nom `setup_odoo.sh`, dona-li permisos i executa’l:
 
@@ -270,9 +258,8 @@ chmod +x setup_odoo.sh
 
 Després de la primera fase reinicia l’ordinador(la màquina virtual) i torna a executar-lo per continuar amb la següent.
 
----
 
-## 📊 Resultat final
+## Resultat final
 
 Quan el procés acabe, tindràs:
 
@@ -284,9 +271,8 @@ Quan el procés acabe, tindràs:
 
 Tot queda automatitzat i preparat per treballar.
 
----
 
-## 💡 Consell final
+## Consell final
 
 Versiona l’script amb `git` i comenta cada canvi. Pots ampliar-lo per afegir:
 
