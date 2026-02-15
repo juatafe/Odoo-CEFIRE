@@ -357,14 +357,9 @@ Exemple mínim per autenticar i llegir contactes (`res.partner`) utilitzant `sea
 
 Si vols provar ràpidament, pots descarregar un script d'exemple que realitza aquestes operacions bàsiques de connexió i consulta a l'API d'Odoo.
 
-```{only} html
-{download}`main.py <../../_static/scripts/main.py>`
+```{raw} latex
+\href{https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/main.py}{Descarrega main.py}
 ```
-
-```{only} latex
-[Descarrega main.py (GitHub)](https://raw.githubusercontent.com/juatafe/Odoo-CEFIRE/main/docs/_static/scripts/main.py)
-```
-
 Descarrega'l, dona-li permisos d'execució i adapta'l al teu entorn.
 
 :::
