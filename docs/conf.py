@@ -162,7 +162,8 @@ latex_toplevel_sectioning = "chapter"
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 latex_additional_files = [
   '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
-  '_static/scripts/comptabilitat.sh'
+  '_static/scripts/comptabilitat.sh',
+  '_static/scripts/main.py'
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
