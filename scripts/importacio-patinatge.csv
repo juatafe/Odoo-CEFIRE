@@ -1,0 +1,5 @@
+name,email,street,city,zip,vat,is_company,bank_ids/acc_number,bank_ids/allow_outbound_batch_payment
+"Joan Garcia (Pare d'Anna)","joan.garcia@example.com","Carrer de la Pau 10","Tavernes de la Valldigna","46760","12345678Z",False,"ES7401828551262155718716",True
+"Marta Beltran","marta.b@example.com","Avinguda de la Marina 5","Gandia","46701","87654321X",False,"ES9501281533757351281254",True
+"Pere Estruch","p.estruch@example.com","Carrer Major 22","Simat de la Valldigna","46750","11223344S",False,"ES8921003193472648111816",True
+"Inés Zeleme","ines@example.com","Carrer Ample 1","Tavernes de la Valldigna","46760","99887766M",False,"ES6131908813697881432291",True

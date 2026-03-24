@@ -134,7 +134,7 @@ Cal validadar la recepció per a actualitzar l'inventari i registrar l'entrada d
 :align: center
 :::
 
-Podem pujar la factura del proveidor manualment o utilitzar la funcionalitat de reconeixement de factures d'Odoo per a automatitzar aquest procés. Pots descarregar la factura de compra que has de pujar a Odoo: [Factura Compra Muebles Madero](/_static/assets/img/Tema1b/factura_muebles_madero_INV2025_0001.pdf).
+Podem pujar la factura del proveidor manualment o utilitzar la funcionalitat de reconeixement de factures d'Odoo per a automatitzar aquest procés. Pots descarregar la factura de compra que has de pujar a Odoo: [Factura Compra Muebles Madero](https://github.com/juatafe/Odoo-CEFIRE/raw/main/docs/_static/assets/img/Tema1b/factura_muebles_madero_INV2025_0001.pdf).
 
 :::{image} /_static/assets/img/Tema1b/factura.png
 :alt: Factura Proveïdor

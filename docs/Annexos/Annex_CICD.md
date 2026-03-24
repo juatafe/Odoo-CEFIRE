@@ -615,8 +615,6 @@ Desplegament gradual que dirigeix un petit percentatge de tràfic a la nova vers
 
 ```yaml
 # docker-compose.canary.yml
-version: '3.8'
-
 services:
   web-stable:
     image: odoo:stable

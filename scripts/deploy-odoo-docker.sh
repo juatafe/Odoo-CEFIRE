@@ -118,8 +118,6 @@ EOF
     # Crear docker-compose.yml
     log_info "Creant configuració Docker Compose..."
     cat > docker-compose.yml <<'EOF'
-version: '3.8'
-
 services:
   web:
     build: .

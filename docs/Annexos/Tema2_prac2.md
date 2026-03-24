@@ -118,8 +118,6 @@ nano docker-compose.yml
 ```
 
 ```yaml
-version: '3.8'
-
 services:
   # Servei de base de dades PostgreSQL
   db:

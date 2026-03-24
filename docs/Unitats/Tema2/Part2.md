@@ -240,7 +240,6 @@ El fitxer `docker-compose.yml` és el cor de la configuració. Aquest fitxer def
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
 
 services:
   web:
@@ -464,7 +463,7 @@ server_wide_modules = base,web
 
 **Pots descarregar l'script complet de desplegament:**
 
-**[deploy-odoo-docker.sh](../../../scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
+**[deploy-odoo-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
 
 
 1. **Fase 1**: Configuració inicial del projecte
@@ -509,9 +508,9 @@ L'script mostrarà una sortida similar a:
 
 **Pots descarregar els següents scripts per verificar la instal·lació:**
 
-- **[test-docker-installation.sh](../../../scripts/test-docker-installation.sh)**: Verificació completa de Docker
-- **[diagnostic.sh](../../../scripts/diagnostic.sh)**: Diagnòstic del sistema Docker
-- **[monitor.sh](../../../scripts/monitor.sh)**: Monitoratge en temps real
+- **[test-docker-installation.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/test-docker-installation.sh)**: Verificació completa de Docker
+- **[diagnostic.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/diagnostic.sh)**: Diagnòstic del sistema Docker
+- **[monitor.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/monitor.sh)**: Monitoratge en temps real
 
 Aquests scripts et ajudaran a verificar que tot funciona correctament abans de continuar.
 
@@ -582,8 +581,8 @@ aa9ae22cf873   odoo_server-web-1   0.05%     412.2MiB / 5.74GiB   7.01%     405M
 :::{tip} 
 **Pots descarregar els scripts de backup:**
 
-- **[backup-docker.sh](../../../scripts/backup-docker.sh)**: Backup complet de base de dades, volums i configuració
-- **[restore-docker.sh](../../../scripts/restore-docker.sh)**: Restauració des de backups anteriors
+- **[backup-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/backup-docker.sh)**: Backup complet de base de dades, volums i configuració
+- **[restore-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/restore-docker.sh)**: Restauració des de backups anteriors
 
 Aquests scripts gestionen automàticament:
 - Backup de base de dades PostgreSQL
@@ -622,7 +621,6 @@ Per a entorns de producció, necessitem configuracions adicionals:
 
 ```yaml
 # docker-compose.prod.yml
-version: '3.8'
 
 services:
   web:
@@ -660,7 +658,6 @@ Per a desenvolupament, podem optimitzar l'entorn:
 
 ```yaml
 # docker-compose.dev.yml
-version: '3.8'
 
 services:
   web:
