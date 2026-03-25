@@ -1,15 +1,15 @@
-
+<!-- 
 ```{raw} latex
 \appendix
-```
-```{raw} latex
+``` -->
+<!-- ```{raw} latex
 \clearpage
 \thispagestyle{empty}
 \begin{center}
 {\Huge\bfseries Annexos}
 \end{center}
 \clearpage
-```
+``` -->
 
 
 ```{toctree}
@@ -21,7 +21,7 @@
 .. Configuracio_Avancada
 .. Annex_CICD
 .. Annex_Redis
-.. Tema2_prac1
+Tema2_prac1
 .. Tema2_prac2
 .. Practica_MailHog_Odoo
 .. explicascript

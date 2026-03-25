@@ -156,7 +156,7 @@ html_search_language = "ca"
 
 # ──────────────── CONFIGURACIÓ ÚNICA LATEX / PDF ────────────────
 latex_engine = "xelatex"
-latex_toplevel_sectioning = "chapter"
+latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
@@ -496,6 +496,17 @@ latex_elements = {
 
 """,
 }
+
+# Opció temporal: ocultar l'etiqueta de capítol ("Capítol 1") però
+# mantenir la numeració jeràrquica 1.1, 1.1.1, etc.
+if os.getenv("LATEX_HIDE_CHAPTER_LABEL", "0") == "1":
+    latex_elements["preamble"] += """
+\\titleformat{\\chapter}[display]
+  {\\normalfont\\huge\\bfseries}
+  {}
+  {0pt}
+  {}
+"""
 
 latex_documents = [
     ("index", f"{site_slug}.tex", project, author, "book")
