@@ -164,7 +164,13 @@ latex_additional_files = [
   '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
   '_static/scripts/main.py',
-  '_static/scripts/scriptsetupodoo.sh'
+  '_static/scripts/scriptsetupodoo.sh',
+  '_static/scripts/deploy-odoo-docker.sh',
+  '_static/scripts/test-docker-installation.sh',
+  '_static/scripts/diagnostic.sh',
+  '_static/scripts/monitor.sh',
+  '_static/scripts/backup-docker.sh',
+  '_static/scripts/restore-docker.sh'
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
@@ -187,6 +193,8 @@ latex_elements = {
 
 
 \usepackage{qrcode}
+\usepackage{attachfile2}
+\attachfilesetup{color=0 0 0}
 
 % ───── Espai entre figures i text ─────
 \setlength{\textfloatsep}{10pt}
@@ -505,6 +513,16 @@ _EMOJI_RE = re.compile(
 )
 
 _BOLD_RE = re.compile(r"\*\*(.*?)\*\*", flags=re.DOTALL)
+_FENCED_CODE_RE = re.compile(r"(^```.*?^```\s*$)", flags=re.MULTILINE | re.DOTALL)
+_PDF_EMOJI_MAP = {
+  "🚀": "▶",
+  "✅": "✔",
+  "🏗️": "▣",
+  "🏗": "▣",
+  "📦": "▤",
+  "🔧": "⚙",
+  "🎉": "★",
+}
 
 def remove_emojis_only_for_pdf(app, docname, source):
     if app.builder.name != "latex":
@@ -512,23 +530,40 @@ def remove_emojis_only_for_pdf(app, docname, source):
 
     text = source[0]
 
-    # 1️⃣ DINS de negreta: eliminar emojis del tot
-    def clean_bold(match):
-        content = match.group(1)
-        content = _EMOJI_RE.sub("", content)
-        # normalitza espais interns
-        content = re.sub(r"\s+", " ", content).strip()
-        return f"**{content}**"
+    # No tocar blocs de codi fenced: preservar indentació i espais exactes
+    parts = _FENCED_CODE_RE.split(text)
+    processed_parts = []
 
-    text = _BOLD_RE.sub(clean_bold, text)
+    def replace_known_pdf_emojis(value: str) -> str:
+        for emoji, replacement in _PDF_EMOJI_MAP.items():
+            value = value.replace(emoji, replacement)
+        return value
 
-    # 2️⃣ FORA de negreta: substituir emojis per un espai
-    text = _EMOJI_RE.sub(" ", text)
+    for part in parts:
+        # Bloc de codi fenced (comença per ```): es deixa intacte
+        if part.startswith("```"):
+            processed_parts.append(replace_known_pdf_emojis(part))
+            continue
 
-    # 3️⃣ Neteja general d’espais duplicats
-    text = re.sub(r"[ \t]{2,}", " ", text)
+        # 1️⃣ DINS de negreta: eliminar emojis del tot
+        def clean_bold(match):
+            content = match.group(1)
+            content = replace_known_pdf_emojis(content)
+            content = _EMOJI_RE.sub("", content)
+            # normalitza espais interns
+            content = re.sub(r"\s+", " ", content).strip()
+            return f"**{content}**"
 
-    source[0] = text
+        part = _BOLD_RE.sub(clean_bold, part)
+
+        part = replace_known_pdf_emojis(part)
+
+        # 2️⃣ FORA de negreta: substituir emojis per un espai
+        part = _EMOJI_RE.sub(" ", part)
+
+        processed_parts.append(part)
+
+    source[0] = "".join(processed_parts)
 
 
 def setup(app):

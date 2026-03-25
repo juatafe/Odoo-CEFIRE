@@ -14,6 +14,12 @@ help:
 sync-static:
 	@mkdir -p docs/_static/scripts
 	cp -f scripts/comptabilitat.sh docs/_static/scripts/comptabilitat.sh || true
+	cp -f scripts/deploy-odoo-docker.sh docs/_static/scripts/deploy-odoo-docker.sh || true
+	cp -f scripts/test-docker-installation.sh docs/_static/scripts/test-docker-installation.sh || true
+	cp -f scripts/diagnostic.sh docs/_static/scripts/diagnostic.sh || true
+	cp -f scripts/monitor.sh docs/_static/scripts/monitor.sh || true
+	cp -f scripts/backup-docker.sh docs/_static/scripts/backup-docker.sh || true
+	cp -f scripts/restore-docker.sh docs/_static/scripts/restore-docker.sh || true
 
 html: sync-static
 	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
