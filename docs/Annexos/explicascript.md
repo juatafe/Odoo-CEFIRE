@@ -9,7 +9,7 @@ crear un **script Bash** que instal·le totes les dependències, genere els fitx
 
 
 ```{raw} latex
-\href{https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/scriptsetupodoo.sh}{Descarrega l'script complet ací.}
+[Descarrega l'script complet ací.](../_static/scripts/scriptsetupodoo.sh)
 ```
 
 

@@ -14,6 +14,8 @@ help:
 sync-static:
 	@mkdir -p docs/_static/scripts
 	cp -f scripts/comptabilitat.sh docs/_static/scripts/comptabilitat.sh || true
+	cp -f scripts/main.py docs/_static/scripts/main.py || true
+	cp -f docs/_static/assets/scriptsetupodoo.sh docs/_static/scripts/scriptsetupodoo.sh || true
 	cp -f scripts/deploy-odoo-docker.sh docs/_static/scripts/deploy-odoo-docker.sh || true
 	cp -f scripts/test-docker-installation.sh docs/_static/scripts/test-docker-installation.sh || true
 	cp -f scripts/diagnostic.sh docs/_static/scripts/diagnostic.sh || true

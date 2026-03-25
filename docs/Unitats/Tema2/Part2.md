@@ -701,7 +701,7 @@ services:
 
 ### Problemes comuns
 
-**🔧 Contenidor no s'inicia:**
+**Contenidor no s'inicia:**
 
 ```bash
 # Verificar logs detallats
@@ -715,7 +715,7 @@ docker compose build --no-cache web
 docker compose up -d
 ```
 
-**🔧 Problemes de connectivitat:**
+**Problemes de connectivitat:**
 
 ```bash
 # Verificar xarxes Docker
@@ -727,7 +727,7 @@ docker compose exec web ping db
 docker compose exec web nc -zv db 5432
 ```
 
-**🔧 Problemes de rendiment:**
+**Problemes de rendiment:**
 
 ```bash
 # Verificar recursos disponibles
@@ -752,7 +752,7 @@ docker compose exec web odoo shell -d nom_base_dades
 docker compose exec web odoo -i nom_modul --test-enable --stop-after-init
 ```
 
-## Referències avançades
+<!-- ## Referències avançades
 
 :::{admonition} 📖 Documentació ampliada
 :class: note
@@ -770,7 +770,7 @@ Per a configuracions més avançades, consulta aquests documents complementaris:
 - Monitoratge professional amb mètriques i alertes
 - Estratègies de backup robustes
 - Pipelines de desplegament continu (CI/CD)
-:::
+::: -->
 
 ## Conclusions
 
@@ -802,21 +802,6 @@ Durant aquest procés has après:
 3. **Establir monitoratge** amb alertes professionals
 4. **Configurar backup automatitzat** amb programació
 5. **Implementar SSL/TLS** per a connexions segures
-
-:::{admonition} 📖 Aprofundiment en CI/CD
-:class: note
-Per comprendre en detall què és CI/CD i com implementar-lo amb Odoo, consulta:
-
-**[Annex D: Integració i Desplegament Continu (CI/CD)](../../Annexos/Annex_CICD.md)**
-
-Aquest annex cobreix:
-- Conceptes fonamentals de CI/CD explicats de manera accessible
-- Comparatives entre processos manuals i automatitzats
-- Exemples pràctics amb GitHub Actions i GitLab CI
-- Scripts complets per implementar pipelines d'Odoo
-- Estratègies avançades (Blue-Green, Canary deployments)
-- Cases d'estudi reals amb mètriques de ROI
-:::
 
 Aquesta metodologia amb Docker et proporciona una base sòlida per desenvolupar, provar i desplegar sistemes Odoo professionals de manera eficient i escalable. 🎯
 

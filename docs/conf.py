@@ -511,17 +511,33 @@ _EMOJI_RE = re.compile(
     "]+",
     flags=re.UNICODE,
 )
+_EMOJI_ARTIFACT_RE = re.compile(r"[\uFE0E\uFE0F\u200D\u20E3]")
 
 _BOLD_RE = re.compile(r"\*\*(.*?)\*\*", flags=re.DOTALL)
 _FENCED_CODE_RE = re.compile(r"(^```.*?^```\s*$)", flags=re.MULTILINE | re.DOTALL)
 _PDF_EMOJI_MAP = {
-  "🚀": "▶",
-  "✅": "✔",
-  "🏗️": "▣",
-  "🏗": "▣",
-  "📦": "▤",
-  "🔧": "⚙",
-  "🎉": "★",
+  # En text normal (incloent títols), no volem etiquetes [OK]/[RUN]:
+  # les icones es lleven directament amb _EMOJI_RE.
+}
+
+_PDF_CODE_EMOJI_MAP = {
+    "✅": "[OK]",
+    "✔": "[OK]",
+    "✓": "[OK]",
+    "❌": "[ERROR]",
+    "🚀": "[RUN]",
+    "🏗️": "[BUILD]",
+    "🏗": "[BUILD]",
+    "📦": "[PKG]",
+    "🔧": "[SERVICE]",
+    "🌐": "[WEB]",
+    "📡": "[HTTP]",
+    "👤": "[USER]",
+    "🐘": "[POSTGRES]",
+    "🔑": "[ROLE]",
+    "📁": "[FILES]",
+    "🐍": "[PYTHON]",
+    "🎉": "[DONE]",
 }
 
 def remove_emojis_only_for_pdf(app, docname, source):
@@ -539,29 +555,36 @@ def remove_emojis_only_for_pdf(app, docname, source):
             value = value.replace(emoji, replacement)
         return value
 
+    def replace_codeblock_pdf_emojis(value: str) -> str:
+      for emoji, replacement in _PDF_CODE_EMOJI_MAP.items():
+        value = value.replace(emoji, replacement)
+      return value
+
     for part in parts:
-        # Bloc de codi fenced (comença per ```): es deixa intacte
-        if part.startswith("```"):
-            processed_parts.append(replace_known_pdf_emojis(part))
-            continue
-
-        # 1️⃣ DINS de negreta: eliminar emojis del tot
-        def clean_bold(match):
-            content = match.group(1)
-            content = replace_known_pdf_emojis(content)
-            content = _EMOJI_RE.sub("", content)
-            # normalitza espais interns
-            content = re.sub(r"\s+", " ", content).strip()
-            return f"**{content}**"
-
-        part = _BOLD_RE.sub(clean_bold, part)
-
-        part = replace_known_pdf_emojis(part)
-
-        # 2️⃣ FORA de negreta: substituir emojis per un espai
+      # Bloc de codi fenced (comença per ```): tractament específic
+      if part.startswith("```"):
+        part = replace_codeblock_pdf_emojis(part)
         part = _EMOJI_RE.sub(" ", part)
-
+        part = _EMOJI_ARTIFACT_RE.sub("", part)
         processed_parts.append(part)
+        continue
+
+      # 1️⃣ DINS de negreta: eliminar emojis del tot
+      def clean_bold(match):
+        content = match.group(1)
+        content = replace_known_pdf_emojis(content)
+        content = _EMOJI_RE.sub("", content)
+        content = _EMOJI_ARTIFACT_RE.sub("", content)
+        content = re.sub(r"\s+", " ", content).strip()
+        return f"**{content}**"
+
+      part = _BOLD_RE.sub(clean_bold, part)
+      part = replace_known_pdf_emojis(part)
+
+      # 2️⃣ FORA de negreta: substituir emojis per un espai
+      part = _EMOJI_RE.sub(" ", part)
+      part = _EMOJI_ARTIFACT_RE.sub("", part)
+      processed_parts.append(part)
 
     source[0] = "".join(processed_parts)
 

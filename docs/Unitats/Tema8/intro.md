@@ -179,7 +179,7 @@ L'escript el que fa és:
 
 **Script d'instal·lació massiva de mòduls OCA per a comptabilitat espanyola**
 
-**Descarregar :** [comptabilitat.sh](https://juatafe.github.io/Odoo-CEFIRE/_static/scripts/comptabilitat.sh)
+**Descarregar :** [comptabilitat.sh](../../_static/scripts/comptabilitat.sh)
 
 Aquest script desa automàticament els mòduls OCA en `./dev_addons` i fa una instal·lació bàsica. Alguns no els instal·la però els deixa a punt per a que els instal·les més endavant si cal. Això és per evitar problemes de dependències i recurrències.
 
