@@ -506,6 +506,12 @@ if os.getenv("LATEX_HIDE_CHAPTER_LABEL", "0") == "1":
   {}
   {0pt}
   {}
+
+\\makeatletter
+\\renewcommand{\\chaptermark}[1]{%
+  \\markboth{#1}{}%
+}
+\\makeatother
 """
 
 latex_documents = [

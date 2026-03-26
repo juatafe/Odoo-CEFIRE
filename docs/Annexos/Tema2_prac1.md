@@ -460,66 +460,42 @@ ssh -p 2222 estudiant@localhost
 ```
 
 ## Fase 6: Documentació i lliurament
+### Què has de documentar (versió curta per a professorat)
 
-### Què has de documentar
+Envia un únic fitxer (PDF ) que inclogua:
 
-Crea un document (Word, PDF o Markdown) que inclogui:
+1. Captures: 1 o 2 captures de pantalla que mostren
+   - La interfície d'Odoo en funcionament (p. ex. pàgina principal o pantalla de configuració)
+   - L'estat del servei (sortida de `systemctl status odoo` o similar). (Si envies només una captura, assegura't que sigui representativa.)
 
-1. **Introducció**
-   - Què és Odoo i per què és important
-   - Objectius de la pràctica
+2. Respostes breus (2-4 línies cadascuna) a LES DUES preguntes següents:
+   a) Com podríeu utilitzar aquesta instal·lació per introduir conceptes d'instal·lació i gestió de serveis en altres mòduls (que no imparteixin SGE)? Indica activitats concretes o fragments pràctics per a classe.
+   b) Quins conceptes clau de sistemes operatius i administració de serveis es poden treballar amb aquesta pràctica? Proposa almenys 3 conceptes i com els introduiries a classe.
 
-2. **Instal·lació del sistema base**
-   - Captures de pantalla de la configuració de VirtualBox
-   - Captures del procés d'instal·lació d'Ubuntu Server
-   - Configuració de xarxa realitzada
+Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 línies).
 
-3. **Instal·lació d'Odoo**
-   - Passos seguits per instal·lar PostgreSQL
-   - Configuració de l'usuari i base de dades
-   - Instal·lació d'Odoo i dependències
-
-4. **Configuració**
-   - Contingut dels fitxers de configuració creats
-   - Configuració del servei systemd
-
-5. **Verificació**
-   - Captures de pantalla de:
-     - Odoo funcionant al navegador
-     - Estat del servei via SSH
-     - Primera configuració d'Odoo
-
-6. **Problemes i solucions**
-   - Quins problemes has tingut?
-   - Com els has resolt?
-
-7. **Conclusions**
-   - Què has après?
-   - Aplicacions pràctiques d'aquest coneixement
-
-### Criteris d'avaluació
+### Criteris d'avaluació (versió curta)
 
 | Criteri | Pes | Descripció |
-|---------|-----|------------|
-| **Instal·lació tècnica** | 40% | Odoo funciona correctament, accessible via web |
-| **Documentació** | 30% | Document complet, clar i amb captures |
-| **Configuració** | 20% | Configuració correcta de xarxa, usuaris i serveis |
-| **Resolució de problemes** | 10% | Capacitat per identificar i resoldre incidències |
+|--------:|:---:|------------|
+| **Captures** | 40% | Imatge clara i representativa d'Odoo i estat del servei |
+| **Respostes breus** | 40% | Rigor i aplicabilitat pedagògica de les respostes (idees útils per altres mòduls) |
+| **Documentació d'incidències** | 20% | Identificació i breu descripció d'incidències i operacions realitzades |
 
-### Format de lliurament
 
-- **Fitxer**: PDF amb el nom `Cognom_Nom_Practica1_Odoo.pdf`
-- **Termini**: [Consulta la data a Aules]
-- **Com lliurar**: Aules, secció de la pràctica
+### Format de lliurament (simplificat)
 
-:::{admonition} Consells per a la documentació
+- **Fitxer**: PDF amb el nom `Cognom_Nom_Practica1_Odoo_short.pdf`.
+- **Contingut**: 1-2 captures + respostes a les dues preguntes + (opcional) una línia sobre una incidència.
+- **On lliurar**: Aules, secció de la pràctica.
+- **Termini**: Consulta la data a Aules.
+
+:::{admonition} Consells ràpids
 :class: tip
-- **Captures nítides**: Usa Alt+Impr Pant per capturar finestres específiques
-- **Explica els passos**: No només digues "he fet això", explica per què
-- **Inclou errors**: Els errors i com els has resolt són molt valuosos
-- **Revisa abans de lliurar**: Comprova que tot s'entén bé
+- Captures clares: enfoca la finestra del navegador o el terminal, sense informació innecessària.
+- Sigues concret en les respostes: proposa una activitat pràctica i indica els conceptes que s'introdueixen.
+- Documenta una incidència si n'hi ha (fes-ho en 1 línia).
 :::
-
 :::{admonition} Recursos addicionals
 :class: note
 - **Documentació oficial d'Odoo**: https://www.odoo.com/documentation/16.0/

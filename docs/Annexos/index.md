@@ -21,8 +21,8 @@
 .. Configuracio_Avancada
 .. Annex_CICD
 .. Annex_Redis
-Tema2_prac1
-.. Tema2_prac2
+.. Tema2_prac1
+Tema2_prac2
 .. Practica_MailHog_Odoo
 .. explicascript
 .. instalarpgAdmin
