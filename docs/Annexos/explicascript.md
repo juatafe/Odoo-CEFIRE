@@ -1,4 +1,4 @@
-# Exercici pràctic 4: Automatització de la instal·lació d’Odoo amb Docker
+# Exercici pràctic: Automatització de la instal·lació d’Odoo amb Docker
 
 ## Introducció
 
@@ -8,9 +8,21 @@ Ara que ja saps com instal·lar Odoo tant en local com dins de Docker, podem don
 crear un **script Bash** que instal·le totes les dependències, genere els fitxers de configuració i arranque el servidor completament configurat amb només una ordre.
 
 
-```{raw} latex
-[Descarrega l'script complet ací.](../_static/scripts/scriptsetupodoo.sh)
+:::{tip}
+
+**Pots descarregar l'script complet d'automatització:**
+
+**[scriptsetupodoo.sh](../_static/scripts/scriptsetupodoo.sh)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{scriptsetupodoo.sh}{scriptsetupodoo.sh}
 ```
+
+:::
 
 
 **Abans d'executar l’script**, recorda modificar el nom del repositori personalitzat

@@ -1,4 +1,4 @@
-# Exercici pràctic 3: Afegir servidor de correu a l’entorn Docker d’Odoo
+# Exercici pràctic : Afegir servidor de correu a l’entorn Docker d’Odoo
 ## Introducció
 Com hem vist al Tema 2, quan configurem les dades de l’empresa en Odoo cal definir un servidor de correu d'eixida' (SMTP) per a notificacions, factures i validacions. En desenvolupament no és recomanable usar un servidor real: convé utilitzar una ferramenta de simulació que intercepte els correus per a provar plantilles i fluxos sense enviaments reals. En esta pràctica integrarem MailHog per a fer aquesta simulació de manera segura dins de Docker.
 
@@ -48,7 +48,7 @@ Per a fer-ho, modificarem el fitxer `docker-compose.yml`.
 
 ### Pas 2: Afegir el servei `mailhog`
 
-Al final del fitxer `docker-compose.yml`, **sota els serveis existents**, copia i enganxa aquest bloc:
+Al final del fitxer `docker-compose.yml`, **baix dels serveis existents**, copia i enganxa aquest bloc:
 
 ```yaml
   mailhog:
@@ -105,7 +105,7 @@ Per comprovar-ho:
 docker ps
 ```
 
-Veràs una línia semblant a:
+S'obervarà una línia semblant a:
 ```
 mailhog/mailhog:latest   ...   0.0.0.0:1025->1025/tcp, 0.0.0.0:8025->8025/tcp
 ```

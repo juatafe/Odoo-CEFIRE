@@ -23,9 +23,11 @@ extensions = [
     "sphinx_design",
     "sphinxcontrib.mermaid",    # si el fas servir, deixa-ho; si no, comenta-ho
     "diagrama_classe",
+    "sphinxcontrib.tikz",
     
 ]
 
+tikz_proc_suite = "ImageMagick" # o "Ghostscript"
 # (Opcional però recomanat per a HTML)
 graphviz_output_format = "svg"
 graphviz_dot_args = ["-Gbgcolor=transparent"]
@@ -204,6 +206,10 @@ latex_elements = {
 \setmainfont{FreeSerif}
 \setsansfont{FreeSans}
 \setmonofont{FreeMono}
+
+% ───── TikZ (global) ─────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
 
 
 

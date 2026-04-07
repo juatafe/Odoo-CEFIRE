@@ -174,10 +174,10 @@ El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
 </template>
 ```
 
-És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a vore amb les vistes internes(backend) d’Odoo (tree, form, kanban, etc) i no forma part "../Tema6"del tema 6.
+És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a vore amb les vistes internes(backend) d’Odoo (tree, form, kanban, etc) i no forma part d'aquest tema.
 :::
 
-El fitxer views.xml que crea scaffolf són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
+El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
 
 :::{caution} 
 El codi que crea scaffold no és per a usar-lo directament, és només un exemple genèric, una guia visual de les estructures bàsiques que podem definir en XML.
@@ -219,14 +219,16 @@ Quan al fitxer XML escrivim:
 ```xml
 <record id="view_patinadora_tree" model="ir.ui.view">
 ```
-Estem creant un nou registre en el model `ir.ui.view`, que defineix una vista específica per al model `patinatge.patinadora`. El record és el registre i ir.ui.view és el model on s’emmagatzemen les vistes.
+Estem creant un nou registre en`ir.ui.view`, que defineix una vista específica per al model `patinatge.patinadora`. El record és el registre i `ir.ui.view` és el model on s’emmagatzemen les vistes.
 
-| Cosa       | Model                   | Registre                         |
+| Element       | Model                   | Registre                         |
 | ---------- | ----------------------- | -------------------------------- |
 | Patinadora | `patinatge.patinadora`  | Una patinadora concreta          |
 | Vista      | `ir.ui.view`            | Una vista concreta (tree, form…) |
 | Acció      | `ir.actions.act_window` | Una acció concreta               |
 | Menú       | `ir.ui.menu`            | Un menú concret                  |
+
+
 Dins del registre de la vista, els camps més importants són:   
 - `name`  
   ```xml
@@ -398,5 +400,5 @@ En aquest cas el camp es mostra, però no es pot modificar des del formulari. Ú
 
 
 ## Resum i pròxims passos
-En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (tree) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic 7: Vistes per als models Grup i Entrenament](../../Annexos/crearvista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de patinatge.
+En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (tree) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic: Vistes per als models Grup i Entrenament](../../Annexos/crearvista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de patinatge.
 <!-- En el següent tema, continuarem explorant les possibilitats de personalització de vistes en Odoo, incloent la creació de vistes kanban, calendaris i gràfics, així com l’ús de filtres i grups per a millorar la navegació i gestió de dades. -->

@@ -1,8 +1,8 @@
-# Exercici pràctic 7: Vistes per als models Grup i Entrenament
+# Exercici pràctic: Vistes per als models Grup i Entrenament
 
 ## 1. Objectiu de l'exercici
 
-L’objectiu d’aquesta pràctica és **aplicar els coneixements del capitol 5** a la resta de models del mòdul `patinatge`, concretament:
+Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta pràctica és **completar el mòdul `patinatge`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
 
 - `patinatge.grup`
 - `patinatge.entrenament`
@@ -13,6 +13,8 @@ L’alumnat haurà de:
 - Definir vistes *tree* i *form* personalitzades, i comprovar que Odoo utilitza aquestes vistes en lloc de les automàtiques.
 
 👉 No s’introdueixen conceptes nous: **només es practica i es consolida** el que ja s’ha vist.
+
+Per això, esta activitat s’ha separat en dos exercicis: primer es crea la base del mòdul i després s’amplia de manera incremental amb les vistes i els menús.
 
 ---
 
@@ -40,7 +42,7 @@ El model `patinatge.entrenament` inclou:
 
 ---
 
-## 3. Crear les accions i menús
+## 3. Crear les accions i els menús
 
 En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra noves** i **dos submenús** dins del menú principal *Patinatge*.
 
@@ -177,28 +179,30 @@ Com que s’han creat fitxers XML nous, cal afegir-los al `__manifest__.py`:
 
 ## 7. Comprovacions finals
 
-Abans de donar la pràctica per bona, comprova que:
+Abans de donar l’activitat per bona, comprova que:
 
-- apareixen els menús **Patinadores**, **Grups** i **Entrenaments**,
-- cada menú obri la seua vista *tree* personalitzada,
-- en crear o obrir un registre es mostra la vista *form* definida,
+- Apareixen els menús **Patinadores**, **Grups** i **Entrenaments**.
+- Cada menú obri la seua vista *tree* personalitzada.
+- En crear o obrir un registre es mostra la vista *form* definida.
 - Odoo **no utilitza vistes automàtiques**.
 
-Si tot això funciona, la pràctica està correcta.
+Si tot això funciona, l’activitat està correcta.
 
 ---
 
 ## 8. Entrega
 
+Ara sí, en acabar este segon exercici, ja es pot fer l’entrega completa de l’activitat.
+
 Cal entregar:
 
 - El mòdul `patinatge` complet en format `.zip`,
-- Un pdf amb:
+- Un PDF amb:
   - Captures de pantalla de:
     - vista *tree* i *form* de **Grups**,
     - vista *tree* i *form* d’**Entrenaments**,
-  - Una breu explicació del treball realitzat.
+  - Una breu explicació del treball realitza, problemes trobats i solucions implementades.
 
 ---
 
-😏 *Si açò et funciona, ja no estàs fent proves… estàs fent mòduls d’Odoo com toca.*
+😏 *Si açò et funciona, ja no estàs fent proves… estàs fent mòduls d’Odoo com cal.*
