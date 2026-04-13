@@ -24,7 +24,7 @@ extensions = [
     "sphinxcontrib.mermaid",    # si el fas servir, deixa-ho; si no, comenta-ho
     "diagrama_classe",
     "sphinxcontrib.tikz",
-    
+    "sphinx.ext.mathjax",       # renderitza fórmules LaTeX en HTML
 ]
 
 tikz_proc_suite = "ImageMagick" # o "Ghostscript"
@@ -32,7 +32,7 @@ tikz_proc_suite = "ImageMagick" # o "Ghostscript"
 graphviz_output_format = "svg"
 graphviz_dot_args = ["-Gbgcolor=transparent"]
 
-myst_enable_extensions = ["colon_fence", "attrs_block", "deflist"]
+myst_enable_extensions = ["colon_fence", "attrs_block", "deflist", "dollarmath", "amsmath"]
 myst_fence_as_directive = ["classe-diagrama"]
 
 

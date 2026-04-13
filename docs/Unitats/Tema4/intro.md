@@ -1,6 +1,6 @@
 ## Introducció
 
-Als capítols anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades. Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**. Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”. Anirem poc a poc, que açò té faena, però no és cap mur de Berlín.
+Als capítols anteriors ja deixàrem Odoo ben instal·lat, configurat i amb accés a la base de dades. Ara toca fer el pas que tothom espera: **crear els nostres propis mòduls**. Ací és on Odoo passa de ser “un programa” a ser “una plataforma programable”. Anirem poc a poc, que açò té faena, però avançarem amb una prespectiva de disseny per entendre no només el “com” sinó també el “per què” de la creació de mòduls. 
 
 ::: {admonition} Objectius d’aprenentatge
 :class: important
@@ -11,7 +11,11 @@ Quan acabes este tema, hauràs de ser capaç de:
 - Escriure un `__manifest__.py` funcional (dependències, dades XML, opcions bàsiques).
 - Entendre què significa “instal·lar” vs “actualitzar” un mòdul.
 - Saber quan té sentit utilitzar hooks (`pre_init_hook`, `post_init_hook`, etc.) i quines limitacions tenen.
+- Crear un model senzill en Python i entendre com es tradueix a la base de dades.
+- Tenir un model mental clar de com Odoo interpreta els mòduls i els models, i com es relacionen amb la base de dades.
 :::
+
+Aquest tema és la base de tot el que farem després, així que convé entendre’l bé. No es tracta només de seguir passos, sinó de comprendre com funciona Odoo per dins. Si tens dubtes, rellegix els apartats que no tingues clars i prova de crear mòduls senzills per veure’n el funcionament real. Per visualitzar el que passa, accedix a PostgreSQL i revisa les taules que es creen, les dades que s’hi inserixen, etc. Així veuràs la connexió directa entre el codi Python, els models d’Odoo i la base de dades, ja siga amb pgAdmin o amb la línia d’ordres (`psql`). També hi ha una altra manera de comprovar-ho abans d’estudiar vistes i menús: activar el mode depurador (“Developer mode”) i consultar la vista de models, que mostra tots els models carregats al sistema i les seues taules associades.
 
 ::: {admonition} Requisits previs (check ràpid)
 :class: note
@@ -20,7 +24,6 @@ Abans de continuar, comprova que:
 
 - Pots entrar a Odoo amb un usuari administrador.
 - Saps on està el teu `addons_path` (i tens una carpeta per als teus mòduls).
-- Tens clar com reiniciar Odoo i com actualitzar un mòdul (mode desenvolupament o línia d’ordres).
 :::
 
 ## Mapa del capítol (itinerari recomanat)
@@ -29,9 +32,13 @@ Abans de continuar, comprova que:
 2. **El manifest**: què és imprescindible i què és opcional.
 3. **Dades `data` vs `demo`**: quan es carreguen i quan NO.
 4. **Hooks**: en quin moment s’executen i què pots fer en cadascun.
+5. **El fitxer `__init__.py`**: què importa Odoo i per què és clau.
+6. **De l’ER al model Odoo**: com es tradueix una entitat en un model Python i després en una taula SQL.
+7. **Vistes i permisos**: XML bàsic i `ir.model.access.csv`.
+8. **Cicle de desenvolupament**: reiniciar, instal·lar i actualitzar mòduls.
 
 :::{tip}
-Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús).
+Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús). De l'ER al model Odoo conté molts conceptes i definicions de base de dades que poden resultar confusos al principi, així que és millor anar pas a pas i veure com es tradueix cada element a la pràctica. Realitza l'exercici pràctic abans de continuar amb el tema de creació de vistes.
 :::
 
 ## Què és un mòdul en Odoo?
@@ -334,7 +341,7 @@ En un mòdul real, la carpeta conté diverses subcarpetes:
 
 ```text
 nom_modul/
- ├── __init__.py                 ← indica què ha de carregar Python
+ ├── __init__.py                 ← indica què ha de carregar el Python
  ├── __manifest__.py             ← informació del mòdul (DNI)
  ├── models/                     ← models de dades (Python)
  │    ├── __init__.py
@@ -521,7 +528,7 @@ Aquest prefix actua com a espai de noms i evita col·lisions.
 
 #### 💡 Exemples dins d’Odoo
 | Mòdul     | Model            |
-|--||
+| --- | --- |
 | Vendes    | `sale.order`     |
 | Stock     | `stock.picking`  |
 | RRHH      | `hr.employee`    |
@@ -627,11 +634,11 @@ Així, la base de dades rebutjarà alumnes sense NIA o amb NIA duplicat.
 :::
 
 
-En Python la classe `Alumne` hereta de `models.Model`, que és la manera que té Odoo de saber que volem crear un model propi dins del framework. A la base de dades, Odoo crearà automàticament una taula anomenada `centre_alumne` amb les columnes `nia`, `name`, `edat` i `curs`. 
+La manera que té Odoo de saber que volem crear un model propi dins del framework és que en Python la classe `Alumne` herete de `models.Model`. A la base de dades, Odoo crearà automàticament una taula anomenada `centre_alumne` amb les columnes `nia`, `name`, `edat` i `curs`. 
 
 
 
-Quan escrius:
+Quan afiges al model un camp de tipus `Many2one`, com `tutor_id`, Odoo crea una columna `tutor_id` que és una clau forana que apunta a la taula `res_partner` (que és on es guarden els contactes, inclosos els tutors). Així, Odoo s’encarrega de gestionar les relacions entre taules i garantir la integritat referencial.:
 ```python
 from odoo import models, fields
 
@@ -646,7 +653,12 @@ class Alumne(models.Model):
         [('1eso','1r ESO'), ('2eso','2n ESO')],
         string="Curs"
     )
+    _sql_constraints = [
+        ('nia_unique', 'unique(nia)', "El NIA ja existeix. Ha de ser únic."),
+    ]
+
     tutor_id = fields.Many2one('res.partner', string="Tutor/a")
+    
 ```
 
 Odoo:
@@ -685,7 +697,7 @@ Odoo:
 
 %  1. ENTITATS 
 \node[entity] (Alumne) {ALUMNE};
-\node[entity, right=3.5cm of Alumne] (Tutor) {TUTOR};
+\node[entity, right=3.5cm of Alumne] (Tutor) {RES.PARTNER};
 
 %  2. ATRIBUTS D'ALUMNE (Disposició en ventall) 
 \node[attribute, above left=1.4cm and 2.8cm of Alumne.north] (nia) {\underline{nia}};
@@ -726,7 +738,7 @@ Odoo:
 \draw[thick] (Tutor.west) -- (tr_white.apex);
 
 %  6. CARDINALITATS 
-\node[above right=0.1cm of Alumne.east, font=\scriptsize\bfseries] {*};
+\node[above right=0.1cm of Alumne.east, font=\scriptsize\bfseries] {n};
 \node[above left=0.1cm of Tutor.west, font=\scriptsize\bfseries] {1};
 
 \end{tikzpicture}
@@ -779,12 +791,112 @@ Filtrat per jerarquia pare-fill (contacte que pertany a una empresa):
     )
 ```
 
+El lector apreciarà que si el tutor és un partner, també ho pot ser un alumne, client, proveïdor, professor, etc. Això és la màgia de `res.partner`: una sola entitat per a tot tipus de contactes. A més, Odoo permet crear subtipus de partner mitjançant camps booleanos o etiquetes, per exemple `is_student` per marcar els partners que són alumnes. Així, pots tenir un partner que és al mateix temps client, tutor i alumne, i Odoo gestionarà tota la informació de manera integrada. Alehores, el diagrama ER serà recursiu, amb `res.partner` com a entitat central i relacions cap a ella mateixa per representar les jerarquies i els rols dels contactes.
 
+### Traducció formal del model recursiu
+
+Per a que el sistema siga capaç de gestionar la jerarquia dins de la mateixa taula, la traducció del diagrama anterior al model relacional segueix estes fórmules:
+
+**1. Esquema de la relació (Taula):**
+
+L'entitat `ALUMNE` es tradueix en una taula SQL que inclou els seus atributs i la clau forana per a la relació recursiva:
+
+```{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    % Estil per a l'entitat (Rectangle)
+    entity/.style={
+        draw, thick, fill=white,
+        minimum width=2.5cm, minimum height=1cm,
+        align=center, font=\bfseries
+    },
+    % Estil per als atributs (Ovals)
+    attribute/.style={
+        draw, ellipse, fill=white,
+        minimum width=1.2cm, minimum height=0.6cm,
+        font=\small\itshape
+    },
+    % Estil per als triangles del rombe bicolor
+    t_white/.style={
+        draw, thick, fill=white,
+        isosceles triangle, isosceles triangle apex angle=60,
+        inner sep=0pt, minimum width=3mm, minimum height=4.5mm
+    },
+    t_black/.style={
+        draw, thick, fill=black,
+        isosceles triangle, isosceles triangle apex angle=60,
+        inner sep=0pt, minimum width=3mm, minimum height=4.5mm
+    }
+]
+
+% 1. L'ENTITAT A
+\node[entity] (A) {A};
+
+% 2. ELS ATRIBUTS D'A (Com al dibuix)
+\node[attribute, left=0.8cm of A] (a0) {\underline{a0}};
+\node[attribute, below left=0.5cm and 0.1cm of A] (a1) {a1};
+
+\draw[thick] (A.west) -- (a0.east);
+\draw[thick] (A.south west) -- (a1.north east);
+
+% 3. EL LLAÇ RECURSIU (RELACIÓ R)
+% Camí del llaç: ix per dalt, va a la dreta i baixa
+\draw[thick] (A.north) -- ++(0,1cm) coordinate (top) -- ++(2.5cm,0) coordinate (corner) -- (A.east -| corner) -- (A.east);
+
+% 4. EL ROMBE BICOLOR (Al lateral, com al dibuix a mà)
+\coordinate (midR) at ($(corner)!0.5!(A.east -| corner)$);
+
+% Segons la teua imatge: Triangle negre (N) a la banda de l'entitat, blanc (1) a la banda del bucle
+\node[t_black, rotate=90, anchor=lower side] at (midR) (tr_black) {};
+\node[t_white, rotate=-90, anchor=lower side] at (midR) (tr_white) {};
+
+
+
+% 5. CARDINALITATS (Intercanviades segons la imatge a mà: N a l'entitat, 1 al bucle)
+\node[right=0.1cm of A.east, yshift=0.2cm, font=\small\bfseries] {n};
+\node[above=0.1cm of A.north, xshift=-0.2cm, font=\small\bfseries] {1};
+
+% 6. ATRIBUT DE RELACIÓ r (minúscula, depenent del rombe)
+\node[attribute, above left=0.7cm and -1.8cm of tr_black] (r_attr) {r};
+\draw[thick] (tr_black.lower side) -- (r_attr.south west);
+
+\end{tikzpicture}
+```
+
+L'entitat $A$ (que en el nostre cas pràctic serà `res.partner`) absorbeix la relació $R$ de la següent manera:
+
+```{math}
+A = (\underline{a_0}, a_1, a_0', r)
+```
+
+**2. Definició dels components:**
+* **$a_0$ (Clau Primària - PK):** Identificador únic del partner (el camp `id` en Odoo).
+* **$a_1$ (Atributs):** Dades pròpies de l'entitat (nom, edat, curs, etc.).
+* **$a_0'$ (Clau Aliena - FK):** El camp `tutor_id` que apunta a un $a_0$ de la mateixa taula.
+* **$r$ (Atribut de relació):** Dada extra que només té sentit si existeix el vincle (per exemple, la data d'assignació del tutor).
+
+**3. Restriccions d'Integritat (RI):**
+* **Integritat Referencial:** La clau aliena ha d'apuntar necessàriament a un registre existent o ser nula per a evitar orfes: 
+
+    ```{math}
+    a_0' \rightarrow A(a_0)
+    ```
+* **Restricció d'existència de l'atribut $r$:** Com s'ha indicat en el disseny, si no hi ha una relació establerta, l'atribut associat ha de ser nul:
+
+```{math}
+\mathrm{si}\;\mathrm{nul}(a_0') \rightarrow \mathrm{nul}(r)
+```
+
+Esta traducció formal és la que Odoo aplica internament. En els pròxims apartats voreu que eixa clau aliena ($a_0'$) es programa en Python mitjançant un camp de tipus `Many2one` que apunta al mateix model, i que la restricció d'integritat ($RI$) la controlarem més avant amb la lògica de negoci del mòdul.
+
+De moment, el que ens interessa és vore com podem posar en pràctica este disseny utilitzant l'herència, per a no haver de recrear de zero tota la infraestructura de contactes que Odoo ja ens ofereix.
 
 ### Herència de models en Odoo
 
 
-En l’exemple anterior hem creat un model nou heretant de `models.Model`. Ara bé, en molts casos no cal crear un model des de zero, sinó **ampliar un model existent** d’Odoo. El cas més habitual és estendre `res.partner` des del teu mòdul, utilitzant `_inherit`.
+En l’exemple anterior hem creat un model nou heretant de `models.Model`. Ara bé, com ja hem vist en molts casos no cal crear un model des de zero, sinó **ampliar un model existent** d’Odoo. El cas més habitual és estendre `res.partner` des del teu mòdul, utilitzant `_inherit`.
 
 Per afegir camps nous a `res.partner` (per exemple, per marcar si un partner és un alumne i guardar el seu expedient), només cal fer:
 ```python
@@ -884,10 +996,10 @@ En teoria ER, l’especialització també porta **restriccions**. En Odoo es tra
 
 - **Disjunta vs solapada**
     - **Disjunta**: una instància només pot pertànyer a un subtipus.
-        En Odoo, ho controles amb un camp discriminador (`Selection`) + constriccions (`@api.constrains` o `_sql_constraints`). Per exemple, un `res.partner` pot ser “alumne” o “professor”, però no els dos alhora. Això ho controlaríem amb un camp `role` i una restricció que no permet guardar un partner amb rol “alumne/professor” si ja té un altre rol.
+        En Odoo, ho controles amb un camp discriminador (`Selection`) + constriccions (`@api.constrains` o `_sql_constraints`). Per exemple, si un `res.partner` pot ser “alumne” o “professor”, però no els dos alhora. Això ho controlaríem amb un camp `role` i una restricció que no permet guardar un partner amb rol “alumne/professor” si ja té un altre rol.
 
     - **Solapada**: una instància pot pertànyer a diversos subtipus.
-        En Odoo, sol modelar-se amb diversos booleans/etiquetes/relacions, i validacions de coherència quan calga. Per exemple, un `res.partner` pot ser “alumne” i “tutor” al mateix temps, i això no és un problema.
+        En Odoo, sol modelar-se amb diversos booleans/etiquetes/relacions, i validacions de coherència quan calga. Per exemple, si un `res.partner` pot ser “alumne” i “tutor” al mateix temps, i això no és un problema.
 
 - **Total vs parcial**
     - **Total**: tota instància del supertipus ha d’estar especialitzada.
@@ -1004,6 +1116,45 @@ class AssignacioDocent(models.Model):
     ]
 ```
 
+**Traducció formal de la relació ternària**
+
+En este cas, la relació **Professor imparteix Mòdul a Grup** es materialitza en Odoo com una taula associativa pròpia:
+
+```{math}
+centre\_assignacio\_docent = (\underline{id}, professor\_id, modul\_id, grup\_id)
+```
+
+**Components de l'esquema:**
+
+- **$id$ (PK):** clau primària tècnica que Odoo crea automàticament.
+- **$professor\_id$ (FK):** referència a `hr.employee(id)`.
+- **$modul\_id$ (FK):** referència a `centre.modul(id)`.
+- **$grup\_id$ (FK):** referència a `centre.grup(id)`.
+
+**Restriccions d'integritat:**
+
+- Integritat referencial:
+
+    ```{math}
+    professor\_id \rightarrow hr\_employee(id)
+    ```
+
+    ```{math}
+    modul\_id \rightarrow centre\_modul(id)
+    ```
+
+    ```{math}
+    grup\_id \rightarrow centre\_grup(id)
+    ```
+
+- Unicitat de la relació:
+
+```{math}
+\operatorname{unique}(professor\_id, modul\_id, grup\_id)
+```
+
+És a dir, la mateixa combinació de professor, mòdul i grup no pot aparéixer dues vegades en la taula.
+
 L’estructura d’una `_sql_constraints` és una llista de tuples amb tres elements:
 `(nom, definicio_sql, missatge_error)`.
 
@@ -1058,29 +1209,10 @@ class Alumne(models.Model):
     tutor_id = fields.Many2one('res.partner', string="Tutor/a", ondelete='set null')
 ```
 
-### 🛡️ Comprovació de dades: `@api.constrains` vs `_sql_constraints`
-
-Ja hem vist les `_sql_constraints` (úniques o comprovacions SQL simples), però quan la regla és més complexa (per exemple, validar que l’edat siga positiva), usem constraints en Python:
-
-```python
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError
-
-class Alumne(models.Model):
-    _name = 'centre.alumne'
-    edat = fields.Integer(string="Edat")
-
-    @api.constrains('edat')
-    def _check_edat_positiva(self):
-        for record in self:
-            if record.edat < 0:
-                raise ValidationError("L'edat no pot ser negativa!")
-```
-
 **Resum de claus alienes en Odoo**
-
+En la taula de relacions, les claus alienes són el mecanisme que garanteix la integritat referencial. En Odoo, es gestionen automàticament amb els camps `Many2one`, i el comportament en cas d’esborrat del registre pare es controla amb l’atribut `ondelete`. És fonamental triar l’opció correcta (`set null`, `restrict` o `cascade`) segons la lògica de negoci i el risc associat a cada cas. En la taula següent es resumeixen les opcions i les seues implicacions:
 | Concepte | Descripció |
-|||
+| --- | --- |
 | FK (Clau aliena) | Implementada per un camp `Many2one`. |
 | Integritat | Garantida per PostgreSQL i gestionada per Odoo. |
 | `restrict` | Bloqueja l’esborrat del pare si hi ha fills. |
@@ -1105,6 +1237,27 @@ Per tant, la regla pràctica és:
 
 
 
+### 🛡️ Comprovació de dades: `@api.constrains` vs `_sql_constraints`
+
+Ja hem vist les `_sql_constraints` (úniques o comprovacions SQL simples), però quan la regla és més complexa (per exemple, validar que l’edat siga positiva), usem constraints en Python:
+
+```python
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
+
+class Alumne(models.Model):
+    _name = 'centre.alumne'
+    edat = fields.Integer(string="Edat")
+
+    @api.constrains('edat')
+    def _check_edat_positiva(self):
+        for record in self:
+            if record.edat < 0:
+                raise ValidationError("L'edat no pot ser negativa!")
+```
+
+
+
 En resum: el **model relacional** és la implementació física; ER és la vista conceptual, i Odoo ho materialitza amb models + camps + claus/validacions.
 
 
@@ -1113,142 +1266,176 @@ En resum: el **model relacional** és la implementació física; ER és la vista
 
 Abans de començar a programar, és fonamental saber com traduir les estructures del diagrama conceptual (ER) a models d'Odoo. Basant-nos en la simbologia de triangles (blancs per a cardinalitat 1, negres per a molts), seguirem aquestes regles:
 
-### 1. Atributs multivalents (El cas del telèfon)
-Si en el diagrama apareix un atribut que pot tindre diversos valors (per exemple, una Patinadora amb diversos telèfons de contacte), **no** creem camps `phone1`, `phone2`.
-- **Regla:** Creem un model nou per a l'atribut i el relacionem amb un `Many2one` cap al model principal.
-- **En Odoo:** La Patinadora tindrà un camp `One2many` per a llistar tots els seus telèfons.
-Per exemple:
-```python
-class Patinadora(models.Model):
-    _name = 'patinatge.patinadora'
-    name = fields.Char(string="Nom")
-    phone_ids = fields.One2many('patinatge.patinadora.phone', 'pat  inadora_id', string="Telèfons")                                                                                                         
+### Atributs multivalents (El cas del telèfon)
 
-class PatinadoraPhone(models.Model):
-    _name = 'patinatge.patinadora.phone'
-    patinadora_id = fields.Many2one('patinatge.patinadora', on delete='cascade')
-    phone = fields.Char(string="Telèfon")
-``` 
-
-
-### 2. Cardinalitat en relacions ternàries
-En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `patinatge.participacio`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
-
-| Tipus de Ternària | Triangles Blancs | On posar el `unique(...)`? | Lògica Odoo |
-| : | :: | : | : |
-| **N:M:P** | 0 | `(A, B, C)` | Qualsevol combinació és vàlida (cap element "mana"). |
-| **1:M:N** | 1 (a C) | `(A, B)` | La parella A i B ja determina un únic C. |
-| **1:1:M** | 2 (a B i C) | `(A, C)` o `(A, B)` | Amb dos elements identifiquem la resta. |
-| **1:1:1** | 3 | `(A)`, `(B)`, `(C)` | Cada element és únic en tota la taula (exclusivitat absoluta). |
-
-#### Aplicació al nostre exercici:
-En el nostre cas, el **Grup** té un triangle **blanc** (cardinalitat 1). Això significa que per a una **Patinadora** i un **Entrenament** concrets, només pot haver-hi **un grup** organitzador.
-
-A nivell de base de dades, la restricció d'unicitat més estricta per a aquest esquema seria:
-```python
-_sql_constraints = [
-    ('uniq_participacio', 'unique(patinadora_id, entrenament_id)', 
-     'Aquesta patinadora ja està inscrita en aquest entrenament!')
-]
-```
-
-*(Nota: Si usem la tripleta `unique(patinadora_id, grup_id, entrenament_id)`, estem sent més permissius, permetent que una xica participe en el mateix entrenament amb dos grups diferents, la qual cosa seria una relació N:M:P).* 
-
-
-:::{tip}
-**El triangle blanc "mana":** L'entitat que té el triangle blanc queda **fora** del `unique(...)` compost. Això força que la combinació de les altres dues siga la que identifique el registre de manera única.
-:::
-
-#### Resum de traducció: Cardinalitat ternària a Odoo
-
-En totes les relacions ternàries, la solució física en Odoo és la mateixa: crear un **model associatiu intermedi** amb tres camps `Many2one`. El que canvia segons el diagrama conceptual (triangles blancs o negres) és la força de la restricció d’unicitat en `_sql_constraints`.
-
-| Tipus de Ternària | Triangles | On posar el `unique(...)`? | Lògica de negoci (Exemple) |
-| : | : | : | : |
-| **M:N:P** | 0 blancs | `(A, B, C)` | **Professor-Mòdul-Grup**: Qualsevol combinació és vàlida mentre no es repetisca la fila exacta. |
-| **1:M:N** | 1 blanc (a C) | `(A, B)` | **Metge-Pacient-Consultori**: La parella Metge i Pacient ja determina un únic Consultori. No poden estar en dos alhora. |
-| **1:1:M** | 2 blancs (a B i C)| `(A, C)` o `(A, B)` | **Alumne-Ordinador-Aula**: Un alumne en una aula concreta només pot tindre un ordinador assignat. |
-| **1:1:1** | 3 blancs | `(A)`, `(B)`, `(C)` (per separat) | **Casament**: Cada cònjuge i cada jutge només poden participar en un registre únic de la taula. |
-
-##### Implementació de les restriccions segons el cas:
-
-1. **Cas Estàndard (M:N:P):** Unicitat de la tripleta completa.
-```python
-_sql_constraints = [
-    ('uniq_abc', 'unique(a_id, b_id, c_id)', 'Registre duplicat')
-]
-```
-
-2. **Cas Restrictiu (1:M:N):** La combinació de dues entitats "bloqueja" la tercera (la del triangle blanc).
-```python
-# Si C és el costat amb triangle blanc:
-_sql_constraints = [
-    ('uniq_ab', 'unique(a_id, b_id)', 'A i B ja tenen un C assignat')
-]
-```
-
-3. **Cas d'Exclusivitat Total (1:1:1):** Cada element només pot aparéixer una vegada en tota la taula.
-```python
-_sql_constraints = [
-    ('uniq_a', 'unique(a_id)', 'L’element A ja està ocupat en una altra relació'),
-    ('uniq_b', 'unique(b_id)', 'L’element B ja està ocupat'),
-    ('uniq_c', 'unique(c_id)', 'L’element C ja està ocupat')
-]
-```
-
-:::{tip}
-**Com saber quina restricció aplicar?**
-Mira el diagrama: si una entitat té un **triangle blanc**, significa que la combinació de les **altres entitats** ha de ser única per a ella. Si el triangle és **negre**, eixa entitat pot repetir-se en moltes combinacions diferents (forma part de la clau).
-:::
-
-
-
-## Patrons avançats de traducció ER a Odoo
-
-Per a completar la traducció de qualsevol disseny de base de dades a Odoo, hem d'abordar els casos especials que defineixen l'estructura jeràrquica i la dependència d'existència.
-
-### Relacions Binàries 1:1
-Són relacions on cada registre d'una entitat només pot estar vinculat, com a màxim, a un únic registre de l'altra entitat. En Odoo no existeix un camp específic per a 1:1 `One2one`, però es pot modelar amb un `Many2one` i una restricció d'unicitat.
-- **En Odoo:** es modelen amb `Many2one` i una restricció `UNIQUE` sobre el camp de relació.
+Quan una entitat té un atribut que pot contindre múltiples valors per a un mateix registre (atribut multivalent), la traducció al model relacional genera dues taules per a evitar grups repetitius i complir amb la Primera Forma Normal (1FN).
 
 ```{tikz}
-\usetikzlibrary{shapes.geometric, positioning, calc}
+\usetikzlibrary{shapes.geometric,positioning,calc}
+
 \begin{tikzpicture}[
     font=\sffamily,
     entity/.style={draw, thick, fill=white, minimum width=2.5cm, minimum height=1cm, align=center, font=\bfseries},
-    t_white/.style={draw, thick, fill=white, isosceles triangle, isosceles triangle apex angle=60, inner sep=0pt, minimum width=3mm, minimum height=4.5mm}
+    attribute/.style={draw, ellipse, fill=white, minimum width=1.5cm, minimum height=0.7cm, font=\small\itshape},
+    % Estil per a atributs multivalents (doble oval)
+    multi_attribute/.style={draw, ellipse, double, fill=white, minimum width=1.5cm, minimum height=0.7cm, font=\small\itshape}
 ]
-    \node[entity] (E) {EMPLEAT};
-    \node[entity, right=3.5cm of E] (O) {ORDINADOR};
-    
-    \path (E.east) -- (O.west) coordinate[midway] (mid);
-    \node[t_white, rotate=-180, anchor=lower side] at (mid) (tw1) {};
-    \node[t_white, rotate=0, anchor=lower side] at (mid) (tw2) {};
-    
-    \draw[thick] (E.east) -- (tw1.apex);
-    \draw[thick] (O.west) -- (tw2.apex);
-    \node[above=0.3cm of mid, font=\scriptsize\itshape] {té};
+
+% 1. L'ENTITAT A
+\node[entity] (A) {A};
+
+% 2. ATRIBUT CLAU a0
+\node[attribute, above left=1cm and 0.5cm of A] (a0) {\underline{a0}};
+\draw[thick] (A.north west) -- (a0.south east);
+
+% 3. ATRIBUT MULTIVALENT a1 (Amb la "n" del teu dibuix)
+\node[attribute, below left=1cm and 0.5cm of A] (a1) {a1};
+\draw[thick] (A.south west) -- (a1.north east) node[midway, left, font=\scriptsize] {n};
+
+% 4. ALTRES ATRIBUTS (...)
+\node[attribute, right=1cm of A] (punts) {...};
+\draw[thick] (A.east) -- (punts.west);
+
 \end{tikzpicture}
 ```
 
-```python
-class Ordinador(models.Model):
-    _name = 'centre.ordinador'
+**1. Esquema de l'entitat principal (A):**
+L'entitat manté els seus atributs atòmics, però l'atribut multivalent "desapareix" d'esta taula:
 
-    empleat_id = fields.Many2one('centre.empleat', string="Usuari")
+```{math}
+A = (\underline{a_0}, \dots)
+```
+
+**2. Esquema de la nova taula per a l'atribut multivalent (B):**
+Es crea una taula específica (B) on la clau és composta, formada per la clau de l'entitat pare i el propi atribut:
+
+```{math}
+B = (\underline{a_0, a_1})
+```
+
+**3. Restriccions d'Integritat (RI):**
+* **Clau Aliena (CA):** El camp $a_0$ de la taula B referencia a la taula principal per a mantindre el lligam:
+
+    ```{math}
+    C.Aliena: a_0 \rightarrow A(a_0)
+    ```
+
+    > **Nota:** **Sempre que la relació siga 1:M** (un registre de A pot tindre molts de B, però cada B pertany a un únic A), la taula B "es lleva la clau" simple per a convertir-la en una clau composta $(\underline{a_0 + a_1})$. Això garanteix que no es repetisca el mateix valor multivalent per al mateix registre.
+
+    > **Exemple:** Si `A` és `CLIENT` i `a_1` és `TELÈFON`, i la relació és **1:M** (un client pot tindre molts telèfons, però cada telèfon pertany a un únic client):
+    > - Taula `A` (CLIENTS): $(\underline{id\_client}, nom, ...)$
+    > - Taula `B` (TELÈFONS): $(\underline{id\_client, telèfon})$ ← clau composta
+
+    > **En canvi**, si la relació fora **M:M** (molts clients poden compartir telèfons o molts telèfons poden assignar-se a molts clients), caldria una **tercera taula associativa** amb dues claus alienes, no una clau multivalent.
+
+    > En Odoo: el cas 1:M se soluciona amb `One2many` + `Many2one` en el model fill (`telèfon_id = Many2one('client')`), no amb un camp text repetit. El cas M:M es modela amb `Many2many` o amb un model intermedi explícit si la relació té atributs propis.
+
+
+Aplicat al nostre exemple de la **Patinadora** (atribut multivalent *telèfon*), la traducció queda exactament igual que el patró anterior:
+
+- **Entitat principal (A):** `patinatge.patinadora` (guarda les dades atòmiques de la patinadora).
+- **Taula/Model del multivalent (B):** `patinatge.patinadora.phone` (una fila per cada telèfon).
+- **Lligam 1:M:** cada telèfon pertany a una única patinadora (`Many2one`) i cada patinadora pot tindre molts telèfons (`One2many`).
+
+Per això, **no** usem camps `phone1`, `phone2`, etc.; usem un model fill relacionat:
+
+```python
+class Patinadora(models.Model):
+    _name = 'patinatge.patinadora'
+
+    name = fields.Char(string="Nom", required=True)
+    phone_ids = fields.One2many(
+        'patinatge.patinadora.phone',
+        'patinadora_id',
+        string="Telèfons"
+    )
+
+
+class PatinadoraPhone(models.Model):
+    _name = 'patinatge.patinadora.phone'
+
+    patinadora_id = fields.Many2one(
+        'patinatge.patinadora',
+        string="Patinadora",
+        required=True,
+        ondelete='cascade'
+    )
+    phone = fields.Char(string="Telèfon", required=True)
 
     _sql_constraints = [
         (
-            'uniq_empleat',
-            'unique(empleat_id)',
-            "Aquest empleat ja té un ordinador assignat!"
+            'uniq_patinadora_phone',
+            'unique(patinadora_id, phone)',
+            'Este telèfon ja està registrat per a esta patinadora.'
         )
     ]
 ```
 
-### Atributs Multivalents Compostos
-Quan un atribut es repeteix i, a més, té subcamps (per exemple, adreces amb carrer, ciutat i codi postal), no convé guardar-ho en un únic camp de text.
-- **En Odoo:** creem un model fill i el relacionem amb el model principal (`One2many` ↔ `Many2one`).
+### 1.7.4 Traducció d'atributs multivalents compostos
+
+Quan un atribut és alhora multivalent (té $n$ valors) i compost (es divideix en sub-atributs), la traducció al model relacional segueix el patró de creació d'una taula associada per a mantindre l'atomicitat.
+
+
+```{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    entity/.style={draw, thick, fill=white, minimum width=2.5cm, minimum height=1cm, align=center, font=\bfseries},
+    attribute/.style={draw, ellipse, fill=white, minimum width=1.5cm, minimum height=0.7cm, font=\small\itshape}
+]
+
+% 1. L'ENTITAT A
+\node[entity] (A) {A};
+
+% 2. ATRIBUT CLAU a0
+\node[attribute, above left=1.2cm and 0.5cm of A] (a0) {\underline{a0}};
+\draw[thick] (A.north west) -- (a0.south east);
+
+% 3. L'ATRIBUT COMPOST RAMIFICAT
+% Punt de ramificació
+\coordinate (ramificacio) at ($(A.east) + (1.5cm, 0)$);
+
+% Atributs fulla
+\node[attribute, above right=0.8cm and 0.5cm of ramificacio] (a1) {a1};
+\node[attribute, right=0.5cm of ramificacio] (a2) {a2};
+\node[attribute, below right=0.8cm and 0.5cm of ramificacio] (a3) {a3};
+
+% Connexions
+\draw[thick] (A.east) -- (ramificacio) 
+    node[midway, above, font=\small] {a}
+    node[midway, below, font=\small] {n};
+\draw[thick] (ramificacio) -- (a1.west);
+\draw[thick] (ramificacio) -- (a2.west);
+\draw[thick] (ramificacio) -- (a3.west);
+
+\end{tikzpicture}
+```
+
+
+**1. Esquema de l'entitat principal (A):**
+L'atribut compost multivalent desapareix de la taula principal per a evitar grups repetitius:
+
+```{math}
+A = (\underline{a_0}, \dots)
+```
+
+**2. Esquema de la taula de l'atribut (B):**
+Es crea una taula que conté la clau de l'entitat principal i tots els sub-atributs que formaven el compost. La clau primària serà la combinació de tots ells (o una part, depenent de la unicitat):
+
+```{math}
+B = (\underline{a_0, a_1, a_2, a_3})
+```
+
+**3. Restriccions d'Integritat (RI):**
+* **Clau Aliena (CA):** El camp $a_0$ de la taula B referencia necessàriament a la taula principal:
+
+```{math}
+C.Aliena: a_0 \rightarrow A(a_0)
+```
+
+> **Exemple d'Odoo (Adreces de Patinadores):**  Imaginem que una patinadora pot tindre diverses adreces (multivalent) i que cada adreça es compon de carrer, número i població (compost). En Odoo, no podem crear una llista de camps dins de la mateixa classe; hem de crear un model per a l'entitat principal i un altre per a l'atribut multivalent compost.
+
 
 ```{tikz}
 \usetikzlibrary{shapes.geometric,positioning,calc}
@@ -1286,12 +1473,12 @@ Quan un atribut es repeteix i, a més, té subcamps (per exemple, adreces amb ca
 
 %  2. ATRIBUTS COMPOSTOS D'ADREÇA 
 \node[attribute, above=1.4cm of A.east] (c) {carrer};
-\node[attribute, right=1cm of A] (ci) {ciutat};
-\node[attribute, below right=1.1cm and 0.10cm of A.east] (cp) {cp};
+\node[attribute, right=1cm of A] (ci) {número};
+\node[attribute, below right=1.1cm and 0.10cm of A.east] (cp) {població};
 
-\draw[thick] (A.north east) -- (c.south west);
+\draw[thick] (A.north) -- (c.south west);
 \draw[thick] (A.east) -- (ci.west);
-\draw[thick] (A.south east) -- (cp.north west);
+\draw[thick] (A.south) -- (cp.north west);
 
 %  3. RELACIÓ 1:N AMB ROMBE BICOLOR 
 \path (P.east) -- (A.west) coordinate[midway] (midrel);
@@ -1311,32 +1498,554 @@ Quan un atribut es repeteix i, a més, té subcamps (per exemple, adreces amb ca
 \end{tikzpicture}
 ```
 
-:::{tip}
-**Nota de modelatge en Odoo amb `res.partner`**
+#### Implementació en Python (Odoo)
 
-Si el model deriva o reutilitza `res.partner`, moltes dades d'adreça **ja existeixen** (`street`, `street2`, `zip`, `city`, `state_id`, `country_id`).
 
-Per tant, en un cas real, abans de crear un model `adreca` separat, convé valorar si amb `res.partner` (o amb contactes fills via `child_ids`) ja cobrixes el requisit.
-:::
+
+En aquest cas, `ADREÇA` és una **entitat dèbil** perquè:
+1. La seua existència depèn completament de `PATINADORA` (no pot haver-hi adreça sense patinadora).
+2. La seua identificació és **composta**: una adreça es distingeix pels seus atributs (carrer, número, població) **dins del context d'una patinadora**.
+
+Per tant, la taula `club_patinadora_adreca` ha de reflectir esta dependència en la base de dades.
 
 ```python
+from odoo import models, fields
+
 class Patinadora(models.Model):
-    _name = 'patinatge.patinadora'
+    _name = 'club.patinadora'
+    _description = 'Patinadora del club'
 
-    adreca_ids = fields.One2many('patinatge.adreca', 'patinadora_id', string="Adreces")
+    name = fields.Char(string="Nom", required=True)
+    # Relació One2many per a llistar totes les seues adreces
+    adreca_ids = fields.One2many(
+        'club.patinadora.adreca', 
+        'patinadora_id', 
+        string="Adreces"
+    )
 
-class Adreca(models.Model):
-    _name = 'patinatge.adreca'
 
-    patinadora_id = fields.Many2one('patinatge.patinadora', ondelete='cascade', required=True)
-    carrer = fields.Char(string="Carrer")
-    ciutat = fields.Char(string="Ciutat")
-    cp = fields.Char(string="Codi postal")
+class PatinadoraAdreca(models.Model):
+    _name = 'club.patinadora.adreca'
+    _description = 'Adreça de la patinadora (entitat dèbil)'
+
+    # Clau Aliena cap a la patinadora (participació total obligatòria)
+    # ondelete='cascade' garanteix que si s'esborra la patinadora, s'esborren totes les adreces
+    patinadora_id = fields.Many2one(
+        'club.patinadora', 
+        string="Patinadora", 
+        required=True,
+        ondelete='cascade'
+    )
+    
+    # Sub-atributs del compost: identifiquen de manera única l'adreça dins de la patinadora
+    carrer = fields.Char(string="Carrer", required=True)
+    numero = fields.Integer(string="Número", required=True)
+    poblacio = fields.Char(string="Població", default="Tavernes de la Valldigna", required=True)
+
+    # Restricció de clau composta: la combinació (patinadora_id, carrer, numero, poblacio)
+    # ha de ser única per evitar duplicar la mateixa adreça per a una mateixa patinadora
+    _sql_constraints = [
+        (
+            'uniq_patinadora_adreca',
+            'unique(patinadora_id, carrer, numero, poblacio)',
+            "Esta adreça ja està registrada per a esta patinadora."
+        )
+    ]
 ```
+
+**Explicació dels elements clau:**
+
+1. **`required=True` en `patinadora_id`:** Implementa la **participació total** (doble ratlla en ER): una adreça no pot existir sense una patinadora associada. Odoo rebutjarà qualsevol intent de crear una adreça sense patinadora.
+
+2. **`ondelete='cascade'`:** Implementa la **dependència existencial** (característica de les entitats dèbils): si s'esborra una patinadora, Odoo **automàticament esborrarà** totes les seues adreces. No quedaran adreces orfes.
+
+3. **`_sql_constraints` amb clau composta:** Implementa la **identificació relativa** de l'entitat dèbil. La taula base de dades tindrà una restricció `UNIQUE` que garanteix que:
+   - No es pot repetir la mateixa combinació de `(patinadora_id, carrer, numero, poblacio)`.
+   - Això significa que una patinadora pot tindre múltiples adreces, però cadascuna ha de ser única (no pot haver-hi dues adreces idèntiques per a la mateixa patinadora).
+
+**Traducció formal al model relacional:**
+
+L'esquema de la taula `club_patinadora_adreca` queda així:
+
+```{math}
+club\_patinadora\_adreca = (\underline{patinadora\_id, carrer, numero, poblacio})
+```
+
+On la clau primària és la combinació dels quatre camps. La clau aliena `patinadora_id` referencia `club_patinadora(id)` i es força en cascada per garantir que no hi ha adreces sense patinadora.
+
+
+### Cardinalitat en relacions ternàries
+En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `patinatge.participacio`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
+
+| Tipus de Ternària | Triangles Blancs | On posar el `unique(...)`? | Lògica Odoo |
+| --- | --- | --- | --- |
+| **M:N:P** | 0 | `(A, B, C)` | Qualsevol combinació és vàlida (cap element "mana"). |
+| **1:M:N** | 1 (a C) | `(A, B)` | La parella A i B ja determina un únic C. |
+| **1:1:M** | 2 (a B i C) | `(A, C)` o `(A, B)` | Amb dos elements identifiquem la resta. |
+| **1:1:1** | 3 | `(A)`, `(B)`, `(C)` | Cada element és únic en tota la taula (exclusivitat absoluta). |
+
+:::{tip}
+**El triangle blanc "mana":** L'entitat que té el triangle blanc queda **fora** del `unique(...)` compost. Això força que la combinació de les altres dues siga la que identifique el registre de manera única.
+:::
+
+
+##### Implementació de les restriccions segons el cas:
+
+1. **Cas Estàndard (M:N:P):** Unicitat de la tripleta completa.
+
+```{tikz}
+\usetikzlibrary{shapes.geometric, positioning, calc}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    % Estil per a les entitats (Rectangles)
+    entity/.style={
+        draw, thick, fill=white,
+        minimum width=3.2cm, minimum height=1.1cm,
+        align=center, font=\bfseries
+    },
+    % Estil per als atributs (Ovals)
+    attribute/.style={
+        draw, ellipse, fill=white,
+        minimum width=2.2cm, minimum height=0.8cm,
+        font=\small\itshape
+    }
+]
+
+%  1. ENTITATS (Posició original per a relació ternària M:N:P) 
+\coordinate (Rel) at (0,0);
+
+\node[entity] (A) at (-4.0,1.6) {A};
+\node[entity] (B) at (4.0,1.6) {B};
+\node[entity] (C) at (0,-2.5) {C};
+
+%  2. ATRIBUTS CLAU DE CADA ENTITAT 
+\node[attribute, above right=0.6cm and 0.2cm of A] (a0) {\underline{a0}};
+\node[attribute, above left=0.6cm and 0.2cm of B] (b0) {\underline{b0}};
+\node[attribute, above left=0.6cm and 0.2cm of C] (c0) {\underline{c0}};
+
+%  3. CONNEXIONS DELS ATRIBUTS A LES ENTITATS 
+\draw[thick] (A.north) -- (a0.south west);
+\draw[thick] (B.north) -- (b0.south east);
+\draw[thick] (C.west) -- (c0.south);
+
+%  4. RELACIÓ TERNÀRIA M:N:P EN TRIANGLES CORRECTA
+% Per a M:N:P, el triangle cap a C (p) és NEGRE.
+% Els altres dos (cap a A i B, ambdós molts) també són NEGRES.
+
+% Triangle Esquerra (cap a A) - NEGRE
+\filldraw[fill=black, draw=black, thick]
+    (-1.20,0.90) -- (0,0.90) -- (-0.60,-0.15) -- cycle;    
+
+% Triangle Dreta (cap a B) - NEGRE
+\filldraw[fill=black, draw=black, thick]
+    (1.20,0.90) -- (0,0.90) -- (0.60,-0.15) -- cycle;      
+
+% Triangle Inferior (cap a C) - NEGRE (cardinalitat p)
+\filldraw[fill=black, draw=black, thick]
+    (0,-1.20) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;   
+
+% Triangle central (fons blanc per a tancar la figura)
+\filldraw[fill=white, draw=black, thick]
+    (0,0.90) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;    
+
+% Etiqueta de la relació
+\node[font=\small] at (2.25,0.10) {R};
+
+%  5. ATRIBUT DE LA RELACIÓ 
+\node[attribute] (id) at (0.65,2.20) {\underline{id}};
+\draw[dashed] (Rel) -- (id);
+
+%  6. CONNEXIONS (Relació ternària M:N:P) 
+% Costat A (cardinalitat n)
+\draw[thick] (A.east) -- (-1.20,0.90) node[pos=0.74, above] {n};
+% Costat B (cardinalitat m)
+\draw[thick] (B.west) -- (1.20,0.90) node[pos=0.74, above] {m};
+% Costat C (cardinalitat p)
+\draw[thick] (C.north) -- (0,-1.20) node[pos=0.74, right] {p};
+
+%  7. EXPLICACIÓ DE LA RESTRICCIÓ M:N:P
+\node[draw, dashed, fill=white, font=\scriptsize, align=left] (Const) at (3.35,-2.25) {
+    sql\_constraints:\\
+    unique(a\_id, b\_id, c\_id)
+};
+\draw[->, bend left=18, gray] (Const) to (0,-0.20);
+
+\end{tikzpicture}
+```
+**Traducció formal (M:N:P):**
+L'esquema de la taula associativa ($R$) conté les tres claus alienes com a part de la seua clau primària:
+
+```{math}
+R = (\underline{a_0, b_0, c_0}, r)
+```
+
+**Restriccions d'Integritat (RI):**
+* **Integritat Referencial:** Les tres claus han d'existir en les seues respectives taules:
+    ```{math}
+    a_0 \rightarrow A(a_0), \quad b_0 \rightarrow B(b_0), \quad c_0 \rightarrow C(c_0)
+    ```
+
+
+**Implementació en Python (Odoo):**
+```python
+...
+_sql_constraints = [
+    ('uniq_abc', 'unique(a_id, b_id, c_id)', 'Registre duplicat')
+]
+```
+
+2. **Cas Restrictiu (1:M:N):** La combinació de dues entitats "bloqueja" la tercera (la del triangle blanc).
+```{tikz}
+\usetikzlibrary{shapes.geometric, positioning, calc}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    % Estil per a les entitats (Rectangles)
+    entity/.style={
+        draw, thick, fill=white,
+        minimum width=3.2cm, minimum height=1.1cm,
+        align=center, font=\bfseries
+    },
+    % Estil per als atributs (Ovals)
+    attribute/.style={
+        draw, ellipse, fill=white,
+        minimum width=2.2cm, minimum height=0.8cm,
+        font=\small\itshape
+    }
+]
+
+%  1. ENTITATS (Posició original per a relació ternària 1:M:N) 
+\coordinate (Rel) at (0,0);
+
+\node[entity] (A) at (-4.0,1.6) {A};
+\node[entity] (B) at (4.0,1.6) {B};
+\node[entity] (C) at (0,-2.5) {C};
+
+%  2. ATRIBUTS CLAU DE CADA ENTITAT 
+\node[attribute, above right=0.6cm and 0.2cm of A] (a0) {\underline{a0}};
+\node[attribute, above left=0.6cm and 0.2cm of B] (b0) {\underline{b0}};
+\node[attribute, above left=0.6cm and 0.2cm of C] (c0) {\underline{c0}};
+
+%  3. CONNEXIONS DELS ATRIBUTS A LES ENTITATS 
+\draw[thick] (A.north) -- (a0.south west);
+\draw[thick] (B.north) -- (b0.south east);
+\draw[thick] (C.west) -- (c0.south);
+
+%  4. RELACIÓ TERNÀRIA 1:M:N EN TRIANGLES CORRECTA
+% Per a 1:M:N, el triangle cap a C (1) és BLANC.
+% Els altres dos (cap a A i B, ambdós molts) són NEGRES.
+
+% Triangle Esquerra (cap a A) - NEGRE
+\filldraw[fill=black, draw=black, thick]
+    (-1.20,0.90) -- (0,0.90) -- (-0.60,-0.15) -- cycle;    
+
+% Triangle Dreta (cap a B) - NEGRE
+\filldraw[fill=black, draw=black, thick]
+    (1.20,0.90) -- (0,0.90) -- (0.60,-0.15) -- cycle;      
+
+% Triangle Inferior (cap a C) - BLANC (cardinalitat 1)
+\filldraw[fill=white, draw=black, thick]
+    (0,-1.20) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;   
+
+% Triangle central (fons blanc per a tancar la figura)
+\filldraw[fill=white, draw=black, thick]
+    (0,0.90) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;    
+
+% Etiqueta de la relació
+\node[font=\small] at (2.25,0.10) {R};
+
+%  5. ATRIBUT DE LA RELACIÓ 
+\node[attribute] (id) at (0.65,2.20) {\underline{id}};
+\draw[dashed] (Rel) -- (id);
+
+%  6. CONNEXIONS (Relació ternària 1:M:N) 
+% Costat A (cardinalitat 1)
+\draw[thick] (A.east) -- (-1.20,0.90) node[pos=0.74, above] {1};
+% Costat B (cardinalitat m)
+\draw[thick] (B.west) -- (1.20,0.90) node[pos=0.74, above] {m};
+% Costat C (cardinalitat n)
+\draw[thick] (C.north) -- (0,-1.20) node[pos=0.74, right] {n};
+
+%  7. EXPLICACIÓ DE LA RESTRICCIÓ 1:M:N
+\node[draw, dashed, fill=white, font=\scriptsize, align=left] (Const) at (3.35,-2.25) {
+    sql\_constraints:\\
+    unique(a\_id, b\_id)
+};
+\draw[->, bend left=18, gray] (Const) to (0,-0.20);
+
+\end{tikzpicture}
+```
+**Traducció formal (1:M:N):**
+La combinació d'A i B "bloqueja" a C, per tant, la clau primària només inclou $a_0$ i $b_0$:
+
+```{math}
+R = (\underline{a_0, b_0}, c_0, r)
+```
+
+**Restriccions d'Integritat (RI):**
+* **Clau Aliena del Blanc:** El camp $c_0$ és una clau aliena cap a C, però no forma part de la PK de la relació:
+    ```{math}
+    c_0 \rightarrow C(c_0)
+    ```
+* **Valor No Nul (VNN):** Si la participació de C és total, el camp no pot ser buit:
+    ```{math}
+    \operatorname{VNN}: c_0
+    ```
+
+
+
+**Implementació en Python (Odoo):**
+```python
+class RelacioR(models.Model):
+    _name = 'nom_modul.relacio_r'
+    _description = 'Model associatiu per a la relació ternària R'
+
+    # Claus alienes (FK) cap a les entitats A, B i C
+    a_id = fields.Many2one('nom_modul.entitat_a', string="Entitat A", required=True)
+    b_id = fields.Many2one('nom_modul.entitat_b', string="Entitat B", required=True)
+    
+    # c_id és el costat del triangle blanc. 
+    # Posem required=True per a implementar el VNN (Participació Total)
+    c_id = fields.Many2one('nom_modul.entitat_c', string="Entitat C", required=True)
+
+    _sql_constraints = [
+        (
+            'uniq_ab', 
+            'unique(a_id, b_id)', 
+            'Error: La combinació d’A i B ja té un C assignat (Restricció 1:M:N).'
+        )
+    ]
+```
+
+:::{tip}
+**Penseu en les claus de la relació com en els ingredients d'un arròs al forn.** Les entitats amb triangle negre ($a_0$, $b_0$) són l'arròs i el caldo: sense elles no hi ha plat, per això formen part de la clau primària i van amb `required=True`.
+
+L'entitat amb triangle blanc ($c_0$) és com la cassola:
+
+- **Si l'ER diu que hi ha VNN**, la cassola és obligatòria (`required=True`). No pots cuinar l'arròs en l'aire. Açò és **Participació Total**.
+- **Si l'ER no té VNN**, la cassola és opcional (`required=False`). Pots tindre els ingredients preparats ($a_0$, $b_0$), però encara no haver triat on posar-los; per tant, $c_0$ pot ser nul. Açò és **Participació Parcial**.
+:::
+###### Aplicació al nostre exercici:
+En el nostre cas, el **Grup** té un triangle **blanc** (cardinalitat 1). Això significa que per a una **Patinadora** i un **Entrenament** concrets, només pot haver-hi **un grup** organitzador.
+
+A nivell de base de dades, la restricció d'unicitat més estricta per a aquest esquema seria:
+```python
+_sql_constraints = [
+    ('uniq_participacio', 'unique(patinadora_id, entrenament_id)', 
+     'Aquesta patinadora ja està inscrita en aquest entrenament!')
+]
+```
+
+*(Nota: Si usem la tripleta `unique(patinadora_id, grup_id, entrenament_id)`, estem sent més permissius, permetent que una xica participe en el mateix entrenament amb dos grups diferents, la qual cosa seria una relació M:N:P).* 
+
+3. **Cas d'Exclusivitat Total (1:1:1):** Cada element només pot aparéixer una vegada en tota la taula.
+```{tikz}
+\usetikzlibrary{shapes.geometric, positioning, calc}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    % Estil per a les entitats (Rectangles)
+    entity/.style={
+        draw, thick, fill=white,
+        minimum width=3.2cm, minimum height=1.1cm,
+        align=center, font=\bfseries
+    },
+    % Estil per als atributs (Ovals)
+    attribute/.style={
+        draw, ellipse, fill=white,
+        minimum width=2.2cm, minimum height=0.8cm,
+        font=\small\itshape
+    }
+]
+
+%  1. ENTITATS (Posició original per a relació ternària 1:1:1) 
+\coordinate (Rel) at (0,0);
+
+\node[entity] (A) at (-4.0,1.6) {A};
+\node[entity] (B) at (4.0,1.6) {B};
+\node[entity] (C) at (0,-2.5) {C};
+
+%  2. ATRIBUTS CLAU DE CADA ENTITAT 
+\node[attribute, above right=0.6cm and 0.2cm of A] (a0) {\underline{a0}};
+\node[attribute, above left=0.6cm and 0.2cm of B] (b0) {\underline{b0}};
+\node[attribute, above left=0.6cm and 0.2cm of C] (c0) {\underline{c0}};
+
+%  3. CONNEXIONS DELS ATRIBUTS A LES ENTITATS 
+\draw[thick] (A.north) -- (a0.south west);
+\draw[thick] (B.north) -- (b0.south east);
+\draw[thick] (C.west) -- (c0.south);
+
+%  4. RELACIÓ TERNÀRIA 1:1:1 EN TRIANGLES CORRECTA
+% Per a 1:1:1, els TRES triangles són BLANCS (cardinalitat 1 per a cadascun)
+
+% Triangle Esquerra (cap a A) - BLANC
+\filldraw[fill=white, draw=black, thick]
+    (-1.20,0.90) -- (0,0.90) -- (-0.60,-0.15) -- cycle;    
+
+% Triangle Dreta (cap a B) - BLANC
+\filldraw[fill=white, draw=black, thick]
+    (1.20,0.90) -- (0,0.90) -- (0.60,-0.15) -- cycle;      
+
+% Triangle Inferior (cap a C) - BLANC (cardinalitat 1)
+\filldraw[fill=white, draw=black, thick]
+    (0,-1.20) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;   
+
+% Triangle central (fons blanc )
+\filldraw[fill=white, draw=black, thick]
+    (0,0.90) -- (-0.60,-0.15) -- (0.60,-0.15) -- cycle;    
+
+% Etiqueta de la relació
+\node[font=\small] at (2.25,0.10) {R};
+
+%  5. ATRIBUT DE LA RELACIÓ 
+\node[attribute] (id) at (0.65,2.20) {\underline{id}};
+\draw[dashed] (Rel) -- (id);
+
+%  6. CONNEXIONS (Relació ternària 1:1:1) 
+% Costat A (cardinalitat 1)
+\draw[thick] (A.east) -- (-1.20,0.90) node[pos=0.74, above] {1};
+% Costat B (cardinalitat 1)
+\draw[thick] (B.west) -- (1.20,0.90) node[pos=0.74, above] {1};
+% Costat C (cardinalitat 1)
+\draw[thick] (C.north) -- (0,-1.20) node[pos=0.74, right] {1};
+
+%  7. EXPLICACIÓ DE LA RESTRICCIÓ 1:1:1
+\node[draw, dashed, fill=white, font=\scriptsize, align=left] (Const) at (3.35,-2.25) {
+    sql\_constraints:\\
+    unique(a\_id)\\
+    unique(b\_id)\\
+    unique(c\_id)
+};
+\draw[->, bend left=18, gray] (Const) to (0,-0.20);
+
+\end{tikzpicture}
+```
+
+**Traducció formal (1:1:1):**
+Triem una entitat com a clau primària i les altres funcionen com a claus candidates (atributs únics):
+
+```{math}
+R = (\underline{a_0}, b_0, c_0, r)
+```
+
+**Restriccions d'Integritat (RI):**
+* **Unicitat absoluta:** Cada element només pot participar en un registre de la taula:
+    ```{math}
+    \operatorname{UK}: b_0, \quad \operatorname{UK}: c_0
+    ```
+* **Integritat Referencial:**
+    ```{math}
+    a_0 \rightarrow A(a_0), \quad b_0 \rightarrow B(b_0), \quad c_0 \rightarrow C(c_0)
+    ```
+
+
+**Implementació en Python (Odoo):**
+```python
+...
+_sql_constraints = [
+    ('uniq_a', 'unique(a_id)', 'L’element A ja està ocupat en una altra relació'),
+    ('uniq_b', 'unique(b_id)', 'L’element B ja està ocupat'),
+    ('uniq_c', 'unique(c_id)', 'L’element C ja està ocupat')
+]
+```
+
+
+#### Resum de traducció: Cardinalitat ternària a Odoo
+
+En totes les relacions ternàries, la solució física en Odoo és la mateixa: crear un **model associatiu intermedi** amb tres camps `Many2one`. El que canvia segons el diagrama conceptual (triangles blancs o negres) és la força de la restricció d’unicitat en `_sql_constraints`.
+
+| Tipus de Ternària | Triangles | On posar el `unique(...)`? | Lògica de negoci (Exemple) |
+| --- | --- | --- | --- |
+| **M:N:P** | 0 blancs | `(A, B, C)` | **Professor-Mòdul-Grup**: Qualsevol combinació és vàlida mentre no es repetisca la fila exacta. |
+| **1:M:N** | 1 blanc (a C) | `(A, B)` | **Metge-Pacient-Consultori**: La parella Metge i Pacient ja determina un únic Consultori. No poden estar en dos alhora. |
+| **1:1:M** | 2 blancs (a B i C) | `(A, C)` o `(A, B)` | **Alumne-Ordinador-Aula**: Un alumne en una aula concreta només pot tindre un ordinador assignat. |
+| **1:1:1** | 3 blancs | `(A)`, `(B)`, `(C)` (per separat) | **Casament**: Cada cònjuge i cada jutge només poden participar en un registre únic de la taula. |
+
+
+:::{tip}
+**Com saber quina restricció aplicar?**
+Mira el diagrama: si una entitat té un **triangle blanc**, significa que la combinació de les **altres entitats** ha de ser única per a ella. Si el triangle és **negre**, eixa entitat pot repetir-se en moltes combinacions diferents (forma part de la clau).
+:::
+
+
+
+<!-- ## Patrons avançats de traducció ER a Odoo
+
+Per a completar la traducció de qualsevol disseny de base de dades a Odoo, hem d'abordar els casos especials que defineixen l'estructura jeràrquica i la dependència d'existència. -->
+
+### Relacions Binàries 1:1
+Són relacions on cada registre d'una entitat només pot estar vinculat, com a màxim, a un únic registre de l'altra entitat. En Odoo no existeix un camp específic per a 1:1 `One2one`, però es pot modelar amb un `Many2one` i una restricció d'unicitat.
+- **En Odoo:** es modelen amb `Many2one` i una restricció `UNIQUE` sobre el camp de relació.
+
+
+**Traducció formal (1:1):**
+Triem una entitat com a principal ($A$) i l'altra absorbeix la clau de la seua parella com a atribut únic:
+
+$$A = (\underline{a\_0}, a\_1, \dots, b\_0)$$
+
+**Restriccions d'Integritat (RI):**
+* **Integritat Referencial:** La clau aliena ha d'existir en la taula original:
+
+$$b\_0 \rightarrow B(b\_0)$$
+
+* **Unicitat ($UK$):** El camp no es pot repetir per a garantir l'exclusivitat 1 a 1:
+
+$$UK: b\_0$$
+
+
+```{tikz}
+\usetikzlibrary{shapes.geometric, positioning, calc}
+\begin{tikzpicture}[
+    font=\sffamily,
+    entity/.style={draw, thick, fill=white, minimum width=2.5cm, minimum height=1cm, align=center, font=\bfseries},
+    t_white/.style={draw, thick, fill=white, isosceles triangle, isosceles triangle apex angle=60, inner sep=0pt, minimum width=3mm, minimum height=4.5mm}
+]
+    \node[entity] (E) {EMPLEAT};
+    \node[entity, right=3.5cm of E] (O) {ORDINADOR};
+    
+    \path (E.east) -- (O.west) coordinate[midway] (mid);
+    \node[t_white, rotate=-180, anchor=lower side] at (mid) (tw1) {};
+    \node[t_white, rotate=0, anchor=lower side] at (mid) (tw2) {};
+    
+    \draw[thick] (E.east) -- (tw1.apex);
+    \draw[thick] (O.west) -- (tw2.apex);
+    \node[above=0.3cm of mid, font=\scriptsize\itshape] {té};
+\end{tikzpicture}
+```
+**Implementació en Python (Odoo):**
+```python
+class Ordinador(models.Model):
+    _name = 'centre.ordinador'
+
+    empleat_id = fields.Many2one('centre.empleat', string="Usuari")
+
+    _sql_constraints = [
+        (
+            'uniq_empleat',
+            'unique(empleat_id)',
+            "Aquest empleat ja té un ordinador assignat!"
+        )
+    ]
+```
+
+
 
 ### Relacions Unàries o Recursives 
 Són relacions on una entitat es relaciona amb si mateixa. El cas més típic és l'arbre jeràrquic (un empleat té un cap, que també és un empleat).
 - **En Odoo:** Creem un camp `Many2one` que apunta al propi model (`_name`).
+
+**Traducció formal:**
+L'entitat absorbeix la seua pròpia clau primària com a clau aliena ($a\_0'$):
+
+$$A = (\underline{a\_0}, a\_1, \dots, a\_0')$$
+
+**Restriccions d'Integritat (RI):**
+* **Integritat Referencial:** El camp apunta a la mateixa taula o és nul (per al node arrel):
+
+$$a\_0' \rightarrow A(a\_0)$$
+
+
 
 ```{tikz}
 \usetikzlibrary{shapes.geometric, positioning, calc}
@@ -1418,7 +2127,7 @@ I recorda afegir la dependència en el manifest:
 No, **no totes les relacions unàries s'implementen igual**. El patró depén de la cardinalitat de la relació:
 
 | Cardinalitat | Cas típic | Solució en Odoo |
-||||
+| --- | --- | --- |
 | **1:M** | Jerarquia (cap → subordinats) | `Many2one` al mateix model + `One2many` invers |
 | **M:M** | Col·legues, equips (molts↔molts) | `Many2many` auto-referencial amb `_relation` explícit |
 | **1:1** | Parella assignada, soci únic | `Many2one` + restricció `unique` en `_sql_constraints` |
@@ -1588,6 +2297,21 @@ Este patró modela una **assignació exclusiva 1:1** dins del mateix model. Si, 
 
 ### Entitats Dèbils i Restriccions d'Identificació 
 Una entitat és dèbil quan la seua existència depén d'una entitat "pare" (per exemple, les línies d'una factura no tenen sentit sense la factura).
+**Traducció formal:**
+La taula filla ($B$) necessita la clau del pare ($a\_0$) per a formar la seua pròpia identitat i PK composta:
+
+$$A = (\underline{a\_0}, \dots)$$
+$$B = (\underline{a\_0, b\_0}, b\_1, \dots)$$
+
+**Restriccions d'Integritat (RI):**
+* **Participació Total ($VNN$):** El registre fill no té sentit ni existència sense el pare:
+
+$$VNN: a\_0$$
+
+* **Esborrat en Cascada:** Si s'elimina el pare, Odoo neteja automàticament els fills:
+
+$$ON \text{ DELETE CASCADE}: a\_0$$
+
 - **En Odoo:** Usem el patró **Capçalera-Línies** amb un esborrat en cascada.
 - **Implementació:** 
 
@@ -2010,7 +2734,7 @@ class Alumne(models.Model):
 #### Resum de restriccions
 
 | Restricció | Mecanisme Odoo Recomanat |
-|||
+| --- | --- |
 | **Especialització Total** | `required=True` en el camp discriminador del Pare. |
 | **Especialització Parcial** | Camp opcional (sense `required`). |
 | **Especialització Disjunta** | Camp `Selection` (només una opció) o `@api.constrains` sobre booleans. |
@@ -2098,7 +2822,7 @@ La **Normalització** és el procés d'organitzar les dades per evitar la redund
 ### Correspondència entre Teoria i Pràctica
 
 | Problema de disseny | Teoria de BD (Normalització) | Solució en Odoo |
-| : | : | : |
+| --- | --- | --- |
 | Camps repetitius (Telèfon1, Telèfon2) | Viola la **1FN** | Crear model nou + `One2many` |
 | Dades barrejades en relacions complexes | Viola la **2FN** | Crear **model associatiu** intermedi |
 | Redundància de dades comunes | Viola la **3FN** | Usar **Herència/Delegació** (`_inherits`) |
@@ -2678,7 +3402,7 @@ docker compose restart web
 ### Quan usar cada acció?
 
 | Acció              | Quan?                                      | Què recarrega?                          |
-|--||--|
+| --- | --- | --- |
 | Reiniciar servidor | Canvis en codi Python                      | Classes, models, controladors           |
 | Instal·lar          | Primera vegada en la BD                    | Tot: models, vistes, menús, permisos    |
 | Actualitzar        | Canvis en XML, manifest, permisos, camps   | Vistes, permisos, dades, esquema        |
