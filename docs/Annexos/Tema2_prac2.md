@@ -121,7 +121,7 @@ nano docker-compose.yml
 services:
   # Servei de base de dades PostgreSQL
   db:
-    image: postgres:15
+    image: postgres:latest
     container_name: odoo_postgres
     environment:
       - POSTGRES_DB=postgres
@@ -129,7 +129,7 @@ services:
       - POSTGRES_PASSWORD=odoo123
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - odoo-db-data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U odoo"]

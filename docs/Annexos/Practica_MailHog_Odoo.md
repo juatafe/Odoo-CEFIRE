@@ -68,6 +68,16 @@ Al final del fitxer `docker-compose.yml`, **baix dels serveis existents**, copia
   - 1025 → per enviar correus des d’Odoo (port SMTP).  
 - `restart: always` → fa que s’inicie automàticament si es reinicia el sistema o el contenidor.
 
+
+:::{tip} 
+**Usuaris de macOS ARM**  
+Si no tens disponible `MailHog`, pots usar **Mailpit**, que és compatible i molt semblant.  
+En eixe cas, el més important és que en Odoo poses com a **Servidor SMTP** el **nom del servei de `docker-compose.yml`** (per exemple `mailhog` o `mailpit`, segons com l'hages definit).
+:::
+```
+
+
+
 ---
 
 ### Pas 3: Connectar Odoo amb MailHog
@@ -132,7 +142,8 @@ Ara anem dins de l’aplicació Odoo:
 | TLS/SSL | ❌ Desactivat |
 | Autenticació | ❌ Cap |
 | Usuari / Contrasenya | (en blanc) |
-| Remitent | `admin@localhost` |
+
+> ✅ Recorda: el camp **Servidor SMTP** ha de coincidir amb el nom del servei Docker (no necessàriament amb el nom comercial de l’eina).
 
 Fes clic a **Provar connexió**.  
 Si tot està bé, apareixerà el missatge:  
@@ -150,7 +161,7 @@ Ara que Odoo ja té configurat el servidor **MailHog**, farem una prova per comp
 #### Entra al mòdul *Contactes*
 
 Accedeix a `Contactes` des del menú superior d’Odoo.  
-Selecciona qualsevol contacte (per exemple, *Administrator*) o crea’n un de nou.
+Selecciona qualsevol contacte (per exemple, *Administrator*) o crea’n un de nou. Posa-li un correu electrònic al destinatari (per exemple, correu@example.com`).
 
 Fes clic a **Enviar missatge** al peu de la fitxa i escriu un text senzill, com ara:
 
@@ -176,7 +187,7 @@ Obri el navegador i entra a:
 Apareixerà la interfície web de MailHog, on veuràs la llista de correus rebuts.  
 Fes clic sobre el missatge per obrir-lo i podràs veure:
 
-- El **remitent** i el **destinatari** (`admin@example.com`)
+- El **remitent** i el **destinatari** 
 - L’**assumpte** i el contingut del missatge
 - Les diferents pestanyes: *HTML*, *Plain text*, *Source*, *MIME*
 

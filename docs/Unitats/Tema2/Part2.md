@@ -484,6 +484,8 @@ L'script inclou:
 - Logging detallat amb colors
 - Control de fases per evitar duplicacions
 - Verificació final del desplegament
+
+>Nota: Els links d'aquest script apunten a un repositori privat, personalitza els URLs segons el teu projecte o comenta les línies de descàrrega. 
   
 **Instal·lació:**
 ```bash

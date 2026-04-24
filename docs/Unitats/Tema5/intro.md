@@ -77,14 +77,16 @@ Al fer clic al menú "Patinatge", Odoo ens mostra la vista de llistat (tree view
 :width: 80%
 :align: center
 ```
-Si ara fem clic en el botó "Crear", Odoo ens mostra la vista de formulari (form view) per defecte del model `patinatge.patinadora`, on podem introduir les dades d’una nova patinadora.
+Si ara fem clic en el botó "NOU", Odoo ens mostra la vista de formulari (form view) per defecte del model `patinatge.patinadora`, on podem introduir les dades d’una nova patinadora.
 
 ```{image} /_static/assets/img/Tema6/vista-Crear-Patinadora.png
 :alt: Vista Crear Patinadora
 :width: 80%
 :align: center
 ``` 
-
+:::{caution} 
+Les vistes que Odoo genera automàticament a partir del model són funcionals, però molt bàsiques. Mostren els camps en ordre d’aparició al model, sense cap estructura ni disseny específic. Dependrà de si hem utilitzat inherits mostrarà més camps, els de res.partner o sols els del model creat. Per a millorar l’experiència d’usuari i adaptar les vistes a les necessitats reals del mòdul, cal crear vistes XML personalitzades, que veurem en els següents apartats.
+:::
 
 ## L’acció `ir.actions.act_window`: què fa i per què és necessària 
 

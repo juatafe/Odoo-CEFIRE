@@ -38,7 +38,7 @@ El model `patinatge.entrenament` inclou:
 - `data`
 - `duracio`
 - `grup_id` (Many2one)
-- `patinadores_ids` (Many2many)
+- `participacio_ids` (One2many cap a `patinatge.participacio`)
 
 ---
 
@@ -55,6 +55,19 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
   - Nom: **Grups**
   - Penjat del menú **Patinatge**
 
+```xml
+<record id="action_patinatge_grups" model="ir.actions.act_window">
+    <field name="name">Grups</field>
+    <field name="res_model">patinatge.grup</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="menu_patinatge_grups"
+          name="Grups"
+          parent="menu_patinatge_root"
+          action="action_patinatge_grups"/>
+```
+
 ---
 
 ### 3.2 Acció i menú per a Entrenaments
@@ -66,7 +79,74 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
   - Nom: **Entrenaments**
   - Penjat del menú **Patinatge**
 
-💡 *Pista:* el codi és molt semblant al de Patinadores; només canvien els noms i el `res_model`.
+```xml
+<record id="action_patinatge_entrenaments" model="ir.actions.act_window">
+    <field name="name">Entrenaments</field>
+    <field name="res_model">patinatge.entrenament</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="menu_patinatge_entrenaments"
+          name="Entrenaments"
+          parent="menu_patinatge_root"
+          action="action_patinatge_entrenaments"/>
+```
+
+:::{admonition} Per què no hi ha menú per a Participació?
+:class: tip
+El model `patinatge.participacio` és una **entitat associativa** (model de la relació ternària). No té sentit accedir-hi directament: les participacions es creen i consulten des dels formularis de Patinadora i Entrenament, a través dels camps `participacio_ids`. Per tant, **no cal crear-li cap acció ni submenú propi**.
+:::
+
+### 3.3 Estat final del fitxer `patinatge_menus.xml`
+
+Amb les dues incorporacions anteriors, el fitxer complet queda així:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Accions de finestra -->
+    <record id="action_patinatge_patinadores" model="ir.actions.act_window">
+        <field name="name">Patinadores</field>
+        <field name="res_model">patinatge.patinadora</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_patinatge_grups" model="ir.actions.act_window">
+        <field name="name">Grups</field>
+        <field name="res_model">patinatge.grup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_patinatge_entrenaments" model="ir.actions.act_window">
+        <field name="name">Entrenaments</field>
+        <field name="res_model">patinatge.entrenament</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menú principal -->
+    <menuitem id="menu_patinatge_root"
+              name="Patinatge"
+              sequence="10"/>
+
+    <!-- Submenús -->
+    <menuitem id="menu_patinatge_patinadores"
+              name="Patinadores"
+              parent="menu_patinatge_root"
+              action="action_patinatge_patinadores"/>
+
+    <menuitem id="menu_patinatge_grups"
+              name="Grups"
+              parent="menu_patinatge_root"
+              action="action_patinatge_grups"/>
+
+    <menuitem id="menu_patinatge_entrenaments"
+              name="Entrenaments"
+              parent="menu_patinatge_root"
+              action="action_patinatge_entrenaments"/>
+
+</odoo>
+```
 
 
 ## 4. Crear les vistes per al model Grup
@@ -139,7 +219,12 @@ La vista *tree* ha de mostrar:
 El formulari ha d’incloure:
 - Dades bàsiques de l’entrenament,
 - El grup associat,
-- Una pestanya amb les patinadores participants (`patinadores_ids`).
+- Una pestanya amb les participacions de la sessió (`participacio_ids`), que mostrarà la patinadora i el grup de cada participació.
+
+:::{admonition} Recorda
+:class: tip
+No hi ha cap camp `patinadores_ids` al model `patinatge.entrenament`. La relació amb les patinadores es fa a través del model associatiu `patinatge.participacio`, que és el que reflecteix la relació ternària del diagrama. Usa `participacio_ids` com a `One2many` en la pestanya.
+:::
 
 ### 🏋️ Resultat final – model Entrenament
 
@@ -201,7 +286,7 @@ Cal entregar:
   - Captures de pantalla de:
     - vista *tree* i *form* de **Grups**,
     - vista *tree* i *form* d’**Entrenaments**,
-  - Una breu explicació del treball realitza, problemes trobats i solucions implementades.
+  - Una breu explicació del treball realitzat, problemes trobats i solucions implementades.
 
 ---
 

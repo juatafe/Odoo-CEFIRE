@@ -7,8 +7,8 @@ Aquesta pràctica té com a objectiu crear un mòdul senzill d’Odoo utilitzant
 
 - Crear manualment l’estructura bàsica d’un mòdul d’Odoo.
 - Entendre i configurar el fitxer `__manifest__.py`.
-- Crear models en Python i relacionar-los (Many2one / One2many) incloent una relació ternària amb model associatiu.
-- Generar el fitxer de permisos `ir.model.access.csv`.
+- Crear models en Python i relacionar-los (Many2one / One2many) incloent una relació ternària amb model associatiu.- Aplicar **herència per delegació** (`_inherits`) per a reutilitzar `res.partner`, i saber quins camps cal declarar manualment perquè el partner no els té.
+- Aplicar criteris d'**integritat referencial** (`ondelete`) adequats a cada relació: `restrict` per a enllaços estructurals i `cascade` per a entitats dèbils.- Generar el fitxer de permisos `ir.model.access.csv`.
 - Instal·lar el mòdul i observar les vistes automàtiques que genera Odoo.
 - Deixar preparat el mòdul per a afegir vistes XML en el següent exercici.
 
@@ -62,11 +62,11 @@ Amb aquest mòdul farem un primer pas per a digitalitzar el club, i en el futur 
 \node[attribute] (gnom) at ($(Grup.north)+(0.85,1.05)$) {name};
 \node[attribute] (edat) at ($(Entrenament.south)+(0.95,-1.00)$) {data};
 
-\draw[thick] ([xshift=-0.45cm]Patinadora.north) -- (dni.south east);
-\draw[thick] ([xshift=0.45cm]Grup.north) -- (gnom.south west);
-\draw[thick] ([xshift=0.20cm]Entrenament.south) -- (edat.north west);
+\draw[thick] ([xshift=-0.45cm]Patinadora.north) -- (dni.south);
+\draw[thick] ([xshift=0.45cm]Grup.north) -- (gnom.south);
+\draw[thick] ([xshift=0.20cm]Entrenament.south) -- (edat.north);
 
-% --- 3. RELACIÓ TERNÀRIA PATINADORA - GRUP - ENTRENAMENT (N:1:N) ---
+% --- 3. RELACIÓ TERNÀRIA PATINADORA - GRUP - ENTRENAMENT (N:1:M) ---
 \coordinate (RelC) at (0,-1.95);
 
 % Símbol ternari (mateix estil que a intro.md): 4 triangles congruents
@@ -82,7 +82,7 @@ Amb aquest mòdul farem un primer pas per a digitalitzar el club, i en el futur 
 % Connexions des de les entitats al símbol ternari
 \draw[thick] (Patinadora.south east) -- (-1.05,-1.35) node[pos=0.72, above] {n};
 \draw[thick] (Grup.south west) -- (1.05,-1.35) node[pos=0.72, above] {1};
-\draw[thick] (Entrenament.north) -- (0,-3.05) node[pos=0.60, right] {n};
+\draw[thick] (Entrenament.north) -- (0,-3.05) node[pos=0.60, right] {m};
 
 % Nom de la relació
 \node[font=\scriptsize\itshape] at (1.75,-1.90) {participa};
@@ -93,7 +93,7 @@ Amb aquest mòdul farem un primer pas per a digitalitzar el club, i en el futur 
 
 :::{admonition} Nota
 :class: tip
-El dibuix representa una **relació ternària** Patinadora - Grup - Entrenament amb cardinalitat **N:1:N** (costat Patinadora = molts, costat Grup = u, costat Entrenament = molts).
+El dibuix representa una **relació ternària** Patinadora - Grup - Entrenament amb cardinalitat **N:1:M** (costat Patinadora = N molts, costat Grup = 1 únic, costat Entrenament = M molts).
 
 Interpretació pràctica: per a una combinació concreta `(patinadora, entrenament)` només hi ha **un** `grup` possible. Això sol ser coherent si cada entrenament l’organitza un únic grup.
 :::
@@ -125,16 +125,16 @@ Les patinadores tindran:
 - Una **categoria/nivell**.  
 - Una llista de **participacions** en entrenaments (relació ternària).
 
-:::{admonition} Nota
-:class: tip 
-Per mantindre coherència amb el diagrama, la participació no la modelarem com un `Many2many` directe, sinó amb un model associatiu (`patinatge.participacio`) amb tres claus alienes:
+:::{admonition} Nota sobre el model associatiu
+:class: tip
+Per a mantindre coherència amb el diagrama, la participació no la modelarem com un `Many2many` directe, sinó amb un model associatiu (`patinatge.participacio`) amb tres claus alienes:
 - `patinadora_id`
-- `grup_id`
+- `grup_id` (VNN, però **fora** de la clau única)
 - `entrenament_id`
 
-Això representa explícitament la relació ternària i permet afegir restriccions (per exemple, evitar duplicitats amb una clau única composta).
+Gràcies a la cardinalitat N:1:M (triangle blanc al costat del Grup, cardinalitat = 1), la restricció d'unicitat recau sobre la **parella** `(patinadora_id, entrenament_id)`: una patinadora no pot aparèixer dues vegades en el mateix entrenament, i el grup on participa queda determinat per l'entrenament mateix.
 
-El camp `grup_id` en `patinatge.patinadora` pot conviure amb la ternària: representa el **grup habitual** de la patinadora, mentre que `patinatge.participacio` registra la participació efectiva en cada sessió.
+El camp `grup_id` en `patinatge.patinadora` és independent: representa el **grup habitual** de la patinadora, mentre que `patinatge.participacio.grup_id` registra a quin grup pertany la participació efectiva en cada sessió (i ha de coincidir sempre amb el `grup_id` de l'entrenament).
 :::
 
 Els entrenaments són sessions puntuals on participen diverses patinadores.
@@ -144,13 +144,21 @@ Els entrenaments són sessions puntuals on participen diverses patinadores.
 ### Model `patinatge.patinadora`
 
 **Camps bàsics (dades personals):**
-- `name` – Char (heretat de `res.partner` via `_inherits`)  
-- `cognoms` – Char  
-- `data_naixement` – Date
-- `dni` – Char   
-- `adreça` – Char (heretat de `res.partner`)  
-- `telèfon` – Char (heretat de `res.partner`)  
-- `email` – Char (heretat de `res.partner`)   
+
+Gràcies a `_inherits`, la majoria de camps personals s'hereten automàticament del `res.partner` associat; **no cal redeclarar-los**. Només hem d'afegir manualment els camps que el partner **no té**:
+
+| Camp | Origen | Obligatori? |
+|------|--------|-------------|
+| `name` | Heretat de `res.partner` | Sí (via partner) |
+| `street`, `phone`, `email` | Heritats de `res.partner` | No (opcionals) |
+| `cognoms` | Declarat manualment | No |
+| `dni` | Declarat manualment | **Sí (VNN)** – clau natural del negoci |
+| `data_naixement` | Declarat manualment | **Sí (VNN)** – necessari per a categories federades |
+
+:::{admonition} Per què `dni` i `data_naixement` no s'hereten?
+:class: warning
+`res.partner` és un model **genèric** d'Odoo dissenyat per a clients, proveïdors, empreses... i molta altra gent que no té per què tindre un DNI ni una data de naixement rellevant en el context del sistema. Per això, aquests camps simplement **no existeixen** al partner estàndard i els hem d'afegir manualment al nostre model `patinatge.patinadora`. Res a vore amb màgia negra! 😄
+:::
 
 **Modalitat (segons el club):**
 - lliure  
@@ -214,10 +222,17 @@ Este model és l’entitat associativa de la ternària **Patinadora - Grup - Ent
 - `grup_id` – Many2one (`patinatge.grup`)
 - `entrenament_id` – Many2one (`patinatge.entrenament`)
 
-I, per evitar duplicitats, afegim:
-- `unique(patinadora_id, grup_id, entrenament_id)`
+Per a evitar duplicitats, la restricció d'unicitat s'aplica **únicament sobre la parella** `(patinadora_id, entrenament_id)`:
+- `unique(patinadora_id, entrenament_id)`
 
-Per a coherència estricta del negoci, si `patinatge.entrenament` també té `grup_id` (grup organitzador), convé afegir una validació (`@api.constrains`) que force:
+El `grup_id` **no entra en la clau única** perquè, d'acord amb la cardinalitat N:1:M (triangle blanc = costat Grup = 1), per a una parella concreta (patinadora, entrenament) ja hi ha implícitament **un únic grup possible**. Afegir-lo a la `unique` seria redundant i incorrecte: indicaria que la mateixa patinadora podria anar al mateix entrenament amb grups distints, cosa que viola el model.
+
+:::{admonition} Truc mnemotècnic
+:class: tip
+Pensa-ho així: "La Llúcia va a l'entrenament del divendres... i punt. No pot anar-hi dues vegades en el mateix entrenament. El grup on va? Eixe ja ve determinat per l'entrenament mateix!"
+:::
+
+A més, per a coherència del negoci, afegim una validació (`@api.constrains`) que força que el grup de la participació coincidisca amb el grup organitzador de l'entrenament:
 - `participacio.grup_id == participacio.entrenament_id.grup_id`
 
 ---
@@ -258,54 +273,172 @@ El mòdul ha de tindre, com a mínim, esta estructura:
 from odoo import models, fields
 
 
+# -- Seleccions reutilitzables -----
+MODALITAT_SELECTION = [
+    ('lliure',          'Lliure'),
+    ('dansa_individual', 'Dansa - Individual'),
+    ('dansa_parelles',   'Dansa - Parelles'),
+    ('dansa_show',       'Dansa - Show'),
+]
+
+NIVELL_SELECTION = [
+    # Escoleta
+    ('escola_inici1',  'Escoleta - Iniciacio 1'),
+    ('escola_inici2',  'Escoleta - Iniciacio 2'),
+    # Federades - Nivells
+    ('fed_n1', 'Federades - Nivell 1'),
+    ('fed_n2', 'Federades - Nivell 2'),
+    ('fed_n3', 'Federades - Nivell 3'),
+    ('fed_n4', 'Federades - Nivell 4'),
+    ('fed_n5', 'Federades - Nivell 5'),
+    ('fed_n6', 'Federades - Nivell 6'),
+    # Federades - Territorials
+    ('terr_benjami',  'Territorial - Benjami'),
+    ('terr_alevi',    'Territorial - Alevi'),
+    ('terr_infantil', 'Territorial - Infantil'),
+    ('terr_cadet',    'Territorial - Cadet'),
+    ('terr_junior',   'Territorial - Junior'),
+    ('terr_juvenil',  'Territorial - Juvenil'),
+    ('terr_senior',   'Territorial - Senior'),
+]
+
+
 class Patinadora(models.Model):
-  _name = 'patinatge.patinadora'
-  _description = 'Patinadora del club'
-  # Deleguem en res.partner per a dades personals (nom, telèfon, adreça...)
-  _inherits = {'res.partner': 'partner_id'}
-  # `name` ja està disponible per delegació; no cal redeclarar-lo
+    _name = 'patinatge.patinadora'
+    _description = 'Patinadora del club CPA Tavernes'
 
-  partner_id = fields.Many2one('res.partner', ondelete='restrict', required=True)
+    # -- Herencia per delegacio ----
+    # _inherits li diu a Odoo: "Quan crees una patinadora, crea tambe un
+    # res.partner i vincula'l per mitjà de partner_id".
+    # Tots els camps del partner (name, street, phone, email...) queden
+    # disponibles directament al model Patinadora sense haver de redeclarar-los.
+    _inherits = {'res.partner': 'partner_id'}
 
-  # Camps específics de patinatge
-  nivell = fields.Selection(
-    [
-      ('iniciacio', 'Iniciació'),
-      ('intermig', 'Intermig'),
-      ('avançat', 'Avançat'),
-    ],
-    string="Nivell"
-  )
+    # Clau de delegacio.
+    # ondelete='restrict': impedeix esborrar el partner si té una patinadora
+    # associada. El partner "aguanta" mentre existisca la patinadora.
+    partner_id = fields.Many2one(
+        'res.partner',
+        string="Contacte Odoo",
+        required=True,
+        ondelete='restrict',
+    )
 
-  grup_id = fields.Many2one('patinatge.grup', string="Grup", ondelete='set null')
-  participacio_ids = fields.One2many('patinatge.participacio', 'patinadora_id', string="Participacions")
+    # -- Camps que res.partner NO té => els declarem nosaltres (VNN) -----------
+    # dni: clau natural del negoci. res.partner no l'inclou perque és un model
+    # generic per a qualsevol tipus de contacte.
+    dni = fields.Char(
+        string="DNI",
+        required=True,
+    )
 
-  _sql_constraints = [
-    ('partner_unique', 'unique(partner_id)', 'Aquest contacte ja és una patinadora!'),
-  ]
+    # data_naixement: obligatoria per a calcular les categories federades.
+    # Tampoc existeix al partner estandard d'Odoo.
+    data_naixement = fields.Date(
+        string="Data de naixement",
+        required=True,
+    )
+
+    # cognoms: camp addicional per a facilitar l'ordenacio per cognom.
+    cognoms = fields.Char(string="Cognoms")
+
+    # -- Camps propis del club ----
+    modalitat = fields.Selection(
+        MODALITAT_SELECTION,
+        string="Modalitat",
+    )
+
+    nivell = fields.Selection(
+        NIVELL_SELECTION,
+        string="Nivell / Categoria",
+    )
+
+    # -- Relacions -----
+    # Grup habitual (pot quedar buit si encara no té grup assignat).
+    grup_id = fields.Many2one(
+        'patinatge.grup',
+        string="Grup habitual",
+        ondelete='set null',
+    )
+    # Totes les participacions en entrenaments (via model associatiu ternari).
+    participacio_ids = fields.One2many(
+        'patinatge.participacio',
+        'patinadora_id',
+        string="Participacions",
+    )
+
+    # -- Restriccions SQL -----
+    _sql_constraints = [
+        ('dni_unique', 'unique(dni)',
+         'Ja existeix una patinadora amb aquest DNI. Comprova que no la registres dos vegades!'),
+        ('partner_unique', 'unique(partner_id)',
+         'Aquest contacte ja és una patinadora. Una patinadora, un contacte!'),
+    ]
 ```
 
 ### Exemple de `models/participacio.py`
 
 ```python
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class Participacio(models.Model):
-  _name = 'patinatge.participacio'
-  _description = 'Participació de patinadora en entrenament (ternària)'
+    _name = 'patinatge.participacio'
+    _description = "Participacio d'una patinadora en un entrenament (ternaria)"
 
-  patinadora_id = fields.Many2one('patinatge.patinadora', required=True, ondelete='restrict')
-  grup_id = fields.Many2one('patinatge.grup', required=True, ondelete='restrict')
-  entrenament_id = fields.Many2one('patinatge.entrenament', required=True, ondelete='restrict')
+    # -- Entitat debil: ondelete='cascade' en tots els camps ---
+    # Una participacio no té sentit per si sola: depèn de la patinadora,
+    # del grup i de l'entrenament. Si qualsevol dels tres s'esborra,
+    # les participacions associades s'han d'esborrar en cascada.
+    patinadora_id = fields.Many2one(
+        'patinatge.patinadora',
+        string="Patinadora",
+        required=True,
+        ondelete='cascade',
+    )
+    grup_id = fields.Many2one(
+        'patinatge.grup',
+        string="Grup",
+        required=True,      # VNN: obligatori, però fora de la clau única
+        ondelete='cascade',
+    )
+    entrenament_id = fields.Many2one(
+        'patinatge.entrenament',
+        string="Entrenament",
+        required=True,
+        ondelete='cascade',
+    )
 
-  _sql_constraints = [
-    (
-      'uniq_participacio_ternaria',
-      'unique(patinadora_id, grup_id, entrenament_id)',
-      'Esta participació ja existeix.'
-    ),
-  ]
+    # -- Restriccio d'unicitat -----
+    # D'acord amb la cardinalitat N:1:M (triangle blanc = costat Grup = 1),
+    # per a cada parella (patinadora, entrenament) només pot haver-hi UN grup.
+    # La unicitat és sobre la PARELLA; grup_id queda fora perquè ve determinat
+    # per l'entrenament i afegir-lo seria redundant i incorrecte.
+    _sql_constraints = [
+        (
+            'uniq_patinadora_entrenament',
+            'unique(patinadora_id, entrenament_id)',
+            'Aquesta patinadora ja participa en eixe entrenament. '
+            'Comprova que no esteu registrant la mateixa sessio dues vegades!',
+        ),
+    ]
+
+    # -- Integritat de negoci -----
+    # El grup de la participacio ha de coincidir amb el grup organitzador
+    # de l'entrenament. Si no, tindríem la Llúcia del grup A entrenant
+    # en una sessio del grup B... i la Xelo posaria el crit al cel!
+    @api.constrains('grup_id', 'entrenament_id')
+    def _check_grup_coherent(self):
+        for rec in self:
+            if rec.entrenament_id.grup_id and rec.grup_id != rec.entrenament_id.grup_id:
+                raise ValidationError(
+                    "El grup de la participacio (%s) no coincideix amb el grup "
+                    "organitzador de l'entrenament (%s). Revisa-ho!" % (
+                        rec.grup_id.name,
+                        rec.entrenament_id.grup_id.name,
+                    )
+                )
 ```
 
 _(Els models `grup` i `entrenament` s'implementen igual, afegint els seus camps i el `One2many` cap a `patinatge.participacio`.)_
@@ -357,19 +490,22 @@ access_patinatge_participacio,access_patinatge_participacio,model_patinatge_part
 2. Instal·lar el mòdul  
 3. Buscar el model, al menú **Tècnic > Models**. Voreu que no existeixen vistes XML definides per als models. Ara cal parar atenció a les vistes automàtiques que genera Odoo però com que no tenim ni un menú ni una acció de finestra, no podrem veure-les des de la interfície d’usuari. A la propera pràctica afegirem menús i abans de veure les vistes XML personalitzades, podrem observar les vistes automàtiques generades per Odoo. 
 
-Consell pràctic: per no treballar “a cegues”, després d’instal·lar el mòdul aneu a **Configuració > Tècnic > Estructures de dades > Models**, busqueu `patinatge.patinadora` i feu clic a **Veure dades**. Així podreu crear un registre de prova i comprovar que el model funciona.
+Consell pràctic: per no treballar “a cegues”, després d’instal·lar el mòdul aneu a **Configuració > Tècnic > Estructures de dades > Models**, busqueu `patinatge.patinadora` i podreu observar els camps que s'han creat.
 
 
 ::::{admonition} Nota
 :class: tip
-Odoo genera vistes automàtiques a partir del model, però perquè es vegin cal, com a mínim, una acció de finestra; i la forma normal de llançar eixa acció és mitjançant un menú. Si no es crea un menú bàsic, no podrem visualitzar les vistes des de la interfície d’usuari. En el següent exercici aprendrem a crear vistes i menús XML personalitzats.
+Odoo genera vistes automàtiques a partir del model, però perquè es vegen cal, com a mínim, una acció de finestra; i la forma normal de llançar eixa acció és mitjançant un menú. Si no es crea un menú bàsic, no podrem visualitzar les vistes des de la interfície d’usuari. En el següent exercici aprendrem a crear vistes i menús XML personalitzats.
 ::::
 
 ## Repàs ràpid de relacions (el que estàs practicant)
 
 - **Many2one**: un entrenament pertany a un grup (`grup_id` en `patinatge.entrenament`).
 - **One2many**: cada entitat principal (`patinadora`, `grup`, `entrenament`) veu les seues participacions.
-- **Relació ternària**: es materialitza amb `patinatge.participacio` (3 Many2one + una `unique` composta).
+- **Relació ternària**: es materialitza amb `patinatge.participacio` (3 Many2one + una `unique` sobre la **parella** `(patinadora_id, entrenament_id)`, d'acord amb la cardinalitat N:1:M del diagrama).
+- **`ondelete='restrict'`** als enllaços estructurals (delegació `partner_id`): el partner no es pot esborrar mentre hi haja una patinadora que l'apunte.
+- **`ondelete='cascade'`** a l'entitat dèbil (`patinatge.participacio`): si s'esborra una patinadora, un grup o un entrenament, les seues participacions desapareixen automàticament.
+- **`@api.constrains`** al model `Participacio` per a garantir que el grup de la participació sempre coincideix amb el grup organitzador de l'entrenament.
 
 Este exercici cobreix el patró clàssic de relació n-ària en Odoo mitjançant model associatiu.
 

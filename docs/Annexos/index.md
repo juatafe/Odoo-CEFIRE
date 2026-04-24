@@ -26,10 +26,10 @@
 .. Practica_MailHog_Odoo
 .. explicascript
 .. instalarpgAdmin
-crearmodul
+.. crearmodul
 .. crearvista
 .. portalpatinadores
 .. inscripcioonline
-.. permisosrols
+permisosrols
 .. apiodoo
 ```

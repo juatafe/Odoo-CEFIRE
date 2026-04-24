@@ -2297,6 +2297,41 @@ Este patró modela una **assignació exclusiva 1:1** dins del mateix model. Si, 
 
 ### Entitats Dèbils i Restriccions d'Identificació 
 Una entitat és dèbil quan la seua existència depén d'una entitat "pare" (per exemple, les línies d'una factura no tenen sentit sense la factura).
+```{tikz}
+\usetikzlibrary{shapes.geometric, positioning, calc}
+\begin{tikzpicture}[
+    font=\sffamily,
+    entity/.style={draw, thick, fill=white, minimum width=3.2cm, minimum height=1.1cm, align=center, font=\bfseries},
+    weak/.style={draw, thick, double, fill=white, minimum width=3.2cm, minimum height=1.1cm, align=center, font=\bfseries},
+    attribute/.style={draw, ellipse, fill=white, minimum width=1.8cm, minimum height=0.7cm, font=\small\itshape},
+    t_white/.style={draw, thick, fill=white, isosceles triangle, isosceles triangle apex angle=60, inner sep=0pt, minimum width=3.5mm, minimum height=5.5mm},
+    t_black/.style={draw, thick, fill=black, isosceles triangle, isosceles triangle apex angle=60, inner sep=0pt, minimum width=3.5mm, minimum height=5.5mm}
+]
+    % Entities
+    \node[entity] (A) {A};
+    \node[weak, right=3cm of A] (B) {B};
+
+    % Attributes of A
+    \node[attribute, above left=0.8cm and 0.3cm of A] (a0) {\underline{a\_0}};
+    \draw[thick] (A.north west) -- (a0.south east);
+
+    % Attributes of B
+    \node[attribute, above left=0.8cm and 0.3cm of B] (b0) {\underline{b\_0}};
+    \node[attribute, above right=0.8cm and 0.3cm of B] (b1) {b\_1};
+    \draw[thick] (B.north west) -- (b0.south east);
+    \draw[thick] (B.north east) -- (b1.south west);
+
+    % Relationship
+    \path (A.east) -- (B.west) coordinate[midway] (mid);
+    \node[t_white, rotate=-180, anchor=lower side] at ($(mid)+(-0.001,0)$) (tw) {};
+    \node[t_black, rotate=0, anchor=lower side] at ($(mid)+(0.001,0)$) (tb) {};
+
+    \draw[thick] (A.east) -- (tw.apex);
+    \draw[thick] (B.west) -- (tb.apex);
+    \node[above=0.3cm of mid, font=\scriptsize\itshape] {té};
+\end{tikzpicture}
+```
+
 **Traducció formal:**
 La taula filla ($B$) necessita la clau del pare ($a\_0$) per a formar la seua pròpia identitat i PK composta:
 
@@ -2310,10 +2345,18 @@ $$VNN: a\_0$$
 
 * **Esborrat en Cascada:** Si s'elimina el pare, Odoo neteja automàticament els fills:
 
+<!--
+This section discusses the SQL constraint "ON DELETE CASCADE". 
+When applied to a foreign key relationship, it ensures that if a record 
+in the parent table (in this case, the record identified by a_0) is deleted, 
+all corresponding records in the child table (e.g., records related to b_0) 
+will also be automatically deleted. This helps maintain referential integrity 
+by preventing orphaned records in the child table.
+-->
 $$ON \text{ DELETE CASCADE}: a\_0$$
 
-- **En Odoo:** Usem el patró **Capçalera-Línies** amb un esborrat en cascada.
-- **Implementació:** 
+**En Odoo:** Usem el patró **Capçalera-Línies** amb un esborrat en cascada.
+**Exemple:** 
 
 ```{tikz}
 \usetikzlibrary{shapes.geometric, positioning, calc}
@@ -2419,8 +2462,8 @@ Les restriccions d'existència defineixen si és obligatori que un registre esti
 #### Cas A) L'existència es pot expressar en la mateixa taula (VNN)
 És el cas típic en què la relació i l'entitat dependent queden en la mateixa taula (ex.: professor ha de tindre departament).
 
-- **En ER:** VNN (valor no nul)
-- **En Odoo:** `Many2one(..., required=True)`
+- **En ER:** VNN (valor no nul). Es representa amb una doble ratlla en el costat de l'entitat obligada.
+- **En Odoo:** Implementem la participació total amb l'atribut `Many2one(..., required=True)`
 
 ```{tikz}
 \usetikzlibrary{shapes.geometric, positioning, calc}
@@ -2445,13 +2488,20 @@ Les restriccions d'existència defineixen si és obligatori que un registre esti
 \end{tikzpicture}
 ```
 
+**Implementació en Odoo:**
 ```python
 class Professor(models.Model):
     _name = 'centre.professor'
 
     name = fields.Char(string="Nom", required=True)
     departament_id = fields.Many2one('centre.departament', required=True, ondelete='restrict')
+
+class Departament(models.Model):
+    _name = 'centre.departament'
+    name = fields.Char(string="Nom", required=True)
+    professor_ids = fields.One2many('centre.professor', 'departament_id', string="Professors")  
 ```
+Recordeu: La doble ratlla indica obligatorietat per a l'entitat que la té a prop. En este cas, el Professor té l'obligació de tindre un departament (`required=True`), però el Departament pot estar buit (ratlla simple), i `ondelete='restrict'` perquè no volem que s'esborre un departament si encara hi ha professors associats. 
 
 #### Cas B) L'existència queda repartida entre taules diferents (R.I. tipus C)
 És el cas on volem una cobertura del tipus: "tot registre de A ha d'aparéixer almenys una vegada en B".
@@ -2523,8 +2573,8 @@ L'agregació **no és una idea nova** respecte del que ja hem comentat abans: é
 
 Dit d'una manera més simple:
 
-- una **relació normal** només diu que dues entitats estan connectades;
-- una **agregació** diu que eixa connexió és tan important que la tractem com un objecte sobre el qual poden passar més coses.
+- Una **relació normal** només diu que dues entitats estan connectades.
+- Una **agregació** diu que eixa connexió és tan important que la tractem com un objecte sobre el qual poden passar més coses.
 
 En el món relacional i en Odoo, això quasi sempre es tradueix en una **entitat associativa** o **model intermedi**.
 
@@ -2953,7 +3003,7 @@ class AssignacioAula(models.Model):
     \node[entity, below left=2.5cm and 1.5cm of PROF] (DOC) {DOCÈNCIA\\(associativa)};
     \node[entity, below right=2.5cm and 1.5cm of PROF] (ASSAULA) {ASSIGNACIÓ AULA\\(associativa)};
     
-    % RELACIÓ 1: PROFESSOR -> DOCÈNCIA (1:N)
+    % RELACIÓ 1: PROFESSOR -> DOCÈNCIA (1:n)
     \coordinate (mid1L) at ($(PROF.south west)!0.5!(DOC.north)$);
     \node[t_white, rotate=45, anchor=lower side] at ($(mid1L)+(-0.001,0)$) (tw1) {};
     \node[t_black, rotate=225, anchor=lower side] at ($(mid1L)+(0.001,0)$) (tb1) {};
@@ -2962,9 +3012,9 @@ class AssignacioAula(models.Model):
     \draw[thick] (DOC.north) -- (tb1.apex);
     
     \node[above, xshift=-4pt] at ($(PROF.south west)!0.33!(tw1.apex)$) {1};
-    \node[below, xshift=4pt] at ($(tw1.apex)!0.66!(DOC.north)$) {N};
+    \node[below, xshift=4pt] at ($(tw1.apex)!0.66!(DOC.north)$) {n};
     
-    % RELACIÓ 2: PROFESSOR -> ASSIGNACIÓ AULA (1:N)
+    % RELACIÓ 2: PROFESSOR -> ASSIGNACIÓ AULA (1:n)
     \coordinate (mid2R) at ($(PROF.south east)!0.5!(ASSAULA.north)$);
     \node[t_white, rotate=135, anchor=lower side] at ($(mid2R)+(-0.001,0)$) (tw2) {};
     \node[t_black, rotate=-45, anchor=lower side] at ($(mid2R)+(0.001,0)$) (tb2) {};
@@ -2973,13 +3023,13 @@ class AssignacioAula(models.Model):
     \draw[thick] (ASSAULA.north) -- (tb2.apex);
     
     \node[above, xshift=4pt] at ($(PROF.south east)!0.33!(tw2.apex)$) {1};
-    \node[below, xshift=-4pt] at ($(tw2.apex)!0.66!(ASSAULA.north)$) {N};
+    \node[below, xshift=-4pt] at ($(tw2.apex)!0.66!(ASSAULA.north)$) {n};
 
     % NIVELL 3: Entitats de resultat
     \node[entity, below=2cm of DOC] (ASSIG) {ASSIGNATURA};
     \node[entity, below=2cm of ASSAULA] (AULA) {AULA};
 
-    % RELACIÓ 3: DOCÈNCIA -> ASSIGNATURA (N:1)
+    % RELACIÓ 3: DOCÈNCIA -> ASSIGNATURA (n:1)
     \coordinate (mid3) at ($(DOC.south)!0.5!(ASSIG.north)$);
     \node[t_black, rotate=90, anchor=lower side] at ($(mid3)+(-0.001,0)$) (tb3) {};
     \node[t_white, rotate=-90, anchor=lower side] at ($(mid3)+(0.001,0)$) (tw3) {};
@@ -2987,10 +3037,10 @@ class AssignacioAula(models.Model):
     \draw[thick] (DOC.south) -- (tb3.apex);
     \draw[thick] (ASSIG.north) -- (tw3.apex);
     
-    \node[left=6pt] at ($(DOC.south)!0.33!(tb3.apex)$) {N};
+    \node[left=6pt] at ($(DOC.south)!0.33!(tb3.apex)$) {n};
     \node[right=6pt] at ($(tw3.apex)!0.66!(ASSIG.north)$) {1};
 
-    % RELACIÓ 4: ASSIGNACIÓ AULA -> AULA (N:1)
+    % RELACIÓ 4: ASSIGNACIÓ AULA -> AULA (n:1)
     \coordinate (mid4) at ($(ASSAULA.south)!0.5!(AULA.north)$);
     \node[t_black, rotate=90, anchor=lower side] at ($(mid4)+(-0.001,0)$) (tb4) {};
     \node[t_white, rotate=-90, anchor=lower side] at ($(mid4)+(0.001,0)$) (tw4) {};
@@ -2998,7 +3048,7 @@ class AssignacioAula(models.Model):
     \draw[thick] (ASSAULA.south) -- (tb4.apex);
     \draw[thick] (AULA.north) -- (tw4.apex);
     
-    \node[left=6pt] at ($(ASSAULA.south)!0.33!(tb4.apex)$) {N};
+    \node[left=6pt] at ($(ASSAULA.south)!0.33!(tb4.apex)$) {n};
     \node[right=6pt] at ($(tw4.apex)!0.66!(AULA.north)$) {1};
 
 \end{tikzpicture}
@@ -3011,7 +3061,9 @@ class AssignacioAula(models.Model):
 Dissenyar correctament en Odoo utilitzant **models relacionats + herència** en lloc de camps de text gegants o redundants és, a la pràctica, l'aplicació física del procés de normalització que demana la teoria relacional.
 :::
 
+Aquesta secció ha sigut una introducció al disseny de models en Odoo, centrada en com les bones pràctiques de normalització es reflecteixen en la manera com Odoo ens obliga a estructurar les dades. No s'ha de prendre com una guia exhaustiva de totes les tècniques de disseny, sinó com un punt de partida per a entendre per què Odoo funciona com funciona i com aprofitar-ho per a crear models robustos i ben estructurats. 
 
+Abans de realitzar l'exercici pràctic, anem a veure com es creen les vistes i els permisos d'accés, que són els següents passos després de definir els models.
 
 ## Crear les vistes
 Les vistes són fitxers XML que defineixen com es mostra la informació a l’usuari. Sense vistes, Odoo no sap com presentar els formularis ni els llistats dels teus models.
@@ -3061,7 +3113,13 @@ Les vistes són fitxers XML que definixen:
 - I tota la part visual declarativa (sense CSS).
 
 És el “frontend” d’Odoo, però al seu estil: estructurat, declaratiu i en XML.  
-Com que tenen molta molla (tree, form, search, kanban, calendar, pivot, graph, activity…), les treballarem amb calma. Per ara, farem un exemple bàsic per al model `centre.alumne`.
+Com que tenen molta molla (tree, form, search, kanban, calendar, pivot, graph, activity…), treballarem les més importants amb calma. Per ara, farem un exemple bàsic per al model `centre.alumne`.
+
+### Exemple bàsic de vistes per a `centre.alumne`
+Aquest archiu XML defineix les interfícies d'usuari (vistes) i la navegació per gestionar alumnes dins del sistema Odoo. Utilitza tres tipus de registres: una vista de formulari, una vista d'arbre (llista) i una acció que les vincula.
+
+L'usuari fa clic en "Alumnes" → es carrega la **vista d'arbre** → pot fer clic en una fila per accedir a la **vista de formulari** de l'alumne seleccionat.
+
 
 Fitxer: `views/alumne_view.xml`
 
@@ -3107,6 +3165,34 @@ Fitxer: `views/alumne_view.xml`
 </odoo>
 ```
 
+### Components Principals
+
+#### **Vista de Formulari** (`centre_alumne_form`)
+- **Funció**: Permet visualitzar i editar els detalls d'un alumne individual
+- **Estructura**:
+    - `<form>`: Contenidor principal del formulari
+    - `<sheet>`: Zona editable del formulari
+    - `<group>`: Agrupa els camps de forma visual
+    - `<field>`: Cada camp representa una propietat de l'alumne (nom, edat, curs)
+
+#### **Vista d'Arbre** (`centre_alumne_tree`)
+- **Funció**: Mostra una llista de tots els alumnes en format taula
+- **Estructura**:
+    - `<tree>`: Defineix la llista
+    - `<field>`: Cada camp es converteix en una columna de la taula
+
+#### **Acció de Finestra** (`centre_alumne_action`)
+- **Funció**: Vincula les vistes anteriors i defineix el comportament quan s'accedeix
+- **Propietats clau**:
+    - `view_mode`: Especifica l'ordre de visualització (`tree` primer, després `form`)
+    - `res_model`: Indica el model que es gestiona
+
+#### **Elements de Menú**
+- `centre_menu_root`: Menú arrel "Centre"
+- `centre_menu_alumnes`: Submenu que enllaça l'acció, mostrant "Alumnes"
+
+
+Ara que tenim una visió general del que fa aquest XML i tot i que encara no coneixem els detalls, anem a veure els permisos d'accés, que són el següent pas després de crear els model y les vistes. Després d'aixo serà el moment de realitzar l'exercici pràctic, on posarem en pràctica tot el que hem vist fins ara sobre la creació de models. Les vistes les abordarem en el proper capítol, on veurem com personalitzar-les i fer-les més amigables per a l'usuari.
 
 ## Permisos: `ir.model.access.csv`
 Odoo té un sistema de seguretat molt estricte.  Fins i tot si has creat un model i les vistes corresponents, **els usuaris no podran accedir fins que no definisques permisos d’accés**. 
@@ -3205,46 +3291,173 @@ Inclou el fitxer al manifest:
 ],
 ```
 
-Aplicació en vistes (exemples habituals):
-```{code-block} xml
+
+## Aplicació de permisos en vistes amb l'atribut `groups`
+
+Els permisos que definim en `ir.model.access.csv` controlen l'accés global al model (si pots crear, editar, llegir o esborrar). Però si vols **amagar camps, botons o menús específics** per a certs usuaris sense denegar accés total al model, pots usar l'atribut `groups` directament en els elements XML de les vistes.
+
+### Concepte bàsic de `groups`
+
+L'atribut `groups` acepta una llista de xml_id de grups d'usuaris (separats per comes) i fa que l'element **només sigui visible** per a els usuaris que pertanyen a eixos grups.
+
+**Important:** `groups` és només **control visual**; la seguretat real s'aplica al servidor amb `ir.model.access.csv` i regles de registre (`ir.rule`).
+
+### Definir grups propis
+
+Primer, cal crear els grups en un fitxer de seguretat. Per exemple, si vols separar "Professorat" i "Alumnat":
+
+Fitxer: `security/security.xml`
+
+```xml
 <odoo>
-  <!-- Formulari: botó només per a Professorat -->
-  <record id="centre_alumne_form" model="ir.ui.view">
-    <field name="name">centre.alumne.form</field>
-    <field name="model">centre.alumne</field>
-    <field name="arch" type="xml">
-      <form string="Alumne">
-        <sheet>
-          <group>
-            <field name="name"/>
-            <field name="edat"/>
-            <field name="curs"/>
-            <!-- Camp visible només per Professorat -->
-            <field name="expedient" groups="gestio_alumnes.group_professorat"/>
-          </group>
-          <!-- Botó d’acció reservat a Professorat -->
-          <footer>
-            <button name="action_calcular_nota" type="object" string="Calcular nota"
-                    class="oe_highlight"
-                    groups="gestio_alumnes.group_professorat"/>
-          </footer>
-        </sheet>
-      </form>
-    </field>
-  </record>
+    <!-- Grup per al professorat -->
+    <record id="group_professorat" model="res.groups">
+        <field name="name">Professorat</field>
+        <field name="category_id" ref="base.module_category_tools"/>
+    </record>
 
-  <!-- Menú visible només per a Professorat -->
-  <menuitem id="centre_menu_root" name="Centre"/>
-  <menuitem id="centre_menu_alumnes" parent="centre_menu_root"
-            action="centre_alumne_action" name="Alumnes"
-            groups="gestio_alumnes.group_professorat"/>
+    <!-- Grup per a l'alumnat -->
+    <record id="group_alumnat" model="res.groups">
+        <field name="name">Alumnat</field>
+        <field name="category_id" ref="base.module_category_tools"/>
+    </record>
 </odoo>
-
 ```
 
-Notes ràpides:
-- `groups` accepta una llista d’xml_id separats per comes.
-- Açò controla visibilitat; la seguretat real s’aplica amb `ir.model.access.csv` i (si cal) regles de registre (`ir.rule`) per restringir dades al servidor.
+Cada grup tiene un `id` (ací: `group_professorat`, `group_alumnat`) que después usem en l'atribut `groups` de les vistes.
+
+### Exemple complet amb `groups` en vistes
+
+Fitxer: `views/alumne_view.xml`
+
+```xml
+<odoo>
+    <!-- Vista de formulari amb camps i botons restringits -->
+    <record id="centre_alumne_form" model="ir.ui.view">
+        <field name="name">centre.alumne.form</field>
+        <field name="model">centre.alumne</field>
+        <field name="arch" type="xml">
+            <form string="Alumne">
+                <sheet>
+                    <group>
+                        <!-- Camps visibles per a tothom (sense groups) -->
+                        <field name="name"/>
+                        <field name="edat"/>
+                        <field name="curs"/>
+                        
+                        <!-- Camp "expedient" visible NOMÉS per a Professorat -->
+                        <field name="expedient" groups="gestio_alumnes.group_professorat"/>
+                    </group>
+                    
+                    <!-- Secció de botons (footer) -->
+                    <footer>
+                        <!-- Botó d'acció reservat NOMÉS a Professorat -->
+                        <button name="action_calcular_nota" type="object" string="Calcular nota"
+                                        class="oe_highlight"
+                                        groups="gestio_alumnes.group_professorat"/>
+                        
+                        <!-- Botó visible per a Alumnat -->
+                        <button name="action_solicitar_tutoria" type="object" string="Solicitar tutoría"
+                                        groups="gestio_alumnes.group_alumnat"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista d'arbre (llistat) amb columnes restringides -->
+    <record id="centre_alumne_tree" model="ir.ui.view">
+        <field name="name">centre.alumne.tree</field>
+        <field name="model">centre.alumne</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="edat"/>
+                <field name="curs"/>
+                <!-- Columna de notes visible només per Professorat -->
+                <field name="nota" groups="gestio_alumnes.group_professorat"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Menú visible només per a Professorat -->
+    <menuitem id="centre_menu_root" name="Centre"/>
+    <menuitem id="centre_menu_alumnes" parent="centre_menu_root"
+                        action="centre_alumne_action" name="Alumnes"
+                        groups="gestio_alumnes.group_professorat"/>
+    
+    <!-- Menú alt per a Alumnat (accés a data pública) -->
+    <menuitem id="centre_menu_alumnes_alumnat" parent="centre_menu_root"
+                        action="centre_alumne_action_alumnat" name="Els meus dades"
+                        groups="gestio_alumnes.group_alumnat"/>
+</odoo>
+```
+
+### Explicació dels exemples
+
+| Exemple | Explicació |
+| --- | --- |
+| `<field name="expedient" groups="gestio_alumnes.group_professorat"/>` | El camp "expedient" només apareix en el formulari si l'usuari pertany al grup `group_professorat`. Els altres usuaris no el veuen. |
+| `<button ... groups="gestio_alumnes.group_professorat"/>` | El botó "Calcular nota" només es mostra per a Professorat. Els altres grups no veuran eixe botó en el footer. |
+| `<field name="nota" groups="gestio_alumnes.group_alumnat"/>` | La columna "nota" a la taula (tree) apareix només si l'usuari pertany a `group_alumnat`. |
+| `<menuitem ... groups="gestio_alumnes.group_professorat"/>` | El menú "Alumnes" es mostra només als usuaris del grup Professorat. Els altres no el veuran en el menú principal. |
+
+### Múltiples grups (OR lògic)
+
+Si vols que un element sigua visible per a **múltiples grups** (lògica OR), separa els xml_id amb comes:
+
+```xml
+<!-- Visible per a Professorat O Administrador -->
+<field name="qualificacio" groups="gestio_alumnes.group_professorat,gestio_alumnes.group_admin"/>
+
+<!-- Visible per a qualsevol dels grups indicats -->
+<button name="action_validate" type="object" 
+                groups="gestio_alumnes.group_coordinador,gestio_alumnes.group_director"/>
+```
+
+### Inclusió dels fitxers en el manifest
+
+Recorda que ambdós fitxers (security i vistes) han d'estar referenciats en el manifest per a que es carreguin correctament:
+
+Fitxer: `__manifest__.py`
+
+```python
+{
+        'name': "Gestió d'Alumnes",
+        'version': '16.0.1.0.0',
+        'depends': ['base'],
+        'data': [
+                # Seguretat (permisos i grups): s'ha de carregar PRIMER
+                'security/security.xml',
+                'security/ir.model.access.csv',
+                
+                # Vistes: es carreguen DESPRÉS
+                'views/alumne_view.xml',
+        ],
+        'installable': True,
+        'application': True,
+}
+```
+
+### Ordre d'importació és crítica
+
+**Molt important:** Els fitxers de seguretat (`security/`) han de carregar-se **SEMPRE PRIMER** que els de vistes i dades, ja que les vistes fan referència als grups definits en els fitxers de seguretat. Si invertixes l'ordre, Odoo llançarà un error perquè buscarà grups que no existeixen.
+
+### Resum del patró
+
+1. **Definir grups** en `security/security.xml` amb un `id` únic (`group_professorat`, etc.).
+2. **Assignar usuaris** als grups (en la interfície d'Odoo: Configuració → Usuaris i Grups).
+3. **Aplicar `groups`** en els elements de vista que vulgues restringir.
+4. **Carregar en ordre**: primer seguretat, després vistes.
+
+### Advertència sobre seguretat
+
+L'atribut `groups` **no és una barrera de seguretat real**. Un usuari malintencionat que accedisca directament a l'API o a la base de dades podria eludir estos controls. La seguretat real s'implementa amb:
+
+- **`ir.model.access.csv`**: Controla permisos globals al model (lectura, escriptura, creació, esborrat).
+- **`ir.rule`**: Permet filtrar quins registres pot veure/editar cada usuari (seguretat a nivell de registres).
+
+L'atribut `groups` és només per a fer la interfície d'usuari més neta i intuïtiva, ocultant elements que no necessita veure.
 
 
 

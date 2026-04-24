@@ -1,4 +1,4 @@
-# Exercici pràctic 8: Inscripció online d’una patinadora amb signatura
+# Exercici pràctic: Inscripció online d’una patinadora amb signatura
 
 ```{toctree}
 :maxdepth: 2
