@@ -1,4 +1,4 @@
-# Exercici pràctic 11: Odoo API XML-RPC amb HTTPS i Ngrok
+# Exercici pràctic: Odoo API XML-RPC amb HTTPS i Ngrok
 
 Aquesta guia descriu com connectar-se a l'API d'Odoo de forma segura, utilitzant un túnel HTTPS per simular un entorn de producció.
 
@@ -102,9 +102,9 @@ Crea un nou registre.
 
 ---
 
-## 5. Codi de la pràctica (main.py)
+## 5. Codi de la pràctica (apiodoo.py)
 
-L’script es guardarà a `apiOdoo/main.py` i utilitza el `config.yml` d’eixa carpeta.
+L’script es guardarà a `apiOdoo/apiodoo.py` i utilitza el `config.yml` d’eixa carpeta.
 
 ```python
 # -*- coding: utf-8 -*-
@@ -208,7 +208,7 @@ Quan s'executa correctament, el terminal hauria de mostrar:
 ```bash
 # Executar des de la carpeta apiOdoo
 cd apiOdoo
-python3 main.py
+python3 apiodoo.py
 ```
 
 ```{admonition} Troubleshooting
@@ -220,3 +220,4 @@ python3 main.py
 - Xarxa/SSL: si hi ha errors de certificat, prova amb `verify_ssl: false` només en proves.
 ```
 
+## Entrega captures de pantalla de l'execució i el codi font (sense credencials) per demostrar que s'ha realitzat correctament la connexió i les operacions a l'API d'Odoo via HTTPS.

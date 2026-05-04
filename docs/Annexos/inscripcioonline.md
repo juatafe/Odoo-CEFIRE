@@ -299,7 +299,7 @@ Odoo busca el template en `views/`, el renderitza i l’embolica amb `website.la
 #### 🧾 Contingut de `inscripcio_templates.xml`
 Dins de la plantilla `formulari_inscripcio`, hi ha:
 
-1) Capçalera i layout del web
+1. Capçalera i layout del web
   La plantilla va dins d’`<odoo>` i crida `website.layout` per tindre capçalera i peu del lloc.
 ```xml
 <template id="formulari_inscripcio">
@@ -319,7 +319,7 @@ La vista QWeb “pinta”, el layout dona estil i estructura. Després “envia�
 :::
 
 
-1) Formulari HTML i seguretat CSRF
+2. Formulari HTML i seguretat CSRF
   El formulari té acció directa cap al controlador de POST: `/inscripcio/enviar`. S'utilitza Token CSRF per evitar enviaments maliciosos.
 ```html
 <form action="/inscripcio/enviar" method="post">
@@ -333,7 +333,7 @@ Tot el que s’envia va al backend, on es valida de veritat.
 :::
 
 
-1) Bloc “Dades de la patinadora”
+3. Bloc “Dades de la patinadora”
 - Camps bàsics: nom, cognoms, data de naixement, categoria (select).
 - `required="required"` és ajuda visual; la validació real és backend.
 - `t-att-value="data.get(...)"` repinta valors si hi ha errors.
@@ -351,7 +351,7 @@ Tot el que s’envia va al backend, on es valida de veritat.
 Els “name” han de coincidir amb el que espera el controlador.
 :::
 
-1) Bloc “Contacte” (només majors d’edat)
+4. Bloc “Contacte” (només majors d’edat)
 - DNI, email i telèfon de la patinadora quan és major.
 - Inicialment ocult; el JS l’activa en funció de l’edat real.
 ```html
@@ -366,7 +366,7 @@ Els “name” han de coincidir amb el que espera el controlador.
 El JS ajuda a mostrar/ocultar, però la decisió final és del backend.
 :::
 
-1) Bloc “Tutor legal” (només menors d’edat)
+5. Bloc “Tutor legal” (només menors d’edat)
 - Nom, cognoms, DNI, email i telèfon del tutor/a.
 - També ocult fins que el JS detecta menor d’edat.
 ```html
@@ -383,7 +383,7 @@ El JS ajuda a mostrar/ocultar, però la decisió final és del backend.
 El backend torna a comprovar menor/major i valida DNI.
 :::
 
-1) Gestió d’errors (feedback a l’usuari)
+6. Gestió d’errors (feedback a l’usuari)
   Si el backend troba un error (p. ex. DNI invàlid), la vista mostra un missatge i conserva les dades.
 ```xml
 <t t-if="error">
@@ -395,7 +395,7 @@ El backend torna a comprovar menor/major i valida DNI.
 Millor experiència; no es perd el que ja s’ha escrit.
 :::
 
-1) Botó d’enviament
+7. Botó d’enviament
   Envia el formulari al controlador; no guarda res en la vista.
 ```html
 <button type="submit" class="btn btn-primary mt-3">Enviar inscripció</button>
@@ -405,10 +405,10 @@ Millor experiència; no es perd el que ja s’ha escrit.
 “Enviar” → PAS 4 (validació i creació). Mostrar ≠ guardar.
 :::
 
-1) JavaScript d’ajuda visual
-Aquest JavaScript no és el cervell del sistema. És només un ajudant perquè l’usuari no es perda mentre ompli el formulari. Calcula edat, mostra el bloc correcte (contacte o tutor) i ajusta “required”. El codi va al final del fitxer inscripcio_templates.xml, dins d’una etiqueta `<script>...</script>`. 
+#### JavaScript d’ajuda visual
+Aquest JavaScript no és el cervell del sistema. És només un ajudant perquè l’usuari no es perda mentre ompli el formulari. Calcula edat, mostra el bloc correcte (contacte o tutor) i ajusta “required”. El codi pot anar al final del fitxer `inscripcio_templates.xml`, dins d’una etiqueta `<script>...</script>`. 
 
-Podem incrustar el codi directament o referenciar un fitxer extern a `static/src/js/`. Sempre que siga senzill, el posem directament però si és molt llarg, millor en un fitxer extern. Per a fer-ho cal `/nom_modul/static/src/js/fitxer.js` i després referenciar-lo, com per exemple, en aquest cas:
+També podem incrustar el codi directament o referenciar un fitxer extern a `static/src/js/`. Sempre que siga senzill, el posem directament però si és molt llarg, millor en un fitxer extern. Per a fer-ho cal `/nom_modul/static/src/js/fitxer.js` i després referenciar-lo, com per exemple, en aquest cas:
 ```xml
 <t t-call="website.layout">
     ...
@@ -427,29 +427,27 @@ Però recorda que si està incrustat cal escapar caràcters especials (com `<`, 
 
 
 
+```{only} html
 ::: {admonition} 🔍 Explicació detallada JavaScript
 :class: info
-
+```
 <details>
-<summary>Fes clic per veure l’explicació pas a pas</summary>
+<summary>Fes clic per veure l'explicació pas a pas</summary>
 
- 8.1) Esperar que el HTML estiga carregat
+#### 🔍 Explicació detallada JavaScript
+Anem a veure el codi JavaScript pas a pas. Recorda que aquest codi només ajuda a la UI, no fa validacions ni canvia res en backend. És un ajudant visual per a l’usuari.
+
+##### Esperar que el HTML estiga carregat
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function () {
     // tot el JS va ací dins
 });
   ```
-Què fa açò?
+Això és clau perquè el JS accedeix a elements del formulari. Si el JS s’executa abans que el navegador haja creat els elements, no trobarà res i no funcionarà. Evita errors típics de “no trobe l’element”.
 
-Espera que el navegador haja carregat tot el HTML.
 
-Evita errors típics de “no trobe l’element”.
-
-👉 Si intentàrem accedir als camps abans, el navegador diria:
-“xe, això encara no existix”.
-
-  8.2) Agafar els elements importants del formulari
+##### Agafar els elements importants del formulari
 
 Ara identifiquem què volem controlar:
 
@@ -458,9 +456,6 @@ const dataInput = document.getElementById("data_naixement");
 const blocTutor = document.getElementById("bloc_tutor");
 const blocContacte = document.getElementById("bloc_contacte");
 ```
-
-
-Què estem fent?
 
 dataInput: el camp de data de naixement.
 
@@ -472,7 +467,7 @@ blocContacte: el bloc amb les dades de contacte de la patinadora.
 Si un id està mal escrit, el JS no farà res (i no sempre avisa).
 
 
-  8.3) Preparar els inputs per marcar required
+##### Preparar els inputs per marcar required
 
 Ara volem poder dir:
 
@@ -484,17 +479,13 @@ const tutorInputs = blocTutor.querySelectorAll("input");
 const contacteInputs = blocContacte.querySelectorAll("input");
 ``` 
 
-Què fa açò?
-
-Agafa tots els <input> dins de cada bloc.
-
-Ens permet marcar o desmarcar required en grup.
+Agafa tots els <input> dins de cada bloc. Ens permet marcar o desmarcar required en grup.
 
 👉 Açò evita anar camp per camp com un boig.
 
 
 
-  8.4) Funció central: `aplicarEdat()`
+##### Funció central: `aplicarEdat()`
 
 Ara ve el tros important, però tranquilitat, anem a poc a poc.
 ```javascript
@@ -502,24 +493,20 @@ function aplicarEdat() {
     if (!dataInput.value) return;
 ```
 
-
 Primer filtre:
 
 Si no hi ha data de naixement → no fem res. Evita errors quan el camp està buit.
 
-  8.5) Convertir la data i comprovar que és vàlida
+##### Convertir la data i comprovar que és vàlida
 
 ```javascript
 const dataNaix = new Date(dataInput.value);
 if (isNaN(dataNaix)) return;
 ```
-
-Per què açò?
-
 Convertim el text (YYYY-MM-DD) en una data real. Si per algun motiu no és una data vàlida → parem. Mai confies cegament en el que ve del navegador.
 
 
-  8.6) Calcular l’edat aproximada
+##### Calcular l’edat aproximada
 ```javascript
 const hui = new Date();
 let edat = hui.getFullYear() - dataNaix.getFullYear();
@@ -530,20 +517,16 @@ if (m < 0 || (m === 0 && hui.getDate() < dataNaix.getDate())) {
 }
 ```
 
-Què fa exactament?
-
-Resta anys.
-
-Ajusta si encara no ha complit anys enguany.
+Resta anys. Ajusta si encara no ha complit anys enguany.
 
 👉 Açò evita errors típics de “té 18… però encara no”.
 
 ⚠️ Important:
 Aquesta edat és orientativa.
-La decisió legal es torna a calcular en backend al PAS 4.
+La decisió legal es torna a calcular en backend.
 
 
-  8.7) Decisió visual: menor o major d’edat
+##### Decisió visual: menor o major d’edat
 
 Ara només decidim què es veu al formulari.
 
@@ -559,11 +542,7 @@ if (edat < 18) {
 
 ```
 
-Mostra el bloc del tutor.
-
-Oculta el bloc de contacte.
-
-Marca com obligatoris els camps del tutor.
+Mostra el bloc del tutor, oculta el bloc de contacte i marca com obligatoris els camps del tutor.
 
 🧑 Si és major d’edat
 ```javascript
@@ -577,17 +556,15 @@ else {
 ```
 
 
-Mostra contacte.
+Mostra contacte, oculta tutor, marca com a required els camps de contacte i desmarca els del tutor.
 
-Oculta tutor.
-
-Ajusta required.
 
 👉 Açò és només UX, no una decisió legal definitiva.
 
 
-  8.8) Reactivar la funció quan canvia la data
-  ```javascript
+##### Reactivar la funció quan canvia la data
+
+```javascript
 dataInput.addEventListener("change", aplicarEdat);
 ```
 
@@ -596,8 +573,8 @@ Què passa ací?
 Cada vegada que l’usuari canvia la data es recalcula l’edat i s’actualitza la UI. Sense recarregar la pàgina. Tot fluid.
 
 
-  8.9) Executar-ho també en carregar la pàgina
-  ```javascript
+##### Executar-ho també en carregar la pàgina
+```javascript
 aplicarEdat();
 ```
 
@@ -607,7 +584,7 @@ Si tornem al formulari per un error (DNI incorrecte, per exemple), el backend re
 
 👉 Sense aquesta línia, la UI podria quedar desquadrada.
 
-  8.10) Resum final
+##### Resum final
 
 Este JS només ajuda a la UI: mostra/oculta blocs i marca “required” segons l’edat. La lògica real (edat, decisions, validacions) es fa en backend.
 
@@ -627,8 +604,105 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 ```
 
-</details> 
-::: 
+</details>
+
+:::
+
+
+
+#### JavaScript (Odoo Widget Framework)
+
+Odoo permet afegir el JS a assets dins del manifest. Això és útil per a JS que s’utilitza en moltes pàgines, però per a un JS específic d’una plantilla i aquest curs, és més senzill incloure’l directament al final de la plantilla QWeb. Així, el codi està més a prop del lloc on s’utilitza i no es carrega en pàgines on no fa falta. Un exemple de com fer-ho seria afegir al manifest:
+
+```python
+    'assets': {
+        # Incloem el nostre JavaScript personalitzat per al formulari d'inscripció
+        'web.assets_frontend': [
+        'patinatge_inscripcio/static/src/js/inscripcio_form.js',
+        ],
+        
+    },
+```
+
+El script JavaScript ha s'ha d'adaptar perquè funcione dins de l'**arquitectura de widgets de Odoo**. Els widgets són components JavaScript que s'associen a elements del DOM i gestionen la seva interacció. En lloc d'escoltar `DOMContentLoaded`, el widget s'inicialitza automàticament quan es carrega la pàgina i es pot associar a un selector CSS específic. Això és especialment útil en pàgines dinàmiques on el contingut pot canviar sense recarregar tota la pàgina (com en el cas de les vistes de Odoo).
+
+### 🔧 Per què canviar a widgets?
+
+Els widgets d'Odoo:
+- Es carreguen automàticament en pàgines web públiques.
+- Gestionen el cicle de vida (inicialització, destrucció).
+- S'integren amb `web.public.widget` sense tindre que fer `DOMContentLoaded`.
+- Permeten reutilitzar codi fàcilment.
+
+### 📝 Estructura del widget
+
+```javascript
+/** @odoo-module **/
+
+import publicWidget from 'web.public.widget';
+
+publicWidget.registry.InscripcioForm = publicWidget.Widget.extend({
+    selector: '.container:has(#data_naixement)',
+    
+    events: {
+        'change #data_naixement': '_onDataChange',
+    },
+
+    start: function () {
+        this._super.apply(this, arguments);
+        this._aplicarEdat();
+    },
+
+    _onDataChange: function () {
+        this._aplicarEdat();
+    },
+
+    _aplicarEdat: function () {
+        // ... lògica d'edat
+    }
+});
+```
+
+**Claus del widget:**
+
+- **`selector`** → On s'activa el widget. Aquí: contenidors que contenen `#data_naixement`.
+- **`events`** → Escolta canvis en el camp de data.
+- **`start()`** → Es crida quan el widget es carrega. Útil per a inicialitzacions.
+- **`_onDataChange()`** → Mètode privat que respon a eventos.
+- **`_aplicarEdat()`** → Lògica principal, separada per claredat.
+
+### 🔍 Diferències amb vanilla JS
+
+| Vanilla JS | Widget Odoo |
+|-----------|-----------|
+| `document.getElementById()` | `this.$('#id_element')[0]` |
+| `addEventListener()` | `events: { 'change #id': '_metode' }` |
+| `DOMContentLoaded` | `start()` |
+| Es carrega sempre | `selector` determina on s'activa |
+
+### ✅ Avantatges
+
+- ✅ Se sincronitza automàticament quan la pàgina canvia dinàmicament.
+- ✅ No cal afegir `<script>` al template: es carrega automàticament.
+- ✅ Gestiona esborrat de listeners automàticament.
+- ✅ Accés a `this.$()` que és jQuery + DOM.
+
+
+:::{tip}
+
+**Pots descarregar l'script javascript del formulari:**
+Al fitxer `inscripcio_form.js` tens el codi complet del widget per a la gestió del formulari d'inscripció. S'ha inclós comentat el codi de la versió amb `DOMContentLoaded` i la versió adaptada a widgets d'Odoo. Pots comparar les dues versions per veure com s'adapta el codi a l'arquitectura de Odoo.
+**[inscripcio_form.js](../_static/scripts/inscripcio_form.js)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{inscripcio_form.js}{inscripcio\_form.js}
+```
+
+:::
 
 
 ::: {admonition} Què fa / què no fa la plantilla
@@ -884,7 +958,21 @@ Aquest fitxer defineix la plantilla QWeb que genera el PDF d’inscripció. No �
 - Barrejar HTML de website amb reports
 
 Si fas això… Odoo et mirarà malament 😅
+:::{tip}
 
+**Pots descarregar el fitxer:**
+
+**[report_inscripcio.xml](../_static/scripts/report_inscripcio.xml)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{report_inscripcio.xml}{report\_inscripcio.xml}
+```
+
+:::
 
 
 ### ✍️ 5 Passar a la pantalla de signatura
@@ -971,6 +1059,21 @@ A partir d’ací:
 ```
 :::
 
+:::{tip}
+
+**Pots descarregar el fitxer:**
+
+**[main.py](../_static/scripts/controlador-pat/main.py)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{main.py}{main.py}
+```
+
+:::
 
 ::: {admonition} Vista signatura  `inscripcio_signar.xml`
 :class: info
@@ -985,147 +1088,6 @@ La lògica real (validacions, estats, PDFs finals) està en el **controlador** i
 :width: 100%
 :align: center
 :::
-
-:::{dropdown} codi complet de la vista de signatura
-:icon: code
-:class-container: tip
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-
-<template id="inscripcio_signar" name="Inscripció quasi acabada">
-    <t t-call="website.layout">
-        <div class="container mt-5">
-
-            <h2>Inscripció quasi acabada 🛼</h2>
-            <p>
-                Ja hem generat el full d’inscripció.
-                <strong>Revisa’l i signa’l</strong> per completar el procés.
-            </p>
-
-            <h4>Full d’inscripció (previsualització)</h4>
-
-            <div style="border:1px solid #ccc; height:700px;">
-                <iframe
-                    t-att-src="'/inscripcio/pdf/%s#navpanes=0&amp;toolbar=1&amp;scrollbar=1' % inscripcio.id"
-                    width="100%"
-                    height="100%"
-                    style="border:none;">
-                </iframe>
-            </div>
-
-            <h4 class="mt-4">Signatura manual</h4>
-
-            <canvas id="signature-pad"
-                    width="500"
-                    height="200"
-                    style="border:1px solid #ccc;"></canvas>
-
-            <br/>
-            <button type="button"
-                    class="btn btn-secondary mt-2"
-                    onclick="clearCanvas()">
-                🧹 Esborrar
-            </button>
-
-            <div class="mt-3">
-                <a t-att-href="'/inscripcio/pdf/%s' % inscripcio.id"
-                   class="btn btn-secondary"
-                   target="_blank">
-                    📄 Descarregar PDF
-                </a>
-            </div>
-
-            <hr/>
-
-            <div class="alert alert-info">
-                <ul class="mb-0">
-                    <li>Signa manualment amb el ratolí i envia'l directament</li>
-                </ul>
-            </div>
-
-            <!-- 🔐 FORMULARI DE PUJADA -->
-            <form id="form-signatura"
-                  action="/inscripcio/pujar_signat"
-                  method="post"
-                  enctype="multipart/form-data">
-                <!-- 🔐 CSRF TOKEN (OBLIGATORI) -->
-                <input type="hidden"
-                        name="csrf_token"
-                        t-att-value="request.csrf_token()"/>
-                <input type="hidden"
-                       name="inscripcio_id"
-                       t-att-value="inscripcio.id"/>
-
-                <!-- 🔴 SIGNATURA MANUAL (BASE64) -->
-                <input type="hidden"
-                       name="signature_data"
-                       id="signature_data"/>
-
-                <input type="file"
-                       name="pdf_signat"
-                       accept="application/pdf"/>
-
-                <br/><br/>
-                <button class="btn btn-success">
-                    ⬆️ Signar
-                </button>
-
-
-            </form>
-
-        </div>
-
-        <!-- 🎨 CANVAS SIGNATURA -->
-        <script>
-            const canvas = document.getElementById('signature-pad');
-            const ctx = canvas.getContext('2d');
-            let drawing = false;
-            let hasDrawn = false;   
-
-            canvas.addEventListener('mousedown', () =&gt; drawing = true);
-            canvas.addEventListener('mouseup', () =&gt; {
-                drawing = false;
-                ctx.beginPath();
-            });
-            canvas.addEventListener('mousemove', draw);
-
-            function draw(e) {
-                if (!drawing) return;
-                hasDrawn = true; 
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = '#000';
-                ctx.lineTo(e.offsetX, e.offsetY);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(e.offsetX, e.offsetY);
-            }
-
-            function clearCanvas() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                hasDrawn = false;
-            }
-        </script>
-
-        <!-- 📤 CAPTURA DE SIGNATURA EN ENVIAR -->
-        <script>
-            document.getElementById('form-signatura').addEventListener('submit', function () {
-                if (hasDrawn) {
-                    document.getElementById('signature_data').value =
-                        canvas.toDataURL('image/png');
-                } else {
-                    document.getElementById('signature_data').value = '';
-                }
-            });
-        </script>
-
-
-    </t>
-</template>
-
-</odoo>
-```
 
 
 #### 🧭 Quin és l’objectiu d’aquesta vista?
@@ -1171,10 +1133,7 @@ Claus:
 
 Què està passant ací?
 - El PDF ja existeix quan arribem a aquesta vista.
-- Es carrega dins d’un iframe per a:
-  - revisar-lo,
-  - comprovar les dades,
-  - evitar descàrregues innecessàries.
+- Es carrega dins d’un iframe per a revisar-lo, comprovar les dades i evitar descàrregues innecessàries.
 
 Detall important:
 - `t-att-src` construeix dinàmicament la URL amb l’id de la inscripció.
@@ -1631,7 +1590,159 @@ def aplicar_signatura_al_pdf(pdf_base64, signatura_base64, referencia, hash_pdf,
 ```
 :::
 
+:::{dropdown} codi complet de la vista de signatura
+:icon: code
+:class-container: tip
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
 
+<template id="inscripcio_signar" name="Inscripció quasi acabada">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+
+            <h2>Inscripció quasi acabada 🛼</h2>
+            <p>
+                Ja hem generat el full d’inscripció.
+                <strong>Revisa’l i signa’l</strong> per completar el procés.
+            </p>
+
+            <h4>Full d’inscripció (previsualització)</h4>
+
+            <div style="border:1px solid #ccc; height:700px;">
+                <iframe
+                    t-att-src="'/inscripcio/pdf/%s#navpanes=0&amp;toolbar=1&amp;scrollbar=1' % inscripcio.id"
+                    width="100%"
+                    height="100%"
+                    style="border:none;">
+                </iframe>
+            </div>
+
+            <h4 class="mt-4">Signatura manual</h4>
+
+            <canvas id="signature-pad"
+                    width="500"
+                    height="200"
+                    style="border:1px solid #ccc;"></canvas>
+
+            <br/>
+            <button type="button"
+                    class="btn btn-secondary mt-2"
+                    onclick="clearCanvas()">
+                🧹 Esborrar
+            </button>
+
+            <div class="mt-3">
+                <a t-att-href="'/inscripcio/pdf/%s' % inscripcio.id"
+                   class="btn btn-secondary"
+                   target="_blank">
+                    📄 Descarregar PDF
+                </a>
+            </div>
+
+            <hr/>
+
+            <div class="alert alert-info">
+                <ul class="mb-0">
+                    <li>Signa manualment amb el ratolí i envia'l directament</li>
+                </ul>
+            </div>
+
+            <!-- 🔐 FORMULARI DE PUJADA -->
+            <form id="form-signatura"
+                  action="/inscripcio/pujar_signat"
+                  method="post"
+                  enctype="multipart/form-data">
+                <!-- 🔐 CSRF TOKEN (OBLIGATORI) -->
+                <input type="hidden"
+                        name="csrf_token"
+                        t-att-value="request.csrf_token()"/>
+                <input type="hidden"
+                       name="inscripcio_id"
+                       t-att-value="inscripcio.id"/>
+
+                <!-- 🔴 SIGNATURA MANUAL (BASE64) -->
+                <input type="hidden"
+                       name="signature_data"
+                       id="signature_data"/>
+
+                <input type="file"
+                       name="pdf_signat"
+                       accept="application/pdf"/>
+
+                <br/><br/>
+                <button class="btn btn-success">
+                    ⬆️ Signar
+                </button>
+
+
+            </form>
+
+        </div>
+
+        <!-- 🎨 CANVAS SIGNATURA -->
+        <script>
+            const canvas = document.getElementById('signature-pad');
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            let hasDrawn = false;   
+
+            canvas.addEventListener('mousedown', () =&gt; drawing = true);
+            canvas.addEventListener('mouseup', () =&gt; {
+                drawing = false;
+                ctx.beginPath();
+            });
+            canvas.addEventListener('mousemove', draw);
+
+            function draw(e) {
+                if (!drawing) return;
+                hasDrawn = true; 
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#000';
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(e.offsetX, e.offsetY);
+            }
+
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hasDrawn = false;
+            }
+        </script>
+
+        <!-- 📤 CAPTURA DE SIGNATURA EN ENVIAR -->
+        <script>
+            document.getElementById('form-signatura').addEventListener('submit', function () {
+                if (hasDrawn) {
+                    document.getElementById('signature_data').value =
+                        canvas.toDataURL('image/png');
+                } else {
+                    document.getElementById('signature_data').value = '';
+                }
+            });
+        </script>
+
+
+    </t>
+</template>
+
+</odoo>
+```
+:::{tip}
+
+**Pots descarregar el fitxer:**
+**[inscripcio_signar.xml](../_static/scripts/inscripcio_signar.xml)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{inscripcio_signar.xml}{inscripcio\_signar.xml}
+```
+:::
 
 ## 🏁 Missatge final
 Missatge humà i clar:
@@ -1907,7 +2018,7 @@ Comprova que tot funciona si:
 - Mode desenvolupador per a vistes QWeb.
 - Logs per errors 500.
 - Actualitza el mòdul:
-  - `docker compose down && docker compose up -d`
+  - `docker compose restart`
   - `docker compose exec web odoo -u patinatge_inscripcio -d cpa --stop-after-init`.
 :::
 

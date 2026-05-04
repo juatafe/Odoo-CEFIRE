@@ -165,14 +165,22 @@ is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 latex_additional_files = [
   '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
-  '_static/scripts/main.py',
+  '_static/scripts/apiodoo.py',
   '_static/scripts/scriptsetupodoo.sh',
   '_static/scripts/deploy-odoo-docker.sh',
   '_static/scripts/test-docker-installation.sh',
   '_static/scripts/diagnostic.sh',
   '_static/scripts/monitor.sh',
   '_static/scripts/backup-docker.sh',
-  '_static/scripts/restore-docker.sh'
+  '_static/scripts/restore-docker.sh',
+  '_static/scripts/inscripcio_form.js',
+  '_static/scripts/inscripcio_signar.xml',
+  '_static/scripts/report_inscripcio.xml',
+  '_static/scripts/controlador-pat/main.py',
+  '_static/scripts/patinatge_inscripcio_views.xml',
+  '_static/scripts/hooks.py',
+  '_static/scripts/exemple_de_mandat.pdf',
+  '_static/scripts/cpa-logo.jpeg'
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",

@@ -1,9 +1,6 @@
 
 ## Introducció
-En este tema deixem de “jugar” i comencem a controlar qui pot fer què dins d’Odoo.  
-Si no controles els permisos… acabes amb el soci esborrant dades i la directiva amb cara de 🤨.
-
-Treballarem el tema amb el **cas del club de patinatge**, perquè s’entenga de veritat.
+Per a digitalizar un negoci, no hi ha prou amb crear models i vistes. També cal controlar **qui pot fer què** dins del sistema. Treballarem el tema amb un cas real, **el club de patinatge**, donar una vision pràctica i concreta de com gestionar usuaris, grups i permisos en Odoo.
 
 ::: {admonition} Objectiu pràctic
 :class: tip
@@ -32,8 +29,7 @@ Si un usuari **no té permís al model**, el sistema el frena encara que “veja
 
 :::{caution} 
 
-El que “es veu” és frontend. El que “es pot fer” és seguretat de servidor.  
-La seguretat real sempre va en CSV i record rules, no en les vistes.
+El que “es veu” és frontend. El que “es pot fer” és seguretat de servidor.  La seguretat real sempre va en CSV i record rules, no en les vistes.
 :::
 
 ---
@@ -216,20 +212,15 @@ Ací filtrem perquè la patinadora només veja inscripcions on `soci_id` coincid
 - Record rules: “sobre quins registres” exactes (dominis).  
 :::
 
----
 
-## Resum final
 
-✔️ Els permisos es defineixen **per grups**  
-✔️ El CSV és obligatori  
-✔️ Les vistes no són seguretat  
-✔️ Sense permisos, Odoo et para
+**Principi fonamental de la seguretat en Odoo:**
 
-O dit més clar:
-> En Odoo no mana qui eres,  
-> **mana el grup on estàs**.
+> En Odoo, els permisos no es basen en la identitat de l'usuari,  
+> sinó en l'**assignació de grups** a què pertany.
 
-I qui no controla els permisos… després plora 😄
+Aquesta estructura permet una gestió escalable i mantenible dels accessos: els administradors només han de mantindre l'associació usuari-grup, mentre que els permisos es defineixen una sola vegada per a cada grup. Sense una configuració correcta de permisos, els sistemes Odoo són vulnerables a accessos no autoritzats i divulgació de dades.
+
 
 ::: {admonition} Checklist de tancament
 :class: tip
@@ -248,4 +239,4 @@ I qui no controla els permisos… després plora 😄
 
 
 ## Resum i pròxims passos
-En aquest capítol hem après a crear grups d’usuaris, assignar permisos reals sobre models amb `ir.model.access.csv`, diferenciar entre permisos de servidor i visibilitat en les vistes, i aplicar record rules per limitar quins registres veu cada grup. Si no ho has fet encara, convidria realitzar [l'Exercici pràctic 10: Permisos i rols en Odoo per al Club de Patinatge](../../Annexos/permisosrols.md), on aplicarem aquests conceptes per a configurar els permisos dels diferents rols del club de patinatge. 
+En aquest capítol hem après a crear grups d’usuaris, assignar permisos reals sobre models amb `ir.model.access.csv`, diferenciar entre permisos de servidor i visibilitat en les vistes, i aplicar record rules per limitar quins registres veu cada grup. Si no ho has fet encara, convidria realitzar [l'Exercici pràctic Permisos i rols en Odoo per al Club de Patinatge](../../Annexos/permisosrols.md), on aplicarem aquests conceptes per a configurar els permisos dels diferents rols del club de patinatge. 

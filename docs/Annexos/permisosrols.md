@@ -22,8 +22,19 @@ Encara que:
 Aquesta pràctica està pensada perquè detectes i entengues aquest comportament.
 :::
 
+
+::: {admonition} Objectius de la pràctica
+:class: tip
+En acabar la pràctica sabràs:
+- Crear grups reals d’usuaris.
+- Assignar permisos amb `ir.model.access.csv`.
+- Comprovar què passa quan falten permisos.
+- Aplicar record rules i vore la diferència abans/després.
+- Entendre per què amagar botons no és seguretat.
+:::
+
 ### Requisits previs
-👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `patinatge.inscripcio` tinga almenys una vista tree i una form** per poder provar els permisos. Si el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
+👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `patinatge.inscripcio` tinga almenys una vista tree i una form** per poder provar els permisos. Si no has fest l'excerccici anterior o el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
 
 :::{dropdown} Codi complet de la vista `patinatge_inscripcio_views.xml`
 :class-container: tip
@@ -123,28 +134,30 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 ```
 :::
 
-::: {admonition} Objectius de la pràctica
-:class: tip
-En acabar la pràctica sabràs:
-- Crear grups reals d’usuaris.
-- Assignar permisos amb `ir.model.access.csv`.
-- Comprovar què passa quan falten permisos.
-- Aplicar record rules i vore la diferència abans/després.
-- Entendre per què amagar botons no és seguretat.
+:::{tip}
+
+**Pots descarregar el fitxer:**
+
+**[patinatge_inscripcio_views.xml](../_static/scripts/patinatge_inscripcio_views.xml)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{patinatge_inscripcio_views.xml}{patinatge\_inscripcio\_views.xml}
+```
+
 :::
+
 
 ---
 
-## 1) Preparació de l’entorn
+## Preparació de l’entorn
 Abans de començar la pràctica, cal tindre clar com està organitzat el projecte.
-En aquesta pràctica no treballem amb un únic mòdul, sinó amb dos mòduls relacionats:
+En aquesta pràctica treballem amb un únic mòdul (`patinatge_inscripcio`) que no depén d'altres mòduls. S'ha preparat així per centrar-nos exclusivament en la seguretat sense complicar-ho amb dependències.
 
-📦 Mòduls del projecte
-- patinatge
-  - Mòdul base del projecte. Conté:
-      - Models generals (patinadores, grups, entrenaments…)
-      - Vistes de backend
-      - Estructura principal del club
+📦 Mòdul
 
 - patinatge_inscripcio
   - Mòdul específic per gestionar:
@@ -152,16 +165,15 @@ En aquesta pràctica no treballem amb un únic mòdul, sinó amb dos mòduls rel
       - Les inscripcions al club
       - La lògica associada a l’alta de patinadores
 
-👉 Tot i ser mòduls diferents, treballen junts i comparteixen dades.
-Requisits:
-- Mòdul “patinatge” instal·lat.
+
+Consisteix a crear els grups de seguretat, definir els permisos d’accés al model i aplicar una record rule per a que les patinadores només vegen les seues inscripcions:
 - Model `patinatge.inscripcio` operatiu.
-- Almenys 3 usuaris de prova:
+- Almenys 3 usuaris de prova (els crearem automàticament amb un hook, però si vols crear-los a mà, són aquests):
   - `directiva_test`
   - `entrenadora_test`
   - `patinadora_test`
 
-👉 Si no existeixen, crea’ls des del backend: Configuració → Usuaris.
+👉 Si no existeixen, cal que els crees des del backend: Configuració → Usuaris.
 
  
 En cas de dubte, comprova que els usuaris tenen els grups assignats correctament des del backend. En configuració → Usuaris i Empreses → Usuaris → selecciona l’usuari i comprova els grups.
@@ -228,7 +240,7 @@ user.action_reset_password()
 
 Açò envia un correu i necessita el sistema de mail configurat.
 
-👉 Per a classe i pràctiques: usa la primera.
+👉 Per a classe i proves: utilitza la primera.
 :::
 
 <!-- ::: {admonition} Actualitzar el mòdul (Linux)
@@ -245,7 +257,7 @@ Substitueix `<nom_bd>` pel nom de la teua base de dades.
 
 ---
 
-## 2) Crear els grups de seguretat
+## Crear els grups de seguretat
 
 Objectiu:
 - Definir els rols: Directiva, Entrenadora, Patinadora.
@@ -311,7 +323,7 @@ Verificació:
 
 ---
 
-## 3) Definir permisos al model (ACL · `ir.model.access.csv`)
+## Definir permisos al model (ACL · `ir.model.access.csv`)
 
 Objectiu:
 - Controlar què pot fer cada grup sobre `patinatge.inscripcio`.
@@ -334,13 +346,17 @@ En `model_id:id` usa el prefix `model_` i guions baixos:
 
 Actualitza el mòdul i prova amb cada usuari:
 
-- 👑 Directiva → pot crear, editar i esborrar inscripcions.
-- 👩‍🏫 Entrenadora → pot vore i editar; ❌ no pot crear ni esborrar.
-- 🛼 Patinadora → pot crear; ❌ no pot editar ni esborrar.
+- **Directiva**: pot crear, editar i esborrar inscripcions.
+- **Entrenadora**: pot vore i editar; no pot crear ni esborrar.
+- **Patinadora**: pot crear; no pot editar ni esborrar.
 
-👉 Pregunta clau: La patinadora veu totes les inscripcions?  
-Sí… de moment 😏. L’ACL diu “què pot fer”, però no “quins registres” veu.  Encara que la patinadora només tinga permís de lectura i creació,
-encara veu totes les inscripcions.
+### Observació important: limitacions de l'ACL
+
+La patinadora veu totes les inscripcions registrades al sistema, malgrat que l'ACL li permet només lectura i creació.
+
+Això ocorre perquè l'ACL defineix **quines accions pot fer** (lectura, escriptura, creació, eliminació), però **no defineix sobre quins registres específics** pot aplicar eixes accions.
+
+Per tant, fins que no s'afegisca una record rule, l'ACL és insuficient per garantir que cada usuari només veja les dades que li pertanyen.
 
 
 :::{image} /_static/assets/img/Tema8/usuaris-confi.png
@@ -349,17 +365,28 @@ encara veu totes les inscripcions.
 :::
 
 
-### 🔥 3.1) Problema real: els permisos existeixen, però l’usuari no està al grup
-Arribats a aquest punt, pot passar una cosa molt habitual:
+### Problema real: els permisos existeixen, però l'usuari no està al grup
 
-👉 Els grups existeixen  
-👉 El CSV està correcte  
-👉 Però el menú **NO apareix**
+Arribats a aquest punt, pot ocórrer una situació molt habitual en la pràctica:
 
-Això no és un error del CSV ni de la vista.
+- Els grups existeixen als paràmetres de seguretat.
+- El fitxer CSV amb els permisos està correctament definit.
+- Però el menú no apareix a la interfície de l'usuari.
 
-👉 **L’usuari no té assignat el grup que toca**.
-### 🔧 3.2) Arreglar usuaris de prova amb un post_init_hook
+Això no és un error en la configuració del CSV ni en la definició de la vista.
+
+**La causa més probable és que l'usuari no té assignat el grup de seguretat que correspon.**
+
+En Odoo, per veure un menú, l'usuari ha de pertànyer almenys a un dels grups que s'han definit en la configuració de seguretat. Si falta aquesta assignació, la interfície no mostra cap error; simplement amaga el menú de manera silenciosa.
+
+Per resoldre-ho, verifica que cada usuari de prova té assignats els grups correctes:
+- `directiva_test` → Directiva
+- `entrenadora_test` → Entrenadora  
+- `patinadora_test` → Patinadora
+
+Accedeix a **Configuració → Usuaris i Empreses → Usuaris**, selecciona cada usuari i confirma que apareix el grup corresponent en el camp de grups.
+
+### 🔧 Arreglar usuaris de prova amb un post_init_hook
 Per assegurar-nos que tots els usuaris de prova tenen el grup correcte,
 usarem un `post_init_hook`.  Aquest pas NO és obligatori en un projecte real,  
 però en una pràctica ens evita errors humans i ens permet centrar-nos en la seguretat.
@@ -449,7 +476,7 @@ Sense grup:
 
 ---
 
-## 4) Prerequisit per a les record rules: afegir `partner_id` al model
+## Prerequisit per a les record rules: afegir `partner_id` al model
 Per poder filtrar “el que és meu”, el model ha de saber qui és el contacte (partner) que fa la inscripció. Afig el camp `partner_id` a `patinatge.inscripcio`. Açò és provisional per a la pràctica ja que caldria acceptar la inscripció per a convertir-la en patinadora però cal tenir un camp relacionat amb res.partner per a la record rule.
 
 ```python
@@ -482,7 +509,7 @@ class PatinatgeInscripcio(models.Model):
 - Actualitza el mòdul: `docker compose exec web odoo -u patinatge_inscripcio -d cpa --stop-after-init`  
 :::
 
-## 5) Aplicar una record rule: ara sí, seguretat de veritat 🔥
+## Aplicar una record rule: ara sí, seguretat de veritat 🔥
 
 Objectiu:
 - Fer que la patinadora només veja les seues inscripcions. Ara mateix veu totes però no pot editar.
@@ -505,6 +532,28 @@ Tasca:
     <field name="groups" eval="[(4, ref('patinatge_inscripcio.group_patinatge_patinadora'))]"/>
   </record>
 ```
+
+### Què significa el `4` en `(4, ref(...))`?
+
+El `4` és un comando ORM de **Many2many** d'Odoo. En camps relacionals Many2many, s'utilitza una llista de tuples amb un codi numèric per indicar l'operació:
+
+| Codi | Operació |
+|------|----------|
+| `0`  | Crea i enllaça un nou registre |
+| `1`  | Modifica un registre existent |
+| `2`  | Elimina i desenllaça un registre |
+| `3`  | Desenllaça (sense eliminar) |
+| `4`  | **Enllaça un registre existent** (sense crear ni eliminar) |
+| `5`  | Desenllaça tots |
+| `6`  | Substitueix tota la llista |
+
+En aquest cas, `(4, ref('patinatge_inscripcio.group_patinatge_patinadora'))` vol dir:
+
+> "Afegeix el grup `group_patinatge_patinadora` a la relació `groups` de la regla, sense crear-lo ni eliminar-lo, simplement associant-lo."
+
+És equivalent a un **ADD** en una relació Many2many: la regla d'accés `rule_patinadora_veure_propia_inscripcio` quedarà vinculada al grup **Patinadora**.
+
+
 A la imatge es veu que ja no té accés a les altres inscripcions. 
 :::{image} /_static/assets/img/Tema8/patinadora-despres.png
 :alt: Patinadora veient només la seua inscripció després d’aplicar la record rule
@@ -544,23 +593,225 @@ Verificació final 🔍
 
 ---
 
-## 6) Conclusions (obligatòries)
-Respon breument:
-- Què passava abans de la record rule?
-- Què ha canviat després d’afegir-la?
-- Per què el CSV no és suficient en molts casos?
-- Per què no és bona idea confiar només en vistes?
+## I si la patinadora sols ha d'accedir al portal?
+
+En molts casos reals, les patinadores **no necessiten accedir al backend d'Odoo** (el panell d'administració). Només necessiten accedir al **portal web** per consultar o gestionar la seua inscripció.
+
+En Odoo, els usuaris de tipus **portal** (`base.group_portal`) accedeixen a una interfície pública simplificada, sense menús d'administració ni vistes internes.
+
+Per implementar-ho, cal crear l'usuari patinadora com a **portal** en lloc d'**internal**. El hook `post_init_hook` del mòdul s'encarrega d'aquesta lògica automàticament en instal·lar-lo.
+
+A més, incorporem un `uninstall_hook` que **elimina els usuaris de prova** quan es desinstal·la el mòdul, per deixar el sistema net.
+
+Crea o actualitza el fitxer `hooks.py` a l'arrel del mòdul:
+
+```python
+# Importem l'API d'Odoo i la constant SUPERUSER_ID per executar accions com a superusuari
+from odoo import api, SUPERUSER_ID
+
+# Llista dels logins dels usuaris de prova que gestiona aquest mòdul
+TEST_USERS = ['directiva_test', 'entrenadora_test', 'patinadora_test']
+
+# Diccionari que mapeja cada login amb la referència XML del seu partner (res.partner) de prova
+TEST_USER_PARTNERS = {
+    'directiva_test': 'patinatge_inscripcio.partner_directiva_test',
+    'entrenadora_test': 'patinatge_inscripcio.partner_entrenadora_test',
+    'patinadora_test': 'patinatge_inscripcio.partner_patinadora_test',
+}
+
+# Referència única de la inscripció de prova de la patinadora
+TEST_PATINADORA_REF = 'TEST-PAT-001'
+
+
+# Hook que s'executa després d'instal·lar o actualitzar el mòdul (post_init_hook)
+def create_test_users(cr, registry):
+    # Creem un entorn Odoo amb permisos de superusuari
+    env = api.Environment(cr, SUPERUSER_ID, {})
+
+    # Obtenim els grups funcionals definits al mòdul
+    group_dir = env.ref('patinatge_inscripcio.group_patinatge_directiva')
+    group_ent = env.ref('patinatge_inscripcio.group_patinatge_entrenadora')
+    group_pat = env.ref('patinatge_inscripcio.group_patinatge_patinadora')
+    # Obtenim els grups estàndard d'Odoo per al tipus d'usuari
+    group_internal = env.ref('base.group_user')   # usuari intern (empleat)
+    group_portal = env.ref('base.group_portal')   # usuari portal (accés limitat)
+
+    # Afegim el grup Directiva a l'usuari administrador (sense treure'n cap altre)
+    admin = env.ref('base.user_admin')
+    admin.write({'groups_id': [(4, group_dir.id)]})
+
+    # Definim els usuaris de prova: (login, nom mostrat, grup funcional, tipus d'accés)
+    users_to_fix = [
+        # login, name, grup funcional, tipus usuari
+        ('directiva_test', 'Directiva Test', group_dir, 'internal'),
+        ('entrenadora_test', 'Entrenadora Test', group_ent, 'internal'),
+        ('patinadora_test', 'Patinadora Test', group_pat, 'portal'),
+    ]
+
+    for login, name, group, user_type in users_to_fix:
+        # Busquem el partner de prova associat a aquest usuari (pot no existir)
+        partner = env.ref(TEST_USER_PARTNERS[login], raise_if_not_found=False)
+
+        # Valors comuns: contrasenya i grup funcional específic del rol
+        vals = {
+            'password': 'odoo123',
+            'groups_id': [(4, group.id)],  # (4, id) = afegir grup sense eliminar els altres
+        }
+
+        # Si existeix el partner de prova, l'associem a l'usuari
+        if partner:
+            vals['partner_id'] = partner.id
+
+        # Assignem el tipus d'usuari: intern o portal (mutuament excloents a Odoo)
+        if user_type == 'internal':
+            # (4, ...) afegeix el grup; (3, ...) desenllaça sense eliminar
+            vals['groups_id'] += [(4, group_internal.id), (3, group_portal.id)]
+        else:
+            vals['groups_id'] += [(4, group_portal.id), (3, group_internal.id)]
+
+        # Comprovem si l'usuari ja existeix (per login)
+        user = env['res.users'].search([('login', '=', login)], limit=1)
+        if user:
+            # Si ja existeix, actualitzem els seus valors
+            user.write(vals)
+        else:
+            # Si no existeix, el creem amb login, nom i la resta de valors
+            env['res.users'].create({
+                'login': login,
+                'name': name,
+                **vals,  # desempaquetem el diccionari vals dins del create
+            })
+
+    # Un cop creats els usuaris, assegurem que existeix la inscripció de prova
+    ensure_patinadora_inscripcio(env)
+
+
+def ensure_patinadora_inscripcio(env):
+    # Busquem el partner de la patinadora de prova; si no existeix, no fem res
+    partner = env.ref('patinatge_inscripcio.partner_patinadora_test', raise_if_not_found=False)
+    if not partner:
+        return
+
+    # Comprovem si ja existeix una inscripció amb la referència de prova
+    inscripcio = env['patinatge.inscripcio'].search([
+        ('reference', '=', TEST_PATINADORA_REF)
+    ], limit=1)
+
+    # Valors de la inscripció de prova
+    vals = {
+        'reference': TEST_PATINADORA_REF,
+        'partner_id': partner.id,
+        'nom_patinadora': 'Patinadora Test',
+        'cognoms_patinadora': 'Test',
+        'data_naixement': '2012-05-10',
+        'categoria': 'iniciacio',
+        'nom_tutor': 'Tutor/a Test',
+        'dni_tutor': '00000000T',
+        'telefon_tutor': '600000000',
+        'email_tutor': 'patinadora_test@example.com',
+    }
+
+    if inscripcio:
+        # Si ja existeix, només actualitzem el partner_id per garantir la consistència
+        inscripcio.write({'partner_id': partner.id})
+    else:
+        # Si no existeix, creem la inscripció completa
+        env['patinatge.inscripcio'].create(vals)
+
+
+# Hook que s'executa quan es desinstal·la el mòdul
+def uninstall_hook(cr, registry):
+    # Creem un entorn Odoo amb permisos de superusuari
+    env = api.Environment(cr, SUPERUSER_ID, {})
+
+    # Busquem la inscripció de prova, incloent les arxivades (active_test=False)
+    inscripcio_test = env['patinatge.inscripcio'].with_context(active_test=False).search([
+        ('reference', '=', TEST_PATINADORA_REF)
+    ])
+    if inscripcio_test:
+        # Eliminem definitivament la inscripció de prova
+        inscripcio_test.unlink()
+        print(f"Inscripció de prova eliminada: {TEST_PATINADORA_REF}")
+
+    # Busquem tots els usuaris de prova, incloent els arxivats
+    users = env['res.users'].with_context(active_test=False).search([
+        ('login', 'in', TEST_USERS)
+    ])
+    if users:
+        # Eliminem definitivament els usuaris de prova de la base de dades
+        users.unlink()
+        print(f"Usuaris eliminats: {TEST_USERS}")
+```
+:::{tip}
+
+**Pots descarregar el fitxer:**
+
+**[hooks.py](../_static/scripts/hooks.py)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{hooks.py}{hooks.py}
+```
+
+:::
+::: {admonition} Punts clau d'aquest hook
+:class: note
+- La llista `users_to_fix` defineix cada usuari de prova amb el seu **tipus** (`internal` o `portal`).
+- Per a `patinadora_test` s'assigna `base.group_portal` i s'elimina `base.group_user` (grup intern), de manera que **no podrà accedir al backend**.
+- Es crea (o es reassigna) una inscripció de prova a `patinadora_test`, perquè la record rule li mostre almenys un registre seu.
+- El codi `(3, group_portal.id)` desenllaça el grup portal sense eliminar-lo (si no estava assignat, no fa res).
+- El `uninstall_hook` usa `active_test=False` i elimina tant la **inscripció de prova** com els **usuaris de prova**.
+
+
+:::
+Recorda que cal declarar els hooks al `__manifest__.py`:
+
+```python
+'post_init_hook': 'hooks.create_test_users',
+'uninstall_hook': 'hooks.uninstall_hook',
+```
+També cal assegurar-se que el fitxer `hooks.py` està importat a `__init__.py`:
+
+```python
+from .hooks import create_test_users, uninstall_hook
+```
 
 ---
 
-## 7) Entrega
+## Conclusions 
+Ara ens quedaria una vista de portal per a la patinadora que pobra ja no pot vore la seua inscripció al backend. A més caldria afegir l'acceptació de la inscripció per a convertir-la en patinadora i que tinga accés real al portal ja que l'hem creada com a test. Així una inscripció derivaria a un procés de validació per part de la directiva o entrenadora i després es convertiria en usuari de portal real amb accés a les seues dades. Exedeix de l'objectiu del curs però t'animes a implementar-ho? 
+
+El més important és entendre què hem fet i per què.
+
+**Què passava abans de la record rule?**  
+L'ACL (CSV) permetia que la patinadora pogués llegir i crear inscripcions, però **sense filtrar per registre**. Veia totes les inscripcions del sistema, malgrat que no podia editar-les. Era com tenir les claus d'una porta però poder veure dins totes les finestres.
+
+**Què ha canviat després d'afegir-la?**  
+La record rule afegeix un filtre de domini: `[('partner_id', '=', user.partner_id.id)]`. Ara, **només veu els registres que li pertanyen**. La patinadora veu només la seua inscripció. La directiva i l'entrenadora (sense record rule) ho veuen tot.
+
+**Per què el CSV no és suficient en molts casos?**  
+El CSV controla **accions** (read, write, create, unlink), però no **quins registres** s'apliquen aquestes accions. Per a sistemes multi-usuari on cadascun ha de veure només les seues dades, calen record rules que defineixin dominis.
+
+**Per què no és bona idea confiar només en vistes?**  
+Les vistes són interfície de usuari: es pot desactivar JavaScript, manipular DOM o accedir directament a la API REST. **Amagar un botó no és seguretat**. Les record rules i l'ACL s'apliquen al servidor (backend), on l'usuari no pot manipular-les.
+
+**Què passar si la patinadora és un usuari de portal?**  
+Si la patinadora és un usuari de portal (`base.group_portal`), no té accés al backend i només podrà veure les seues dades a través del portal web. En aquest cas, la record rule seguiria aplicant-se per garantir que només accedeix a les seues inscripcions, però la interfície seria diferent (portal vs backend).
+
+---
+
+## Entrega
 
 Cal entregar:
-- El mòdul “patinatge” actualitzat (zip o repo).
+- El mòdul “patinatge_inscripcio”  (zip o repo).
 - Un PDF amb:
   - Captura com a patinadora abans de la record rule.
   - Captura com a patinadora després de la record rule.
   - Captura com a directiva.
-  - Respostes a les preguntes de conclusions.
-:::
+  - Captura si has implementat alguna funcionalitat addicional.
+  - Explica quina impresió tens ara sobre la seguretat a Odoo i què has après amb aquesta pràctica, si t'ha resultat fàcil o difícil, si tens dubtes pendents, si has tingut algun problema i com l'has resolt, etc.
+
 

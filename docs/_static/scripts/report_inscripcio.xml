@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_inscripcio">
+        <t t-call="web.external_layout">
+            <main style="margin-left: 2.2cm;">
+
+
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="margin-left: 2.2cm;">
+
+                        <h2 style="text-align:center;">
+                            Full d’inscripció al Club de Patinatge
+                        </h2>
+
+                        <p>
+                            <strong>Referència:</strong>
+                            <span t-esc="doc.reference"/>
+                        </p>
+
+                        <h3>Dades de la patinadora</h3>
+                        <ul>
+                            <li><strong>Nom:</strong> <span t-esc="doc.nom_patinadora"/></li>
+                            <li><strong>Cognoms:</strong> <span t-esc="doc.cognoms_patinadora"/></li>
+                            <li><strong>Data naixement:</strong> <span t-esc="doc.data_naixement"/></li>
+                            <li><strong>Categoria:</strong> <span t-esc="doc.categoria"/></li>
+                        </ul>
+
+                        <t t-if="doc.nom_tutor">
+                            <h3>Dades del tutor legal</h3>
+                            <ul>
+                                <li><strong>Nom:</strong> <span t-esc="doc.nom_tutor"/></li>
+                                <li><strong>Cognoms:</strong> <span t-esc="doc.cognoms_tutor"/></li>
+                                <li><strong>DNI:</strong> <span t-esc="doc.dni_tutor"/></li>
+                                <li><strong>Email:</strong> <span t-esc="doc.email_tutor"/></li>
+                                <li><strong>Telèfon:</strong> <span t-esc="doc.telefon_tutor"/></li>
+                            </ul>
+                        </t>
+
+                        <p style="margin-top:40px;">
+                            Signatura:
+                        </p>
+
+                        <div style="margin-top:60px;">
+                            _______________________________
+                        </div>
+
+                    </div>
+                </t>
+
+            </main>
+        </t>
+    </template>
+
+</odoo>

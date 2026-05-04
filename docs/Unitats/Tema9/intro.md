@@ -353,16 +353,23 @@ Aquestes operacions actuen sobre els **mateixos models** que s’utilitzen al ba
 ### Exemple pràctic amb XML-RPC (autenticació + lectura)
 Exemple mínim per autenticar i llegir contactes (`res.partner`) utilitzant `search_read`:
 
-:::{tip} 
 
-Si vols provar ràpidament, pots descarregar un script d'exemple que realitza aquestes operacions bàsiques de connexió i consulta a l'API d'Odoo.
+:::{tip}
 
-```{raw} latex
-[Descarrega main.py](../../_static/scripts/main.py)
+Si vols provar ràpidament, pots descarregar un script d'exemple que realitza aquestes operacions bàsiques de connexió i consulta a l'API d'Odoo. Descarrega'l, dona-li permisos d'execució i adapta'l al teu entorn.
+
+**[apiodoo.py](../_static/scripts/scripts/apiodoo.py)**
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{apiodoo.py}{apiodoo.py}
 ```
-Descarrega'l, dona-li permisos d'execució i adapta'l al teu entorn.
 
 :::
+
 
 
 ### Gestió d’errors comuns

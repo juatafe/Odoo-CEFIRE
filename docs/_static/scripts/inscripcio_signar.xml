@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="inscripcio_signar" name="Inscripció quasi acabada">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+
+            <h2>Inscripció quasi acabada 🛼</h2>
+            <p>
+                Ja hem generat el full d’inscripció.
+                <strong>Revisa’l i signa’l</strong> per completar el procés.
+            </p>
+
+            <h4>Full d’inscripció (previsualització)</h4>
+
+            <div style="border:1px solid #ccc; height:700px;">
+                <iframe
+                    t-att-src="'/inscripcio/pdf/%s#navpanes=0&amp;toolbar=1&amp;scrollbar=1' % inscripcio.id"
+                    width="100%"
+                    height="100%"
+                    style="border:none;">
+                </iframe>
+            </div>
+
+            <h4 class="mt-4">Signatura manual</h4>
+
+            <canvas id="signature-pad"
+                    width="500"
+                    height="200"
+                    style="border:1px solid #ccc;"></canvas>
+
+            <br/>
+            <button type="button"
+                    class="btn btn-secondary mt-2"
+                    onclick="clearCanvas()">
+                🧹 Esborrar
+            </button>
+
+            <div class="mt-3">
+                <a t-att-href="'/inscripcio/pdf/%s' % inscripcio.id"
+                   class="btn btn-secondary"
+                   target="_blank">
+                    📄 Descarregar PDF
+                </a>
+            </div>
+
+            <hr/>
+
+            <div class="alert alert-info">
+                <ul class="mb-0">
+                    <li>Signa manualment amb el ratolí i envia'l directament</li>
+                </ul>
+            </div>
+
+            <!-- 🔐 FORMULARI DE PUJADA -->
+            <form id="form-signatura"
+                  action="/inscripcio/pujar_signat"
+                  method="post"
+                  enctype="multipart/form-data">
+                <!-- 🔐 CSRF TOKEN (OBLIGATORI) -->
+                <input type="hidden"
+                        name="csrf_token"
+                        t-att-value="request.csrf_token()"/>
+                <input type="hidden"
+                       name="inscripcio_id"
+                       t-att-value="inscripcio.id"/>
+
+                <!-- 🔴 SIGNATURA MANUAL (BASE64) -->
+                <input type="hidden"
+                       name="signature_data"
+                       id="signature_data"/>
+
+                <input type="file"
+                       name="pdf_signat"
+                       accept="application/pdf"/>
+
+                <br/><br/>
+                <button class="btn btn-success">
+                    ⬆️ Signar
+                </button>
+
+
+            </form>
+
+        </div>
+
+        <!-- 🎨 CANVAS SIGNATURA -->
+        <script>
+            const canvas = document.getElementById('signature-pad');
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            let hasDrawn = false;   
+
+            canvas.addEventListener('mousedown', () =&gt; drawing = true);
+            canvas.addEventListener('mouseup', () =&gt; {
+                drawing = false;
+                ctx.beginPath();
+            });
+            canvas.addEventListener('mousemove', draw);
+
+            function draw(e) {
+                if (!drawing) return;
+                hasDrawn = true; 
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#000';
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(e.offsetX, e.offsetY);
+            }
+
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hasDrawn = false;
+            }
+        </script>
+
+        <!-- 📤 CAPTURA DE SIGNATURA EN ENVIAR -->
+        <script>
+            document.getElementById('form-signatura').addEventListener('submit', function () {
+                if (hasDrawn) {
+                    document.getElementById('signature_data').value =
+                        canvas.toDataURL('image/png');
+                } else {
+                    document.getElementById('signature_data').value = '';
+                }
+            });
+        </script>
+
+
+    </t>
+</template>
+
+</odoo>
