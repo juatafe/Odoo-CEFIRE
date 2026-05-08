@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("./_ext"))
 
 # ──────────────── Projecte ────────────────
 project = "Sistemes de Gestió Empresarial"
-author = "Juan Bautista Talens & Alicia González"
+author = "Reina del Carmen Peiró Arnau / Juan Bautista Talens & Alicia González"
 language = "ca"
 
 # ----- i18n -----
@@ -68,7 +68,7 @@ def slugify(s: str) -> str:
 _repo = os.environ.get("GITHUB_REPOSITORY", "")
 _repo_name = _repo.split("/")[-1] if _repo else ""
 site_slug = _repo_name or slugify(project)
-site_slug = os.environ.get("SITE_SLUG", "Odoo-CEFIRE")
+site_slug = os.environ.get("SITE_SLUG", "SGE-Morralla Odoo")
 
 # Enllaç relatiu al PDF dins del site (p. ex. pdf/plantilla-sphinx.pdf)
 pdf_url = f"pdf/{site_slug}.pdf"
