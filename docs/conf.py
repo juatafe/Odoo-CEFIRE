@@ -481,10 +481,11 @@ latex_elements = {
 
     \vspace{1.8cm}
 
-    % ───── QR BLANC ─────
-    {\color{white}
-    \qrcode[height=3.5cm]{https://github.com/juatafe/Odoo-CEFIRE}
-    }
+    % ───── QR (alt contrast) ─────
+    \begingroup
+      \setlength{\fboxsep}{10pt} % quiet zone extra
+      \colorbox{white}{\color{black}\qrcode[height=3.5cm,level=H]{https://github.com/juatafe/Odoo-CEFIRE}}
+    \endgroup
 
     \vspace{0.5cm}
 
