@@ -419,7 +419,12 @@ latex_elements = {
 \makeatother
 
 % ───── Contraportada morada estil Odoo (robusta) ─────
-\AtEndDocument{
+\newif\ifodoocefirebackcoverdone
+\odoocefirebackcoverdonefalse
+
+\AtEndDocument{%
+  \ifodoocefirebackcoverdone\else
+  \global\odoocefirebackcoverdonetrue
   \clearpage
   \thispagestyle{empty}
 
@@ -492,6 +497,7 @@ latex_elements = {
     {\small Accés al repositori oficial del curs (GitHub)\par}
 
   \end{center}
+  \fi
 }
 % ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
 \AtBeginDocument{

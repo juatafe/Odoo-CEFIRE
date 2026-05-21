@@ -2,6 +2,14 @@
 SOURCEDIR = docs
 BUILDDIR  = _build
 
+# Usa el venv del projecte si existeix (evita errors d'extensions no trobades)
+PYTHON ?= python3
+ifneq ("$(wildcard .venv/bin/python)","")
+PYTHON := .venv/bin/python
+endif
+
+SPHINXBUILD = $(PYTHON) -m sphinx
+
 .PHONY: help html pdf clean serve sync-static
 
 help:
@@ -24,11 +32,11 @@ sync-static:
 	cp -f scripts/restore-docker.sh docs/_static/scripts/restore-docker.sh || true
 
 html: sync-static
-	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
+	$(SPHINXBUILD) -b html $(SOURCEDIR) $(BUILDDIR)/html
 
 pdf: sync-static
 	# 1. Genera el codi LaTeX
-	sphinx-build -b latex $(SOURCEDIR) $(BUILDDIR)/latex
+	$(SPHINXBUILD) -b latex $(SOURCEDIR) $(BUILDDIR)/latex
 	# 2. Compila el PDF amb XeLaTeX
 	-cd $(BUILDDIR)/latex && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
 	@echo "-------------------------------------------------------"
@@ -37,7 +45,7 @@ pdf: sync-static
 	@echo "-------------------------------------------------------"
 
 serve: html
-	cd $(BUILDDIR)/html && python3 -m http.server 8000
+	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000
 
 clean:
 	rm -rf $(BUILDDIR)
