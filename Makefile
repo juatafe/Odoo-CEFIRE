@@ -10,7 +10,7 @@ endif
 
 SPHINXBUILD = $(PYTHON) -m sphinx
 
-.PHONY: help html pdf clean serve sync-static
+.PHONY: help html pdf epub kindle clean serve sync-static
 
 help:
 	@echo "Ordres disponibles:"
@@ -43,7 +43,18 @@ pdf: sync-static
 	@echo "Procés finalitzat. Revisa el PDF a:"
 	@echo "$(BUILDDIR)/latex/Odoo-CEFIRE.pdf"
 	@echo "-------------------------------------------------------"
+epub: sync-static
+	$(SPHINXBUILD) -b epub $(SOURCEDIR) $(BUILDDIR)/epub
+	@echo "ePub generat a: $(BUILDDIR)/epub/"
 
+kindle: epub
+	@command -v ebook-convert >/dev/null 2>&1 || { echo "ERROR: Calibre no trobat. Instal·la'l amb: sudo apt-get install calibre"; exit 1; }
+	ebook-convert $(BUILDDIR)/epub/*.epub $(BUILDDIR)/epub/$(notdir $(BUILDDIR)/epub/*.epub:.epub=.mobi) \
+		--output-profile kindle \
+		--no-inline-toc \
+		--title "$(project)" \
+		--authors "$(author)"
+	@echo "MOBI generat a: $(BUILDDIR)/epub/"
 serve: html
 	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000
 

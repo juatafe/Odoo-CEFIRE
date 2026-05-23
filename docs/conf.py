@@ -539,6 +539,20 @@ latex_documents = [
     ("index", f"{site_slug}.tex", project, author, "book")
 ]
 
+# ──────────────── ePub / Kindle ────────────────
+epub_title = project
+epub_author = author
+epub_publisher = author
+epub_language = language
+epub_identifier = f"https://github.com/juatafe/Odoo-CEFIRE"
+epub_scheme = "URL"
+epub_show_urls = "no"
+epub_tocdepth = 3
+epub_use_index = True
+epub_documents = [
+    ("index", f"{site_slug}.epub", project, author)
+]
+
 
 import re
 
