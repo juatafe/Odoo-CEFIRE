@@ -275,18 +275,14 @@ Si tot això funciona, l’activitat està correcta.
 
 ---
 
-## 8. Entrega
+## 8. Verificació i repte final
 
-Ara sí, en acabar este segon exercici, ja es pot fer l’entrega completa de l’activitat.
+Ara sí, en acabar aquest segon exercici, ja pots verificar el funcionament complet del mòdul.
 
-Cal entregar:
-
-- El mòdul `patinatge` complet en format `.zip`,
-- Un PDF amb:
-  - Captures de pantalla de:
-    - vista *tree* i *form* de **Grups**,
-    - vista *tree* i *form* d’**Entrenaments**,
-  - Una breu explicació del treball realitzat, problemes trobats i solucions implementades.
+Assegura't de:
+- Comprovar la vista *tree* i *form* de **Grups**, comprovant que les relacions i dades es visualitzen correctament.
+- Comprovar la vista *tree* i *form* d'**Entrenaments** i els seus camps.
+- Reflexionar sobre el treball realitzat, els problemes trobats i les solucions implementades durant el desenvolupament de la pràctica.
 
 ---
 

@@ -220,4 +220,4 @@ python3 apiodoo.py
 - Xarxa/SSL: si hi ha errors de certificat, prova amb `verify_ssl: false` només en proves.
 ```
 
-**Entrega captures de pantalla de l'execució i el codi font (sense credencials) per demostrar que s'ha realitzat correctament la connexió i les operacions a l'API d'Odoo via HTTPS.**
+**Prova l'execució i revisa el codi font per tal d'assegurar-te que s'ha realitzat correctament la connexió i les operacions a l'API d'Odoo via HTTPS.**

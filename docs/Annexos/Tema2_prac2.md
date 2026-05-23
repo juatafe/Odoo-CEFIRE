@@ -323,15 +323,13 @@ docker system prune -a # Neteja completa
 
 ---
 
-## Mini entrega
+## Preguntes de reflexió
 
-Per a donar per finalitzada la pràctica, lliura:
+Per a consolidar el que has après en aquesta pràctica, intenta respondre a aquestes preguntes:
 
-- **1 o 2 captures de pantalla** (per exemple, `docker compose ps` i/o Odoo funcionant al navegador).
-- **Respostes breus** a aquestes preguntes:
-  1. Quin avantatge principal has vist en usar Docker Compose per a Odoo?
-  2. Quin problema t’has trobat durant el desplegament i com l’has resolt?
-  3. Quina millora aplicaries en un entorn de producció?
+1. Quin avantatge principal has vist en usar Docker Compose per a Odoo?
+2. Quin problema t’has trobat durant el desplegament i com l’has resolt?
+3. Quina millora aplicaries en un entorn de producció?
 
 ---
 

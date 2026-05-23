@@ -20,7 +20,6 @@ Sempre que es complisquen les condicions següents:
 
 Autoria:  
 **Juan Bautista Talens** i **Alicia González**  
-CEFIRE de València  
 Any: 2026
 
 Més informació sobre la llicència:  

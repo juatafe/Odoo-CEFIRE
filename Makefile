@@ -10,14 +10,15 @@ endif
 
 SPHINXBUILD = $(PYTHON) -m sphinx
 
-.PHONY: help html pdf epub kindle clean serve sync-static
+.PHONY: help html pdf epub kindle clean serve sync-static paperback
 
 help:
 	@echo "Ordres disponibles:"
-	@echo "  make html   -> genera la documentació HTML"
-	@echo "  make pdf    -> genera el PDF amb XeLaTeX"
-	@echo "  make serve  -> compila i obri un servidor local"
-	@echo "  make clean  -> neteja els _build"
+	@echo "  make html      -> genera la documentació HTML"
+	@echo "  make pdf       -> genera el PDF amb XeLaTeX"
+	@echo "  make paperback -> genera el PDF interior per a paperback (sense portada ni contraportada)"
+	@echo "  make serve     -> compila i obri un servidor local"
+	@echo "  make clean     -> neteja els _build"
 
 sync-static:
 	@mkdir -p docs/_static/scripts
@@ -42,6 +43,16 @@ pdf: sync-static
 	@echo "-------------------------------------------------------"
 	@echo "Procés finalitzat. Revisa el PDF a:"
 	@echo "$(BUILDDIR)/latex/Odoo-CEFIRE.pdf"
+	@echo "-------------------------------------------------------"
+
+paperback: sync-static
+	# 1. Genera el codi LaTeX per a paperback (sense portada ni contraportada)
+	SPHINX_PAPERBACK=1 $(SPHINXBUILD) -b latex $(SOURCEDIR) $(BUILDDIR)/paperback
+	# 2. Compila el PDF amb XeLaTeX
+	-cd $(BUILDDIR)/paperback && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
+	@echo "-------------------------------------------------------"
+	@echo "Procés finalitzat. Revisa el PDF del paperback a:"
+	@echo "$(BUILDDIR)/paperback/Odoo-CEFIRE.pdf"
 	@echo "-------------------------------------------------------"
 epub: sync-static
 	SPHINX_BUILDER=epub $(SPHINXBUILD) -b epub $(SOURCEDIR) $(BUILDDIR)/epub

@@ -519,8 +519,6 @@ Este exercici està plantejat com una primera part. El següent exercici serà i
 
 ---
 
-## Nota sobre l’activitat
+## Nota sobre l'exercici
 
-Este exercici no s'entrega de manera independent. S'ha dividit en dos parts per a fer-lo més senzill, evitar mesclar massa conceptes alhora i avançar de forma progressiva.
-
-L'entrega es farà quan s'acabe el següent exercici, que continuarà sobre esta mateixa base.
+Aquest exercici s'ha dividit en dues parts per a fer-lo més senzill, evitar mesclar massa conceptes alhora i avançar de forma progressiva. Pots continuar directament amb el següent exercici, on ampliarem aquest mateix mòdul amb vistes XML i menús.

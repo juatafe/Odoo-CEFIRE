@@ -165,6 +165,7 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
+is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
 latex_additional_files = [
   '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
@@ -197,7 +198,7 @@ latex_elements = {
 
     "fontpkg": "",
     "fncychap": "",
-    "maketitle": r"\maketitle",
+    "maketitle": "" if is_paperback else r"\maketitle",
 
     "preamble": r"""
 % ───── Idioma i fonts ─────
@@ -296,29 +297,44 @@ latex_elements = {
 %\pagestyle{plain}
 % ───── Capçaleres i peus de pàgina professionals ─────
 \usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{} % neteja tot
 
-% ─── Capçaleres ───
-% Pàgines parells (esquerra): Capítol
-\fancyhead[LE]{\small\itshape \leftmark}
+% Definim els estils per a garantir la compatibilitat amb Sphinx i Amazon KDP
+\fancypagestyle{normal}{
+  \fancyhf{} % neteja tot
+  % ─── Capçaleres ───
+  % Pàgines parells (esquerra): Capítol
+  \fancyhead[LE]{\small\itshape \leftmark}
+  % Pàgines senars (dreta): Tema / secció
+  \fancyhead[RO]{\small\itshape \rightmark}
 
-% Pàgines senars (dreta): Tema / secció
-\fancyhead[RO]{\small\itshape \rightmark}
+  % ─── Peu de pàgina ───
+  % Número de pàgina als costats exteriors (esquerra en parells, dreta en senars)
+  \fancyfoot[LE,RO]{\thepage}
+  % Autoria al centre del peu de pàgina, evitant solapaments o problemes amb Amazon Print Preview
+  \fancyfoot[C]{\scriptsize Juan Bautista Talens \& Alicia González}
+  
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.2pt}
+}
 
-% ─── Peu de pàgina ───
-% Número de pàgina al centre
-\fancyfoot[C]{\thepage}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  % També en pàgines sense capçalera (com inici de capítols), posem la numeració a l'exterior
+  \fancyfoot[LE,RO]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
 
-% Peu esquerra: autoria
-\fancyfoot[LE,RO]{\scriptsize Juan Bautista Talens \& Alicia González}
+\pagestyle{normal}
 
-% Peu dreta (alternatiu si vols llicència)
-% \fancyfoot[RE,LO]{\scriptsize CC BY-NC-SA}
-
-% ─── Línies fines (elegant, no escandalós) ───
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.2pt}
+\ifpaperback
+  % Redefinició de \textattachfile per a l'edició en paper (paperback) a Amazon
+  \makeatletter
+  \AtBeginDocument{
+    \renewcommand{\textattachfile}[2]{#2 (arxiu disponible en format digital al repositori del llibre: \url{https://github.com/juatafe/Odoo-CEFIRE})}
+  }
+  \makeatother
+\fi
 
 % ───── Suport per a llistes molt profundes (fins a 20 nivells) ─────
 \usepackage{enumitem}
@@ -426,6 +442,7 @@ latex_elements = {
 \odoocefirebackcoverdonefalse
 
 \AtEndDocument{%
+  \ifpaperback\else
   \ifodoocefirebackcoverdone\else
   \global\odoocefirebackcoverdonetrue
   \clearpage
@@ -501,6 +518,7 @@ latex_elements = {
 
   \end{center}
   \fi
+  \fi
 }
 % ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
 \AtBeginDocument{
@@ -520,6 +538,8 @@ latex_elements = {
 
 """,
 }
+
+latex_elements["preamble"] = f"\\newif\\ifpaperback\n\\paperback{'true' if is_paperback else 'false'}\n" + latex_elements["preamble"]
 
 # Opció temporal: ocultar l'etiqueta de capítol ("Capítol 1") però
 # mantenir la numeració jeràrquica 1.1, 1.1.1, etc.

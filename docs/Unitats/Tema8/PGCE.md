@@ -630,7 +630,7 @@ Aquests actors no són comptes comptables: són CONTACTES que Odoo usarà per em
 
 Una bona gestió comença per no picar les dades a mà. Una vegada configurat el diari de Banc (CaixaBank Club), farem servir la funció d'importació per a carregar-los juntament amb el seu IBAN. 
 
-Com que calen IBANs vàlids per a les remeses SEPA, assegura’t que el fitxer d’importació estiga ben formatat. Per a proves pots generar IBANs ficticis amb eines com [RandomIBAN](https://randomiban.com/).
+Com que calen IBANs vàlids per a les remeses SEPA, assegura’t que el fitxer d’importació estiga ben formatat. Per a proves pots generar IBANs ficticis amb eines com [RandomIBAN](https://randomiban.com/) (https://randomiban.com/).
 
 
 **Pas 1: Preparació del fitxer**

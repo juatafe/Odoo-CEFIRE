@@ -258,7 +258,7 @@ Dins del registre de la vista, els camps més importants són:
 **No cal tocar l’acció (de moment)**
 
 
-Esta part [Creació de frontend en Odoo](../Tema6/intro.md) és clau:
+La part de [Creació de frontend en Odoo](../Tema6/intro.md) és clau:
 
 `<field name="view_mode">tree,form</field>`
 

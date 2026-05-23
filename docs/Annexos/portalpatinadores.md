@@ -316,14 +316,11 @@ Checklist:
 
 ---
 
-## 8 Entrega
+## 8 Verificació del treball realitzat
 
-Cal entregar:
+Per a comprovar que tot funciona correctament, assegura't de:
 
-- El mòdul `patinatge` complet en format `.zip`,
-- Un pdf amb:
-  - Captures de:
-    - El botó a `/my`
-    - La pàgina `/my/patinatge` amb dades. Recorda omplir el mòdul amb algunes patinadores abans de fer la captura. 
-  - Una breu explicació del treball realitzat. Pots realitzar modificacions addicionals per mostrar camps extra o millorar l’estil. 
+- Accedir al portal `/my` i verificar que hi apareix el botó d'accés.
+- Consultar la pàgina `/my/patinatge` amb dades. Recorda omplir el mòdul amb algunes patinadores prèviament per a provar-ho de manera realista. 
+- Si vols anar més enllà, pots fer canvis o modificacions addicionals per mostrar camps extra o personalitzar el disseny i l’estil de la plantilla. 
 

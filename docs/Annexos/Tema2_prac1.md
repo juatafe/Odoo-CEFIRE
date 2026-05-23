@@ -459,42 +459,35 @@ ssh -p 2222 estudiant@localhost
 # Si funciona, ja tens accés remot per administrar el servidor
 ```
 
-## Fase 6: Documentació i lliurament
-### Què has de documentar (versió curta per a professorat)
+## Fase 6: Comprovació i autoavaluació
+### Què s'ha de verificar i reflexionar
 
-Envia un únic fitxer (PDF ) que inclogua:
+A continuació es detalla el que convé verificar i analitzar un cop completada la instal·lació:
 
-1. Captures: 1 o 2 captures de pantalla que mostren
-   - La interfície d'Odoo en funcionament (p. ex. pàgina principal o pantalla de configuració)
-   - L'estat del servei (sortida de `systemctl status odoo` o similar). (Si envies només una captura, assegura't que sigui representativa.)
+1. Verificació:
+   - Que la interfície d'Odoo estiga en funcionament (p. ex. pàgina principal o pantalla de configuració al teu navegador).
+   - L'estat del servei (sortida de `systemctl status odoo` o similar). Assegura't de conèixer com llegir els logs del servei.
 
-2. Respostes breus (2-4 línies cadascuna) a LES DUES preguntes següents:
-   a) Com podríeu utilitzar aquesta instal·lació per introduir conceptes d'instal·lació i gestió de serveis en altres mòduls (que no imparteixin SGE)? Indica activitats concretes o fragments pràctics per a classe.
-   b) Quins conceptes clau de sistemes operatius i administració de serveis es poden treballar amb aquesta pràctica? Proposa almenys 3 conceptes i com els introduiries a classe.
+2. Preguntes de reflexió:
+   a) Com podríeu utilitzar aquesta instal·lació per introduir conceptes d'instal·lació i gestió de serveis en altres contextos? Indica activitats concretes o fragments pràctics.
+   b) Quins conceptes clau de sistemes operatius i administració de serveis es poden treballar amb aquesta pràctica? Proposa almenys 3 conceptes i com els introduiries.
 
-Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 línies).
+Analitza també si has trobat alguna incidència principal durant el procés i com l'has resolt.
 
-### Criteris d'avaluació (versió curta)
+### Punts clau a valorar
 
-| Criteri | Pes | Descripció |
+| Aspecte | Importància | Descripció |
 |--------:|:---:|------------|
-| **Captures** | 40% | Imatge clara i representativa d'Odoo i estat del servei |
-| **Respostes breus** | 40% | Rigor i aplicabilitat pedagògica de les respostes (idees útils per altres mòduls) |
-| **Documentació d'incidències** | 20% | Identificació i breu descripció d'incidències i operacions realitzades |
+| **Funcionament** | Alta | Que Odoo estiga accessible i s'haja comprovat l'estat del servei correctament |
+| **Reflexió pedagògica** | Mitjana | Rigor i aplicabilitat de les idees plantejades en entorns d'aprenentatge |
+| **Resolució de problemes** | Mitjana | Identificació i anàlisi de les incidències i operacions realitzades durant la instal·lació |
 
-
-### Format de lliurament (simplificat)
-
-- **Fitxer**: PDF amb el nom `Cognom_Nom_Practica1_Odoo_short.pdf`.
-- **Contingut**: 1-2 captures + respostes a les dues preguntes + (opcional) una línia sobre una incidència.
-- **On lliurar**: Aules, secció de la pràctica.
-- **Termini**: Consulta la data a Aules.
 
 :::{admonition} Consells ràpids
 :class: tip
-- Captures clares: enfoca la finestra del navegador o el terminal, sense informació innecessària.
+- Verificació clara: comprova la finestra del navegador o el terminal per verificar el correcte funcionament del servei.
 - Sigues concret en les respostes: proposa una activitat pràctica i indica els conceptes que s'introdueixen.
-- Documenta una incidència si n'hi ha (fes-ho en 1 línia).
+- Documenta una incidència si n'hi ha per al teu propi registre i aprenentatge.
 :::
 :::{admonition} Recursos addicionals
 :class: note

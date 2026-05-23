@@ -10,6 +10,7 @@ Hauràs de configurar Odoo per a completar el següent cicle operatiu:
 
 ## Objectiu
 L'objectiu és aprendre a configurar els processos de negoci sense necessitat de programació inicial, entenent la lògica de l'usuari final abans d'entrar en el desenvolupament de mòduls. Scale Up! és una eina que permet simular l'ús d'Odoo en un entorn controlat, facilitant l'aprenentatge pràctic i la comprensió dels processos empresarials. A través d'aquest cas pràctic, els participants podran veure com les diferents aplicacions d'Odoo es connecten entre si per a gestionar una empresa de manera eficient.
+
 ## Passos a Seguir
 1. **Instal·lació d'Odoo**: Entra a [www.odoo.com/es_ES/trial](https://www.odoo.com/es_ES/trial) i tria les aplicacions  ventes, comptabilitat, inventari i compres. 
 
@@ -134,7 +135,7 @@ Cal validadar la recepció per a actualitzar l'inventari i registrar l'entrada d
 :align: center
 :::
 
-Podem pujar la factura del proveidor manualment o utilitzar la funcionalitat de reconeixement de factures d'Odoo per a automatitzar aquest procés. Pots descarregar la factura de compra que has de pujar a Odoo: [Factura Compra Muebles Madero](https://github.com/juatafe/Odoo-CEFIRE/raw/main/docs/_static/assets/img/Tema1b/factura_muebles_madero_INV2025_0001.pdf).
+Podem pujar la factura del proveïdor manualment o utilitzar la funcionalitat de reconeixement de factures d'Odoo per a automatitzar aquest procés. Pots descarregar la factura de compra que has de pujar a Odoo: [Factura Compra Muebles Madero (Annexos)](https://github.com/juatafe/Odoo-CEFIRE/raw/amazon/docs/Annexos/factura_muebles_madero_INV2025_0001.pdf) (https://github.com/juatafe/Odoo-CEFIRE/raw/amazon/docs/Annexos/factura_muebles_madero_INV2025_0001.pdf).
 
 :::{image} /_static/assets/img/Tema1b/factura.png
 :alt: Factura Proveïdor

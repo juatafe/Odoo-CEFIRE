@@ -803,15 +803,12 @@ Si la patinadora és un usuari de portal (`base.group_portal`), no té accés al
 
 ---
 
-## Entrega
+## Proposta de repte i autoavaluació
 
-Cal entregar:
-- El mòdul “patinatge_inscripcio”  (zip o repo).
-- Un PDF amb:
-  - Captura com a patinadora abans de la record rule.
-  - Captura com a patinadora després de la record rule.
-  - Captura com a directiva.
-  - Captura si has implementat alguna funcionalitat addicional.
-  - Explica quina impresió tens ara sobre la seguretat a Odoo i què has après amb aquesta pràctica, si t'ha resultat fàcil o difícil, si tens dubtes pendents, si has tingut algun problema i com l'has resolt, etc.
+Per verificar que has implementat correctament la seguretat:
+- Comprova la vista com a patinadora abans de la record rule (hauria de mostrar dades de tercers no desitjades).
+- Comprova la vista com a patinadora després de la record rule (hauria de mostrar única i exclusivament les seues dades).
+- Comprova la vista com a directiva (hauria de poder visualitzar-ho tot sense restriccions).
+- Reflexiona sobre la seguretat a Odoo: què has après amb aquesta pràctica? T'ha resultat intuïtiu el sistema de permisos i record rules? Quins problemes has tingut i com els has resolt?
 
 

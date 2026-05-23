@@ -8,20 +8,12 @@ Ara que ja saps com instal·lar Odoo tant en local com dins de Docker, podem don
 crear un **script Bash** que instal·le totes les dependències, genere els fitxers de configuració i arranque el servidor completament configurat amb només una ordre.
 
 
-:::{tip}
 
-**Pots descarregar l'script complet d'automatització:**
 
-**[scriptsetupodoo.sh](../_static/scripts/scriptsetupodoo.sh)**
 
-```{eval-rst}
-.. only:: latex
-
-  .. raw:: latex
-
-    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{scriptsetupodoo.sh}{scriptsetupodoo.sh}
-```
-
+:::{tip} Truc
+<b>Descarrega l'script complet d'automatització:</b><br>
+<a href="https://github.com/juatafe/Odoo-CEFIRE/blob/amazon/scriptsetupOdoo.sh" style="text-align: left;">https://github.com/juatafe/Odoo-CEFIRE/blob/amazon/scriptsetupOdoo.sh</a>
 :::
 
 
