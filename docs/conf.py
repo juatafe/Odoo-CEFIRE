@@ -28,6 +28,9 @@ extensions = [
 ]
 
 tikz_proc_suite = "ImageMagick" # o "Ghostscript"
+tikz_latex_preamble = r"""
+\usetikzlibrary{shapes.geometric,positioning,calc}
+"""
 # (Opcional però recomanat per a HTML)
 graphviz_output_format = "svg"
 graphviz_dot_args = ["-Gbgcolor=transparent"]
