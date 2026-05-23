@@ -49,12 +49,12 @@ epub: sync-static
 
 kindle: epub
 	@command -v ebook-convert >/dev/null 2>&1 || { echo "ERROR: Calibre no trobat. Instal·la'l amb: sudo apt-get install calibre"; exit 1; }
-	ebook-convert $(BUILDDIR)/epub/*.epub $(BUILDDIR)/epub/$(notdir $(BUILDDIR)/epub/*.epub:.epub=.mobi) \
+	$(eval EPUB_FILE := $(wildcard $(BUILDDIR)/epub/*.epub))
+	$(eval MOBI_FILE := $(EPUB_FILE:.epub=.mobi))
+	ebook-convert $(EPUB_FILE) $(MOBI_FILE) \
 		--output-profile kindle \
-		--no-inline-toc \
-		--title "$(project)" \
-		--authors "$(author)"
-	@echo "MOBI generat a: $(BUILDDIR)/epub/"
+		--no-inline-toc
+	@echo "MOBI generat a: $(MOBI_FILE)"
 serve: html
 	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000
 
