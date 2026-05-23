@@ -44,7 +44,7 @@ pdf: sync-static
 	@echo "$(BUILDDIR)/latex/Odoo-CEFIRE.pdf"
 	@echo "-------------------------------------------------------"
 epub: sync-static
-	$(SPHINXBUILD) -b epub $(SOURCEDIR) $(BUILDDIR)/epub
+	SPHINX_BUILDER=epub $(SPHINXBUILD) -b epub $(SOURCEDIR) $(BUILDDIR)/epub
 	@echo "ePub generat a: $(BUILDDIR)/epub/"
 
 kindle: epub

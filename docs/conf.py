@@ -659,3 +659,13 @@ suppress_warnings = [
 
 mermaid_latex_float = False
 mermaid_latex_inline = True
+
+# ──────────────── Mermaid per a ePub/Kindle ────────────────
+# Quan el builder és epub, renderitzem els diagrames com PNG estàtic
+# perquè Kindle no suporta JavaScript.
+import os as _os
+if _os.environ.get("SPHINX_BUILDER", "") in ("epub", "kindle"):
+    mermaid_output_format = "png"
+    mermaid_params = ["--backgroundColor", "white"]
+else:
+    mermaid_output_format = "raw"  # HTML usa JS natiu
