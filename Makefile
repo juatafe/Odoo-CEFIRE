@@ -53,7 +53,12 @@ kindle: epub
 	$(eval MOBI_FILE := $(EPUB_FILE:.epub=.mobi))
 	ebook-convert $(EPUB_FILE) $(MOBI_FILE) \
 		--output-profile kindle \
-		--no-inline-toc
+		--extract-to "$(BUILDDIR)/epub/extracted_mobi" \
+		--title "$(project)" \
+		--authors "$(author)" \
+		--language "ca" \
+		--level1-toc "//*[@class='section' or contains(@class, 'section')]/h1" \
+		--level2-toc "//*[@class='section' or contains(@class, 'section')]/h2"
 	@echo "MOBI generat a: $(MOBI_FILE)"
 serve: html
 	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000

@@ -552,6 +552,8 @@ epub_use_index = True
 epub_documents = [
     ("index", f"{site_slug}.epub", project, author)
 ]
+epub_tocscope = "default"
+epub_tocdup = False
 
 
 import re
