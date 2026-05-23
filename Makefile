@@ -49,17 +49,17 @@ epub: sync-static
 
 kindle: epub
 	@command -v ebook-convert >/dev/null 2>&1 || { echo "ERROR: Calibre no trobat. Instal·la'l amb: sudo apt-get install calibre"; exit 1; }
-	$(eval EPUB_FILE := $(wildcard $(BUILDDIR)/epub/*.epub))
-	$(eval MOBI_FILE := $(EPUB_FILE:.epub=.mobi))
-	ebook-convert $(EPUB_FILE) $(MOBI_FILE) \
+	rm -f $(BUILDDIR)/epub/*.mobi
+	rm -f $(BUILDDIR)/epub/'*.epub:.epub=.mobi'
+	@EPUB_FILE=$$(find $(BUILDDIR)/epub/ -maxdepth 1 -name "*.epub" | head -n 1); \
+	MOBI_FILE="$${EPUB_FILE%.epub}.mobi"; \
+	echo "Compilant $$EPUB_FILE a $$MOBI_FILE..."; \
+	ebook-convert "$$EPUB_FILE" "$$MOBI_FILE" \
 		--output-profile kindle \
 		--extract-to "$(BUILDDIR)/epub/extracted_mobi" \
-		--title "$(project)" \
-		--authors "$(author)" \
-		--language "ca" \
-		--level1-toc "//*[@class='section' or contains(@class, 'section')]/h1" \
-		--level2-toc "//*[@class='section' or contains(@class, 'section')]/h2"
-	@echo "MOBI generat a: $(MOBI_FILE)"
+		--level1-toc "//*[local-name()='h1']" \
+		--level2-toc "//*[local-name()='h2']"; \
+	echo "MOBI generat a: $$MOBI_FILE"
 serve: html
 	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000
 
