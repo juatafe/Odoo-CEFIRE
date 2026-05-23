@@ -2,6 +2,14 @@
 SOURCEDIR = docs
 BUILDDIR  = _build
 
+# Usa el venv del projecte si existeix (evita errors d'extensions no trobades)
+PYTHON ?= python3
+ifneq ("$(wildcard .venv/bin/python)","")
+PYTHON := .venv/bin/python
+endif
+
+SPHINXBUILD = $(PYTHON) -m sphinx
+
 .PHONY: help html pdf clean serve sync-static
 
 help:
@@ -14,13 +22,21 @@ help:
 sync-static:
 	@mkdir -p docs/_static/scripts
 	cp -f scripts/comptabilitat.sh docs/_static/scripts/comptabilitat.sh || true
+	cp -f scripts/main.py docs/_static/scripts/main.py || true
+	cp -f docs/_static/assets/scriptsetupodoo.sh docs/_static/scripts/scriptsetupodoo.sh || true
+	cp -f scripts/deploy-odoo-docker.sh docs/_static/scripts/deploy-odoo-docker.sh || true
+	cp -f scripts/test-docker-installation.sh docs/_static/scripts/test-docker-installation.sh || true
+	cp -f scripts/diagnostic.sh docs/_static/scripts/diagnostic.sh || true
+	cp -f scripts/monitor.sh docs/_static/scripts/monitor.sh || true
+	cp -f scripts/backup-docker.sh docs/_static/scripts/backup-docker.sh || true
+	cp -f scripts/restore-docker.sh docs/_static/scripts/restore-docker.sh || true
 
 html: sync-static
-	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)/html
+	$(SPHINXBUILD) -b html $(SOURCEDIR) $(BUILDDIR)/html
 
 pdf: sync-static
 	# 1. Genera el codi LaTeX
-	sphinx-build -b latex $(SOURCEDIR) $(BUILDDIR)/latex
+	$(SPHINXBUILD) -b latex $(SOURCEDIR) $(BUILDDIR)/latex
 	# 2. Compila el PDF amb XeLaTeX
 	-cd $(BUILDDIR)/latex && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
 	@echo "-------------------------------------------------------"
@@ -29,7 +45,7 @@ pdf: sync-static
 	@echo "-------------------------------------------------------"
 
 serve: html
-	cd $(BUILDDIR)/html && python3 -m http.server 8000
+	cd $(BUILDDIR)/html && $(PYTHON) -m http.server 8000
 
 clean:
 	rm -rf $(BUILDDIR)

@@ -132,13 +132,13 @@ Resulta imprescindible conéixer bé l'estructura HTML i les classes CSS que Odo
 ## Creem un controlador per a una pàgina nova
 En aquest apartat, crearem un controlador senzill per a una pàgina nova en el frontend d’Odoo. Això ens permetrà entendre com funcionen els controladors i com es poden utilitzar per a gestionar rutes i mostrar contingut personalitzat.
 
-Al portal de l’usuari (/my) apareix un enllaç nou anomenat "Pàgina Personalitzada". Quan l’usuari fa clic en aquest enllaç, volem que es mostri una pàgina nova amb un missatge de benvinguda. Quan l’usuari fa clic:
+Al portal de l’usuari (/my) apareix un enllaç nou anomenat "Pàgina Personalitzada". Quan l’usuari fa clic en aquest enllaç, volem que es mostre una pàgina nova amb un missatge de benvinguda. Quan l’usuari fa clic:
 
     - Odoo crida un controlador
     - El controlador retorna una plantilla QWeb
 
 Així es veu clar:
-👉 vista XML ≠ controlador ≠ ruta web
+👉 vista XML → controlador → ruta web
 
 
 Primer afegirem el link a la pàgina principal del portal d’usuari. Per a això, heretarem la plantilla `portal.portal_my_home` i afegirem l’enllaç. Ho farem a un fitxer XML dins del nostre mòdul personalitzat, per exemple, `views/portal_templates.xml`:
@@ -268,5 +268,6 @@ Recorda que ara no sols cal actualitzar el mòdul perquè els canvis tinguen efe
 :width: 100%
 ``` 
 
-Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina. Si no ho has fet encara convidria realitzar els exercicis [Exercici pràctic 8: Inscripció online d’una patinadora amb signatura](../../Annexos/inscripcioonline.md) i [Exercici pràctic 9: Portal de patinadores](../../Annexos/portalpatinadores.md) per a posar en pràctica tot el que hem vist en aquest capítol.
+Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina. Si no ho has fet encara convidria realitzar l'exercici[Exercici pràctic: Portal de patinadores per a posar en pràctica tot el que hem vist en aquest capítol](../../Annexos/portalpatinadores.md).
 
+ <!-- [Exercici pràctic: Inscripció online d’una patinadora amb signatura](../../Annexos/inscripcioonline.md) i  -->

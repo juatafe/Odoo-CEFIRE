@@ -9,11 +9,11 @@ Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
 ---
 
 ## Introducció
-  En l'exercici pràctic anterior has après a instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
+  En l'exercici pràctic opcional s'aborda instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
   
-  En aquesta segona pràctica explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
+  En aquest exercici explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
   
-  A més de comparar els dos mètodes, aprendràs a gestionar contenidors, revisar logs i preparar scripts de monitoratge.
+  A més de la possibilitat de comparar els dos mètodes, aprendràs a gestionar contenidors, revisar logs i preparar scripts de monitoratge.
 
 ---
 
@@ -28,11 +28,11 @@ Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
 
 ## Requisits previs
 
-Per mantindre la coherència amb la Pràctica 1, treballarem sobre el mateix entorn:
-  - Màquina virtual Ubuntu Server 24.04 LTS creada a la Pràctica 1.
-  - Torna a un estat net abans d’instal·lar Odoo manualment:
+Per mantindre la coherència amb l'exercici opcional, treballarem sobre el mateix entorn:
+  - Màquina virtual Ubuntu Server 24.04 LTS.
+  - Si escau, torna a un estat net abans d’instal·lar Odoo manualment:
     - Recupera una instantània de VirtualBox guardada després de la instal·lació bàsica d’Ubuntu, abans de configurar Odoo.
-    - O bé, fes una clonació de la màquina virtual i treballa sobre la còpia per a no perdre la configuració de la Pràctica 1.
+    - O bé, fes una clonació de la màquina virtual i treballa sobre la còpia per a no perdre la configuració de l'opcional.
 
 Altres requisits tècnics:
   - Accés com a administrador (sudo) a la VM
@@ -121,7 +121,7 @@ nano docker-compose.yml
 services:
   # Servei de base de dades PostgreSQL
   db:
-    image: postgres:15
+    image: postgres:latest
     container_name: odoo_postgres
     environment:
       - POSTGRES_DB=postgres
@@ -129,7 +129,7 @@ services:
       - POSTGRES_PASSWORD=odoo123
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - odoo-db-data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U odoo"]
@@ -307,50 +307,6 @@ docker system prune -f
 
 ---
 
-## Entrega de la pràctica
-
-**Has de lliurar:**
-
-📸 Captures de pantalla:
-- Odoo funcionant al navegador
-- Output de `docker compose ps`
-- Dashboard d'Odoo amb alguna dada creada
-
-📂 Fitxers de configuració:
-- `docker-compose.yml`
-- `config/odoo.conf`
-
-📑 Informe breu (1-2 pàgines) amb:
-- Problemes trobats i solucions
-- Avantatges de Docker vs instal·lació tradicional
-- Propostes de millora per a producció
-
-**Estructura de carpetes:**
-```
-Practica2_NomCognom/
-├── captures/
-│   ├── odoo_funcionant.png
-│   ├── docker_ps.png
-│   └── dashboard_odoo.png
-├── configuracio/
-│   ├── docker-compose.yml
-│   └── odoo.conf
-└── informe.pdf
-```
-
----
-
-## Criteris d'avaluació
-
-| Criteri                  | Puntuació |
-|---------------------------|-----------|
-| Desplegament funcional    | 40%       |
-| Configuració correcta     | 25%       |
-| Scripts operatius         | 20%       |
-| Documentació i captures   | 15%       |
-
----
-
 ## Recursos addicionals
 
 ```bash
@@ -364,6 +320,18 @@ docker system prune -a # Neteja completa
 📚 **Referències:**
 - [Docker Compose reference](https://docs.docker.com/compose/)
 - [Odoo Docker documentation](https://hub.docker.com/_/odoo)
+
+---
+
+## Mini entrega
+
+Per a donar per finalitzada la pràctica, lliura:
+
+- **1 o 2 captures de pantalla** (per exemple, `docker compose ps` i/o Odoo funcionant al navegador).
+- **Respostes breus** a aquestes preguntes:
+  1. Quin avantatge principal has vist en usar Docker Compose per a Odoo?
+  2. Quin problema t’has trobat durant el desplegament i com l’has resolt?
+  3. Quina millora aplicaries en un entorn de producció?
 
 ---
 

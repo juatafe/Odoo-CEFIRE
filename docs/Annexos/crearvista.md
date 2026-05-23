@@ -1,8 +1,8 @@
-# Exercici pràctic 7: Vistes per als models Grup i Entrenament
+# Exercici pràctic: Vistes per als models Grup i Entrenament
 
 ## 1. Objectiu de l'exercici
 
-L’objectiu d’aquesta pràctica és **aplicar els coneixements del capitol 5** a la resta de models del mòdul `patinatge`, concretament:
+Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta pràctica és **completar el mòdul `patinatge`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
 
 - `patinatge.grup`
 - `patinatge.entrenament`
@@ -13,6 +13,8 @@ L’alumnat haurà de:
 - Definir vistes *tree* i *form* personalitzades, i comprovar que Odoo utilitza aquestes vistes en lloc de les automàtiques.
 
 👉 No s’introdueixen conceptes nous: **només es practica i es consolida** el que ja s’ha vist.
+
+Per això, esta activitat s’ha separat en dos exercicis: primer es crea la base del mòdul i després s’amplia de manera incremental amb les vistes i els menús.
 
 ---
 
@@ -36,11 +38,11 @@ El model `patinatge.entrenament` inclou:
 - `data`
 - `duracio`
 - `grup_id` (Many2one)
-- `patinadores_ids` (Many2many)
+- `participacio_ids` (One2many cap a `patinatge.participacio`)
 
 ---
 
-## 3. Crear les accions i menús
+## 3. Crear les accions i els menús
 
 En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra noves** i **dos submenús** dins del menú principal *Patinatge*.
 
@@ -53,6 +55,19 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
   - Nom: **Grups**
   - Penjat del menú **Patinatge**
 
+```xml
+<record id="action_patinatge_grups" model="ir.actions.act_window">
+    <field name="name">Grups</field>
+    <field name="res_model">patinatge.grup</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="menu_patinatge_grups"
+          name="Grups"
+          parent="menu_patinatge_root"
+          action="action_patinatge_grups"/>
+```
+
 ---
 
 ### 3.2 Acció i menú per a Entrenaments
@@ -64,7 +79,74 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
   - Nom: **Entrenaments**
   - Penjat del menú **Patinatge**
 
-💡 *Pista:* el codi és molt semblant al de Patinadores; només canvien els noms i el `res_model`.
+```xml
+<record id="action_patinatge_entrenaments" model="ir.actions.act_window">
+    <field name="name">Entrenaments</field>
+    <field name="res_model">patinatge.entrenament</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="menu_patinatge_entrenaments"
+          name="Entrenaments"
+          parent="menu_patinatge_root"
+          action="action_patinatge_entrenaments"/>
+```
+
+:::{admonition} Per què no hi ha menú per a Participació?
+:class: tip
+El model `patinatge.participacio` és una **entitat associativa** (model de la relació ternària). No té sentit accedir-hi directament: les participacions es creen i consulten des dels formularis de Patinadora i Entrenament, a través dels camps `participacio_ids`. Per tant, **no cal crear-li cap acció ni submenú propi**.
+:::
+
+### 3.3 Estat final del fitxer `patinatge_menus.xml`
+
+Amb les dues incorporacions anteriors, el fitxer complet queda així:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Accions de finestra -->
+    <record id="action_patinatge_patinadores" model="ir.actions.act_window">
+        <field name="name">Patinadores</field>
+        <field name="res_model">patinatge.patinadora</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_patinatge_grups" model="ir.actions.act_window">
+        <field name="name">Grups</field>
+        <field name="res_model">patinatge.grup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_patinatge_entrenaments" model="ir.actions.act_window">
+        <field name="name">Entrenaments</field>
+        <field name="res_model">patinatge.entrenament</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menú principal -->
+    <menuitem id="menu_patinatge_root"
+              name="Patinatge"
+              sequence="10"/>
+
+    <!-- Submenús -->
+    <menuitem id="menu_patinatge_patinadores"
+              name="Patinadores"
+              parent="menu_patinatge_root"
+              action="action_patinatge_patinadores"/>
+
+    <menuitem id="menu_patinatge_grups"
+              name="Grups"
+              parent="menu_patinatge_root"
+              action="action_patinatge_grups"/>
+
+    <menuitem id="menu_patinatge_entrenaments"
+              name="Entrenaments"
+              parent="menu_patinatge_root"
+              action="action_patinatge_entrenaments"/>
+
+</odoo>
+```
 
 
 ## 4. Crear les vistes per al model Grup
@@ -137,7 +219,12 @@ La vista *tree* ha de mostrar:
 El formulari ha d’incloure:
 - Dades bàsiques de l’entrenament,
 - El grup associat,
-- Una pestanya amb les patinadores participants (`patinadores_ids`).
+- Una pestanya amb les participacions de la sessió (`participacio_ids`), que mostrarà la patinadora i el grup de cada participació.
+
+:::{admonition} Recorda
+:class: tip
+No hi ha cap camp `patinadores_ids` al model `patinatge.entrenament`. La relació amb les patinadores es fa a través del model associatiu `patinatge.participacio`, que és el que reflecteix la relació ternària del diagrama. Usa `participacio_ids` com a `One2many` en la pestanya.
+:::
 
 ### 🏋️ Resultat final – model Entrenament
 
@@ -177,28 +264,30 @@ Com que s’han creat fitxers XML nous, cal afegir-los al `__manifest__.py`:
 
 ## 7. Comprovacions finals
 
-Abans de donar la pràctica per bona, comprova que:
+Abans de donar l’activitat per bona, comprova que:
 
-- apareixen els menús **Patinadores**, **Grups** i **Entrenaments**,
-- cada menú obri la seua vista *tree* personalitzada,
-- en crear o obrir un registre es mostra la vista *form* definida,
+- Apareixen els menús **Patinadores**, **Grups** i **Entrenaments**.
+- Cada menú obri la seua vista *tree* personalitzada.
+- En crear o obrir un registre es mostra la vista *form* definida.
 - Odoo **no utilitza vistes automàtiques**.
 
-Si tot això funciona, la pràctica està correcta.
+Si tot això funciona, l’activitat està correcta.
 
 ---
 
 ## 8. Entrega
 
+Ara sí, en acabar este segon exercici, ja es pot fer l’entrega completa de l’activitat.
+
 Cal entregar:
 
 - El mòdul `patinatge` complet en format `.zip`,
-- Un pdf amb:
+- Un PDF amb:
   - Captures de pantalla de:
     - vista *tree* i *form* de **Grups**,
     - vista *tree* i *form* d’**Entrenaments**,
-  - Una breu explicació del treball realitzat.
+  - Una breu explicació del treball realitzat, problemes trobats i solucions implementades.
 
 ---
 
-😏 *Si açò et funciona, ja no estàs fent proves… estàs fent mòduls d’Odoo com toca.*
+😏 *Si açò et funciona, ja no estàs fent proves… estàs fent mòduls d’Odoo com cal.*

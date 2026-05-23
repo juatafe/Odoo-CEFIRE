@@ -7,3 +7,4 @@ _build/
 *.fdb_latexmk
 texput.*
 __pycache__/
+comandos.sh

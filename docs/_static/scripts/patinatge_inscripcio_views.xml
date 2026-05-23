@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_patinatge_inscripcio_tree" model="ir.ui.view">
+        <field name="name">patinatge.inscripcio.tree</field>
+        <field name="model">patinatge.inscripcio</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="true">
+                <field name="reference" string="Ref"/>
+                <field name="nom_patinadora" string="Nom patinadora"/>
+                <field name="data_naixement" string="Data naixement"/>
+                <field name="categoria"
+                    decoration-info="categoria == 'iniciacio'"
+                    decoration-primary="categoria == 'federades'"/>
+
+                <field name="nom_tutor" string="Pare/Mare"/>
+                <field name="dni_tutor" string="DNI tutor"/>
+                <field name="telefon_tutor"/>
+                <field name="email_tutor"/>
+
+                <field name="estat"
+                    decoration-success="estat == 'acceptada'"
+                    decoration-danger="estat == 'rebutjada'"
+                    decoration-warning="estat == 'pendent_signatura'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_patinatge_inscripcio_form" model="ir.ui.view">
+        <field name="name">patinatge.inscripcio.form</field>
+        <field name="model">patinatge.inscripcio</field>
+        <field name="arch" type="xml">
+            <form string="Inscripció al club">
+                <header>
+                    <button name="action_acceptar"
+                            string="Acceptar"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('estat', '!=', 'signada')]}"/>
+
+                    <button name="action_rebutjar"
+                            string="Rebutjar"
+                            type="object"
+                            attrs="{'invisible': [('estat', '!=', 'signada')]}"/>
+                    
+                    <field name="estat" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Dades de la patinadora">
+                            <field name="nom_patinadora"/>
+                            <field name="data_naixement"/>
+                            <field name="categoria"/>
+                        </group>
+
+                        <group string="Tutor legal">
+                            <field name="nom_tutor"/>
+                            <field name="dni_tutor"/>
+                            <field name="email_tutor"/>
+                            <field name="telefon_tutor"/>
+                        </group>
+                    </group>
+
+                    <group string="Estat i documents">
+                        <field name="estat" readonly="1"/>
+                        <field name="pdf_original" filename="reference"/>
+                        <field name="pdf_signat" filename="reference"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_patinatge_inscripcio" model="ir.actions.act_window">
+        <field name="name">Inscripcions</field>
+        <field name="res_model">patinatge.inscripcio</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_patinatge_inscripcio_root"
+            name="Inscripcions"
+            sequence="10"/>
+
+    <menuitem id="menu_patinatge_inscripcio"
+              name="Gestió d’inscripcions"
+              parent="menu_patinatge_inscripcio_root"
+              action="action_patinatge_inscripcio"
+              sequence="10"/>
+</odoo>

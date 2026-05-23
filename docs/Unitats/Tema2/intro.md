@@ -32,8 +32,9 @@ Un futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, 
 
 ### Requisits del sistema
 
-:::{admonition} Requisits de hardware per a Odoo 16
+:::{admonition} Requisits mínims de hardware per a Odoo 16
 :class: note
+Cal tenir en compte que els requisits poden variar segons la mida de l'organització, el nombre d'usuaris i els mòduls utilitzats. A continuació es presenten els requisits mínims i recomanats per a un entorn de proves i un entorn de producció xicoteta-mitjana:
 **Requisits mínims (entorn de proves):**
 - **CPU**: 2 cores (2 GHz)
 - **RAM**: 4 GB
@@ -66,7 +67,7 @@ Un futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, 
 **Consideracions per Redis**
 Redis és un sistema de cache que pot millorar significativament el rendiment d’Odoo, especialment en entorns amb molts usuaris o mòduls pesats. És **opcional** per a entorns de desenvolupament amb 1-2 usuaris, però esdevé **imprescindible** en entorns de producció amb més de 10 usuaris concurrents. 
 
-Consulta **[l'Annex E: Redis](../../Annexos/Annex_Redis.md)** per a una guia completa sobre quan i com implementar-lo.
+% Consulta **[l'Annex E: Redis](../../Annexos/Annex_Redis.md)** per a una guia completa sobre quan i com implementar-lo.
 :::
 
 ## Metodologies de desplegament
@@ -110,7 +111,7 @@ graph TD
     
 ```
 
-- **SaaS Cloud (Odoo.com)**: Solució en el núvol gestionada per Odoo, amb zero manteniment i inici immediat, però amb limitacions de personalització i control.
+- **SaaS Cloud (Odoo.com)**: Solució en el núvol gestionada per Odoo, amb zero manteniment i inici immediat, però amb limitacions de personalització i control. Cal tenir un partner de confiança per a migracions i integracions avançades a més d'un servidor extern per a les personalitzacions.
 
 ```{mermaid}
 :width: 120%
@@ -221,7 +222,7 @@ graph TD
 
 ### Arquitectura d'Odoo
 
-Abans de procedir amb qualsevol instal·lació, és important entendre l'arquitectura de components d'Odoo:
+Abans de procedir amb qualsevol instal·lació, és important entendre l'arquitectura de components d'Odoo. En entorn de producció, Odoo es desplega típicament com una aplicació web que interactua amb una base de dades i altres components de suport. A continuació es mostra una visió general de l'arquitectura típica d'Odoo en producció. En entorns de desenvolupament, aquesta arquitectura es pot simplificar, però és important comprendre els components clau que formen part d'una instal·lació de producció per a garantir un desplegament adequat i escalable:
 
 ```{mermaid}
 graph TD
@@ -247,7 +248,7 @@ graph TD
 5. **Cache (Redis)**: Sessions, cache de consultes, tasques asíncrones
 
 ### Consideracions per a entorns de producció
-
+En entorns de producció, és fonamental garantir que el sistema sigua segur, rendible, escalable i fàcil de mantenir. A continuació es presenten les consideracions clau per a desplegar Odoo en un entorn de producció:
 :::{caution} 
 **Factors clau per a entorns professionals**
 

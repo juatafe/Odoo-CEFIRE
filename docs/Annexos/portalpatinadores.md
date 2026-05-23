@@ -1,4 +1,4 @@
-# Exercici pràctic 9: Portal de patinadores
+# Exercici pràctic: Portal de patinadores
 
 ## Context de la pràctica
 El club de patinatge vol que les patinadores puguen consultar les seues dades des del portal d’usuari, sense entrar al backend d’Odoo. Ja tenim:
@@ -22,7 +22,7 @@ Ara posarem tot a treballar junt, pas a pas i amb validacions.
 - Mòdul `patinatge` instal·lat.
 - Almenys un model relacionat (per ex. `patinatge.patinadora`) amb algunes dades.
 - Usuaris amb accés al portal (aplicació Portal).  
-No calen permisos especials encara (Tema 8).
+No calen permisos especials encara.
 :::
 
 ---
@@ -174,7 +174,7 @@ def portal_patinatge(self, **kw):
     }
     return request.render('patinatge.portal_patinatge_page', values)
 ```
-El `request.env` és una manera segura d’accedir als models d’Odoo des d’un controlador web i amb .search() busquem tots els registres sense filtres. L’ús de `sudo()` és només temporal i didàctic. En el Tema 8 veurem com substituir-ho per permisos i regles adequades. Ara ens permet accedir als registres sense restriccions de permisos, cosa que és útil en aquest context de portal on els usuaris poden no tenir permisos complets. El resultat de la cerca es passa a la plantilla QWeb mitjançant el diccionari `values`. Una col·lecció d'objectes patinatge.patinadora està ara disponible a la plantilla per a ser mostrada. És el que anomenem recordset d’Odoo.
+El `request.env` és una manera segura d’accedir als models d’Odoo des d’un controlador web i amb .search() busquem tots els registres sense filtres. L’ús de `sudo()` és només temporal i didàctic. Més endavant veurem com substituir-ho per permisos i regles adequades. Ara ens permet accedir als registres sense restriccions de permisos, cosa que és útil en aquest context de portal on els usuaris poden no tenir permisos complets. El resultat de la cerca es passa a la plantilla QWeb mitjançant el diccionari `values`. Una col·lecció d'objectes patinatge.patinadora està ara disponible a la plantilla per a ser mostrada. És el que anomenem recordset d’Odoo.
 
 Verificació:
 - No falla la ruta.
@@ -283,7 +283,7 @@ Checklist:
 ::: {admonition} Recorda: açò és frontend (QWeb), no backend
 :class: note
 - Estàs renderitzant plantilles al website/portal.
-- La seguretat real de dades la controlarem en Tema 8 (regles i permisos).
+- La seguretat real de dades la controlarem més endavant (regles i permisos).
 :::
 
 ---

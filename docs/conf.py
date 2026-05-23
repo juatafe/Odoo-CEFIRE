@@ -23,14 +23,16 @@ extensions = [
     "sphinx_design",
     "sphinxcontrib.mermaid",    # si el fas servir, deixa-ho; si no, comenta-ho
     "diagrama_classe",
-    
+    "sphinxcontrib.tikz",
+    "sphinx.ext.mathjax",       # renderitza fórmules LaTeX en HTML
 ]
 
+tikz_proc_suite = "ImageMagick" # o "Ghostscript"
 # (Opcional però recomanat per a HTML)
 graphviz_output_format = "svg"
 graphviz_dot_args = ["-Gbgcolor=transparent"]
 
-myst_enable_extensions = ["colon_fence", "attrs_block", "deflist"]
+myst_enable_extensions = ["colon_fence", "attrs_block", "deflist", "dollarmath", "amsmath"]
 myst_fence_as_directive = ["classe-diagrama"]
 
 
@@ -156,15 +158,29 @@ html_search_language = "ca"
 
 # ──────────────── CONFIGURACIÓ ÚNICA LATEX / PDF ────────────────
 latex_engine = "xelatex"
-latex_toplevel_sectioning = "chapter"
+latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 latex_additional_files = [
   '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
-  '_static/scripts/main.py',
-  '_static/scripts/scriptsetupodoo.sh'
+  '_static/scripts/apiodoo.py',
+  '_static/scripts/scriptsetupodoo.sh',
+  '_static/scripts/deploy-odoo-docker.sh',
+  '_static/scripts/test-docker-installation.sh',
+  '_static/scripts/diagnostic.sh',
+  '_static/scripts/monitor.sh',
+  '_static/scripts/backup-docker.sh',
+  '_static/scripts/restore-docker.sh',
+  '_static/scripts/inscripcio_form.js',
+  '_static/scripts/inscripcio_signar.xml',
+  '_static/scripts/report_inscripcio.xml',
+  '_static/scripts/controlador-pat/main.py',
+  '_static/scripts/patinatge_inscripcio_views.xml',
+  '_static/scripts/hooks.py',
+  '_static/scripts/exemple_de_mandat.pdf',
+  '_static/scripts/cpa-logo.jpeg'
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
@@ -187,6 +203,8 @@ latex_elements = {
 
 
 \usepackage{qrcode}
+\usepackage{attachfile2}
+\attachfilesetup{color=0 0 0}
 
 % ───── Espai entre figures i text ─────
 \setlength{\textfloatsep}{10pt}
@@ -196,6 +214,10 @@ latex_elements = {
 \setmainfont{FreeSerif}
 \setsansfont{FreeSans}
 \setmonofont{FreeMono}
+
+% ───── TikZ (global) ─────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,calc}
 
 
 
@@ -397,7 +419,12 @@ latex_elements = {
 \makeatother
 
 % ───── Contraportada morada estil Odoo (robusta) ─────
-\AtEndDocument{
+\newif\ifodoocefirebackcoverdone
+\odoocefirebackcoverdonefalse
+
+\AtEndDocument{%
+  \ifodoocefirebackcoverdone\else
+  \global\odoocefirebackcoverdonetrue
   \clearpage
   \thispagestyle{empty}
 
@@ -459,16 +486,18 @@ latex_elements = {
 
     \vspace{1.8cm}
 
-    % ───── QR BLANC ─────
-    {\color{white}
-    \qrcode[height=3.5cm]{https://github.com/juatafe/Odoo-CEFIRE}
-    }
+    % ───── QR (alt contrast) ─────
+    \begingroup
+      \setlength{\fboxsep}{10pt} % quiet zone extra
+      \colorbox{white}{\color{black}\qrcode[height=3.5cm,level=H]{https://github.com/juatafe/Odoo-CEFIRE}}
+    \endgroup
 
     \vspace{0.5cm}
 
     {\small Accés al repositori oficial del curs (GitHub)\par}
 
   \end{center}
+  \fi
 }
 % ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
 \AtBeginDocument{
@@ -489,6 +518,23 @@ latex_elements = {
 """,
 }
 
+# Opció temporal: ocultar l'etiqueta de capítol ("Capítol 1") però
+# mantenir la numeració jeràrquica 1.1, 1.1.1, etc.
+if os.getenv("LATEX_HIDE_CHAPTER_LABEL", "0") == "1":
+    latex_elements["preamble"] += """
+\\titleformat{\\chapter}[display]
+  {\\normalfont\\huge\\bfseries}
+  {}
+  {0pt}
+  {}
+
+\\makeatletter
+\\renewcommand{\\chaptermark}[1]{%
+  \\markboth{#1}{}%
+}
+\\makeatother
+"""
+
 latex_documents = [
     ("index", f"{site_slug}.tex", project, author, "book")
 ]
@@ -503,8 +549,34 @@ _EMOJI_RE = re.compile(
     "]+",
     flags=re.UNICODE,
 )
+_EMOJI_ARTIFACT_RE = re.compile(r"[\uFE0E\uFE0F\u200D\u20E3]")
 
 _BOLD_RE = re.compile(r"\*\*(.*?)\*\*", flags=re.DOTALL)
+_FENCED_CODE_RE = re.compile(r"(^```.*?^```\s*$)", flags=re.MULTILINE | re.DOTALL)
+_PDF_EMOJI_MAP = {
+  # En text normal (incloent títols), no volem etiquetes [OK]/[RUN]:
+  # les icones es lleven directament amb _EMOJI_RE.
+}
+
+_PDF_CODE_EMOJI_MAP = {
+    "✅": "[OK]",
+    "✔": "[OK]",
+    "✓": "[OK]",
+    "❌": "[ERROR]",
+    "🚀": "[RUN]",
+    "🏗️": "[BUILD]",
+    "🏗": "[BUILD]",
+    "📦": "[PKG]",
+    "🔧": "[SERVICE]",
+    "🌐": "[WEB]",
+    "📡": "[HTTP]",
+    "👤": "[USER]",
+    "🐘": "[POSTGRES]",
+    "🔑": "[ROLE]",
+    "📁": "[FILES]",
+    "🐍": "[PYTHON]",
+    "🎉": "[DONE]",
+}
 
 def remove_emojis_only_for_pdf(app, docname, source):
     if app.builder.name != "latex":
@@ -512,23 +584,47 @@ def remove_emojis_only_for_pdf(app, docname, source):
 
     text = source[0]
 
-    # 1️⃣ DINS de negreta: eliminar emojis del tot
-    def clean_bold(match):
+    # No tocar blocs de codi fenced: preservar indentació i espais exactes
+    parts = _FENCED_CODE_RE.split(text)
+    processed_parts = []
+
+    def replace_known_pdf_emojis(value: str) -> str:
+        for emoji, replacement in _PDF_EMOJI_MAP.items():
+            value = value.replace(emoji, replacement)
+        return value
+
+    def replace_codeblock_pdf_emojis(value: str) -> str:
+      for emoji, replacement in _PDF_CODE_EMOJI_MAP.items():
+        value = value.replace(emoji, replacement)
+      return value
+
+    for part in parts:
+      # Bloc de codi fenced (comença per ```): tractament específic
+      if part.startswith("```"):
+        part = replace_codeblock_pdf_emojis(part)
+        part = _EMOJI_RE.sub(" ", part)
+        part = _EMOJI_ARTIFACT_RE.sub("", part)
+        processed_parts.append(part)
+        continue
+
+      # 1️⃣ DINS de negreta: eliminar emojis del tot
+      def clean_bold(match):
         content = match.group(1)
+        content = replace_known_pdf_emojis(content)
         content = _EMOJI_RE.sub("", content)
-        # normalitza espais interns
+        content = _EMOJI_ARTIFACT_RE.sub("", content)
         content = re.sub(r"\s+", " ", content).strip()
         return f"**{content}**"
 
-    text = _BOLD_RE.sub(clean_bold, text)
+      part = _BOLD_RE.sub(clean_bold, part)
+      part = replace_known_pdf_emojis(part)
 
-    # 2️⃣ FORA de negreta: substituir emojis per un espai
-    text = _EMOJI_RE.sub(" ", text)
+      # 2️⃣ FORA de negreta: substituir emojis per un espai
+      part = _EMOJI_RE.sub(" ", part)
+      part = _EMOJI_ARTIFACT_RE.sub("", part)
+      processed_parts.append(part)
 
-    # 3️⃣ Neteja general d’espais duplicats
-    text = re.sub(r"[ \t]{2,}", " ", text)
-
-    source[0] = text
+    source[0] = "".join(processed_parts)
 
 
 def setup(app):

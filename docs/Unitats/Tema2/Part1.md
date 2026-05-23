@@ -1,11 +1,24 @@
 Instal·lació tradicional d'Odoo en Ubuntu Server
 ================================================
 
-Aquest document cobreix la instal·lació completa **d'Odoo 16** utilitzant el mètode tradicional en **Ubuntu Server**. Aquest enfocament proporciona el màxim control sobre l'entorn i permet entendre profundament tots els components del sistema.
+:::{admonition} Sobre aquest document i les pràctiques associades
+:class: important
+Aquest tema **no pretén ser una guia pas a pas** per a la instal·lació d'Odoo. El seu objectiu és proporcionar una **visió teòrica i conceptual** dels passos que cal seguir, els components implicats i les decisions tècniques rellevants.
+
+La posada en pràctica d'aquests continguts es realitza a través de **pràctiques específiques** que acompanyen cadascun dels apartats d'aquest tema. Cada pràctica inclou:
+
+- 📋 **Instruccions pas a pas** per a completar la tasca concreta
+- ✅ **Bones pràctiques** recomanades per a cada fase del procés
+- 🔍 **Checklist de verificació** al final per confirmar que la instal·lació s'ha realitzat correctament
+
+Si estàs buscant les instruccions detallades per instal·lar Odoo, consulta directament les **pràctiques recomanades** associades a aquest apartat.
+:::
+
+Aquest apartat aborda la instal·lació d'**Odoo 16** mitjançant el mètode tradicional en **Ubuntu Server**, analitzant des d'un punt de vista tècnic i conceptual cada fase del procés: des de la preparació del sistema fins a la posada en marxa del servei. Es recomana no utilitzar aquest mètode per a entorns de proves o desenvolupament inicial, ja que és més complex i consumeix més temps que altres alternatives com Docker o Odoo.sh. No obstant això, és ideal per a aquells que volen un control total sobre la configuració, seguretat i rendiment del seu sistema Odoo.
 
 ## Introducció
 
-La instal·lació tradicional d'Odoo implica configurar manualment tots els components: sistema operatiu, base de dades, aplicació i serveis. Aquesta metodologia és ideal per a:
+La instal·lació tradicional d'Odoo implica configurar manualment tots els components: sistema operatiu, base de dades, aplicació i serveis. Comprendre cadascun d'aquests passos és fonamental per a:
 
 - **Entorns de producció** que requereixen personalització avançada
 - **Aprenentatge** dels components i la seva interacció
@@ -46,7 +59,7 @@ graph TD
 - Xarxa: Connexió estable a Internet
 
 **Software:**
-- Ubuntu Server 22.04 LTS (o posterior)
+- Ubuntu Server 20.04 LTS (o posterior).
 - Accés sudo al sistema
 - Connexió SSH configurada (si és remot)
 
@@ -57,7 +70,7 @@ graph TD
 :::
 
 :::{note}
-Les instruccions d'aquest document han estat provades en Ubuntu 22.04 LTS. En altres versions o distribucions poden variar els noms de paquets o ordres específiques.
+Les instruccions d'aquest document han estat provades en Ubuntu 24.04 LTS. En altres versions o distribucions poden variar els noms de paquets o ordres específiques.
 :::
 
 ## Visió general del procés
@@ -117,8 +130,10 @@ sudo apt upgrade
 
 **apt-get** (per a scripts i automatització):
 - Sortida més predictible i estable
-- Ideal per a scripts, CI/CD i Dockerfiles
+- Ideal per a scripts, CI/CD[^cicd] i Dockerfiles
 - Comportament consistent entre versions
+
+[^cicd]: **CI/CD** (*Continuous Integration / Continuous Delivery or Deployment*): metodologia de desenvolupament que automatitza la integració de canvis de codi i el seu desplegament als entorns de producció.
 
 ```bash
 export DEBIAN_FRONTEND=noninteractive
@@ -922,7 +937,7 @@ La configuració completa d'Apache com a reverse proxy és un tema extens que in
 - Monitoratge i logging avançat
 - Resolució de problemes habituals
 
-**[📋 Documentació completa: Apache com a Reverse Proxy per a Odoo](../../Annexos/Apache_ReverseProxy)**
+% **[📋 Documentació completa: Apache com a Reverse Proxy per a Odoo](../../Annexos/Apache_ReverseProxy)**
 :::
 
 ### Avantatges del reverse proxy
@@ -1145,7 +1160,7 @@ Durant aquest procés has après:
 
 ### 🚀 Pròxims passos recomanats
 
-1. **Explorar l'Annex A** per configurar Apache com a reverse proxy
+1. **Configurar Apache com a reverse proxy** *(contingut no inclòs en aquest curs — s'escapa del temps disponible)*
 2. **Implementar SSL/TLS** per a connexions segures
 3. **Configurar backups automàtics** amb programació cron
 4. **Monitoritzar el rendiment** i optimitzar segons l'ús

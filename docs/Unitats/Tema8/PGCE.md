@@ -171,6 +171,7 @@ Coses que duren anys, no mesos. La màquina de muntar i extraure rodaments dels 
 
 :::{note} Comprendre l'Amortització: De la Inversió a la Despesa
 Quan el club compra un bé durador (com uns patins o una màquina), no es considera una “despesa total” el primer dia, sinó una inversió. El cost es reparteix durant la vida útil de l’objecte.
+:::
 
 1. El Moment de la Compra (Any 0)
 Registrem que tenim un bé nou i que els diners han eixit del banc.
@@ -206,7 +207,7 @@ En resum:
 - El compte 216 ens diu què ens va costar.
 - El compte 681 és la “factura” anual que ens enviem a nosaltres mateixos per l’ús de la màquina.
 - El compte 572 només es mou el primer dia quan paguem.
-:::
+
 
 
 
@@ -731,7 +732,18 @@ Perquè un gir bancari siga legalment vàlid, el club ha de custodiar el documen
 2. **Pujar el document signat:** Per tenir la prova documental vinculada al registre.
 ::: {important}
 Pots descarregar un model oficial del CPA Patinatge per a recollir els mandats signats pels socis i pujar-los a Odoo: 
-[Descarregar Exemple de Mandat SEPA (PDF)](https://juatafe.github.io/Odoo-CEFIRE/_static/assets/img/Tema9/exemple_de_mandat.pdf)
+
+**[Descarregar Exemple de Mandat SEPA (PDF)](../../_static/scripts/exemple_de_mandat.pdf)**
+
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{exemple_de_mandat.pdf}{exemple\_de\_mandat.pdf}
+```
+
 :::
 En Odoo Community NO pots crear un mandat SEPA massiu. Cal anar d'un en un, bé pujant el fitxer del mandat signat pels socis i validar o bé crear-lo manualment. El permís legal és manual el que és automàtic és el cobrament. Altra cosa seria crear un mòdul específic que d'un formulari generara mandats signats i els pujara automàticament però això ja és un desenvolupament a mida.
 
@@ -900,9 +912,10 @@ Per a poder generar remeses SEPA de cobrament, cal crear un mode de pagament esp
   ::: {note} 
   **Modalitat de pagament per a devolucions**.
   Aquest camp serveix per a indicar quin mètode s'ha d'utilitzar si el club ha de tornar diners a un soci (per exemple, si s'ha cobrat una quota per error).
-      - **Per què no et deixa triar cap?** No apareixen opcions perquè encara no has creat un mode de pagament de tipus "Outbound" (eixida de diners) que siga compatible amb devolucions.
-      - **Com actuar ara?**: De moment, pots deixar-ho buit. No és imprescindible per a generar les remeses de cobrament (ingrés) de les quotes. Si més endavant necessites fer devolucions massives, hauries de crear un mode de pagament per a "Transferència SEPA" (pagaments del club cap a fora) i llavors ja el podries seleccionar ací.
   :::
+  - **Per què no et deixa triar cap?** No apareixen opcions perquè encara no has creat un mode de pagament de tipus "Outbound" (eixida de diners) que siga compatible amb devolucions.
+  - **Com actuar ara?**: De moment, pots deixar-ho buit. No és imprescindible per a generar les remeses de cobrament (ingrés) de les quotes. Si més endavant necessites fer devolucions massives, hauries de crear un mode de pagament per a "Transferència SEPA" (pagaments del club cap a fora) i llavors ja el podries seleccionar ací.
+  
 
   `Transfer journal on payment/debit orders`
   : Aquest camp és una eina de control comptable per a situacions en què els diners no arriben immediatament al banc.
@@ -910,10 +923,11 @@ Per a poder generar remeses SEPA de cobrament, cal crear un mode de pagament esp
   ::: {note} 
   **Transfer journal on payment/debit orders**.
   **Què vol dir?** Si el selecciones, quan generes la remesa, Odoo no portarà els diners directament al compte del banc (572), sinó que els deixarà en un "Diari de trànsit" fins que tu confirmis que els diners han arribat realment.
-  **Recomanació per al club:** 
-        - **Si vols simplicitat:** Deixa-ho buit. D'aquesta manera, quan registres el pagament de la remesa, els diners aniran directament al diari de banc "CaixaBank Club".
-        - **Si vols un control total (Professional):** Es podria crear un diari tipus "Efectiu/Transitoris". Això serveix per a reflectir que has enviat el fitxer al banc, però que el banc encara pot trigar 2-3 dies a fer-ho efectiu.
   :::
+  **Recomanació per al club:** 
+    - **Si vols simplicitat:** Deixa-ho buit. D'aquesta manera, quan registres el pagament de la remesa, els diners aniran directament al diari de banc "CaixaBank Club".
+    - **Si vols un control total (Professional):** Es podria crear un diari tipus "Efectiu/Transitoris". Això serveix per a reflectir que has enviat el fitxer al banc, però que el banc encara pot trigar 2-3 dies a fer-ho efectiu.
+
 
 #### 1.3 Opcions d'Ordres de pagament:
 `No permetes el dèbit abans de la data de venciment`
@@ -922,18 +936,19 @@ Per a poder generar remeses SEPA de cobrament, cal crear un mode de pagament esp
   ::: {note} 
   **No permetis el dèbit abans de la data de venciment**.
   Aquesta casella (que sol aparèixer com a "Do not allow debit before maturity date") és una mesura de seguretat legal i de gestió.
-      - **Què fa**: Si la marques, Odoo s'assegurarà que la data de cobrament que s'envia al banc en el fitxer XML mai siga anterior a la data de venciment que vas posar a la factura.
-      - **Per què és important per al club**: Evita queixes de les famílies. Si la factura venç el dia 5, però tu generes la remesa el dia 1, el banc esperarà fins al dia 5 per a fer el càrrec si aquesta opció està activa.
-      - **Recomanació**: Marca-la. Dóna serietat al club i garanteix que respecteu els terminis promesos als socis.
   :::
+    - **Què fa**: Si la marques, Odoo s'assegurarà que la data de cobrament que s'envia al banc en el fitxer XML mai siga anterior a la data de venciment que vas posar a la factura.
+    - **Per què és important per al club**: Evita queixes de les famílies. Si la factura venç el dia 5, però tu generes la remesa el dia 1, el banc esperarà fins al dia 5 per a fer el càrrec si aquesta opció està activa.
+    - **Recomanació**: Marca-la. Dóna serietat al club i garanteix que respecteu els terminis promesos als socis.
+
 
 `Data d'execució de pagament per defecte`
 : Aquest camp defineix quina data portaran els rebuts de la remesa per defecte si no s'especifica una altra. Sol tindre tres opcions habituals:
-      - **Data de venciment de la factura**: Cada rebut es cobrarà el dia que venç la seua factura corresponent. És la més precisa.
-      - **Data actual**: El banc intentarà cobrar-ho tan prompte com reba el fitxer.
-      - **Data fixa**: Una data que tu tries manualment cada vegada que fas la remesa.
-      - **Recomanació per al club**: Selecciona "Data de venciment de la factura".
-      - **El motiu**: Si el club factura totes les quotes el dia 1 amb venciment el dia 1, totes s'executaran el mateix dia. Si un soci té un acord especial i la seua factura venç el dia 15, el sistema ho respectarà automàticament dins del mateix fitxer.
+    - **Data de venciment de la factura**: Cada rebut es cobrarà el dia que venç la seua factura corresponent. És la més precisa.
+    - **Data actual**: El banc intentarà cobrar-ho tan prompte com reba el fitxer.
+    - **Data fixa**: Una data que tu tries manualment cada vegada que fas la remesa.
+    - **Recomanació per al club**: Selecciona "Data de venciment de la factura".
+    - **El motiu**: Si el club factura totes les quotes el dia 1 amb venciment el dia 1, totes s'executaran el mateix dia. Si un soci té un acord especial i la seua factura venç el dia 15, el sistema ho respectarà automàticament dins del mateix fitxer.
   
 `Agrupa les transaccions de les ordres de pagament`
 : Marca la casella "Agrupa les transaccions de les ordres de pagament" per a generar un sol assentament comptable per remesa.
@@ -966,7 +981,7 @@ Per a poder generar remeses SEPA de cobrament, cal crear un mode de pagament esp
 
 
 ### 2. Crear les factures de quotes
-Ara que ja tenim tot preparat, podem generar una factura de quotes. En Facturació > Clients > Factures de clients, clica a "Crear" i  afegeix el producte "Quota Iniciació". Ajusta la data i l'import si cal. Desa i envia la factura.
+Ara que ja tenim tot preparat, podem generar una factura de quotes. En Facturació -> Clients -> Factures de clients, clica a "Crear" i  afegeix el producte "Quota Iniciació". Ajusta la data i l'import si cal. Desa i envia la factura.
 
 Un error comú és no definir l'empresa CPA Patinantge com a "Empresa per defecte" en la configuració d'Odoo. Això pot provocar que les factures no es puguen generar apareguent un missatge d'error. Assegura't que l'empresa està creada correctament abans de crear les factures.
 
@@ -975,8 +990,17 @@ Per a la creació de l'empresea caldra un CIF fictici (per exemple G98558232) i 
 :::{admonition} Logotip oficial CPA Patinatge
 :class: tip
 Per a donar un toc més professional a les factures, pots pujar el logotip oficial del CPA Patinatge a la configuració de l'empresa dins d'Odoo. Això farà que el logotip aparega automàticament a totes les factures i documents generats pel sistema.
-[ Descarregar logotip CPA (jpeg)](https://juatafe.github.io/Odoo-CEFIRE/_static/assets/img/Tema9/cpa-logo.jpeg)
 
+**[Descarregar logotip CPA (jpeg)](../../_static/scripts/cpa-logo.jpeg)**
+
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{cpa-logo.jpeg}{cpa-logo.jpeg}
+```
 :::
 
 Caldrà crear dos factures d'exemple per a veure com funciona el procés de cobrament massiu amb remeses SEPA. 
@@ -1291,20 +1315,45 @@ Tens dues opcions principals segons el que et proporcione CaixaBank:
     - Aquí tens la representació del fitxer que hauries d'importar a Odoo per simular aquest extracte. Pots copiar aquest contingut en un bloc de notes i guardar-lo amb l'extensió .n43. 
 
 
-:::{note} 
+
 **Exemple fitxer Norma 43 (.n43)**
 
-```text
-111001ES16008167231265575497770101260701261205467EUR2
-221600816723126557549777070126070126040100000000137000000000000867AB.REM. PAY0001        
-2301Ingres: Remesa quotes (Marta + Pere)                                        
-2216008167231265575497770701260701260401000000001000000000000868BEL-LIQ.REM.DEVOL.      
-2301Devolucio: Rebut de Pere Estruch retornat                                   
-221600816723126557549777070126070126040100000000003500000000000869COMIS. DEVOL.         
-2301Despesa: Comissio bancaria per devolucio                                    
-3316008167231265575497770000010000000013700000000200000000103501195117          
-88999999999999999999990000100000000000000000000000000000000000
+
+```{eval-rst}
+.. only:: latex
+
+   .. raw:: latex
+
+      \begin{flushleft}
+      \fontsize{7pt}{8pt}\selectfont
+      \begin{verbatim}
+      111001ES16008167231265575497770101260701261205467EUR2
+      221600816723126557549777070126070126040100000000137000000000000867AB.REM. PAY0001
+      2301Ingres: Remesa quotes (Marta + Pere)
+      2216008167231265575497770701260701260401000000001000000000000868BEL-LIQ.REM.DEVOL.
+      2301Devolucio: Rebut de Pere Estruch retornat
+      221600816723126557549777070126070126040100000000003500000000000869COMIS. DEVOL.
+      2301Despesa: Comissio bancaria per devolucio
+      3316008167231265575497770000010000000013700000000200000000103501195117
+      88999999999999999999990000100000000000000000000000000000000000
+      \end{verbatim}
+      \end{flushleft}
 ```
+<!-- .. only:: html
+
+   .. code-block:: text
+
+      111001ES16008167231265575497770101260701261205467EUR2
+  111001ES16008167231265575497770101260701261205467EUR2
+  221600816723126557549777070126070126040100000000137000000000000867AB.REM. PAY0001        
+  2301Ingres: Remesa quotes (Marta + Pere)                                        
+  2216008167231265575497770701260701260401000000001000000000000868BEL-LIQ.REM.DEVOL.      
+  2301Devolucio: Rebut de Pere Estruch retornat                                   
+  221600816723126557549777070126070126040100000000003500000000000869COMIS. DEVOL.         
+  2301Despesa: Comissio bancaria per devolucio                                    
+  3316008167231265575497770000010000000013700000000200000000103501195117          
+  88999999999999999999990000100000000000000000000000000000000000
+``` -->
 🔍 Explicació de l'estructura generada:
 
 - Registre 11 (Capçalera): Defineix el compte del club (acabat en 9777) i el saldo inicial de la sessió.
@@ -1315,7 +1364,7 @@ Tens dues opcions principals segons el que et proporcione CaixaBank:
 - Registre 23 (Conceptes): Conté les descripcions que has facilitat ("Ingrés: Remesa...", etc.).
 
 - Registre 33 (Totals): Suma els càrrecs i abonaments per verificar que el fitxer és correcte i calcula el saldo final de 11.951,17 €.
-:::
+
 
   - Format CSV/Excel (.csv): En moltes ocasions el banc sols et proporciona l'extracte en format CSV o Excel. En aquest cas, hauràs de revisar que les columnes estiguen ben organitzades perquè Odoo puga interpretar-les correctament. En aquest exemple anem a utilitzar: date,ref,name i amount (amb signe positiu o negatiu).
   
@@ -1728,7 +1777,7 @@ Apunts:
 
 Què vol dir:
 - Entren diners al banc del club.
-El compte 572001 Banc és el compte on està el diners reals del club.
+El compte 572001 Banc és el compte on estan els diners reals del club.
   En estar **al DEURE**, vol dir que: 
     - El saldo del banc augmenta en 137 €.
 - Es buida el compte “pont” de la remesa.
@@ -1982,7 +2031,31 @@ El següent moviment de l'extracte és la devolució del rebut de Pere. El compt
 
 :::{image} /_static/assets/img/Tema9/statementlines4.png
 :alt: Validar conciliació bancària Odoo
-:align: center   
+:align: center   Per a descarregar l’extracte bancari en format CSV, accedeix a la teua banca en línia de CaixaBank. Ves a la secció d’extractes o moviments del compte i busca l’opció per a exportar o descarregar l’extracte. Selecciona el format CSV i el període corresponent als moviments que vols importar a Odoo.
+:::
+
+
+
+### Simulació de l'extracte bancari (Noves Remeses)
+Aquest seria l'escenari que et trobaràs al banc en uns dies per a aquestes noves remeses. Seguim el format que m'has passat anteriorment:
+
+```text
+Tipus moviment         Import      Saldo       Nro. Apunt   Tipus d'operació
+ab.rem. PAY0001        +137,00 €   12.054,67   867          Ingrés: Remesa quotes (Marta + Pere)
+bel-liq.rem.devol.     -100,00 €   11.954,67   868          Devolució: Rebut de Pere Estruch retornat
+comis. devol.           -3,50 €    11.951,17   869          Despesa: Comissió bancària per devolució
+```
+
+Per importar l'extracte bancari a Odoo i completar el procés de conciliació per a la teva remesa PAY0001, has de seguir aquests passos tècnics:
+1. Preparació de l'arxiu d'extracte
+
+Tens dues opcions principals segons el que et proporcione CaixaBank:
+
+  - Format Norma 43 (.n43): És el format estàndard bancari a Espanya. El format Norma 43 (.n43) és un fitxer de text pla (ASCII) amb una estructura molt rígida de columnes on no existeixen els decimals (els darrers dos dígits són sempre els cèntims)
+    - Aquí tens la representació del fitxer que hauries d'importar a Odoo per simular aquest extracte. Pots copiar aquest contingut en un bloc de notes i guardar-lo amb l'extensió .n43. 
+
+
+:::{note} 
 :width: 100%
 ::: 
 
@@ -2017,3 +2090,7 @@ El mòdul `account_financial_report` permet generar informes financers personali
 ::: 
 
 Una vegada instal·lat el mòdul, podem accedir a la configuració dels informes financers des de _Facturació > Informes_. Aquí podem crear nous informes o modificar els existents segons les nostres necessitats.
+
+
+## Resum del tema
+En aquest tema hem après a configurar i utilitzar els mòduls d'importació d'extractes bancaris de l'OCA per a importar fitxers en format Norma 43 i altres formats compatibles. Hem vist com configurar el statement sheet mapping per a que Odoo puga interpretar correctament els fitxers CSV, i com importar l'extracte bancari al diari CaixaBank Club. També hem analitzat el flux comptable que es genera a Odoo segons el PGC, i com conciliar els moviments bancaris amb les factures i pagaments registrats a Odoo. Finalment, hem vist com utilitzar el mòdul `account_financial_report` per a generar informes financers personalitzats a Odoo.  

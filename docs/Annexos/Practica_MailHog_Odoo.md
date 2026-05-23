@@ -1,4 +1,4 @@
-# Exercici pràctic 3: Afegir servidor de correu a l’entorn Docker d’Odoo
+# Exercici pràctic : Afegir servidor de correu a l’entorn Docker d’Odoo
 ## Introducció
 Com hem vist al Tema 2, quan configurem les dades de l’empresa en Odoo cal definir un servidor de correu d'eixida' (SMTP) per a notificacions, factures i validacions. En desenvolupament no és recomanable usar un servidor real: convé utilitzar una ferramenta de simulació que intercepte els correus per a provar plantilles i fluxos sense enviaments reals. En esta pràctica integrarem MailHog per a fer aquesta simulació de manera segura dins de Docker.
 
@@ -48,7 +48,7 @@ Per a fer-ho, modificarem el fitxer `docker-compose.yml`.
 
 ### Pas 2: Afegir el servei `mailhog`
 
-Al final del fitxer `docker-compose.yml`, **sota els serveis existents**, copia i enganxa aquest bloc:
+Al final del fitxer `docker-compose.yml`, **baix dels serveis existents**, copia i enganxa aquest bloc:
 
 ```yaml
   mailhog:
@@ -67,6 +67,16 @@ Al final del fitxer `docker-compose.yml`, **sota els serveis existents**, copia 
   - 8025 → per accedir via navegador.  
   - 1025 → per enviar correus des d’Odoo (port SMTP).  
 - `restart: always` → fa que s’inicie automàticament si es reinicia el sistema o el contenidor.
+
+
+:::{tip} 
+**Usuaris de macOS ARM**  
+Si no tens disponible `MailHog`, pots usar **Mailpit**, que és compatible i molt semblant.  
+En eixe cas, el més important és que en Odoo poses com a **Servidor SMTP** el **nom del servei de `docker-compose.yml`** (per exemple `mailhog` o `mailpit`, segons com l'hages definit).
+:::
+```
+
+
 
 ---
 
@@ -105,7 +115,7 @@ Per comprovar-ho:
 docker ps
 ```
 
-Veràs una línia semblant a:
+S'obervarà una línia semblant a:
 ```
 mailhog/mailhog:latest   ...   0.0.0.0:1025->1025/tcp, 0.0.0.0:8025->8025/tcp
 ```
@@ -132,7 +142,8 @@ Ara anem dins de l’aplicació Odoo:
 | TLS/SSL | ❌ Desactivat |
 | Autenticació | ❌ Cap |
 | Usuari / Contrasenya | (en blanc) |
-| Remitent | `admin@localhost` |
+
+> ✅ Recorda: el camp **Servidor SMTP** ha de coincidir amb el nom del servei Docker (no necessàriament amb el nom comercial de l’eina).
 
 Fes clic a **Provar connexió**.  
 Si tot està bé, apareixerà el missatge:  
@@ -150,7 +161,7 @@ Ara que Odoo ja té configurat el servidor **MailHog**, farem una prova per comp
 #### Entra al mòdul *Contactes*
 
 Accedeix a `Contactes` des del menú superior d’Odoo.  
-Selecciona qualsevol contacte (per exemple, *Administrator*) o crea’n un de nou.
+Selecciona qualsevol contacte (per exemple, *Administrator*) o crea’n un de nou. Posa-li un correu electrònic al destinatari (per exemple, correu@example.com`).
 
 Fes clic a **Enviar missatge** al peu de la fitxa i escriu un text senzill, com ara:
 
@@ -176,7 +187,7 @@ Obri el navegador i entra a:
 Apareixerà la interfície web de MailHog, on veuràs la llista de correus rebuts.  
 Fes clic sobre el missatge per obrir-lo i podràs veure:
 
-- El **remitent** i el **destinatari** (`admin@example.com`)
+- El **remitent** i el **destinatari** 
 - L’**assumpte** i el contingut del missatge
 - Les diferents pestanyes: *HTML*, *Plain text*, *Source*, *MIME*
 

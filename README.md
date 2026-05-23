@@ -74,6 +74,22 @@ pip install -r requirements.txt
 make html
 ```
 
+### 📘 Recordatori PDF (casos puntuals)
+
+Compilació PDF normal:
+
+```bash
+make pdf
+```
+
+Compilació puntual **sense mostrar "Capítol 1"** però mantenint numeració (`1`, `1.1`, `1.1.1`):
+
+```bash
+LATEX_TOPLEVEL_SECTIONING=chapter LATEX_HIDE_CHAPTER_LABEL=1 make pdf
+```
+
+> Aquest canvi és només per a eixa execució (no és permanent).
+
 ---
 
 Apunts pensats per a **ús docent real**, amb un flux senzill i sense maldecaps:

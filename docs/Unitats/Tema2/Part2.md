@@ -1,7 +1,7 @@
 Desplegament d'Odoo amb Docker
 ==============================
 
-Aquest document cobreix el desplegament complet d’Odoo 16 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, et recomanem realitzar l’Exercici pràctic 2 — Desplegament d’Odoo amb Docker Compose, a la [Guia pràctica: Desplegament d’Odoo amb Docker](../../Annexos/Tema2_prac2.md), on trobaràs una guia pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
+Aquest document cobreix el desplegament complet d’Odoo 16 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, es recomana realitzar l’Exercici pràctic — Desplegament d’Odoo amb Docker Compose, on es pot trobar una proposta pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
 
 ## Introducció
 
@@ -65,7 +65,7 @@ graph TD
 - Xarxa: Connexió estable a Internet per descarregar imatges
 
 **Software:**
-- Ubuntu 20.04 LTS o posterior (o equivalent)
+- Ubuntu 20.04 LTS o posterior (24.04 LTS recomanat)
 - Accés sudo al sistema
 - Ports 8069 i 5432 lliures
 
@@ -463,7 +463,15 @@ server_wide_modules = base,web
 
 **Pots descarregar l'script complet de desplegament:**
 
-**[deploy-odoo-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
+**[deploy-odoo-docker.sh](../../_static/scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{deploy-odoo-docker.sh}{deploy-odoo-docker.sh}
+```
 
 
 1. **Fase 1**: Configuració inicial del projecte
@@ -476,11 +484,13 @@ L'script inclou:
 - Logging detallat amb colors
 - Control de fases per evitar duplicacions
 - Verificació final del desplegament
+
+>Nota: Els links d'aquest script apunten a un repositori privat, personalitza els URLs segons el teu projecte o comenta les línies de descàrrega. 
   
 **Instal·lació:**
 ```bash
-# Copiar script de desplegament
-cp docs/scripts/deploy-odoo-docker.sh ~/
+# Descarregar o copiar script de desplegament
+cp scripts/deploy-odoo-docker.sh ~/
 chmod +x ~/deploy-odoo-docker.sh
 ```
 :::
@@ -506,11 +516,19 @@ L'script mostrarà una sortida similar a:
 
 :::{tip} 
 
-**Pots descarregar els següents scripts per verificar la instal·lació:**
+**Pots descarregar els següents scripts per verificar la instal·lació sense necessitat d'accedir al repositori privat:**
 
-- **[test-docker-installation.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/test-docker-installation.sh)**: Verificació completa de Docker
-- **[diagnostic.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/diagnostic.sh)**: Diagnòstic del sistema Docker
-- **[monitor.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/monitor.sh)**: Monitoratge en temps real
+- **[test-docker-installation.sh](../../_static/scripts/test-docker-installation.sh)**: Verificació completa de Docker
+- **[diagnostic.sh](../../_static/scripts/diagnostic.sh)**: Diagnòstic del sistema Docker
+- **[monitor.sh](../../_static/scripts/monitor.sh)**: Monitoratge en temps real
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Adjunts en la versió PDF (visors compatibles): }\textattachfile{test-docker-installation.sh}{test-docker-installation.sh}, \textattachfile{diagnostic.sh}{diagnostic.sh}, \textattachfile{monitor.sh}{monitor.sh}
+```
 
 Aquests scripts et ajudaran a verificar que tot funciona correctament abans de continuar.
 
@@ -520,7 +538,7 @@ Aquests scripts et ajudaran a verificar que tot funciona correctament abans de c
 mkdir -p ~/odoo_server/scripts
 mkdir -p ~/odoo_server/backups/scripts
 
-# Copiar scripts des de la documentació
+# Copiar scripts descarregats al projecte
 cp test-docker-installation.sh ~/odoo_server/scripts/
 cp diagnostic.sh ~/odoo_server/scripts/
 cp monitor.sh ~/odoo_server/scripts/
@@ -579,10 +597,18 @@ aa9ae22cf873   odoo_server-web-1   0.05%     412.2MiB / 5.74GiB   7.01%     405M
 ### Backup i restauració
 
 :::{tip} 
-**Pots descarregar els scripts de backup:**
+**Pots descarregar els scripts de backup sense necessitat d'accedir al repositori privat:**
 
-- **[backup-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/backup-docker.sh)**: Backup complet de base de dades, volums i configuració
-- **[restore-docker.sh](https://github.com/juatafe/Odoo-CEFIRE/blob/main/scripts/restore-docker.sh)**: Restauració des de backups anteriors
+- **[backup-docker.sh](../../_static/scripts/backup-docker.sh)**: Backup complet de base de dades, volums i configuració
+- **[restore-docker.sh](../../_static/scripts/restore-docker.sh)**: Restauració des de backups anteriors
+
+```{eval-rst}
+.. only:: latex
+
+  .. raw:: latex
+
+    \noindent\textit{Adjunts en la versió PDF (visors compatibles): }\textattachfile{backup-docker.sh}{backup-docker.sh}, \textattachfile{restore-docker.sh}{restore-docker.sh}
+```
 
 Aquests scripts gestionen automàticament:
 - Backup de base de dades PostgreSQL
@@ -677,7 +703,7 @@ services:
 
 ### Problemes comuns
 
-**🔧 Contenidor no s'inicia:**
+**Contenidor no s'inicia:**
 
 ```bash
 # Verificar logs detallats
@@ -691,7 +717,7 @@ docker compose build --no-cache web
 docker compose up -d
 ```
 
-**🔧 Problemes de connectivitat:**
+**Problemes de connectivitat:**
 
 ```bash
 # Verificar xarxes Docker
@@ -703,7 +729,7 @@ docker compose exec web ping db
 docker compose exec web nc -zv db 5432
 ```
 
-**🔧 Problemes de rendiment:**
+**Problemes de rendiment:**
 
 ```bash
 # Verificar recursos disponibles
@@ -728,7 +754,7 @@ docker compose exec web odoo shell -d nom_base_dades
 docker compose exec web odoo -i nom_modul --test-enable --stop-after-init
 ```
 
-## Referències avançades
+<!-- ## Referències avançades
 
 :::{admonition} 📖 Documentació ampliada
 :class: note
@@ -746,7 +772,7 @@ Per a configuracions més avançades, consulta aquests documents complementaris:
 - Monitoratge professional amb mètriques i alertes
 - Estratègies de backup robustes
 - Pipelines de desplegament continu (CI/CD)
-:::
+::: -->
 
 ## Conclusions
 
@@ -778,21 +804,6 @@ Durant aquest procés has après:
 3. **Establir monitoratge** amb alertes professionals
 4. **Configurar backup automatitzat** amb programació
 5. **Implementar SSL/TLS** per a connexions segures
-
-:::{admonition} 📖 Aprofundiment en CI/CD
-:class: note
-Per comprendre en detall què és CI/CD i com implementar-lo amb Odoo, consulta:
-
-**[Annex D: Integració i Desplegament Continu (CI/CD)](../../Annexos/Annex_CICD.md)**
-
-Aquest annex cobreix:
-- Conceptes fonamentals de CI/CD explicats de manera accessible
-- Comparatives entre processos manuals i automatitzats
-- Exemples pràctics amb GitHub Actions i GitLab CI
-- Scripts complets per implementar pipelines d'Odoo
-- Estratègies avançades (Blue-Green, Canary deployments)
-- Cases d'estudi reals amb mètriques de ROI
-:::
 
 Aquesta metodologia amb Docker et proporciona una base sòlida per desenvolupar, provar i desplegar sistemes Odoo professionals de manera eficient i escalable. 🎯
 

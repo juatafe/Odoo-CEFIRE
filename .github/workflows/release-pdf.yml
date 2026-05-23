@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to build/release (e.g. v2.2). Leave empty to just build artifacts from the default branch."
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -14,6 +20,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.tag || github.ref }}
 
       - uses: actions/setup-python@v5
         with:
@@ -34,9 +43,21 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build PDF
+        env:
+          LATEX_TOPLEVEL_SECTIONING: chapter
+          LATEX_HIDE_CHAPTER_LABEL: "1"
         run: make pdf
 
+      - name: Upload PDF artifact (debug)
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: _build/latex/*.pdf
+
       - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/') || (inputs.tag != '')
         uses: softprops/action-gh-release@v2
         with:
-          files: _build/latex/Odoo-CEFIRE.pdf
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          files: _build/latex/*.pdf
+          fail_on_unmatched_files: true
