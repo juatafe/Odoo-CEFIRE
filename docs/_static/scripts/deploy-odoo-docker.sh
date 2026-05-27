@@ -13,16 +13,12 @@ NC='\033[0m' # No Color
 # Variables de configuració
 PROJECT_NAME="odoo_server"
 PROJECT_DIR=~/odoo_server
-ODOO_DB_NAME="provestalens"
+ODOO_DB_NAME="morrallaodoo"
 ADMIN_EMAIL="admin@empresa.com"
-ADMIN_PASSWORD="AdminPassword2024!"
+ADMIN_PASSWORD="AdminPassword2026!"
 
 # Mòduls personalitzats a instal·lar
-CUSTOM_MODULES=(
-    "familia"
-    "event_family_registration" 
-    "payment_with_saldo"
-)
+CUSTOM_MODULES=()
 
 # Flags de control de fases
 PHASE1_FLAG="$PROJECT_DIR/.phase1_docker_done"
@@ -137,7 +133,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: postgres:15
+    image: postgres:16
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo
@@ -186,19 +182,7 @@ phase2_deploy() {
     
     # Clonar repositoris de mòduls personalitzats
     log_info "Descarregant mòduls personalitzats..."
-    
-    if [ ! -d "dev_addons/familia" ]; then
-        git clone https://github.com/ElJust/familia.git dev_addons/familia
-    fi
-    
-    if [ ! -d "dev_addons/event_family_registration" ]; then
-        git clone https://github.com/ElJust/event_family_registration.git dev_addons/event_family_registration
-    fi
-    
-    if [ ! -d "dev_addons/payment_with_saldo" ]; then
-        git clone https://github.com/ElJust/payment_with_saldo.git dev_addons/payment_with_saldo
-    fi
-    
+
     # Construir i iniciar contenidors
     log_info "Construint imatges Docker..."
     docker compose build

@@ -19,9 +19,9 @@ Sempre que es complisquen les condicions següents:
 - **Compartir Igual (SA)**: si es crea una obra derivada, s’ha de distribuir sota la mateixa llicència.
 
 Autoria:  
-**Juan Bautista Talens** i **Alicia González**  
-CEFIRE de València  
+**Reina del Carmen Peiró Arnau** 
 Any: 2026
+Material adaptat del curs SGE dels autors: **Juan Bautista Talens** i **Alicia González**  
 
 Més informació sobre la llicència:  
 https://creativecommons.org/licenses/by-nc-sa/4.0/

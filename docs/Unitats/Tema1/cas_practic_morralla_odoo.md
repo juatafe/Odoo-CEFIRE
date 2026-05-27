@@ -1,15 +1,15 @@
 # Cas Pràctic: Morralla Odoo
-Per a comprendre el funcionament real d'un ERP, utilitzarem un cas real, on gestionaràs una colla de dolçaines i percusió anomenada "La Morralla". Utilitzarem Odoo 19 en la versió Enterprise. No anem a fer la gestió completa  de la colla, sinó les parts principals de la seua gestió per a entendre la lògica dels processos de negoci i la connexió entre les diferents aplicacions d'Odoo i siga punt de partida per ampliar requisits o fer-ne una aplicació reutilitzable en un sistema similar.
+Per a comprendre el funcionament real d'un ERP, utilitzarem un cas real, on gestionaràs una colla de dolçaines i tabals anomenada "La Morralla". Utilitzarem Odoo 19 en la versió Enterprise. No anem a fer la gestió completa  de la colla, ja que el temps disponible no seria el suficient, però sí les parts més principals de la seua gestió per a entendre la lògica dels processos de negoci i la connexió entre les diferents aplicacions d'Odoo, i ens serveixca de punt de partida per ampliar requisits o fer-ne una aplicació reutilitzable en un sistema similar.
 
-## Flux de Treball Inicial: Compra i Venda
+## Flux de Treball Inicial: Clients i Contractació
 Hauràs de configurar Odoo per a completar el següent cicle operatiu:
-1. **Crear productes**: Definir el catàleg de mobles.
-2. **Compra**: Gestionar sol·licituds de cotització a proveïdors.
-3. **Logística**: Rebre productes al magatzem (ús de codis de barres).
-4. **Venda i Facturació**: Realitzar el cicle complet fins al registre del pagament i l'anàlisi de resultats.
+1. **Crear clients**: Són els que contracten la música per a diferents actes.
+2. **Crear contractes**: Són les vendes en sí. On creem els pressupostos, s'envien als clients i es converteixen en comandes confirmades.
+3. **Cobraments**: Quan es reb el cobrament per l'acte ja fet.
+4. **Agenda**: Per gestionar d'una manera visual totes les actuacions.
 
 ## Objectiu
-L'objectiu és aprendre a configurar els processos de negoci sense necessitat de programació inicial, entenent la lògica de l'usuari final abans d'entrar en el desenvolupament de mòduls. Scale Up! és una eina que permet simular l'ús d'Odoo en un entorn controlat, facilitant l'aprenentatge pràctic i la comprensió dels processos empresarials. A través d'aquest cas pràctic, els participants podran veure com les diferents aplicacions d'Odoo es connecten entre si per a gestionar una empresa de manera eficient.
+L'objectiu és aprendre a configurar els processos de negoci sense necessitat de programació inicial, entenent la lògica de l'usuari final abans d'entrar en el desenvolupament de mòduls. Amb estos 4 punts volem començar l'aprenentatge pràctic i la comprensió dels processos empresarials. Podràs veure com les diferents aplicacions d'Odoo es connecten entre si per a gestionar una empresa de manera eficient.
 ## Passos a Seguir
 1. **Instal·lació d'Odoo**: Entra a [www.odoo.com/es_ES/trial](https://www.odoo.com/es_ES/trial) i tria les aplicacions  ventes, comptabilitat, inventari i compres. 
 

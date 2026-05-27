@@ -90,8 +90,8 @@ docker compose exec web odoo -u nom_modul -d nom_base_dades
 # Actualitzar sense interfície web (mode terminal)
 docker compose exec web odoo --no-xmlrpc -u nom_modul -d nom_base_dades
 
-# Exemple real d'actualització de mòdul familia
-docker compose restart web && docker compose exec web odoo -u familia -d provestalens
+# Exemple real d'actualització de mòdul patinatge
+docker compose restart web && docker compose exec web odoo -u patinatge -d morrallaodoo
 
 # Instal·lar múltiples mòduls alhora
 docker compose exec web odoo -i modul1,modul2,modul3 -d nom_base_dades
@@ -145,7 +145,7 @@ cat __manifest__.py | grep -A 10 'depends'"
 docker compose exec db psql -U odoo -d nom_base_dades
 
 # També es pot accedir des del contenidor principal (alternativa)
-docker exec -it odoo_dev-db-1 psql -U odoo -d provestalens
+docker exec -it odoo_dev-db-1 psql -U odoo -d nom_base_dades
 
 # Executar scripts SQL des de fitxer
 cat script.sql | docker compose exec -T db psql -U odoo -d nom_base_dades
@@ -154,7 +154,7 @@ cat script.sql | docker compose exec -T db psql -U odoo -d nom_base_dades
 docker compose exec db psql -U odoo -d nom_base_dades -c "SELECT COUNT(*) FROM res_users;"
 
 # Exemple d'operació SQL directa per corregir sessions POS
-docker compose exec db psql -U odoo -d provestalens -c "
+docker compose exec db psql -U odoo -d nom_base_dades -c "
 UPDATE pos_session 
 SET state = 'closed', stop_at = now() 
 WHERE name = 'POS/00006';"
@@ -497,7 +497,7 @@ echo "✅ Restauració completada!"
 # update_module.sh
 
 MODULE_NAME=$1
-DB_NAME=${2:-"provestalens"}
+DB_NAME=${2:-"morrallaodoo"}
 
 if [ -z "$MODULE_NAME" ]; then
     echo "Ús: $0 nom_modul [nom_bd]"
@@ -545,8 +545,8 @@ fi
 set -e  # Aturar en cas d'error
 
 PROJECT_NAME=${1:-"odoo_dev"}
-DB_NAME=${2:-"provestalens"}
-MODULES=("familia" "event_family_registration" "payment_with_saldo")
+DB_NAME=${2:-"morrallaodoo"}
+MODULES=()
 
 echo "🚀 Iniciant desplegament de $PROJECT_NAME"
 

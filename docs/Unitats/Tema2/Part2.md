@@ -1,7 +1,7 @@
 Desplegament d'Odoo amb Docker
 ==============================
 
-Aquest document cobreix el desplegament complet d’Odoo 16 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, es recomana realitzar l’Exercici pràctic — Desplegament d’Odoo amb Docker Compose, on es pot trobar una proposta pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
+Aquest document cobreix el desplegament complet d’Odoo 19 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, es recomana realitzar l’Exercici pràctic — Desplegament d’Odoo amb Docker Compose, on es pot trobar una proposta pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
 
 ## Introducció
 
@@ -65,7 +65,7 @@ graph TD
 - Xarxa: Connexió estable a Internet per descarregar imatges
 
 **Software:**
-- Ubuntu 20.04 LTS o posterior (24.04 LTS recomanat)
+- Ubuntu 22.04 LTS o posterior (24.04 LTS recomanat)
 - Accés sudo al sistema
 - Ports 8069 i 5432 lliures
 
@@ -122,13 +122,13 @@ odoo_project/
 ### Components de l'arquitectura
 
 **1. Contenidor PostgreSQL:**
-- Imatge oficial `postgres:15`
+- Imatge oficial `postgres:16`
 - Volums persistents per a dades
 - Configuració optimitzada per a Odoo
 - Variables d'entorn per a seguretat
 
 **2. Contenidor Odoo:**
-- Basada en imatge oficial `odoo:16.0`
+- Basada en imatge oficial `odoo:19.0`
 - Personalitzada amb mòduls específics
 - Muntatge de volums per a configuració i dades
 - Comunicació amb PostgreSQL via xarxa Docker
@@ -279,7 +279,7 @@ services:
       start_period: 60s
 
   db:
-    image: postgres:15
+    image: postgres:16
     container_name: odoo_server-db-1
     environment:
       - POSTGRES_DB=postgres
@@ -324,7 +324,7 @@ networks:
 - `healthcheck`: Verificació automàtica de l'estat del servei
 
 **Servei db (PostgreSQL):**
-- `image: postgres:15`: Versió específica i estable
+- `image: postgres:16`: Versió específica i estable
 - `command`: Paràmetres d'optimització específics per a Odoo
 - `PGDATA`: Ubicació personalitzada de les dades
 
@@ -334,18 +334,18 @@ El Dockerfile permet personalitzar la imatge d'Odoo amb les nostres necessitats 
 
 ```dockerfile
 # Dockerfile
-FROM odoo:16.0
+FROM odoo:19.0
 
 # Metadades
 LABEL maintainer="your-email@company.com"
-LABEL description="Odoo 16 personalitzat amb mòduls específics"
+LABEL description="Odoo 19 personalitzat amb mòduls específics"
 LABEL version="1.0"
 
 # Canviar a usuari root per instal·lacions
 USER root
 
 # Variables d'entorn
-ENV ODOO_VERSION=16.0
+ENV ODOO_VERSION=19.0
 ENV ODOO_USER=odoo
 ENV ODOO_EXTRA_ADDONS=/mnt/extra-addons
 
@@ -415,7 +415,7 @@ db_password = myodoo
 db_maxconn = 64
 
 # Configuració d'aplicació
-admin_passwd = SuperAdminPassword2024!
+admin_passwd = SuperAdminPassword2026!
 xmlrpc_port = 8069
 xmlrpc_interface = 0.0.0.0
 longpolling_port = 8072

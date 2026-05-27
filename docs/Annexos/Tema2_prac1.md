@@ -333,15 +333,15 @@ sudo -u odoo -s
 
 # Descarregar Odoo 16 des de GitHub
 cd /opt/odoo
-git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch odoo16
+git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch odoo19
 
 # Crear entorn virtual de Python
-python3 -m venv odoo16-venv
-source /opt/odoo/odoo16-venv/bin/activate
+python3 -m venv odoo19-venv
+source /opt/odoo/odoo19-venv/bin/activate
 
 # Instal·lar dependències Python d'Odoo
 pip install wheel PyPDF2 psycopg2-binary
-pip install -r odoo16/requirements.txt
+pip install -r odoo19/requirements.txt
 
 # Sortir de l'usuari odoo
 exit
@@ -369,7 +369,7 @@ db_port = 5432
 db_user = odoo
 db_password = odoo_password
 logfile = /var/log/odoo/odoo.log
-addons_path = /opt/odoo/odoo16/addons
+addons_path = /opt/odoo/odoo19/addons
 xmlrpc_port = 8069
 ```
 
@@ -400,7 +400,7 @@ SyslogIdentifier=odoo
 PermissionsStartOnly=true
 User=odoo
 Group=odoo
-ExecStart=/opt/odoo/odoo16-venv/bin/python /opt/odoo/odoo16/odoo-bin -c /etc/odoo/odoo.conf
+ExecStart=/opt/odoo/odoo19-venv/bin/python /opt/odoo/odoo19/odoo-bin -c /etc/odoo/odoo.conf
 StandardOutput=journal+console
 KillMode=mixed
 
@@ -534,9 +534,9 @@ Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 l
 # Reinstal·lar dependències
 sudo -u odoo -s
 cd /opt/odoo
-source odoo16-venv/bin/activate
+source odoo19-venv/bin/activate
 pip install --upgrade pip
-pip install -r odoo16/requirements.txt
+pip install -r odoo19/requirements.txt
 ```
 
 ### Problema: Error de base de dades

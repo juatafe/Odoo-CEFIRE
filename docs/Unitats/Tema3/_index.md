@@ -1,4 +1,4 @@
-# Tema 3 · Implantació de sistemes ERP-CRM en una empresa
+# Implantació de sistemes ERP-CRM en una empresa
 
 ```{toctree}
 :maxdepth: 2

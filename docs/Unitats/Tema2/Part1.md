@@ -14,7 +14,7 @@ La posada en pràctica d'aquests continguts es realitza a través de **pràctiqu
 Si estàs buscant les instruccions detallades per instal·lar Odoo, consulta directament les **pràctiques recomanades** associades a aquest apartat.
 :::
 
-Aquest apartat aborda la instal·lació d'**Odoo 16** mitjançant el mètode tradicional en **Ubuntu Server**, analitzant des d'un punt de vista tècnic i conceptual cada fase del procés: des de la preparació del sistema fins a la posada en marxa del servei. Es recomana no utilitzar aquest mètode per a entorns de proves o desenvolupament inicial, ja que és més complex i consumeix més temps que altres alternatives com Docker o Odoo.sh. No obstant això, és ideal per a aquells que volen un control total sobre la configuració, seguretat i rendiment del seu sistema Odoo.
+Aquest apartat aborda la instal·lació d'**Odoo 19** mitjançant el mètode tradicional en **Ubuntu Server**, analitzant des d'un punt de vista tècnic i conceptual cada fase del procés: des de la preparació del sistema fins a la posada en marxa del servei. Es recomana no utilitzar aquest mètode per a entorns de proves o desenvolupament inicial, ja que és més complex i consumeix més temps que altres alternatives com Docker o Odoo.sh. No obstant això, és ideal per a aquells que volen un control total sobre la configuració, seguretat i rendiment del seu sistema Odoo.
 
 ## Introducció
 
@@ -55,11 +55,11 @@ graph TD
 **Hardware mínim:**
 - CPU: 2 cores (2.5 GHz)
 - RAM: 4 GB (8 GB recomanat)
-- Disc: 20 GB d'espai lliure (SSD preferible)
+- Disc: 30 GB d'espai lliure (SSD preferible)
 - Xarxa: Connexió estable a Internet
 
 **Software:**
-- Ubuntu Server 20.04 LTS (o posterior).
+- Ubuntu Server 22.04 LTS (o posterior).
 - Accés sudo al sistema
 - Connexió SSH configurada (si és remot)
 
@@ -77,19 +77,19 @@ Les instruccions d'aquest document han estat provades en Ubuntu 24.04 LTS. En al
 
 La instal·lació tradicional segueix aquests passos principals:
 
-1. **[Preparació del sistema](#1-preparació-del-sistema)**: Actualització i dependències base
-2. **[Usuari de servei](#2-usuari-de-servei)**: Creació d'usuari dedicat per seguretat
-3. **[PostgreSQL](#3-instal·lació-de-postgresql)**: Instal·lació i configuració de la base de dades
-4. **[Odoo](#4-descàrrega-i-configuració-dodoo)**: Descàrrega del codi font i dependències
-5. **[Configuració](#5-configuració-dodoo)**: Fitxers de configuració personalitzats
-6. **[Servei systemd](#6-servei-systemd)**: Automatització i gestió del servei
+1. **[Preparació del sistema](#preparació-del-sistema)**: Actualització i dependències base
+2. **[Usuari de servei](#usuari-de-servei)**: Creació d'usuari dedicat per seguretat
+3. **[PostgreSQL](#instal·lació-de-postgresql)**: Instal·lació i configuració de la base de dades
+4. **[Odoo](#descàrrega-i-configuració-dodoo)**: Descàrrega del codi font i dependències
+5. **[Configuració](#configuració-dodoo)**: Fitxers de configuració personalitzats
+6. **[Servei systemd](#servei-systemd)**: Automatització i gestió del servei
 7. **[Verificació](#checklist-de-verificació-de-la-instal·lació)**: Tests de funcionament
-8. **[Apache (opcional)](#7-configuració-dapache-com-a-reverse-proxy-opcional)**: Reverse proxy per a producció
+8. **[Apache (opcional)](#configuració-dapache-com-a-reverse-proxy-opcional)**: Reverse proxy per a producció
 
 **Temps estimat:** 45-90 minuts (depenent de l'experiència i velocitat de connexió)
 
-(1-preparació-del-sistema)=
-## 1) Preparació del sistema
+(preparació-del-sistema)=
+## Preparació del sistema
 
 ### Actualització completa del sistema
 
@@ -174,8 +174,8 @@ sudo apt-get install -y \
 - **gnupg**: Verificació de signatures GPG
 - **lsb-release**: Informació de la distribució Linux
 
-(2-usuari-de-servei)=
-## 2) Usuari de servei
+(usuari-de-servei)=
+## Usuari de servei
 
 ### Creació de l'usuari dedicat
 
@@ -245,8 +245,8 @@ sudo -u odoo ls -la /opt/odoo
 sudo -u odoo whoami
 ```
 
-(3-instal·lació-de-postgresql)=
-## 3) Instal·lació de PostgreSQL
+(instal·lació-de-postgresql)=
+## Instal·lació de PostgreSQL
 
 ### Instal·lació del servidor de base de dades
 
@@ -327,8 +327,8 @@ sudo systemctl restart postgresql
 sudo systemctl status postgresql
 ```
 
-(4-descàrrega-i-configuració-dodoo)=
-## 4) Descàrrega i configuració d'Odoo
+(descàrrega-i-configuració-dodoo)=
+## Descàrrega i configuració d'Odoo
 
 ### Descàrrega del codi font
 
@@ -336,7 +336,7 @@ sudo systemctl status postgresql
 # Canviar a l'usuari odoo per a la descàrrega
 sudo -u odoo -H bash -c '
     cd /opt/odoo
-    git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch odoo16
+    git clone https://www.github.com/odoo/odoo --depth 1 --branch 19.0 --single-branch odoo19
 '
 
 # Verificar la descàrrega
@@ -349,9 +349,9 @@ sudo -u odoo ls -la /opt/odoo/
 |-----------|--------|
 | `-u odoo -H` | Executa com usuari odoo amb el seu entorn HOME |
 | `--depth 1` | Clonació superficial (només l'última revisió) per estalviar espai |
-| `--branch 16.0` | Especifica la branca de la versió 16.0 d'Odoo |
+| `--branch 19.0` | Especifica la branca de la versió 19.0 d'Odoo |
 | `--single-branch` | Només descarrega la branca especificada |
-| `odoo16` | Nom del directori destí |
+| `odoo19` | Nom del directori destí |
 
 ### Instal·lació de dependències del sistema
 
@@ -415,7 +415,7 @@ sudo -u odoo -H bash -c '
     pip install --upgrade pip wheel setuptools
     
     # Instal·lar dependències d'Odoo
-    pip install -r odoo16/requirements.txt
+    pip install -r odoo19/requirements.txt
     
     deactivate
 '
@@ -435,7 +435,7 @@ Els entorns virtuals Python proporcionen:
 
 **Contingut de requirements.txt:**
 
-El fitxer `/opt/odoo/odoo16/requirements.txt` conté dependències com:
+El fitxer `/opt/odoo/odoo19/requirements.txt` conté dependències com:
 
 ```text
 Babel>=2.6.0               # Internacionalització
@@ -481,8 +481,8 @@ which wkhtmltopdf
 - **Qualitat**: Proporciona millor qualitat que altres biblioteques Python
 - **Compatibilitat**: Versió específica requerida per compatibilitat amb Odoo
 
-(5-configuració-dodoo)=
-## 5) Configuració d'Odoo
+(configuració-dodoo)=
+## Configuració d'Odoo
 
 ### Estructura de directoris
 
@@ -521,12 +521,12 @@ db_user = odoo
 db_password = false
 
 # Configuració de l'aplicació
-admin_passwd = SuperAdminPassword2024!
+admin_passwd = SuperAdminPassword2026!
 xmlrpc_port = 8069
 longpolling_port = 8072
 
 # Rutes i addons
-addons_path = /opt/odoo/odoo16/addons,/opt/odoo/custom-addons
+addons_path = /opt/odoo/odoo19/addons,/opt/odoo/custom-addons
 data_dir = /var/lib/odoo
 
 # Logging
@@ -607,8 +607,8 @@ EOF
 - `create 0640 odoo odoo`: Crear nous logs amb permisos específics
 - `postrotate`: Recarregar el servei després de la rotació
 
-(6-servei-systemd)=
-## 6) Servei systemd
+(servei-systemd)=
+## Servei systemd
 
 ### Creació del fitxer de servei
 
@@ -617,7 +617,7 @@ EOF
 sudo tee /etc/systemd/system/odoo.service > /dev/null <<'EOF'
 [Unit]
 Description=Odoo ERP and CRM
-Documentation=https://www.odoo.com/documentation/16.0/
+Documentation=https://www.odoo.com/documentation/19.0/
 After=network.target postgresql.service
 Wants=postgresql.service
 
@@ -628,7 +628,7 @@ Group=odoo
 WorkingDirectory=/opt/odoo
 
 Environment=PATH="/opt/odoo/odoo-venv/bin:$PATH"
-ExecStart=/opt/odoo/odoo-venv/bin/python /opt/odoo/odoo16/odoo-bin -c /etc/odoo/odoo.conf
+ExecStart=/opt/odoo/odoo-venv/bin/python /opt/odoo/odoo19/odoo-bin -c /etc/odoo/odoo.conf
 
 # Gestió de processos
 Restart=on-failure
@@ -745,7 +745,7 @@ sudo -u postgres psql -c "SELECT version();"  # Versió PostgreSQL
 
 **🐍 Odoo:**
 ```bash
-ls /opt/odoo/odoo16/odoo-bin      # Executable principal d'Odoo
+ls /opt/odoo/odoo19/odoo-bin      # Executable principal d'Odoo
 /opt/odoo/odoo-venv/bin/python --version  # Versió Python de l'entorn virtual
 /opt/odoo/odoo-venv/bin/pip list | grep psycopg2  # Dependències crítiques
 cat /etc/odoo/odoo.conf           # Configuració d'Odoo
@@ -805,7 +805,7 @@ fi
 
 # Test 4: Fitxers d'Odoo
 echo -n "📁 Codi font Odoo: "
-if [ -f "/opt/odoo/odoo16/odoo-bin" ]; then
+if [ -f "/opt/odoo/odoo19/odoo-bin" ]; then
     echo "✅ OK"
 else
     echo "❌ FALLA"
@@ -920,8 +920,8 @@ echo "   - Estat del servei: $(sudo systemctl is-active odoo)"
    - Configurar informació de l'empresa
    - Personalitzar la interfície
 
-(7-configuració-dapache-com-a-reverse-proxy-opcional)=
-## 7) Configuració d'Apache com a reverse proxy (Opcional)
+(configuració-dapache-com-a-reverse-proxy-opcional)=
+## Configuració d'Apache com a reverse proxy (Opcional)
 
 Per a entorns de producció, és altament recomanable utilitzar Apache com a reverse proxy davant d'Odoo. Aquesta configuració proporciona beneficis significatius en seguretat, rendiment i gestió.
 
@@ -993,7 +993,7 @@ sudo systemctl restart apache2
 sudo journalctl -u odoo -f
 
 # Comprovar configuració
-sudo -u odoo /opt/odoo/odoo-venv/bin/python /opt/odoo/odoo16/odoo-bin -c /etc/odoo/odoo.conf --test-enable
+sudo -u odoo /opt/odoo/odoo-venv/bin/python /opt/odoo/odoo19/odoo-bin -c /etc/odoo/odoo.conf --test-enable
 
 # Verificar permisos
 ls -la /etc/odoo/odoo.conf
@@ -1093,19 +1093,19 @@ sudo -u postgres pg_dump odoo_production > /backup/pre-update-$(date +%Y%m%d).sq
 
 # Actualitzar codi
 sudo -u odoo -H bash -c '
-    cd /opt/odoo/odoo16
-    git pull origin 16.0
+    cd /opt/odoo/odoo19
+    git pull origin 19.0
 '
 
 # Actualitzar dependències
 sudo -u odoo -H bash -c '
     source /opt/odoo/odoo-venv/bin/activate
-    pip install --upgrade -r /opt/odoo/odoo16/requirements.txt
+    pip install --upgrade -r /opt/odoo/odoo19/requirements.txt
     deactivate
 '
 
 # Actualitzar base de dades
-sudo -u odoo /opt/odoo/odoo-venv/bin/python /opt/odoo/odoo16/odoo-bin -c /etc/odoo/odoo.conf -u all -d odoo_production --stop-after-init
+sudo -u odoo /opt/odoo/odoo-venv/bin/python /opt/odoo/odoo19/odoo-bin -c /etc/odoo/odoo.conf -u all -d odoo_production --stop-after-init
 
 # Reiniciar servei
 sudo systemctl start odoo

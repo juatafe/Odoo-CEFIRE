@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("./_ext"))
 
 # ──────────────── Projecte ────────────────
 project = "Sistemes de Gestió Empresarial"
-author = "Reina del Carmen Peiró Arnau / Juan Bautista Talens & Alicia González"
+author = "Reina del Carmen Peiró Arnau"
 language = "ca"
 
 # ----- i18n -----
@@ -17,7 +17,7 @@ gettext_compact = False        # manté un .po per fitxer
 # ──────────────── Extensions ────────────────
 extensions = [
     "myst_parser",
-    "sphinx.ext.graphviz",      # 👈 afegeix açò
+    "sphinx.ext.graphviz",
     "sphinx_copybutton",
     "sphinx.ext.imgconverter",
     "sphinx_design",
@@ -163,7 +163,7 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 latex_additional_files = [
-  '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
+#  '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
   '_static/scripts/main.py',
   '_static/scripts/scriptsetupodoo.sh',
@@ -300,7 +300,7 @@ latex_elements = {
 \fancyfoot[C]{\thepage}
 
 % Peu esquerra: autoria
-\fancyfoot[LE,RO]{\scriptsize Juan Bautista Talens \& Alicia González}
+\fancyfoot[LE,RO]{\scriptsize Reina del Carmen Peiró Arnau}
 
 % Peu dreta (alternatiu si vols llicència)
 % \fancyfoot[RE,LO]{\scriptsize CC BY-NC-SA}
@@ -342,32 +342,6 @@ latex_elements = {
 \pagecolor{odoopurple}
 \color{white}
 
-% ───── Fons amb franja inferior clara + logos ─────
-\begin{tikzpicture}[remember picture,overlay]
-
-    % Franja blanca inferior (BLANC PUR)
-    \fill[white]
-    (current page.south west)
-    rectangle ([yshift=3.8cm]current page.south east);
-
-  % Logos institucionals (grans i centrats)
-  \node[
-    anchor=south,
-    yshift=1.9cm
-  ] at (current page.south) {
-    \includegraphics[width=1.3\textwidth]{logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf}
-  };
-
-  % Llicència baix dels logos
-  \node[
-    anchor=south,
-    yshift=0.6cm
-  ] at (current page.south) {
-    {\scriptsize
-    Material docent publicat sota llicència Creative Commons BY-NC-SA}
-  };
-
-\end{tikzpicture}
 
 \vspace{2cm}
 \centering
@@ -379,14 +353,13 @@ latex_elements = {
 
 % ───── Subtítol ─────
 {\Large
-26FP32CF013 – Odoo: entorn, desenvolupament de mòduls i projectes reals
+Odoo: entorn, desenvolupament de mòduls i projectes reals
 \par}
 
 \vfill
 
 % ───── Autoria ─────
-{\Large Juan Bautista Talens\par}
-{\Large Alicia González\par}
+{\Large Reina del Carmen Peiró Arnau\par}
 
 \vspace{1cm}
 
@@ -395,6 +368,7 @@ latex_elements = {
 
 \vspace*{1.2cm}
 
+{\Large Material adaptat del curs SGE dels autors: **Juan Bautista Talens** i **Alicia González** \par}
 
 \end{titlepage}
 

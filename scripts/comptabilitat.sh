@@ -41,14 +41,14 @@ mkdir -p ./dev_addons
 
 # --- PART 1: SERVER-UX ---
 echo "--- Descarregant de server-ux ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/server-ux.git /tmp/server-ux
+git clone --depth 1 --branch 19.0 https://github.com/OCA/server-ux.git /tmp/server-ux
 cp -r /tmp/server-ux/base_technical_features ./dev_addons/
 cp -r /tmp/server-ux/date_range ./dev_addons/
 rm -rf /tmp/server-ux
 
 # --- PART 2: L10N-SPAIN ---
 echo "--- Descarregant de l10n-spain ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/l10n-spain.git /tmp/l10n-spain
+git clone --depth 1 --branch 19.0 https://github.com/OCA/l10n-spain.git /tmp/l10n-spain
 MODULES_SPAIN=(
     "l10n_es_aeat" "l10n_es_aeat_mod111" "l10n_es_aeat_mod115" "l10n_es_aeat_mod123"
     "l10n_es_aeat_mod190" "l10n_es_aeat_mod216" "l10n_es_aeat_mod303" "l10n_es_aeat_mod303_oss"
@@ -63,7 +63,7 @@ rm -rf /tmp/l10n-spain
 
 # --- PART 3: BANK-PAYMENT ---
 echo "--- Descarregant de bank-payment ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/bank-payment.git /tmp/bank-payment
+git clone --depth 1 --branch 19.0 https://github.com/OCA/bank-payment.git /tmp/bank-payment
 MODULES_BANK=(
     "account_banking_mandate"
     "account_banking_pain_base"
@@ -84,37 +84,37 @@ rm -rf /tmp/bank-payment
 
 # --- PART 4: MIS-BUILDER & REPORTING ---
 echo "--- Descarregant MIS Builder i Reporting Engine ---"
-wget -q https://github.com/OCA/mis-builder/archive/refs/heads/16.0.zip -O /tmp/mis.zip
-unzip -q /tmp/mis.zip -d /tmp/ && cp -r /tmp/mis-builder-16.0/mis_builder ./dev_addons/
+wget -q https://github.com/OCA/mis-builder/archive/refs/heads/19.0.zip -O /tmp/mis.zip
+unzip -q /tmp/mis.zip -d /tmp/ && cp -r /tmp/mis-builder-19.0/mis_builder ./dev_addons/
 
-git clone --depth 1 --branch 16.0 https://github.com/OCA/reporting-engine.git /tmp/rep
+git clone --depth 1 --branch 19.0 https://github.com/OCA/reporting-engine.git /tmp/rep
 cp -r /tmp/rep/report_xlsx ./dev_addons/
 cp -r /tmp/rep/report_xml ./dev_addons/
 cp -r /tmp/rep/report_xlsx_helper ./dev_addons/
-rm -rf /tmp/*.zip /tmp/mis-builder-16.0 /tmp/rep
+rm -rf /tmp/*.zip /tmp/mis-builder-19.0 /tmp/rep
 
 
 
 # --- PART 5: REPOS RESTANTS (AFEGIT MÒDUL CRÍTIC) ---
 echo "--- Descarregant eines financeres i reporting ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/account-financial-tools.git /tmp/tools
+git clone --depth 1 --branch 19.0 https://github.com/OCA/account-financial-tools.git /tmp/tools
 cp -r /tmp/tools/account_lock_date_update ./dev_addons/
 cp -r /tmp/tools/account_chart_update ./dev_addons/
 cp -r /tmp/tools/account_asset_management ./dev_addons/
 
-git clone --depth 1 --branch 16.0 https://github.com/OCA/account-financial-reporting.git /tmp/af-rep
+git clone --depth 1 --branch 19.0 https://github.com/OCA/account-financial-reporting.git /tmp/af-rep
 cp -r /tmp/af-rep/account_financial_report ./dev_addons/
 cp -r /tmp/af-rep/account_tax_balance ./dev_addons/
 
-git clone --depth 1 --branch 16.0 https://github.com/OCA/bank-statement-import.git /tmp/bs-imp
+git clone --depth 1 --branch 19.0 https://github.com/OCA/bank-statement-import.git /tmp/bs-imp
 cp -r /tmp/bs-imp/account_statement_import_base ./dev_addons/
 cp -r /tmp/bs-imp/account_statement_import ./dev_addons/
 cp -r /tmp/bs-imp/account_statement_import_base ./dev_addons/account_statement_base
 
-git clone --depth 1 --branch 16.0 https://github.com/OCA/account-payment.git /tmp/acc-pay
+git clone --depth 1 --branch 19.0 https://github.com/OCA/account-payment.git /tmp/acc-pay
 cp -r /tmp/acc-pay/account_due_list ./dev_addons/
 
-git clone --depth 1 --branch 16.0 https://github.com/OCA/account-reconcile.git /tmp/rec
+git clone --depth 1 --branch 19.0 https://github.com/OCA/account-reconcile.git /tmp/rec
 
 cp -r /tmp/rec/account_reconcile_oca ./dev_addons/
 cp -r /tmp/rec/account_mass_reconcile ./dev_addons/
@@ -124,13 +124,13 @@ cp -r /tmp/rec/account_move_reconcile_forbid_cancel ./dev_addons/
 rm -rf /tmp/rec
 
 echo "--- Descarregant credit-control ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/credit-control.git /tmp/credit-control
+git clone --depth 1 --branch 19.0 https://github.com/OCA/credit-control.git /tmp/credit-control
 cp -r /tmp/credit-control/account_credit_control ./dev_addons/
 cp -r /tmp/credit-control/account_financial_risk ./dev_addons/
 rm -rf /tmp/credit-control
 
 echo "--- Descarregant account-financial-tools (importació extractes) ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/account-financial-tools.git /tmp/account-financial-tools
+git clone --depth 1 --branch 19.0 https://github.com/OCA/account-financial-tools.git /tmp/account-financial-tools
 
 cp -r /tmp/account-financial-tools/account_statement_import_base ./dev_addons/
 cp -r /tmp/account-financial-tools/account_statement_import_file ./dev_addons/
@@ -140,7 +140,7 @@ rm -rf /tmp/account-financial-tools
 
 # AQUESTA ÉS LA PEÇA QUE FALTAVA SEGONS EL LOG
 echo "--- Descarregant community-data-files (base_bank_from_iban) ---"
-git clone --depth 1 --branch 16.0 https://github.com/OCA/community-data-files.git /tmp/cdf
+git clone --depth 1 --branch 19.0 https://github.com/OCA/community-data-files.git /tmp/cdf
 cp -r /tmp/cdf/base_bank_from_iban ./dev_addons/
 
 rm -rf /tmp/tools /tmp/af-rep /tmp/bs-imp /tmp/acc-pay /tmp/rec /tmp/cdf

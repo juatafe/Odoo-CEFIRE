@@ -555,7 +555,7 @@ fi
 # Test 3: Mòduls crítics
 CRITICAL_MODULES=("base" "web" "familia")
 for module in "${CRITICAL_MODULES[@]}"; do
-  if curl -s "$BASE_URL/web/database/list" | grep -q "provestalens"; then
+  if curl -s "$BASE_URL/web/database/list" | grep -q "morrallaodoo"; then
     echo "✅ Mòdul $module: OK"
   else
     echo "❌ Mòdul $module: ERROR"

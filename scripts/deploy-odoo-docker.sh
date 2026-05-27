@@ -13,9 +13,9 @@ NC='\033[0m' # No Color
 # Variables de configuració
 PROJECT_NAME="odoo_server"
 PROJECT_DIR=~/odoo_server
-ODOO_DB_NAME="provestalens"
+ODOO_DB_NAME="morrallaodoo"
 ADMIN_EMAIL="admin@empresa.com"
-ADMIN_PASSWORD="AdminPassword2024!"
+ADMIN_PASSWORD="AdminPassword2026!"
 
 # Mòduls personalitzats a instal·lar
 CUSTOM_MODULES=(
@@ -155,7 +155,7 @@ EOF
     # Crear Dockerfile
     log_info "Creant Dockerfile personalitzat..."
     cat > Dockerfile <<'EOF'
-FROM odoo:16.0
+FROM odoo:19.0
 
 USER root
 

@@ -2,15 +2,6 @@
 
 En aquest capítol aprendrem les diferents metodologies per desplegar **Odoo Community**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Explorarem tant la instal·lació tradicional en servidors Linux com les solucions modernes amb contenidors Docker, analitzant els avantatges i inconvenients de cada aproximació.
 
-::: {admonition} Decisió de versió: Odoo 16 vs 19
-:class: note
-Tot i que existeix **Odoo 19**, en aquest vegada utilitzem **Odoo 16** per aprofitar l’ecosistema de mòduls de la comunitat. Les versions més noves encara no ofereixen suport estable per a diversos paquets de comptabilitat (addons comunitaris i integracions) que necessitarem al llarg de les pràctiques.
-
-- Compatibilitat més àmplia amb paquets de la comunitat
-- Integracions provades i documentació consolidada
-- Major estabilitat per a pràctiques i entorns demo
-:::
-
 Odoo és un sistema modular que permet administrar diferents aspectes d'una organització: vendes, compres, inventari, comptabilitat, recursos humans, projectes, etc. El seu desplegament adequat és fonamental per garantir el rendiment, la seguretat i la mantenibilitat del sistema.
 
 **Components clau que estudiarem:**
@@ -32,14 +23,14 @@ Un futur tècnic superior en **Desenvolupament d'Aplicacions Multiplataforma**, 
 
 ### Requisits del sistema
 
-:::{admonition} Requisits mínims de hardware per a Odoo 16
+:::{admonition} Requisits mínims de hardware per a Odoo 19
 :class: note
 Cal tenir en compte que els requisits poden variar segons la mida de l'organització, el nombre d'usuaris i els mòduls utilitzats. A continuació es presenten els requisits mínims i recomanats per a un entorn de proves i un entorn de producció xicoteta-mitjana:
 **Requisits mínims (entorn de proves):**
 - **CPU**: 2 cores (2 GHz)
 - **RAM**: 4 GB
-- **Disc**: 20 GB d'espai lliure
-- **Sistema**: Ubuntu 20.04 LTS o superior
+- **Disc**: de 30 a 40 GB d'espai lliure
+- **Sistema**: Ubuntu 22.04 LTS o superior
 
 **Requisits recomanats (producció xicoteta-mitjana):**
 - **CPU**: 4+ cores (2.5+ GHz)
@@ -248,7 +239,7 @@ graph TD
 5. **Cache (Redis)**: Sessions, cache de consultes, tasques asíncrones
 
 ### Consideracions per a entorns de producció
-En entorns de producció, és fonamental garantir que el sistema sigua segur, rendible, escalable i fàcil de mantenir. A continuació es presenten les consideracions clau per a desplegar Odoo en un entorn de producció:
+En entorns de producció, és fonamental garantir que el sistema siga segur, rendible, escalable i fàcil de mantenir. A continuació es presenten les consideracions clau per a desplegar Odoo en un entorn de producció:
 :::{caution} 
 **Factors clau per a entorns professionals**
 
