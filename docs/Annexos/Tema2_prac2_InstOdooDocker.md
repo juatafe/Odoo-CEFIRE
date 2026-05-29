@@ -1,33 +1,31 @@
-Exercici pràctic 2: Desplegament d'Odoo amb Docker Compose
-==================================================================
-
-**Objectiu:** Aprendre a desplegar **Odoo 16** utilitzant Docker i Docker Compose de manera pràctica i guiada.  
-
-**Durada estimada:** 2-3 hores  
-**Dificultat:** Intermèdia  
-
----
-
+# Desplegament d'Odoo amb Docker Compose
 ## Introducció
-  En l'exercici pràctic opcional s'aborda instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
-  
-  En aquest exercici explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
-  
-  A més de la possibilitat de comparar els dos mètodes, aprendràs a gestionar contenidors, revisar logs i preparar scripts de monitoratge.
+En l'exercici pràctic opcional s'aborda instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
 
----
+En aquest exercici explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
 
-## Què aprendràs
-✅ Instal·lar i configurar Docker i Docker Compose  
-✅ Crear un projecte Odoo amb Docker Compose  
-✅ Gestionar contenidors (iniciar, aturar, monitorar)  
-✅ Personalitzar la configuració d'Odoo  
-✅ Comparar avantatges i inconvenients respecte a la instal·lació manual
+A més de la possibilitat de comparar els dos mètodes, aprendràs a gestionar contenidors, revisar logs i preparar scripts de monitoratge.
 
----
+:::{admonition} Objectius d'aprenentatge
+:class: note
 
-## Requisits previs
+- Instal·lar i configurar Docker i Docker Compose
+- Crear un projecte Odoo amb Docker Compose
+- Gestionar contenidors (iniciar, aturar, monitorar)
+- Personalitzar la configuració d'Odoo
+- Comparar avantatges i inconvenients respecte a la instal·lació manual
 
+L'objectiu general d'esta pràctica és aprendre a desplegar **Odoo 19** utilitzant Docker i Docker Compose de manera pràctica i guiada.
+:::
+
+:::{admonition} Temps estimat i dificultat
+:class: tip
+- **Durada estimada:** 2-3 hores
+- **Dificultat:** Intermèdia
+:::
+
+:::{admonition} Requisits previs
+:class: important
 Per mantindre la coherència amb l'exercici opcional, treballarem sobre el mateix entorn:
   - Màquina virtual Ubuntu Server 24.04 LTS.
   - Si escau, torna a un estat net abans d’instal·lar Odoo manualment:
@@ -38,10 +36,9 @@ Altres requisits tècnics:
   - Accés com a administrador (sudo) a la VM
   - 4 GB de RAM lliures i 10 GB d’espai en disc
   - Connexió a Internet activa
+:::
 
----
-
-## Fase 1: Preparació de l'entorn
+## Fase 1: Preparació de l'entorn de treball
 
 ### Pas 1: Instal·lació de Docker
 ```bash
@@ -108,10 +105,7 @@ config/
 logs/
 ```
 
----
-
 ## Fase 2: Configuració de Docker Compose
-
 ### Pas 4: Crear el fitxer *docker-compose.yml*
 ```bash
 nano docker-compose.yml
@@ -121,7 +115,7 @@ nano docker-compose.yml
 services:
   # Servei de base de dades PostgreSQL
   db:
-    image: postgres:latest
+    image: postgres:16
     container_name: odoo_postgres
     environment:
       - POSTGRES_DB=postgres
@@ -139,7 +133,7 @@ services:
 
   # Servei d'aplicació Odoo
   web:
-    image: odoo:16.0
+    image: odoo:19.0
     container_name: odoo_app
     depends_on:
       db:
@@ -173,8 +167,6 @@ networks:
   default:
     name: odoo_network
 ```
-
----
 
 ### Pas 5: Configuració personalitzada d'Odoo
 ```bash
@@ -212,8 +204,6 @@ limit_time_real = 1200
 without_demo = False
 ```
 
----
-
 ## Fase 3: Desplegament i verificació
 
 ### Pas 6: Iniciar els serveis
@@ -229,17 +219,14 @@ docker compose ps
 ```
 
 **Resultat esperat:**
-```
+```text
 NAME            IMAGE         STATUS                   PORTS
-odoo_app        odoo:16.0     Up (healthy)             0.0.0.0:8069->8069/tcp
-odoo_postgres   postgres:15   Up (healthy)             5432/tcp
+odoo_app        odoo:19.0     Up (healthy)             0.0.0.0:8069->8069/tcp
+odoo_postgres   postgres:16   Up (healthy)             5432/tcp
 ```
 
 ### Pas 8: Accedir a Odoo
-Obre el navegador i ves a:  
-👉 http://localhost:8069
-
----
+Obri el navegador i ves a: 👉 http://localhost:8069
 
 ## Fase 4: Gestió operativa
 
@@ -281,8 +268,6 @@ chmod +x scripts/monitor.sh
 ./scripts/monitor.sh
 ```
 
----
-
 ## Fase 6: Resolució de problemes
 
 🔧 **Problema 1: Els contenidors no s'inicien**
@@ -305,8 +290,6 @@ docker stats
 docker system prune -f
 ```
 
----
-
 ## Recursos addicionals
 
 ```bash
@@ -320,8 +303,6 @@ docker system prune -a # Neteja completa
 📚 **Referències:**
 - [Docker Compose reference](https://docs.docker.com/compose/)
 - [Odoo Docker documentation](https://hub.docker.com/_/odoo)
-
----
 
 ## Mini entrega
 

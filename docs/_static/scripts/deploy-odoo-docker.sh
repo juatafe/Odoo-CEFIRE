@@ -18,7 +18,11 @@ ADMIN_EMAIL="admin@empresa.com"
 ADMIN_PASSWORD="AdminPassword2026!"
 
 # Mòduls personalitzats a instal·lar
-CUSTOM_MODULES=()
+CUSTOM_MODULES=(
+    "familia"
+    "event_family_registration" 
+    "payment_with_saldo"
+)
 
 # Flags de control de fases
 PHASE1_FLAG="$PROJECT_DIR/.phase1_docker_done"
@@ -133,7 +137,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: postgres:16
+    image: postgres:15
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo
@@ -151,7 +155,7 @@ EOF
     # Crear Dockerfile
     log_info "Creant Dockerfile personalitzat..."
     cat > Dockerfile <<'EOF'
-FROM odoo:16.0
+FROM odoo:19.0
 
 USER root
 
@@ -182,7 +186,19 @@ phase2_deploy() {
     
     # Clonar repositoris de mòduls personalitzats
     log_info "Descarregant mòduls personalitzats..."
-
+    
+    if [ ! -d "dev_addons/familia" ]; then
+        git clone https://github.com/ElJust/familia.git dev_addons/familia
+    fi
+    
+    if [ ! -d "dev_addons/event_family_registration" ]; then
+        git clone https://github.com/ElJust/event_family_registration.git dev_addons/event_family_registration
+    fi
+    
+    if [ ! -d "dev_addons/payment_with_saldo" ]; then
+        git clone https://github.com/ElJust/payment_with_saldo.git dev_addons/payment_with_saldo
+    fi
+    
     # Construir i iniciar contenidors
     log_info "Construint imatges Docker..."
     docker compose build

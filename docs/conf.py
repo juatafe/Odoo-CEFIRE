@@ -17,7 +17,7 @@ gettext_compact = False        # manté un .po per fitxer
 # ──────────────── Extensions ────────────────
 extensions = [
     "myst_parser",
-    "sphinx.ext.graphviz",
+    "sphinx.ext.graphviz",      # 👈 afegeix açò
     "sphinx_copybutton",
     "sphinx.ext.imgconverter",
     "sphinx_design",
@@ -28,6 +28,9 @@ extensions = [
 ]
 
 tikz_proc_suite = "ImageMagick" # o "Ghostscript"
+tikz_latex_preamble = r"""
+\usetikzlibrary{shapes.geometric,positioning,calc}
+"""
 # (Opcional però recomanat per a HTML)
 graphviz_output_format = "svg"
 graphviz_dot_args = ["-Gbgcolor=transparent"]
@@ -162,6 +165,7 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
+is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
 latex_additional_files = [
 #  '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
@@ -176,23 +180,26 @@ latex_additional_files = [
 ]
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
-    "extraclassoptions": "twoside,openany",
+    "extraclassoptions": "oneside",
     "geometry": (
         r"\usepackage[paperwidth=7in,paperheight=10in,"
-        r"top=2cm,bottom=2cm,left=2.5cm,right=2cm]{geometry}"
+        r"top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}"
         if is_pdf
-        else r"\usepackage[a4paper,margin=2.5cm]{geometry}"
+        else r"\usepackage[a4paper,margin=2cm]{geometry}"
     ),
-
+    "sphinxsetup": "verbatimwrapslines=true",
     "fontpkg": "",
     "fncychap": "",
-    "maketitle": r"\maketitle",
+    "maketitle": "" if is_paperback else r"\maketitle",
 
     "preamble": r"""
 % ───── Idioma i fonts ─────
 \usepackage{polyglossia}
 \setmainlanguage{catalan}
 
+\makeatletter
+\def\sphinxVerbatimFormatLine#1{\hspace{0pt}#1}
+\makeatother
 
 \usepackage{qrcode}
 \usepackage{attachfile2}
@@ -210,16 +217,6 @@ latex_elements = {
 % ───── TikZ (global) ─────
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,positioning,calc}
-
-
-
-% ───── Forçar que Pygments NO elimine indentació ─────
-\usepackage{fvextra}
-\fvset{
-  obeytabs=true,
-  tabsize=2,
-  gobble=0
-}
 
 % ───── Capítols ─────
 \usepackage{titlesec}
@@ -247,15 +244,8 @@ latex_elements = {
 % ───── Marques de capçalera per a Fancyhdr (Sphinx fix) ─────
 \makeatletter
 
-% Capítol → leftmark
-\renewcommand{\chaptermark}[1]{%
-  \markboth{\chaptername\ \thechapter\ --\ #1}{}%
-}
-
-% Secció → rightmark
-\renewcommand{\sectionmark}[1]{%
-  \markright{#1}%
-}
+% Capítol
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 \makeatother
 
@@ -289,21 +279,12 @@ latex_elements = {
 \fancyhf{} % neteja tot
 
 % ─── Capçaleres ───
-% Pàgines parells (esquerra): Capítol
-\fancyhead[LE]{\small\itshape \leftmark}
-
-% Pàgines senars (dreta): Tema / secció
-\fancyhead[RO]{\small\itshape \rightmark}
+\fancyhead[L]{\small\itshape \leftmark}
 
 % ─── Peu de pàgina ───
 % Número de pàgina al centre
-\fancyfoot[C]{\thepage}
-
-% Peu esquerra: autoria
-\fancyfoot[LE,RO]{\scriptsize Reina del Carmen Peiró Arnau}
-
-% Peu dreta (alternatiu si vols llicència)
-% \fancyfoot[RE,LO]{\scriptsize CC BY-NC-SA}
+\fancyfoot[L]{\small\itshape \leftmark}
+\fancyfoot[R]{\thepage}
 
 % ─── Línies fines (elegant, no escandalós) ───
 \renewcommand{\headrulewidth}{0.4pt}
@@ -368,7 +349,8 @@ Odoo: entorn, desenvolupament de mòduls i projectes reals
 
 \vspace*{1.2cm}
 
-{\Large Material adaptat del curs SGE dels autors: **Juan Bautista Talens** i **Alicia González** \par}
+{\Large Material adaptat del curs SGE dels autors: \par}
+{\Large Juan Bautista Talens i Alicia González \par}
 
 \end{titlepage}
 
@@ -377,10 +359,10 @@ Odoo: entorn, desenvolupament de mòduls i projectes reals
 % \clearpage
 % \pagenumbering{arabic}
 }
-% ───── Annexos: que diga "Annex" i no "Capítol" ─────
+% ───── Annexos: que diga "Exercici pràctic" i no "Capítol" ─────
 \makeatletter
 \g@addto@macro\appendix{%
-  \renewcommand{\chaptername}{Annex}%
+  \renewcommand{\chaptername}{Exercici pràctic}
 }
 \makeatother
 
@@ -477,6 +459,8 @@ Odoo: entorn, desenvolupament de mòduls i projectes reals
 """,
 }
 
+latex_elements["preamble"] = f"\\newif\\ifpaperback\n\\paperback{'true' if is_paperback else 'false'}\n" + latex_elements["preamble"]
+
 # Opció temporal: ocultar l'etiqueta de capítol ("Capítol 1") però
 # mantenir la numeració jeràrquica 1.1, 1.1.1, etc.
 if os.getenv("LATEX_HIDE_CHAPTER_LABEL", "0") == "1":
@@ -488,9 +472,7 @@ if os.getenv("LATEX_HIDE_CHAPTER_LABEL", "0") == "1":
   {}
 
 \\makeatletter
-\\renewcommand{\\chaptermark}[1]{%
-  \\markboth{#1}{}%
-}
+\\renewcommand{\\chaptermark}[1]{\\markboth{#1}{}}
 \\makeatother
 """
 

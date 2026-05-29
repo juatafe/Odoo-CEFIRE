@@ -43,34 +43,10 @@ Aquesta opció és útil si necessites crear, duplicar o eliminar bases de dades
 :::
 :::
 
-### Pantalla inicial “Discussió”
-
-Quan inicies sessió per primera vegada amb l’usuari **Administrador**, Odoo et mostra el mòdul **Discussió**.  
-Aquesta pantalla és la bústia d’entrada de notificacions i missatgeria interna entre usuaris.
-
-```{image} /_static/assets/img/Tema3/discussio.png
-:alt: Pantalla inicial Discussió
-:width: 100%
-:align: center
-```
-En aquesta interfície pots veure:
-
-  - *Bústia d’entrada, Destacat i Historial* → per gestionar els missatges.
-  - *Canals* (com el canal general), on participen diversos usuaris.
-  - *Missatges directes* (com OdooBot o altres usuaris individuals).
-  
-:::{note}
-OdooBot és un usuari virtual que apareix per defecte i que serveix per donar-te missatges d’ajuda, consells o notificacions internes del sistema.
-És útil per rebre recordatoris o proves, però no és un usuari real.
-:::
-A la part central apareixen els missatges rebuts. Si encara no hi ha activitat, la bústia es mostra buida.
-
-
-**Una vegada dins d’Odoo:**  
-Per accedir a la resta d’aplicacions i configuracions, fes clic a la icona dels 9 quadrets (app switcher) situada a la part superior esquerra.
+Per accedir a les aplicacions i configuracions, fes clic a la icona dels 9 quadrets (app switcher) situada a la part superior esquerra.
 Des d’allí veuràs el menú principal amb tots els mòduls disponibles i podràs:
 
-  - Accedir a la configuració de l’empresa **(Configuració > Configuració General > Empreses)**.
+  - Accedir a la configuració de l’empresa **(Configuració > Usuaris i Empreses > Empreses)**.
   - Instal·lar mòduls nous des del menú **Aplicacions**.
   - Gestionar dades bàsiques i paràmetres generals.
 
@@ -113,7 +89,7 @@ En `docker-compose.yml` podem muntar una carpeta local de mòduls:
 
 ```{code-block} yaml
   web:
-    image: odoo:16.0
+    image: odoo:19.0
     volumes:
       - ./extra-addons:/mnt/extra-addons
 ```
@@ -129,9 +105,9 @@ Una vegada tenim la base de dades, cal configurar els paràmetres generals de l�
 
 | **Element** | **Exemple** |
 |-------------|-------------|
-| Nom i logo  | “Ajuntament de Tavernes” amb logotip corporatiu |
+| Nom i logo  | “La Morralla” amb logotip corporatiu |
 | Icona web (favicon) | Arxiu `.ico` per personalitzar la pestanya del navegador |
-| Adreça i dades fiscals | Carrer Major, CIF, telèfon, correu electrònic |
+| Adreça i dades fiscals | Carrer, CIF, telèfon, correu electrònic |
 | Servidor de correu | SMTP per enviar notificacions des d’Odoo |
 | Pla comptable | Mòdul de localització `l10n_es` (PGC2008) descarregable des d’Aplicacions |
 
@@ -139,21 +115,20 @@ Una vegada tenim la base de dades, cal configurar els paràmetres generals de l�
 El mòdul de **localització del país** (en el nostre cas `l10n_es`) és imprescindible per tindre impostos i pla comptable correctes.  
 Sense això, Odoo no estarà preparat per a facturar correctament.
 
-Cal advertir que un **ajuntament no té la mateixa comptabilitat que una empresa**: el seu pla comptable és diferent i pot canviar segons la legislació vigent.  
-Aquesta anàlisi i adaptació requereix una complexitat que s’escapa del propòsit del curs.  
+Cal advertir que **el pla comptable d’una associació musical NO és** exactament igual que el d’una empresa, però s’assembla molt amb algunes adaptacions. A més pot canviar segon la legislació vigent. Aquesta anàlisi i adaptació requereix una complexitat que s’escapa del propòsit del curs.  
 Per tant, treballarem amb el **pla comptable espanyol per a empreses** per simplificar els exemples.
 :::
 
 ---
 ### Creació i reconfiguració del Website
 
-Quan instal·lem el mòdul **Website**, Odoo llança un **assistent inicial** que ens guia per a crear la web de l’empresa. Aquest *wizard* et permet:
+Quan instal·lem el mòdul **Website (Lloc web)**, Odoo llança un **assistent inicial** que ens guia per a crear la web de l’empresa. Aquest *wizard* et permet:
 
 - Seleccionar un **tema visual** (plantilla).  
 - Triar colors i tipografia corporativa.  
 - Generar una primera pàgina editable amb el **Website Builder**.
 
-```{image} /_static/assets/img/Tema3/assitent.png
+```{image} /_static/assets/img/Tema3/assistent.png
 :alt: Assistent de selecció de tema en Website
 :width: 100%
 :align: center
@@ -186,4 +161,4 @@ La reinstal·lació pot provocar pèrdua de dades i només és viable en una bas
 ## Resum i pròxims passos
 En aquest capítol hem vist com accedir a la interfície web d’Odoo, gestionar les bases de dades, activar mòduls i configurar els paràmetres bàsics de l’empresa. També hem explorat com funciona l’assistent de selecció de tema per a la web i com tornar a llançar-lo si cal.  
 
-Ara convidria afegir el servidor de correu a l’entorn Docker d’Odoo. Com que en entorns de desenvolupament no volem fer enviaments reals, utilitzarem **MailHog** com a servidor SMTP de proves.  Així podrem comprovar que Odoo genera els correus correctament i que MailHog els rep i els mostra en la seva interfície web, sense que cap missatge real s’envie fora del nostre entorn de desenvolupament.  A més, si vols automatitzar la instal·lació d’Odoo i la configuració de MailHog, pots realitzar l’exercici pràctic opcional Automatització de la instaŀlació d’Odoo amb Docker per agilitzar el procés en futurs projectes.
+Ara convidria afegir el servidor de correu a l’entorn Docker d’Odoo. Com que en entorns de desenvolupament no volem fer enviaments reals, utilitzarem **MailHog** com a servidor SMTP de proves (Exercici pràctic 3).  Així podrem comprovar que Odoo genera els correus correctament i que MailHog els rep i els mostra en la seva interfície web, sense que cap missatge real s’envie fora del nostre entorn de desenvolupament.  A més, si vols automatitzar la instal·lació d’Odoo i la configuració de MailHog, pots realitzar l’exercici pràctic opcional Automatització de la instaŀlació d’Odoo amb Docker per agilitzar el procés en futurs projectes.

@@ -8,7 +8,7 @@ Instal·lació i configuració d'Odoo
 
 intro
 Part1
-Tema2_prac1
+Tema2_prac1_InstOdooServer
 Part2
-Tema2_prac2
+Tema2_prac2_InstOdooDocker
 ```

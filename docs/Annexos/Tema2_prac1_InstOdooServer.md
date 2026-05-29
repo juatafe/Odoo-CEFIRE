@@ -1,9 +1,5 @@
-Exercici pràctic 1: Instal·lació i configuració d'Odoo en Ubuntu Server
-===============================================================================
-
-## Instal·lació i configuració d'Odoo
-
-### Introducció
+# Instal·lació i configuració d'Odoo en Ubuntu Server
+## Introducció
 
 En aquest exercici pràctic aprendràs a instal·lar i configurar **Odoo**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Odoo és una plataforma modular que permet gestionar diferents aspectes d'una empresa: vendes, compres, inventari, comptabilitat, recursos humans, etc.
 
@@ -14,7 +10,7 @@ Com a futur tècnic superior en Desenvolupament d'Aplicacions Multiplataforma, �
 Al final d'aquesta pràctica hauràs après a:
 
 - **Configurar una màquina virtual** amb Ubuntu Server 24.04 LTS
-- **Instal·lar i configurar un sistema ERP** (Odoo 16) en un entorn Linux
+- **Instal·lar i configurar un sistema ERP** (Odoo 19) en un entorn Linux
 - **Treballar amb la línia d'ordres** de Linux per a tasques d'administració
 - **Configurar xarxes virtuals** per permetre l'accés remot a serveis
 - **Documentar processos tècnics** de manera professional
@@ -282,7 +278,7 @@ sudo apt update && sudo apt upgrade -y
 Això actualitza el sistema amb les últimes correccions de seguretat. En acabar serà un bon moment per crear una snapshot de la MV.
 :::
 
-## Fase 4: Instal·lació d'Odoo 16
+## Fase 4: Instal·lació d'Odoo 19
 
 ### Pas 1: Preparació del sistema
 
@@ -331,9 +327,9 @@ sudo passwd odoo
 # Canviar a l'usuari odoo
 sudo -u odoo -s
 
-# Descarregar Odoo 16 des de GitHub
+# Descarregar Odoo 19 des de GitHub
 cd /opt/odoo
-git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch odoo19
+git clone https://www.github.com/odoo/odoo --depth 1 --branch 19.0 --single-branch odoo19
 
 # Crear entorn virtual de Python
 python3 -m venv odoo19-venv
@@ -498,7 +494,7 @@ Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 l
 :::
 :::{admonition} Recursos addicionals
 :class: note
-- **Documentació oficial d'Odoo**: https://www.odoo.com/documentation/16.0/
+- **Documentació oficial d'Odoo**: https://www.odoo.com/documentation/19.0/
 - **Ubuntu Server Guide**: https://ubuntu.com/server/docs
 - **PostgreSQL Docs**: https://www.postgresql.org/docs/
 - **Consultes**: Fes servir les sessions presencials per resoldre dubtes
