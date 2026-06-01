@@ -1575,7 +1575,7 @@ On la clau primària és la combinació dels quatre camps. La clau aliena `music
 
 
 ### Cardinalitat en relacions ternàries
-En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `agrupaciomusical.convocatoria`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
+En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `agrupaciomusical.participacio`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
 
 | Tipus de Ternària | Triangles Blancs | On posar el `unique(...)`? | Lògica Odoo |
 | --- | --- | --- | --- |
@@ -1832,12 +1832,12 @@ En el nostre cas, la **Convocatòria** té un triangle **blanc** (cardinalitat 1
 A nivell de base de dades, la restricció d'unicitat més estricta per a aquest esquema seria:
 ```python
 _sql_constraints = [
-    ('uniq_convocatoria', 'unique(membre_id, acte_id)', 
-     'Aquest músic ja està inscrit en aquesta convocatòria!')
+    ('uniq_participacio', 'unique(music_id, acte_id)', 
+     'Aquest músic ja està inscrit en aquest acte!')
 ]
 ```
 
-*(Nota: Si usem la tripleta `unique(membre_id, convocatoria_id, acte_id)`, estem sent més permissius, permetent que un músic siga convocat en el mateix cate  amb dos convocatòries diferents, la qual cosa seria una relació M:N:P).* 
+*(Nota: Si usem la tripleta `unique(music_id, instrument_id, acte_id)`, estem sent més permissius, permetent que un músic siga convocat en el mateix cate  amb dos convocatòries diferents, la qual cosa seria una relació M:N:P).* 
 
 3. **Cas d'Exclusivitat Total (1:1:1):** Cada element només pot aparéixer una vegada en tota la taula.
 ```{tikz}
@@ -2587,7 +2587,7 @@ Per això, en Odoo, l'agregació en sentit estricte no es resol "apuntant a una 
 
 **Exemple d'agregació estricta:** si d'eixa `Matrícula` naix una `NOTA`, una `INCIDÈNCIA` o un `JUSTIFICANT`, estos elements no haurien d'apuntar directament ni a `ALUMNE` ni a `MÒDUL`, sinó a la `Matrícula` com a unitat.
 
-En Odoo, això equival a tindre un model com `centre.matricula` o `agrupaciomusical.convocatoria`, i fer que la tercera entitat apunte a eixe model amb un `Many2one`.
+En Odoo, això equival a tindre un model com `centre.matricula` o `agrupaciomusical.participacio`, i fer que la tercera entitat apunte a eixe model amb un `Many2one`.
 
 :::{note}
 **Idea clau**
@@ -2890,7 +2890,7 @@ La 1FN prohibeix els atributs multivalents i els grups repetitius. Tots els valo
 
 #### 2. Odoo i la Segona Forma Normal (2FN)
 La 2FN diu que tots els atributs han de dependre de tota la clau primària, no només d'una part (evita dependències parcials).
-* **Com ho força Odoo:** Les relacions ternàries (M:N:P) es resolen sempre amb un **model associatiu intermedi**. En definir eixe model (com `agrupaciomusical.convocatoria`), Odoo ens obliga a identificar clarament quines dades depenen de la combinació de les tres entitats.
+* **Com ho força Odoo:** Les relacions ternàries (M:N:P) es resolen sempre amb un **model associatiu intermedi**. En definir eixe model (com `agrupaciomusical.participacio`), Odoo ens obliga a identificar clarament quines dades depenen de la combinació de les tres entitats.
 * **Resultat:** Evitem dependències parcials en materialitzar les relacions n-àries com a models propis amb la seua pròpia PK composta funcional (`_sql_constraints`).
 
 #### 3. Odoo i la Tercera Forma Normal (3FN)
@@ -3632,4 +3632,4 @@ Regla ràpida:
 - Primera vegada que poses el mòdul → install
 
 ## Resum del capítol i recomanacions
-En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic 4: Creació d’un mòdul bàsic en Odoo per a la colla](../../Annexos/Tema4_prac6_CrearModul.md) per posar en pràctica aquests conceptes.
+En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per a la colla](../../Annexos/Tema4_prac6_CrearModul.md) per posar en pràctica aquests conceptes.
