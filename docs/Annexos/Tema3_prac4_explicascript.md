@@ -1,5 +1,4 @@
-# Exercici pràctic: Automatització de la instal·lació d’Odoo amb Docker
-
+# Automatització de la instal·lació d’Odoo amb Docker
 ## Introducció
 
 Quan desenvolupem projectes amb **Odoo** és fonamental **mantindre el control sobre el procés d’instal·lació, configuració i actualització**.  Fer-ho manualment cada vegada és lent i propens a errors.  La millor pràctica en entorns professionals és **automatitzar les tasques repetitives** mitjançant scripts.
@@ -29,13 +28,13 @@ crear un **script Bash** que instal·le totes les dependències, genere els fitx
 que es clona automàticament a la línia:
 
 ```bash
-CUSTOM_REPO="odoo-cpa-addons"
-git clone https://github.com/juatafe/$CUSTOM_REPO.git
+CUSTOM_REPO="odoo-morrallaodoo-addons"
+git clone https://github.com/reinapa/$CUSTOM_REPO.git
 ```
 Si tens els teus propis mòduls, substitueix:
 
 ```bash
-juatafe/odoo-cpa-addons
+reinapa/odoo-morrallaodoo-addons
 ```
 
 pel teu repositori, per exemple:
@@ -47,9 +46,8 @@ pel teu repositori, per exemple:
  També pots crear el teu repositori buit a GitHub abans d'executar l’script perquè es clone
  automàticament dins de `dev_addons/`.
 
-
-## Objectiu
-
+:::{admonition} Objectius
+:class: note
 Aprendre a comprendre i executar un **script Bash d’automatització** que:
 
 - Instal·la Docker i les seues dependències.
@@ -58,6 +56,7 @@ Aprendre a comprendre i executar un **script Bash d’automatització** que:
 - Crea la base de dades i instal·la mòduls automàticament.
 - Controla l’estat de cada fase mitjançant fitxers de senyal (`.phase1_docker_done`, etc.).
 
+:::
 
 ## Vista general de l’script
 
@@ -87,12 +86,13 @@ Això és important per a evitar que continue un procés d’instal·lació si a
 ```bash
 PROJECT_DIR=~/odoo_server
 ODOO_PORT=8069
-ODOO_DB_NAME=cpa
+ODOO_DB_NAME=morrallaodoo
 ODOO_DB_USER=admin
 ODOO_DB_PASS='Pa$$w0rd'
 ODOO_MASTER_PASS='Pa$$w0rd'
 ODOO_PG_PORT=5432
 ADDONS_DIR=$PROJECT_DIR/dev_addons
+POSTGRES_VERSION=16
 ```
 
 Aquestes variables determinen on es crearà el projecte i quins ports, noms i contrasenyes es faran servir.  Per exemple, `PROJECT_DIR` defineix el directori base (`~/odoo_server`) i `ODOO_PORT` el port pel qual accedirem a Odoo. També hi ha variables per a la base de dades (`ODOO_DB_NAME`, `ODOO_PG_PORT`) i les carpetes on es guardaran els *addons* o mòduls personalitzats.
@@ -106,10 +106,10 @@ PHASE2_FLAG="$PROJECT_DIR/.phase2_odoo_started"
 INSTALLED_MODULES_FILE="$PROJECT_DIR/.installed_modules"
 
 DEFAULT_MODULES=(web portal contacts sale account event website website_event website_event_sale payment point_of_sale pos_sale pos_hr pos_restaurant crm l10n_es)
-CUSTOM_REPO="odoo-cpa-addons"
+CUSTOM_REPO="odoo-morrallaodoo-addons"
 ```
 
-Aquests fitxers de control serveixen per a indicar quina fase s’ha completat.  L’script és **idempotent**: si el tornes a executar, només farà les parts pendents.  També es defineix una llista de mòduls base i el repositori personalitzat (`odoo-cpa-addons`).
+Aquests fitxers de control serveixen per a indicar quina fase s’ha completat.  L’script és **independent**: si el tornes a executar, només farà les parts pendents.  També es defineix una llista de mòduls base i el repositori personalitzat (`odoo-morrallaodoo-addons`).
 
 
 ## Fase 1 — Instal·lació de Docker i dependències
@@ -118,7 +118,7 @@ Aquesta fase comprova si Docker està instal·lat. Si no, el configura completam
 
 ```bash
 if [ ! -f "$PHASE1_FLAG" ]; then
-    echo "🔧 [FASE 1] Instal·lant Docker i dependències..."
+    echo "[FASE 1] Instal·lant Docker i dependències..."
     sudo apt -y remove docker docker-engine docker.io containerd runc || true
     sudo apt update
     sudo apt install -y ca-certificates curl gnupg lsb-release python3 python3-pip
@@ -173,7 +173,7 @@ Aquest fitxer conté la configuració bàsica d’Odoo (ruta dels addons, base d
 
 ```bash
 cat > Dockerfile <<'EOF'
-FROM odoo:16.0
+FROM odoo:19.0
 USER root
 RUN pip install requests pandas
 COPY ./dev_addons/* /mnt/extra-addons/
@@ -182,7 +182,7 @@ WORKDIR /mnt/extra-addons
 EOF
 ```
 
-Este `Dockerfile` crea una imatge pròpia a partir de `odoo:16.0` i instal·la llibreries addicionals com `requests` o `pandas`.
+Este `Dockerfile` crea una imatge pròpia a partir de `odoo:19.0` i instal·la llibreries addicionals com `requests` o `pandas`.
 
 ### Fitxer `docker-compose.yml`
 
@@ -194,8 +194,10 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db
-      - mailhog
+      db:
+        condition: service_healthy
+      mailhog:
+        condition: service_started 
     ports:
       - "$ODOO_PORT:$ODOO_PORT"
     volumes:
@@ -203,10 +205,19 @@ services:
       - ./dev_addons:/mnt/extra-addons
       - ./log:/var/log/odoo
   db:
-    image: postgres:latest
+    image: postgres:${POSTGRES_VERSION}
     environment:
-      - POSTGRES_USER=odoo
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo
+      - POSTGRES_USER=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: always
   mailhog:
     image: mailhog/mailhog:latest
     ports:
@@ -279,7 +290,7 @@ Quan el procés acabe, tindràs:
 - **MailHog:** [http://localhost:8025](http://localhost:8025)
 - **Usuari:** `admin`
 - **Contrasenya:** `Pa$$w0rd`
-- **Base de dades:** `cpa`
+- **Base de dades:** `morrallaodoo`
 
 Tot queda automatitzat i preparat per treballar.
 

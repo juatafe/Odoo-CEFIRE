@@ -23,9 +23,9 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 :::
 
 ### Requisits previs
-👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `patinatge.inscripcio` tinga almenys una vista tree i una form** per poder provar els permisos. Si el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
+👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `patinatge.inscripcio` tinga almenys una vista list i una form** per poder provar els permisos. Si el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
 
-:::{dropdown} Codi complet de la vista `patinatge_inscripcio_views.xml`
+:::{admonition} Codi complet de la vista `patinatge_inscripcio_views.xml`
 :class-container: tip
 
 ```xml
@@ -33,11 +33,11 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="view_patinatge_inscripcio_tree" model="ir.ui.view">
-        <field name="name">patinatge.inscripcio.tree</field>
+    <record id="view_patinatge_inscripcio_list" model="ir.ui.view">
+        <field name="name">patinatge.inscripcio.list</field>
         <field name="model">patinatge.inscripcio</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="true">
+            <list create="false" edit="true">
                 <field name="reference" string="Ref"/>
                 <field name="nom_patinadora" string="Nom patinadora"/>
                 <field name="data_naixement" string="Data naixement"/>
@@ -54,7 +54,7 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
                     decoration-success="estat == 'acceptada'"
                     decoration-danger="estat == 'rebutjada'"
                     decoration-warning="estat == 'pendent_signatura'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -106,7 +106,7 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
     <record id="action_patinatge_inscripcio" model="ir.actions.act_window">
         <field name="name">Inscripcions</field>
         <field name="res_model">patinatge.inscripcio</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_patinatge_inscripcio_root"
@@ -175,7 +175,7 @@ En cas de dubte, comprova que els usuaris tenen els grups assignats correctament
 :class: note
 Executa psql al servei de base de dades del docker-compose:
 ```bash
-docker compose exec db psql -U odoo -d cpa
+docker compose exec db psql -U odoo -d morrallaodoo
 ```
 
 Ja dins de psql, comprova els usuaris de prova:
@@ -479,7 +479,7 @@ class PatinatgeInscripcio(models.Model):
 
 ::: {admonition} Actualitza i prova
 :class: tip
-- Actualitza el mòdul: `docker compose exec web odoo -u patinatge_inscripcio -d cpa --stop-after-init`  
+- Actualitza el mòdul: `docker compose exec web odoo -u patinatge_inscripcio -d morrallaodoo --stop-after-init`  
 :::
 
 ## 5) Aplicar una record rule: ara sí, seguretat de veritat 🔥

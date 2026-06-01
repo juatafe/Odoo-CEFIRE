@@ -1,27 +1,22 @@
-# Exercici pràctic: Organització i consulta de la informació amb pgAdmin
-
-
+# Organització i consulta de la informació amb pgAdmin
 ## Introducció
 
 En el **Capítol 3** hem automatitzat completament la instal·lació d’Odoo en una màquina virtual mitjançant Docker.  A hores d’ara ja disposem d’un servidor amb tres contenidors principals:
 
 - **Odoo** (aplicació web)  
 - **PostgreSQL** (base de dades)  
-- **MailHog** (servidor de correu de proves) [../../Annexos/Practica_MailHog_Odoo.md]{Annex H}.
+- **MailHog** (servidor de correu de proves).
 
 Ara anem un pas més enllà: aprendrem a **consultar directament la base de dades d’Odoo** utilitzant un client gràfic anomenat **pgAdmin**, i també veurem com identificar les taules i camps on Odoo desa la informació.
 
----
-
-## Objectius
-
+:::{admonition} Objectius
+:class: note
 - Entendre com es connecta Odoo a la seua base de dades PostgreSQL.  
 - Configurar un accés remot **persistent** al contenidor de base de dades.  
 - Instal·lar i configurar **pgAdmin** a la màquina virtual.  
 - Visualitzar taules, dades i usuaris de PostgreSQL.  
 - Comprendre la correspondència entre models d’Odoo i taules SQL.
-
----
+:::
 
 ## Accés a la base de dades amb pgAdmin
 
@@ -30,8 +25,6 @@ Les dades de clients, productes, factures, etc., s’emmagatzemen en **centenars
 
 - **psql** — client de línia d’ordres per a usuaris avançats.  
 - **pgAdmin** — client gràfic multiplataforma amb interfície visual.
-
----
 
 ### Configuració persistent per a la connexió remota
 
@@ -67,8 +60,6 @@ EOF
 fi
 ```
 
----
-
 #### Creació automàtica de la carpeta `db_config`
 
 L’script crea aquesta estructura dins del projecte:
@@ -82,8 +73,6 @@ I genera automàticament dos fitxers si no existeixen:
 
 > 🧠 **Per què és necessari?**  
 > Sense aquesta carpeta externa, els fitxers de configuració estarien dins del contenidor i es perdrien en qualsevol reconstrucció. Amb aquest volum, Docker pot reaplicar la configuració i permet conservar-la entre reinicis.
-
----
 
 #### Modificació del `docker-compose.yml`
 
@@ -144,7 +133,7 @@ Si és la **primera inicialització**, PostgreSQL:
 > Per això sempre és recomanable mantindre `pg_hba.conf` i `postgresql.conf` **fora del contenidor** (a `~/odoo_server/db_config/`).  
 
 
-```{dropdown} 🔧  **Si necessites modificar-los temporalment des de dins del contenidor**, pots seguir aquests passos:
+```{admonition} **Si necessites modificar-los temporalment des de dins del contenidor**, pots seguir aquests passos:
 :icon: gear
 :class-container: tip
 
@@ -204,8 +193,6 @@ Hi ha dues situacions possibles:
   docker compose up -d --force-recreate db
   ```
 
----
-
 ## Instal·lació de pgAdmin en Ubuntu (sense entorn gràfic)
 
 Com que treballem dins d’una **màquina virtual Ubuntu 24.04** sense interfície gràfica, no podem instal·lar la versió d’escriptori de pgAdmin.  En el seu lloc, instal·larem la **versió web (pgAdmin4)**, que es gestiona des del navegador.
@@ -218,8 +205,6 @@ Actualitzem els paquets i instal·lem les dependències necessàries:
 sudo apt update
 sudo apt install -y curl ca-certificates gnupg
 ```
-
----
 
 ### Afegir el repositori oficial de pgAdmin
 
@@ -236,8 +221,6 @@ echo "deb [signed-by=/usr/share/keyrings/pgadmin-keyring.gpg] https://ftp.postgr
 ```
 
 > *Nota:* en Ubuntu 24.04 el nom en clau és **noble**, per això usem aquest valor.
-
----
 
 ### Instal·lar pgAdmin4 en mode servidor
 
@@ -265,7 +248,7 @@ Apache successfully restarted. You can now start using pgAdmin 4 in web mode at 
 ```
 
 
-:::{dropdown}  💾 Espai esgotat en la màquina virtual: com ampliar el disc LVM (Ubuntu)
+:::{admonition}  💾 Espai esgotat en la màquina virtual: com ampliar el disc LVM (Ubuntu)
 :icon: gear
 :class-container: tip
 
@@ -277,8 +260,6 @@ Apache successfully restarted. You can now start using pgAdmin 4 in web mode at 
 
 encara que el disc virtual (.vdi) tinga molts GB disponibles.  
 Això passa perquè **Ubuntu instal·la per defecte amb LVM**, i el volum lògic del sistema (`ubuntu-lv`) només ocupa una part del disc virtual.
-
----
 
 ### Comprovació inicial
 
@@ -296,8 +277,6 @@ Si veus alguna línia com:
 
 vol dir que el volum lògic només té 11 GB encara que el `.vdi` siga més gran (p. ex. 25 GB).
 
----
-
 ### Ampliar el volum lògic per utilitzar tot l’espai del disc
 
 Executa aquestes ordres dins de la màquina virtual:
@@ -309,8 +288,6 @@ sudo resize2fs /dev/ubuntu-vg/ubuntu-lv
 
 - `lvextend` assigna tot l’espai lliure del disc al volum lògic.  
 - `resize2fs` expandeix el sistema de fitxers per aprofitar-lo.
-
----
 
 ### Verifica l’expansió
 
@@ -328,8 +305,6 @@ Ara hauries de veure alguna cosa semblant a:
 
 A partir d’aquest moment el sistema ja disposa de tot l’espai del disc virtual.
 
----
-
 ### En cas de no tindre més espai assignat al disc virtual
 
 Si continues al 100 %, pots **augmentar la mida del `.vdi`** des de VirtualBox:
@@ -338,17 +313,12 @@ Si continues al 100 %, pots **augmentar la mida del `.vdi`** des de VirtualBox:
 2. En **Configuració → Emmagatzematge → Dispositiu SATA → OdooServer-Docker.vdi**, augmenta la mida (p. ex. de 25 GB a 40 GB).  
 3. Torna a iniciar la VM i repeteix els passos anteriors (`lvextend` i `resize2fs`).
 
----
-
 Amb això, el teu Ubuntu aprofitarà tot l’espai disponible i deixarà d’aparéixer l’error `database or disk is full` en pgAdmin4 o altres aplicacions.
 :::
----
 
 ## Accedir a pgAdmin4 des del navegador
 
 Una vegada finalitzada la configuració amb `sudo /usr/pgadmin4/bin/setup-web.sh`, podem obrir pgAdmin4 des del navegador web dins de la màquina virtual (si té entorn gràfic) o des del nostre ordinador amfitrió mitjançant **redirecció de ports**.
-
----
 
 ### 🧭 Cas 1: Xarxa NAT amb redirecció de ports (VirtualBox)
 
@@ -370,8 +340,6 @@ A VirtualBox:
 :align: center
 ```
 
----
-
 ### 🧭 Cas 2: Xarxa pont (bridged)
 
 Si la màquina virtual està en xarxa **bridged (pont)**, simplement accedim directament a la seua IP dins de la xarxa local.
@@ -380,8 +348,6 @@ Si la màquina virtual està en xarxa **bridged (pont)**, simplement accedim dir
 :::bash
 http://192.168.56.10:8080/pgadmin4
 :::
-
----
 
 ### 🔐 Autenticació
 
@@ -392,19 +358,22 @@ Autentica’t amb l’usuari creat durant el procés de configuració (`setup-we
 
 Després d’iniciar sessió, ja podràs afegir una connexió al servidor PostgreSQL del teu entorn Docker (contenidor `db`).
 
----
-
 ### Exemple d’accés des del host
 
 Amb la redirecció de ports configurada com a dalt, des del teu navegador (al teu ordinador host) pots accedir-hi amb:
 
 :::bash
-http://127.0.0.1:8080/pgadmin4
+http://127.0.0.1:8080/
 :::
 
 Això obrirà la interfície web de pgAdmin4, servida per la màquina virtual Ubuntu mitjançant Apache i WSGI.
 
----
+
+```{image} /_static/assets/img/Tema4/pgadminlogin.png
+:alt: pgadminlogin
+:width: 80%
+:align: center
+```
 
 ### Connexió amb el contenidor de PostgreSQL
 
@@ -422,7 +391,7 @@ Una vegada dins de pgAdmin4, creem una nova connexió amb el servidor Docker:
 - **Usuari:** `odoo`  
 - **Contrasenya:** `myodoo` (segons el `docker-compose.yml`).
 
-Amb això, ja podem explorar la base de dades `cpa` creada per Odoo dins del contenidor PostgreSQL.
+Amb això, ja podem explorar la base de dades `morrallaodoo` creada per Odoo dins del contenidor PostgreSQL.
 
 
 ```{image} /_static/assets/img/Tema4/pgadminnuevoconfig.png
@@ -431,7 +400,6 @@ Amb això, ja podem explorar la base de dades `cpa` creada per Odoo dins del con
 :align: center
 ```
 
----
 ### 🧭 Interfície de pgAdmin4
 
 Quan accedim a pgAdmin4, podem vore totes les bases de dades disponibles dins del servidor PostgreSQL.  
@@ -440,12 +408,10 @@ Per defecte, apareixen dues:
 | Nom de la base de dades | Origen | Funció | Pots esborrar-la? |
 |--------------------------|---------|--------|-------------------|
 | **postgres** | Base de dades creada automàticament per PostgreSQL | S’utilitza per a connexions administratives o proves. No conté dades d’Odoo. | ❌ No recomanat |
-| **cpa** | Base de dades creada per Odoo en la instal·lació inicial | Conté totes les taules, esquemes i dades reals del projecte Odoo. | ✅ És la base principal |
+| **morrallaodoo** | Base de dades creada per Odoo en la instal·lació inicial | Conté totes les taules, esquemes i dades reals del projecte Odoo. | ✅ És la base principal |
 
 > ⚠️ **Atenció:** no confongues la base `postgres` amb la base del projecte Odoo.  
-> Totes les dades útils es troben dins de la base **`cpa`**.
-
----
+> Totes les dades útils es troben dins de la base **`morrallaodoo`**.
 
 ### 📊 Panell de control de pgAdmin
 
@@ -475,7 +441,7 @@ Des de la pestanya **Tablero** (Dashboard), pgAdmin mostra informació en temps 
 ### 📋 Exploració de la base de dades d’Odoo
 
 Una vegada connectats, veurem totes les bases de dades disponibles.  
-Seleccionem la que hem creat (per exemple, `cpa`) per explorar-ne les taules:
+Seleccionem la que hem creat (per exemple, `morrallaodoo`) per explorar-ne les taules:
 
 ```{image} /_static/assets/img/Tema4/img4-T4.png
 :alt: img4-T4
@@ -512,8 +478,6 @@ I també **consultar les dades** fent la consulta corresponent:
 
 Així visualitzem, per exemple, els productes registrats a Odoo.
 
----
-
 ### 👥 Gestió d’usuaris de PostgreSQL
 
 També podem veure i modificar els usuaris existents des del menú lateral:
@@ -540,8 +504,6 @@ Des de *Propietats* podem revisar permisos i contrasenyes:
 :align: center
 ```
 
----
-
 ### 🌐 Consulta des del client web d’Odoo
 
 Finalment, recorda que podem accedir a les mateixes dades també des del **client web d’Odoo**, però de manera estructurada i segura, mitjançant les seues vistes i models.
@@ -554,8 +516,6 @@ Odoo segueix el patró **MVC (Model–Vista–Controlador):**
 
 Aquesta arquitectura permet mantenir separats les dades i el disseny de la interfície.
 
----
-
 ## 🧠 Resum
 
 En aquest tema hem aprés a:
@@ -567,8 +527,7 @@ En aquest tema hem aprés a:
 
 Amb tot això, ja pots **analitzar i comprendre les dades internes d’Odoo** tant des del client web com des d’una eina professional com *pgAdmin*.
 
----
-:::{dropdown}  ✅ Configuració recomanada (resum)
+:::{admonition}  ✅ Configuració recomanada (resum)
 :icon: gear
 :class-container: tip 
 

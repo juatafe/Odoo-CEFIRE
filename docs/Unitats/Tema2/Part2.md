@@ -463,7 +463,7 @@ server_wide_modules = base,web
 
 **Pots descarregar l'script complet de desplegament:**
 
-**[deploy-odoo-docker.sh](../../_static/scripts/deploy-odoo-docker.sh)**: Script automatitzat que gestiona tot el procés de desplegament en tres fases:
+**[deploy-odoo-docker.sh](../../_static/scripts/deploy-odoo-docker.sh)**
 
 ```{eval-rst}
 .. only:: latex
@@ -473,7 +473,7 @@ server_wide_modules = base,web
     \noindent\textit{Versió PDF (visors compatibles): }\textattachfile{deploy-odoo-docker.sh}{deploy-odoo-docker.sh}
 ```
 
-
+Script automatitzat que gestiona tot el procés de desplegament en tres fases:
 1. **Fase 1**: Configuració inicial del projecte
 2. **Fase 2**: Descàrrega de mòduls i desplegament dels contenidors
 3. **Fase 3**: Configuració i instal·lació de mòduls personalitzats

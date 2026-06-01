@@ -268,6 +268,6 @@ Recorda que ara no sols cal actualitzar el mòdul perquè els canvis tinguen efe
 :width: 100%
 ``` 
 
-Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina. Si no ho has fet encara convidria realitzar l'exercici[Exercici pràctic: Portal de patinadores per a posar en pràctica tot el que hem vist en aquest capítol](../../Annexos/portalpatinadores.md).
+Amb aquests passos, hem creat un controlador senzill que gestiona una ruta nova en el frontend d’Odoo i retorna una plantilla QWeb personalitzada. Això ens permet mostrar contingut específic als usuaris quan accedeixen a aquesta ruta. Queda clar, per tant, com funciona el frontend en Odoo, QWeb defineix què es mostra, el controlador decideix quan i com, i la ruta connecta l’usuari amb la pàgina. Si no ho has fet encara convidria realitzar l'exercici[Exercici pràctic: Portal de patinadores per a posar en pràctica tot el que hem vist en aquest capítol](../../Annexos/Tema6_prac8_portalcolla.md).
 
  <!-- [Exercici pràctic: Inscripció online d’una patinadora amb signatura](../../Annexos/inscripcioonline.md) i  -->

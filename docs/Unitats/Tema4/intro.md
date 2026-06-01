@@ -38,7 +38,7 @@ Abans de continuar, comprova que:
 8. **Cicle de desenvolupament**: reiniciar, instal·lar i actualitzar mòduls.
 
 :::{tip}
-Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús). De l'ER al model Odoo conté molts conceptes i definicions de base de dades que poden resultar confusos al principi, així que és millor anar pas a pas i veure com es tradueix cada element a la pràctica. Realitza l'exercici pràctic abans de continuar amb el tema de creació de vistes.
+Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús). De l'ER al model Odoo conté molts conceptes i definicions de base de dades que poden resultar confusos al principi, així que és millor anar pas a pas i veure com es tradueix cada element a la pràctica. Realitza l'exercici pràctic 6 abans de continuar amb el tema de creació de vistes.
 :::
 
 ## Què és un mòdul en Odoo?
@@ -47,7 +47,7 @@ Un mòdul d’Odoo és, bàsicament, una carpeta amb una estructura concreta que
 
 Un mòdul és simplement una **carpeta** que conté:
 
-- un fitxer `__manifest__.py` → *el DNI del mòdul*
+- un fitxer `__manifest__.py` → el *DNI* del mòdul
 - un fitxer `__init__.py` → perquè Python sàpiga què carregar
 - carpetes opcionals com:
   - `models/` → les classes i mètodes (Python)
@@ -164,7 +164,7 @@ gestio_alumnes/
 ```
 Quan Odoo executa alguns hooks especials durant la instal·lació d’un mòdul, passa dos objectes importants a les funcions: cr i registry. 
 - `cr`: és el cursor de la base de dades que permet executar consultes SQL directament.
-- `registry`: és el registre d’Odoo que conté informació sobre tots els models i dades carregades en el sistema.Només està disponible després que els models ja han sigut creats, per això sols apareix en `post_init_hook` i `uninstall_hook`.
+- `registry`: és el registre d’Odoo que conté informació sobre tots els models i dades carregades en el sistema. Només està disponible després que els models ja han sigut creats, per això sols apareix en `post_init_hook` i `uninstall_hook`.
 
 ```{caution} Resum dels hooks i els seus paràmetres
 
@@ -291,7 +291,7 @@ def cleanup_before_uninstall(cr, registry):
 Encara que en els nostres exemples **no fem servir directament** l'objecte `registry`, és important saber què és.  
 `registry` és la estructura interna d’Odoo que conté **tots els models carregats** del sistema (contactes, vendes, productes, i també els models del teu mòdul).
 
-Gràcies a `registry`, Odoo pot crear l’objecte `env`, que és el que sí que utilitzarem per treballar amb l’ORM:  
+Gràcies a `registry`, Odoo pot crear l’objecte `env`, que és el que sí que utilitzarem per treballar amb l’ORM (Object-Relational Mapping):  
 ```python
 env = api.Environment(cr, SUPERUSER_ID, {})
 ```
@@ -448,7 +448,7 @@ En el `docker-compose.yml`, afegir la línia `user: "${UID}:${GID}"` al servei d
 ```yaml 
 services:
   web:
-    image: odoo:16.0
+    image: odoo:19.0
     user: "${UID}:${GID}"
     ...
 ```
@@ -550,7 +550,7 @@ Per això, si fas consultes SQL manuals, has de buscar el nom amb guions baixos.
 :::
 
 #### 🧩 I en el nostre cas?
-Si el nostre mòdul es diu `gestio_centre`, el prefix triat és `centre`. Per tant, els models serien:
+Si el nostre mòdul es diu `gestio_alumnes`, el prefix triat és `centre`. Per tant, els models serien:
 - `centre.alumne`
 - `centre.classe`
 - `centre.event`
@@ -1331,32 +1331,32 @@ B = (\underline{a_0, a_1})
     > En Odoo: el cas 1:M se soluciona amb `One2many` + `Many2one` en el model fill (`telèfon_id = Many2one('client')`), no amb un camp text repetit. El cas M:M es modela amb `Many2many` o amb un model intermedi explícit si la relació té atributs propis.
 
 
-Aplicat al nostre exemple de la **Patinadora** (atribut multivalent *telèfon*), la traducció queda exactament igual que el patró anterior:
+Aplicat al nostre exemple de la pràctica 6, amb el model de **Music** (atribut multivalent *telèfon*), la traducció queda exactament igual que el patró anterior:
 
-- **Entitat principal (A):** `patinatge.patinadora` (guarda les dades atòmiques de la patinadora).
-- **Taula/Model del multivalent (B):** `patinatge.patinadora.phone` (una fila per cada telèfon).
-- **Lligam 1:M:** cada telèfon pertany a una única patinadora (`Many2one`) i cada patinadora pot tindre molts telèfons (`One2many`).
+- **Entitat principal (A):** `agrupaciomusical.music` (guarda les dades atòmiques de cada music de la colla).
+- **Taula/Model del multivalent (B):** `agrupaciomusical.music.phone` (una fila per cada telèfon).
+- **Lligam 1:M:** cada telèfon pertany a un únic music (`Many2one`) i cada music pot tindre molts telèfons (`One2many`).
 
 Per això, **no** usem camps `phone1`, `phone2`, etc.; usem un model fill relacionat:
 
 ```python
-class Patinadora(models.Model):
-    _name = 'patinatge.patinadora'
+class Music(models.Model):
+    _name = 'agrupaciomusical.music'
 
     name = fields.Char(string="Nom", required=True)
     phone_ids = fields.One2many(
-        'patinatge.patinadora.phone',
-        'patinadora_id',
+        'agrupaciomusical.music.phone',
+        'music_id',
         string="Telèfons"
     )
 
 
-class PatinadoraPhone(models.Model):
-    _name = 'patinatge.patinadora.phone'
+class MusicPhone(models.Model):
+    _name = 'agrupaciomusical.music.phone'
 
-    patinadora_id = fields.Many2one(
-        'patinatge.patinadora',
-        string="Patinadora",
+    music_id = fields.Many2one(
+        'agrupaciomusical.music',
+        string="Músic",
         required=True,
         ondelete='cascade'
     )
@@ -1364,14 +1364,14 @@ class PatinadoraPhone(models.Model):
 
     _sql_constraints = [
         (
-            'uniq_patinadora_phone',
-            'unique(patinadora_id, phone)',
-            'Este telèfon ja està registrat per a esta patinadora.'
+            'uniq_music_phone',
+            'unique(music_id, phone)',
+            'Este telèfon ja està registrat per a este músic.'
         )
     ]
 ```
 
-### 1.7.4 Traducció d'atributs multivalents compostos
+### Traducció d'atributs multivalents compostos
 
 Quan un atribut és alhora multivalent (té $n$ valors) i compost (es divideix en sub-atributs), la traducció al model relacional segueix el patró de creació d'una taula associada per a mantindre l'atomicitat.
 
@@ -1434,7 +1434,7 @@ B = (\underline{a_0, a_1, a_2, a_3})
 C.Aliena: a_0 \rightarrow A(a_0)
 ```
 
-> **Exemple d'Odoo (Adreces de Patinadores):**  Imaginem que una patinadora pot tindre diverses adreces (multivalent) i que cada adreça es compon de carrer, número i població (compost). En Odoo, no podem crear una llista de camps dins de la mateixa classe; hem de crear un model per a l'entitat principal i un altre per a l'atribut multivalent compost.
+> **Exemple d'Odoo (Adreces de músics):**  Imaginem que un músic pot tindre diverses adreces (multivalent) i que cada adreça es compon de carrer, número i població (compost). En Odoo, no podem crear una llista de camps dins de la mateixa classe; hem de crear un model per a l'entitat principal i un altre per a l'atribut multivalent compost.
 
 
 ```{tikz}
@@ -1468,7 +1468,7 @@ C.Aliena: a_0 \rightarrow A(a_0)
     }
 ]
 %  1. ENTITATS 
-\node[entity] (P) {PATINADORA};
+\node[entity] (P) {MÚSIC};
 \node[multientity, right=3cm of P] (A) {ADREÇA};
 
 %  2. ATRIBUTS COMPOSTOS D'ADREÇA 
@@ -1483,7 +1483,7 @@ C.Aliena: a_0 \rightarrow A(a_0)
 %  3. RELACIÓ 1:N AMB ROMBE BICOLOR 
 \path (P.east) -- (A.west) coordinate[midway] (midrel);
 
-% Triangle blanc cap a PATINADORA (costat 1)
+% Triangle blanc cap a MÚSIC (costat 1)
 \node[t_white, rotate=-180, anchor=lower side] at (midrel) (tr_white) {};
 % Triangle negre cap a ADREÇA (costat n)
 \node[t_black, rotate=0, anchor=lower side] at (midrel) (tr_black) {};
@@ -1503,79 +1503,79 @@ C.Aliena: a_0 \rightarrow A(a_0)
 
 
 En aquest cas, `ADREÇA` és una **entitat dèbil** perquè:
-1. La seua existència depèn completament de `PATINADORA` (no pot haver-hi adreça sense patinadora).
-2. La seua identificació és **composta**: una adreça es distingeix pels seus atributs (carrer, número, població) **dins del context d'una patinadora**.
+1. La seua existència depèn completament de `MÚSIC` (no pot haver-hi adreça sense músic).
+2. La seua identificació és **composta**: una adreça es distingeix pels seus atributs (carrer, número, població) **dins del context d'un músic**.
 
-Per tant, la taula `club_patinadora_adreca` ha de reflectir esta dependència en la base de dades.
+Per tant, la taula `agrupaciomusical_music_adreca` ha de reflectir esta dependència en la base de dades.
 
 ```python
 from odoo import models, fields
 
-class Patinadora(models.Model):
-    _name = 'club.patinadora'
-    _description = 'Patinadora del club'
+class Music(models.Model):
+    _name = 'agrupaciomusical.music'
+    _description = 'Músic de l''agrupació'
 
     name = fields.Char(string="Nom", required=True)
     # Relació One2many per a llistar totes les seues adreces
     adreca_ids = fields.One2many(
-        'club.patinadora.adreca', 
-        'patinadora_id', 
+        'agrupaciomusical.music.adreca', 
+        'music_id', 
         string="Adreces"
     )
 
 
-class PatinadoraAdreca(models.Model):
-    _name = 'club.patinadora.adreca'
-    _description = 'Adreça de la patinadora (entitat dèbil)'
+class MusicAdreca(models.Model):
+    _name = 'agrupaciomusical.music.adreca'
+    _description = 'Adreça del músic (entitat dèbil)'
 
-    # Clau Aliena cap a la patinadora (participació total obligatòria)
-    # ondelete='cascade' garanteix que si s'esborra la patinadora, s'esborren totes les adreces
-    patinadora_id = fields.Many2one(
-        'club.patinadora', 
-        string="Patinadora", 
+    # Clau Aliena cap al músic (participació total obligatòria)
+    # ondelete='cascade' garanteix que si s'esborra el músic, s'esborren totes les adreces
+    music_id = fields.Many2one(
+        'agrupaciomusical.music', 
+        string="Músic", 
         required=True,
         ondelete='cascade'
     )
     
-    # Sub-atributs del compost: identifiquen de manera única l'adreça dins de la patinadora
+    # Sub-atributs del compost: identifiquen de manera única l'adreça dins del músic
     carrer = fields.Char(string="Carrer", required=True)
     numero = fields.Integer(string="Número", required=True)
     poblacio = fields.Char(string="Població", default="Tavernes de la Valldigna", required=True)
 
-    # Restricció de clau composta: la combinació (patinadora_id, carrer, numero, poblacio)
-    # ha de ser única per evitar duplicar la mateixa adreça per a una mateixa patinadora
+    # Restricció de clau composta: la combinació (music_id, carrer, numero, poblacio)
+    # ha de ser única per evitar duplicar la mateixa adreça per a un mateix músic
     _sql_constraints = [
         (
-            'uniq_patinadora_adreca',
-            'unique(patinadora_id, carrer, numero, poblacio)',
-            "Esta adreça ja està registrada per a esta patinadora."
+            'uniq_music_adreca',
+            'unique(music_id, carrer, numero, poblacio)',
+            "Esta adreça ja està registrada per a este músic."
         )
     ]
 ```
 
 **Explicació dels elements clau:**
 
-1. **`required=True` en `patinadora_id`:** Implementa la **participació total** (doble ratlla en ER): una adreça no pot existir sense una patinadora associada. Odoo rebutjarà qualsevol intent de crear una adreça sense patinadora.
+1. **`required=True` en `music_id`:** Implementa la **participació total** (doble ratlla en ER): una adreça no pot existir sense un músic associat. Odoo rebutjarà qualsevol intent de crear una adreça sense músic.
 
-2. **`ondelete='cascade'`:** Implementa la **dependència existencial** (característica de les entitats dèbils): si s'esborra una patinadora, Odoo **automàticament esborrarà** totes les seues adreces. No quedaran adreces orfes.
+2. **`ondelete='cascade'`:** Implementa la **dependència existencial** (característica de les entitats dèbils): si s'esborra un músic, Odoo **automàticament esborrarà** totes les seues adreces. No quedaran adreces orfes.
 
 3. **`_sql_constraints` amb clau composta:** Implementa la **identificació relativa** de l'entitat dèbil. La taula base de dades tindrà una restricció `UNIQUE` que garanteix que:
-   - No es pot repetir la mateixa combinació de `(patinadora_id, carrer, numero, poblacio)`.
-   - Això significa que una patinadora pot tindre múltiples adreces, però cadascuna ha de ser única (no pot haver-hi dues adreces idèntiques per a la mateixa patinadora).
+   - No es pot repetir la mateixa combinació de `(music_id, carrer, numero, poblacio)`.
+   - Això significa que un músic pot tindre múltiples adreces, però cadascuna ha de ser única (no pot haver-hi dues adreces idèntiques per al mateix músic).
 
 **Traducció formal al model relacional:**
 
-L'esquema de la taula `club_patinadora_adreca` queda així:
+L'esquema de la taula `agrupaciomusical_music_adreca` queda així:
 
 ```{math}
-club\_patinadora\_adreca = (\underline{patinadora\_id, carrer, numero, poblacio})
+agrupaciomusical\_music\_adreca = (\underline{music\_id, carrer, numero, poblacio})
 ```
 
-On la clau primària és la combinació dels quatre camps. La clau aliena `patinadora_id` referencia `club_patinadora(id)` i es força en cascada per garantir que no hi ha adreces sense patinadora.
+On la clau primària és la combinació dels quatre camps. La clau aliena `music_id` referencia `agrupaciomusical_music(id)` i es força en cascada per garantir que no hi ha adreces sense músic.
 
 
 ### Cardinalitat en relacions ternàries
-En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `patinatge.participacio`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
+En Odoo, les ternàries s'implementen sempre amb un **model associatiu** (com `agrupaciomusical.convocatoria`). El que defineix la lògica de negoci és la restricció d'unicitat (`_sql_constraints`):
 
 | Tipus de Ternària | Triangles Blancs | On posar el `unique(...)`? | Lògica Odoo |
 | --- | --- | --- | --- |
@@ -1827,17 +1827,17 @@ L'entitat amb triangle blanc ($c_0$) és com la cassola:
 - **Si l'ER no té VNN**, la cassola és opcional (`required=False`). Pots tindre els ingredients preparats ($a_0$, $b_0$), però encara no haver triat on posar-los; per tant, $c_0$ pot ser nul. Açò és **Participació Parcial**.
 :::
 ###### Aplicació al nostre exercici:
-En el nostre cas, el **Grup** té un triangle **blanc** (cardinalitat 1). Això significa que per a una **Patinadora** i un **Entrenament** concrets, només pot haver-hi **un grup** organitzador.
+En el nostre cas, la **Convocatòria** té un triangle **blanc** (cardinalitat 1). Això significa que per a un **Músic** i un **Acte** concrets, només pot haver-hi **una convocatòria** realitzada.
 
 A nivell de base de dades, la restricció d'unicitat més estricta per a aquest esquema seria:
 ```python
 _sql_constraints = [
-    ('uniq_participacio', 'unique(patinadora_id, entrenament_id)', 
-     'Aquesta patinadora ja està inscrita en aquest entrenament!')
+    ('uniq_convocatoria', 'unique(membre_id, acte_id)', 
+     'Aquest músic ja està inscrit en aquesta convocatòria!')
 ]
 ```
 
-*(Nota: Si usem la tripleta `unique(patinadora_id, grup_id, entrenament_id)`, estem sent més permissius, permetent que una xica participe en el mateix entrenament amb dos grups diferents, la qual cosa seria una relació M:N:P).* 
+*(Nota: Si usem la tripleta `unique(membre_id, convocatoria_id, acte_id)`, estem sent més permissius, permetent que un músic siga convocat en el mateix cate  amb dos convocatòries diferents, la qual cosa seria una relació M:N:P).* 
 
 3. **Cas d'Exclusivitat Total (1:1:1):** Cada element només pot aparéixer una vegada en tota la taula.
 ```{tikz}
@@ -2587,7 +2587,7 @@ Per això, en Odoo, l'agregació en sentit estricte no es resol "apuntant a una 
 
 **Exemple d'agregació estricta:** si d'eixa `Matrícula` naix una `NOTA`, una `INCIDÈNCIA` o un `JUSTIFICANT`, estos elements no haurien d'apuntar directament ni a `ALUMNE` ni a `MÒDUL`, sinó a la `Matrícula` com a unitat.
 
-En Odoo, això equival a tindre un model com `centre.matricula` o `patinatge.participacio`, i fer que la tercera entitat apunte a eixe model amb un `Many2one`.
+En Odoo, això equival a tindre un model com `centre.matricula` o `agrupaciomusical.convocatoria`, i fer que la tercera entitat apunte a eixe model amb un `Many2one`.
 
 :::{note}
 **Idea clau**
@@ -2890,7 +2890,7 @@ La 1FN prohibeix els atributs multivalents i els grups repetitius. Tots els valo
 
 #### 2. Odoo i la Segona Forma Normal (2FN)
 La 2FN diu que tots els atributs han de dependre de tota la clau primària, no només d'una part (evita dependències parcials).
-* **Com ho força Odoo:** Les relacions ternàries (M:N:P) es resolen sempre amb un **model associatiu intermedi**. En definir eixe model (com `patinatge.participacio`), Odoo ens obliga a identificar clarament quines dades depenen de la combinació de les tres entitats.
+* **Com ho força Odoo:** Les relacions ternàries (M:N:P) es resolen sempre amb un **model associatiu intermedi**. En definir eixe model (com `agrupaciomusical.convocatoria`), Odoo ens obliga a identificar clarament quines dades depenen de la combinació de les tres entitats.
 * **Resultat:** Evitem dependències parcials en materialitzar les relacions n-àries com a models propis amb la seua pròpia PK composta funcional (`_sql_constraints`).
 
 #### 3. Odoo i la Tercera Forma Normal (3FN)
@@ -3063,7 +3063,7 @@ Dissenyar correctament en Odoo utilitzant **models relacionats + herència** en 
 
 Aquesta secció ha sigut una introducció al disseny de models en Odoo, centrada en com les bones pràctiques de normalització es reflecteixen en la manera com Odoo ens obliga a estructurar les dades. No s'ha de prendre com una guia exhaustiva de totes les tècniques de disseny, sinó com un punt de partida per a entendre per què Odoo funciona com funciona i com aprofitar-ho per a crear models robustos i ben estructurats. 
 
-Abans de realitzar l'exercici pràctic, anem a veure com es creen les vistes i els permisos d'accés, que són els següents passos després de definir els models.
+Abans de realitzar l'exercici pràctic 6, anem a veure com es creen les vistes i els permisos d'accés, que són els següents passos després de definir els models.
 
 ## Crear les vistes
 Les vistes són fitxers XML que defineixen com es mostra la informació a l’usuari. Sense vistes, Odoo no sap com presentar els formularis ni els llistats dels teus models.
@@ -3077,7 +3077,7 @@ Quan instal·les un mòdul amb un model nou (p. ex. `centre.alumne`) i no has cr
 - Genera vistes automàtiques perquè pugues treballar amb el model encara que no hages escrit ni una línia d’XML.
 
 Odoo crea tres elements bàsics:
-- Vista tree (llistat) amb tots els camps visibles.
+- Vista en forma de llistat amb tots els camps visibles.
 - Vista form minimalista amb els camps alineats de dalt a baix.
 - Una acció interna per poder veure dades des de Tècnic → Models → centre.alumne → Veure dades.
 - No crea cap menú ni accés directe, per això no podem veure aquestes vistes des del menú principal, però sí que existeixen i es poden utilitzar.
@@ -3106,19 +3106,19 @@ Així evitem anar a cegues mentre definim models.
 ### 📌 Què són exactament les vistes?
 Les vistes són fitxers XML que definixen:
 - Com es mostra el formulari (form),
-- Com es mostra el llistat (tree),
+- Com es mostra el llistat,
 - Quins camps van junts en un group,
 - Quines pestanyes hi ha,
 - Què és editable i què no,
 - I tota la part visual declarativa (sense CSS).
 
 És el “frontend” d’Odoo, però al seu estil: estructurat, declaratiu i en XML.  
-Com que tenen molta molla (tree, form, search, kanban, calendar, pivot, graph, activity…), treballarem les més importants amb calma. Per ara, farem un exemple bàsic per al model `centre.alumne`.
+Com que tenen molta molla (list, form, search, kanban, calendar, pivot, graph, activity…), treballarem les més importants amb calma. Per ara, farem un exemple bàsic per al model `centre.alumne`.
 
 ### Exemple bàsic de vistes per a `centre.alumne`
-Aquest archiu XML defineix les interfícies d'usuari (vistes) i la navegació per gestionar alumnes dins del sistema Odoo. Utilitza tres tipus de registres: una vista de formulari, una vista d'arbre (llista) i una acció que les vincula.
+Aquest archiu XML defineix les interfícies d'usuari (vistes) i la navegació per gestionar alumnes dins del sistema Odoo. Utilitza tres tipus de registres: una vista de formulari, una vista de llista i una acció que les vincula.
 
-L'usuari fa clic en "Alumnes" → es carrega la **vista d'arbre** → pot fer clic en una fila per accedir a la **vista de formulari** de l'alumne seleccionat.
+L'usuari fa clic en "Alumnes" → es carrega la **vista de llista** → pot fer clic en una fila per accedir a la **vista de formulari** de l'alumne seleccionat.
 
 
 Fitxer: `views/alumne_view.xml`
@@ -3141,22 +3141,22 @@ Fitxer: `views/alumne_view.xml`
         </field>
     </record>
 
-    <record id="centre_alumne_tree" model="ir.ui.view">
-        <field name="name">centre.alumne.tree</field>
+    <record id="centre_alumne_list" model="ir.ui.view">
+        <field name="name">centre.alumne.list</field>
         <field name="model">centre.alumne</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="edat"/>
                 <field name="curs"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="centre_alumne_action" model="ir.actions.act_window">
         <field name="name">Alumnes</field>
         <field name="res_model">centre.alumne</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="centre_menu_root" name="Centre"/>
@@ -3175,16 +3175,16 @@ Fitxer: `views/alumne_view.xml`
     - `<group>`: Agrupa els camps de forma visual
     - `<field>`: Cada camp representa una propietat de l'alumne (nom, edat, curs)
 
-#### **Vista d'Arbre** (`centre_alumne_tree`)
+#### **Vista de Llista** (`centre_alumne_list`)
 - **Funció**: Mostra una llista de tots els alumnes en format taula
 - **Estructura**:
-    - `<tree>`: Defineix la llista
+    - `<list>`: Defineix la llista
     - `<field>`: Cada camp es converteix en una columna de la taula
 
 #### **Acció de Finestra** (`centre_alumne_action`)
 - **Funció**: Vincula les vistes anteriors i defineix el comportament quan s'accedeix
 - **Propietats clau**:
-    - `view_mode`: Especifica l'ordre de visualització (`tree` primer, després `form`)
+    - `view_mode`: Especifica l'ordre de visualització (`list` primer, després `form`)
     - `res_model`: Indica el model que es gestiona
 
 #### **Elements de Menú**
@@ -3272,12 +3272,10 @@ Fitxer: `security/security.xml`
 <odoo>
   <record id="group_professorat" model="res.groups">
     <field name="name">Professorat</field>
-    <field name="category_id" ref="base.module_category_tools"/>
   </record>
 
   <record id="group_alumnat" model="res.groups">
-    <field name="name">Alumnat</field>
-    <field name="category_id" ref="base.module_category_tools"/>
+    <field name="name">Alumnat</field>    
   </record>
 </odoo>
 ```
@@ -3313,18 +3311,16 @@ Fitxer: `security/security.xml`
     <!-- Grup per al professorat -->
     <record id="group_professorat" model="res.groups">
         <field name="name">Professorat</field>
-        <field name="category_id" ref="base.module_category_tools"/>
     </record>
 
     <!-- Grup per a l'alumnat -->
     <record id="group_alumnat" model="res.groups">
         <field name="name">Alumnat</field>
-        <field name="category_id" ref="base.module_category_tools"/>
     </record>
 </odoo>
 ```
 
-Cada grup tiene un `id` (ací: `group_professorat`, `group_alumnat`) que después usem en l'atribut `groups` de les vistes.
+Cada grup té un `id` (ací: `group_professorat`, `group_alumnat`) que después usem en l'atribut `groups` de les vistes.
 
 ### Exemple complet amb `groups` en vistes
 
@@ -3352,44 +3348,53 @@ Fitxer: `views/alumne_view.xml`
                     <!-- Secció de botons (footer) -->
                     <footer>
                         <!-- Botó d'acció reservat NOMÉS a Professorat -->
-                        <button name="action_calcular_nota" type="object" string="Calcular nota"
-                                        class="oe_highlight"
-                                        groups="gestio_alumnes.group_professorat"/>
+                        <button 
+                            name="action_calcular_nota" 
+                            type="object" 
+                            string="Calcular nota"
+                            class="oe_highlight"
+                            groups="gestio_alumnes.group_professorat"/>
                         
                         <!-- Botó visible per a Alumnat -->
-                        <button name="action_solicitar_tutoria" type="object" string="Solicitar tutoría"
-                                        groups="gestio_alumnes.group_alumnat"/>
+                        <button 
+                            name="action_solicitar_tutoria" 
+                            type="object" 
+                            string="Solicitar tutoría"
+                            groups="gestio_alumnes.group_alumnat"/>
                     </footer>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Vista d'arbre (llistat) amb columnes restringides -->
-    <record id="centre_alumne_tree" model="ir.ui.view">
-        <field name="name">centre.alumne.tree</field>
+    <!-- Vista de llista amb columnes restringides -->
+    <record id="centre_alumne_list" model="ir.ui.view">
+        <field name="name">centre.alumne.list</field>
         <field name="model">centre.alumne</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="edat"/>
                 <field name="curs"/>
                 <!-- Columna de notes visible només per Professorat -->
                 <field name="nota" groups="gestio_alumnes.group_professorat"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <!-- Menú visible només per a Professorat -->
     <menuitem id="centre_menu_root" name="Centre"/>
-    <menuitem id="centre_menu_alumnes" parent="centre_menu_root"
-                        action="centre_alumne_action" name="Alumnes"
-                        groups="gestio_alumnes.group_professorat"/>
+    <menuitem id="centre_menu_alumnes" 
+        parent="centre_menu_root"
+        action="centre_alumne_action" name="Alumnes"
+        groups="gestio_alumnes.group_professorat"/>
     
     <!-- Menú alt per a Alumnat (accés a data pública) -->
-    <menuitem id="centre_menu_alumnes_alumnat" parent="centre_menu_root"
-                        action="centre_alumne_action_alumnat" name="Els meus dades"
-                        groups="gestio_alumnes.group_alumnat"/>
+    <menuitem id="centre_menu_alumnes_alumnat" 
+        parent="centre_menu_root"
+        action="centre_alumne_action_alumnat" 
+        name="Els meus dades"
+        groups="gestio_alumnes.group_alumnat"/>
 </odoo>
 ```
 
@@ -3399,7 +3404,7 @@ Fitxer: `views/alumne_view.xml`
 | --- | --- |
 | `<field name="expedient" groups="gestio_alumnes.group_professorat"/>` | El camp "expedient" només apareix en el formulari si l'usuari pertany al grup `group_professorat`. Els altres usuaris no el veuen. |
 | `<button ... groups="gestio_alumnes.group_professorat"/>` | El botó "Calcular nota" només es mostra per a Professorat. Els altres grups no veuran eixe botó en el footer. |
-| `<field name="nota" groups="gestio_alumnes.group_alumnat"/>` | La columna "nota" a la taula (tree) apareix només si l'usuari pertany a `group_alumnat`. |
+| `<field name="nota" groups="gestio_alumnes.group_alumnat"/>` | La columna "nota" a la taula (list) apareix només si l'usuari pertany a `group_alumnat`. |
 | `<menuitem ... groups="gestio_alumnes.group_professorat"/>` | El menú "Alumnes" es mostra només als usuaris del grup Professorat. Els altres no el veuran en el menú principal. |
 
 ### Múltiples grups (OR lògic)
@@ -3424,7 +3429,7 @@ Fitxer: `__manifest__.py`
 ```python
 {
         'name': "Gestió d'Alumnes",
-        'version': '16.0.1.0.0',
+        'version': '19.0.1.0.0',
         'depends': ['base'],
         'data': [
                 # Seguretat (permisos i grups): s'ha de carregar PRIMER
@@ -3627,4 +3632,4 @@ Regla ràpida:
 - Primera vegada que poses el mòdul → install
 
 ## Resum del capítol i recomanacions
-En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge](../../Annexos/crearmodul.md) per posar en pràctica aquests conceptes.
+En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic 4: Creació d’un mòdul bàsic en Odoo per a la colla](../../Annexos/Tema4_prac6_CrearModul.md) per posar en pràctica aquests conceptes.

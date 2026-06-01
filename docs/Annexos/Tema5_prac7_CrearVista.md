@@ -10,7 +10,7 @@ Este exercici és la continuació directa de l’anterior. L’objectiu d’aque
 L’alumnat haurà de:
 - Crear accions de finestra,
 - Crear menús i submenús,
-- Definir vistes *tree* i *form* personalitzades, i comprovar que Odoo utilitza aquestes vistes en lloc de les automàtiques.
+- Definir vistes *list* i *form* personalitzades, i comprovar que Odoo utilitza aquestes vistes en lloc de les automàtiques.
 
 👉 No s’introdueixen conceptes nous: **només es practica i es consolida** el que ja s’ha vist.
 
@@ -50,7 +50,7 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
 
 - Acció:
   - Model: `patinatge.grup`
-  - Vistes: `tree,form`
+  - Vistes: `list,form`
 - Submenú:
   - Nom: **Grups**
   - Penjat del menú **Patinatge**
@@ -59,7 +59,7 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
 <record id="action_patinatge_grups" model="ir.actions.act_window">
     <field name="name">Grups</field>
     <field name="res_model">patinatge.grup</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">list,form</field>
 </record>
 
 <menuitem id="menu_patinatge_grups"
@@ -74,7 +74,7 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
 
 - Acció:
   - Model: `patinatge.entrenament`
-  - Vistes: `tree,form`
+  - Vistes: `list,form`
 - Submenú:
   - Nom: **Entrenaments**
   - Penjat del menú **Patinatge**
@@ -83,7 +83,7 @@ En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra 
 <record id="action_patinatge_entrenaments" model="ir.actions.act_window">
     <field name="name">Entrenaments</field>
     <field name="res_model">patinatge.entrenament</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">list,form</field>
 </record>
 
 <menuitem id="menu_patinatge_entrenaments"
@@ -109,19 +109,19 @@ Amb les dues incorporacions anteriors, el fitxer complet queda així:
     <record id="action_patinatge_patinadores" model="ir.actions.act_window">
         <field name="name">Patinadores</field>
         <field name="res_model">patinatge.patinadora</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_patinatge_grups" model="ir.actions.act_window">
         <field name="name">Grups</field>
         <field name="res_model">patinatge.grup</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_patinatge_entrenaments" model="ir.actions.act_window">
         <field name="name">Entrenaments</field>
         <field name="res_model">patinatge.entrenament</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú principal -->
@@ -157,9 +157,9 @@ Crea un fitxer nou dins de la carpeta `views/`:
 patinatge_grup_views.xml
 ```
 
-### 4.1 Vista de llistat (tree) de Grups
+### 4.1 Vista de llistat (list) de Grups
 
-La vista *tree* ha de mostrar com a mínim:
+La vista *list* ha de mostrar com a mínim:
 - `name`
 - `modalitat`
 - `categoria`
@@ -178,7 +178,7 @@ El formulari ha d’estar ben organitzat:
 
 ### 👥 Resultat final – model Grup
 
-Vista de llistat (*tree*) de Grups:
+Vista de llistat (*list*) de Grups:
 ```{image} /_static/assets/img/Tema6/vista-grups.png
 :alt: Vista Grups
 :class: img-fluid
@@ -204,9 +204,9 @@ Crea un fitxer nou dins de `views/`:
 patinatge_entrenament_views.xml
 ```
 
-### 5.1 Vista de llistat (tree) d’Entrenaments
+### 5.1 Vista de llistat (list) d’Entrenaments
 
-La vista *tree* ha de mostrar:
+La vista *list* ha de mostrar:
 - `name`
 - `data`
 - `duracio`
@@ -228,7 +228,7 @@ No hi ha cap camp `patinadores_ids` al model `patinatge.entrenament`. La relaci�
 
 ### 🏋️ Resultat final – model Entrenament
 
-Vista de llistat (*tree*) d’Entrenaments:
+Vista de llistat (*list*) d’Entrenaments:
 ```{image} /_static/assets/img/Tema6/vista-entrenaments.png
 :alt: Vista Entrenaments
 :class: img-fluid
@@ -267,7 +267,7 @@ Com que s’han creat fitxers XML nous, cal afegir-los al `__manifest__.py`:
 Abans de donar l’activitat per bona, comprova que:
 
 - Apareixen els menús **Patinadores**, **Grups** i **Entrenaments**.
-- Cada menú obri la seua vista *tree* personalitzada.
+- Cada menú obri la seua vista *list* personalitzada.
 - En crear o obrir un registre es mostra la vista *form* definida.
 - Odoo **no utilitza vistes automàtiques**.
 
@@ -284,8 +284,8 @@ Cal entregar:
 - El mòdul `patinatge` complet en format `.zip`,
 - Un PDF amb:
   - Captures de pantalla de:
-    - vista *tree* i *form* de **Grups**,
-    - vista *tree* i *form* d’**Entrenaments**,
+    - vista *list* i *form* de **Grups**,
+    - vista *list* i *form* d’**Entrenaments**,
   - Una breu explicació del treball realitzat, problemes trobats i solucions implementades.
 
 ---

@@ -33,7 +33,7 @@ pdf: sync-static
 	-cd $(BUILDDIR)/latex && latexmk -pdf -xelatex -f -interaction=nonstopmode *.tex
 	@echo "-------------------------------------------------------"
 	@echo "Procés finalitzat. Revisa el PDF a:"
-	@echo "$(BUILDDIR)/latex/Odoo-CEFIRE.pdf"
+	@echo "$(BUILDDIR)/latex/SGE-Morralla Odoo.pdf"
 	@echo "-------------------------------------------------------"
 
 serve: html

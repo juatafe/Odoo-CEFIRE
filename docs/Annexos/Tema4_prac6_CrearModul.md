@@ -1,6 +1,4 @@
-Exercici pràctic: Creació d’un mòdul bàsic en Odoo per al Club de Patinatge
-===============================================================================
-
+# Creació d’un mòdul bàsic en Odoo per la colla de Dolçaines i tabals 'La Morralla'
 ## Objectiu de la pràctica
 
 Aquesta pràctica té com a objectiu crear un mòdul senzill d’Odoo utilitzant els coneixements vistos fins ara. El mòdul gestionarà la informació bàsica d’un club de patinatge, incloent patinadores, grups i entrenaments. Amb aquest exercici aprendrem a:

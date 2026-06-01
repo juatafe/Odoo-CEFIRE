@@ -248,4 +248,4 @@ I qui no controla els permisos… després plora 😄
 
 
 ## Resum i pròxims passos
-En aquest capítol hem après a crear grups d’usuaris, assignar permisos reals sobre models amb `ir.model.access.csv`, diferenciar entre permisos de servidor i visibilitat en les vistes, i aplicar record rules per limitar quins registres veu cada grup. Si no ho has fet encara, convidria realitzar [l'Exercici pràctic 10: Permisos i rols en Odoo per al Club de Patinatge](../../Annexos/permisosrols.md), on aplicarem aquests conceptes per a configurar els permisos dels diferents rols del club de patinatge. 
+En aquest capítol hem après a crear grups d’usuaris, assignar permisos reals sobre models amb `ir.model.access.csv`, diferenciar entre permisos de servidor i visibilitat en les vistes, i aplicar record rules per limitar quins registres veu cada grup. Si no ho has fet encara, convidria realitzar [l'Exercici pràctic 10: Permisos i rols en Odoo per al Club de Patinatge](../../Annexos/Tema7_prac10_permisosrols.md), on aplicarem aquests conceptes per a configurar els permisos dels diferents rols del club de patinatge. 

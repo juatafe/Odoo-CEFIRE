@@ -774,92 +774,92 @@ curl -s http://localhost:8069/web/database/selector | grep -i odoo  # Pàgina d'
 #!/bin/bash
 # test-odoo-installation.sh - Script de verificació automàtica
 
-echo "🔍 Verificant instal·lació d'Odoo..."
+echo "Verificant instal·lació d'Odoo..."
 
 # Test 1: Usuari i permisos
-echo -n "👤 Usuari odoo: "
+echo -n "Usuari odoo: "
 if id odoo >/dev/null 2>&1; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 2: PostgreSQL
-echo -n "🐘 PostgreSQL: "
+echo -n "PostgreSQL: "
 if sudo systemctl is-active --quiet postgresql; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 3: Usuari PostgreSQL
-echo -n "🔑 Usuari PostgreSQL odoo: "
+echo -n "Usuari PostgreSQL odoo: "
 if sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='odoo'" | grep -q 1; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 4: Fitxers d'Odoo
-echo -n "📁 Codi font Odoo: "
+echo -n "Codi font Odoo: "
 if [ -f "/opt/odoo/odoo19/odoo-bin" ]; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 5: Entorn virtual
-echo -n "🐍 Entorn virtual Python: "
+echo -n "Entorn virtual Python: "
 if [ -f "/opt/odoo/odoo-venv/bin/python" ]; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 6: Dependències Python
-echo -n "📦 Dependències Python: "
+echo -n "Dependències Python: "
 if /opt/odoo/odoo-venv/bin/pip show psycopg2 >/dev/null 2>&1; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 7: Configuració
 echo -n " Fitxer de configuració: "
 if [ -f "/etc/odoo/odoo.conf" ] && [ -r "/etc/odoo/odoo.conf" ]; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 8: Servei systemd
-echo -n "🔧 Servei systemd: "
+echo -n "Servei systemd: "
 if systemctl is-enabled --quiet odoo; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 9: Servei actiu
-echo -n "🚀 Servei en execució: "
+echo -n "Servei en execució: "
 if sudo systemctl is-active --quiet odoo; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA - Intentant iniciar..."
+    echo "FALLA - Intentant iniciar..."
     sudo systemctl start odoo
     sleep 5
     if sudo systemctl is_active --quiet odoo; then
-        echo "✅ OK (iniciat)"
+        echo "OK (iniciat)"
     else
-        echo "❌ FALLA"
+        echo "FALLA"
         echo "Logs del servei:"
         sudo journalctl -u odoo --no-pager -n 10
         exit 1
@@ -867,28 +867,28 @@ else
 fi
 
 # Test 10: Port accessible
-echo -n "🌐 Port 8069 accessible: "
+echo -n "Port 8069 accessible: "
 if ss -tlnp | grep -q ":8069"; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 # Test 11: Resposta HTTP
-echo -n "📡 Resposta HTTP: "
+echo -n "Resposta HTTP: "
 if curl -s -f http://localhost:8069/web/database/selector >/dev/null; then
-    echo "✅ OK"
+    echo "OK"
 else
-    echo "❌ FALLA"
+    echo "FALLA"
     exit 1
 fi
 
 echo ""
-echo "🎉 Instal·lació verificada correctament!"
-echo "🔗 Accés: http://$(hostname -I | awk '{print $1}'):8069"
+echo "Instal·lació verificada correctament!"
+echo "Accés: http://$(hostname -I | awk '{print $1}'):8069"
 echo ""
-echo "📋 Informació del sistema:"
+echo "Informació del sistema:"
 echo "   - Usuari Odoo: $(id odoo)"
 echo "   - Versió PostgreSQL: $(sudo -u postgres psql -tAc 'SELECT version()' | head -1)"
 echo "   - Versió Python: $(/opt/odoo/odoo-venv/bin/python --version)"
@@ -925,7 +925,7 @@ echo "   - Estat del servei: $(sudo systemctl is-active odoo)"
 
 Per a entorns de producció, és altament recomanable utilitzar Apache com a reverse proxy davant d'Odoo. Aquesta configuració proporciona beneficis significatius en seguretat, rendiment i gestió.
 
-:::{admonition} 📖 Configuració Apache detallada
+:::{admonition} Configuració Apache detallada
 :class: note
 La configuració completa d'Apache com a reverse proxy és un tema extens que inclou:
 
@@ -937,7 +937,7 @@ La configuració completa d'Apache com a reverse proxy és un tema extens que in
 - Monitoratge i logging avançat
 - Resolució de problemes habituals
 
-% **[📋 Documentació completa: Apache com a Reverse Proxy per a Odoo](../../Annexos/Apache_ReverseProxy)**
+% **[Documentació completa: Apache com a Reverse Proxy per a Odoo](../../Annexos/Apache_ReverseProxy)**
 :::
 
 ### Avantatges del reverse proxy

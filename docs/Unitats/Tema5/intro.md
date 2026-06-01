@@ -34,7 +34,7 @@ Per a crear menús i vistes personalitzades, cal crear un fitxer XML nou dins de
     <record id="action_patinatge_patinadores" model="ir.actions.act_window">
         <field name="name">Patinadores</field>
         <field name="res_model">patinatge.patinadora</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú principal -->
@@ -70,7 +70,7 @@ Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis
 :align: center
 ```
 
-Al fer clic al menú "Patinatge", Odoo ens mostra la vista de llistat (tree view) per defecte del model `patinatge.patinadora`, encara que sense cap registre, ja que no n’hem creat cap.
+Al fer clic al menú "Patinatge", Odoo ens mostra la vista de llistat (list view) per defecte del model `patinatge.patinadora`, encara que sense cap registre, ja que no n’hem creat cap.
 
 ```{image} /_static/assets/img/Tema6/vista-Patinadores.png
 :alt: Vista Patinadores
@@ -90,7 +90,7 @@ Les vistes que Odoo genera automàticament a partir del model són funcionals, p
 
 ## L’acció `ir.actions.act_window`: què fa i per què és necessària 
 
-Ara anem al detall què és `ir.actions.act_window` i com funciona. Aquest registre defineix una acció que obri una finestra amb una vista específica del model `patinatge.patinadora`. El camp `view_mode` indica que primer es mostrarà la vista de llistat (tree) i després la vista de formulari (form) quan es seleccione un registre. Aquesta acció s’associa al submenú "Patinadores" mitjançant l’atribut `action`, permetent als usuaris accedir fàcilment a la gestió de patinadores des del menú principal del mòdul.    
+Ara anem al detall què és `ir.actions.act_window` i com funciona. Aquest registre defineix una acció que obri una finestra amb una vista específica del model `patinatge.patinadora`. El camp `view_mode` indica que primer es mostrarà la vista de llistat (list) i després la vista de formulari (form) quan es seleccione un registre. Aquesta acció s’associa al submenú "Patinadores" mitjançant l’atribut `action`, permetent als usuaris accedir fàcilment a la gestió de patinadores des del menú principal del mòdul.    
 
 En Odoo, els **menús no executen accions per si mateixos**.  
 Un menú és només un punt d’entrada: allò que realment fa que s’obriga una pantalla és una **acció**.
@@ -103,7 +103,7 @@ En el nostre cas, hem definit la següent acció:
 <record id="action_patinatge_patinadores" model="ir.actions.act_window">
     <field name="name">Patinadores</field>
     <field name="res_model">patinatge.patinadora</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">list,form</field>
 </record>
 
 ```
@@ -130,9 +130,9 @@ Anem a analitzar els camps més importants d’aquesta acció.
 
 - `view_mode`  
   ```xml
-  <field name="view_mode">tree,form</field>
+  <field name="view_mode">list,form</field>
   ```  
-  Orde de les vistes a mostrar. Primer llistat (tree) i, en obrir o crear un registre, formulari (form). Si no hi ha vistes XML pròpies, Odoo generarà vistes automàtiques a partir del model. Ahhaa! 
+  Orde de les vistes a mostrar. Primer llistat (list) i, en obrir o crear un registre, formulari (form). Si no hi ha vistes XML pròpies, Odoo generarà vistes automàtiques a partir del model. Ahhaa! 
 
 ## Relació entre menú i acció
 
@@ -162,9 +162,9 @@ En XML podem definir elements de dues formes:
 En aquest punt el mòdul té:
 - Un menú funcional.
 - Una acció de finestra associada.
-- Vistes automàtiques (tree i form) generades per Odoo.
+- Vistes automàtiques (list i form) generades per Odoo.
 
-Aquestes vistes funcionen però són bàsiques: mostren pocs camps, sense estructura ni disseny específic. En el següent apartat definirem vistes XML pròpies, començant per la vista de llistat (tree) del model `patinatge.patinadora`
+Aquestes vistes funcionen però són bàsiques: mostren pocs camps, sense estructura ni disseny específic. En el següent apartat definirem vistes XML pròpies, començant per la vista de llistat (list) del model `patinatge.patinadora`
 
 :::{danger} 
 El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
@@ -176,18 +176,18 @@ El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
 </template>
 ```
 
-És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a vore amb les vistes internes(backend) d’Odoo (tree, form, kanban, etc) i no forma part d'aquest tema.
+És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a vore amb les vistes internes(backend) d’Odoo (list, form, kanban, etc) i no forma part d'aquest tema.
 :::
 
-El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
+El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (list).
 
 :::{caution} 
 El codi que crea scaffold no és per a usar-lo directament, és només un exemple genèric, una guia visual de les estructures bàsiques que podem definir en XML.
-No cal copiar-lo ni utilitzar-lo directament, ja que no s’ajusta a les necessitats del nostre mòdul. En els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (tree).
+No cal copiar-lo ni utilitzar-lo directament, ja que no s’ajusta a les necessitats del nostre mòdul. En els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (list).
 :::
 
-## Crear la vista de llistat (tree) personalitzada
-Per a crear una vista de llistat (tree) personalitzada per al model `patinatge.patinadora`, cal afegir un nou registre de tipus `ir.ui.view` en el fitxer XML de vistes del mòdul. El model `ir.ui.view` s’utilitza en Odoo per a definir com es mostren les dades d’un model a la interfície d’usuari. És el mecanisme que permet decidir quins camps es veuen, en quin ordre apareixen, i amb quin tipus de vista (llistat, formulari, etc.).
+## Crear la vista de llistat (list) personalitzada
+Per a crear una vista de llistat (list) personalitzada per al model `patinatge.patinadora`, cal afegir un nou registre de tipus `ir.ui.view` en el fitxer XML de vistes del mòdul. El model `ir.ui.view` s’utilitza en Odoo per a definir com es mostren les dades d’un model a la interfície d’usuari. És el mecanisme que permet decidir quins camps es veuen, en quin ordre apareixen, i amb quin tipus de vista (llistat, formulari, etc.).
 
 Dit d’una manera senzilla:
 si el model defineix les dades, la vista defineix com es veuen.
@@ -198,16 +198,16 @@ si el model defineix les dades, la vista defineix com es veuen.
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Vista de llistat (tree) per a patinadores -->
-<record id="view_patinadora_tree" model="ir.ui.view">
-    <field name="name">patinatge.patinadora.tree</field>
+    <!-- Vista de llistat (list) per a patinadores -->
+<record id="view_patinadora_list" model="ir.ui.view">
+    <field name="name">patinatge.patinadora.list</field>
     <field name="model">patinatge.patinadora</field>
     <field name="arch" type="xml">
-        <tree>
+        <list>
             <field name="name"/>
             <field name="cognoms"/>
             <field name="grup_id"/>
-        </tree>
+        </list>
     </field>
 </record>
 
@@ -219,14 +219,14 @@ Quan al fitxer XML escrivim:
 
 
 ```xml
-<record id="view_patinadora_tree" model="ir.ui.view">
+<record id="view_patinadora_list" model="ir.ui.view">
 ```
 Estem creant un nou registre en`ir.ui.view`, que defineix una vista específica per al model `patinatge.patinadora`. El record és el registre i `ir.ui.view` és el model on s’emmagatzemen les vistes.
 
 | Element       | Model                   | Registre                         |
 | ---------- | ----------------------- | -------------------------------- |
 | Patinadora | `patinatge.patinadora`  | Una patinadora concreta          |
-| Vista      | `ir.ui.view`            | Una vista concreta (tree, form…) |
+| Vista      | `ir.ui.view`            | Una vista concreta (list, form…) |
 | Acció      | `ir.actions.act_window` | Una acció concreta               |
 | Menú       | `ir.ui.menu`            | Un menú concret                  |
 
@@ -234,7 +234,7 @@ Estem creant un nou registre en`ir.ui.view`, que defineix una vista específica 
 Dins del registre de la vista, els camps més importants són:   
 - `name`  
   ```xml
-  <field name="name">patinatge.patinadora.tree</field>
+  <field name="name">patinatge.patinadora.list</field>
   ```  
   Nom descriptiu de la vista. No afecta el funcionament, però ajuda a identificar-la.
 - `model`  
@@ -245,14 +245,14 @@ Dins del registre de la vista, els camps més importants són:
 - `arch`  
   ```xml
   <field name="arch" type="xml">
-      <tree>
+      <list>
           <field name="name"/>
           <field name="cognoms"/>
           <field name="grup_id"/>
-      </tree>
+      </list>
   </field>
   ```  
-  Definició XML de l’estructura de la vista. En aquest cas, una vista de llistat (tree) que mostra els camps `name`, `cognoms` i `grup_id` del model `patinatge.patinadora`. L'arquitectura de la vista es defineix dins de l’etiqueta `<arch>`, utilitzant l’estructura XML específica per a vistes d’Odoo. El `<arch>` no defineix dades, només decideix com es mostren les dades del model.
+  Definició XML de l’estructura de la vista. En aquest cas, una vista de llistat (list) que mostra els camps `name`, `cognoms` i `grup_id` del model `patinatge.patinadora`. L'arquitectura de la vista es defineix dins de l’etiqueta `<arch>`, utilitzant l’estructura XML específica per a vistes d’Odoo. El `<arch>` no defineix dades, només decideix com es mostren les dades del model.
 
 :::{danger} 
 **No cal tocar l’acció (de moment)**
@@ -260,12 +260,12 @@ Dins del registre de la vista, els camps més importants són:
 
 Esta part [Creació de frontend en Odoo](../Tema6/intro.md) és clau:
 
-`<field name="view_mode">tree,form</field>`
+`<field name="view_mode">list,form</field>`
 
-No cal modificar-la, Odoo trobarà automàticament la nova vista tree i després continuarà mostrant el form automàtic. Açò és màgia… però màgia explicable.
+No cal modificar-la, Odoo trobarà automàticament la nova vista list i després continuarà mostrant el form automàtic. Açò és màgia… però màgia explicable.
 Odoo fa això:
 
- - Busca un registre `ir.ui.view` de tipus tree per a eixe model, si el troba, l’utilitza, si no, crea una vista automàtica.
+ - Busca un registre `ir.ui.view` de tipus list per a eixe model, si el troba, l’utilitza, si no, crea una vista automàtica.
 
 Per això no cal tocar l’acció.
 
@@ -286,7 +286,7 @@ En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `pa
 ```
 :::
 
-Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (tree) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
+Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (list) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
 
 ```{image} /_static/assets/img/Tema6/vista-Patinadores-personalitzada.png
 :alt: Vista Patinadores Personalitzada
@@ -296,7 +296,7 @@ Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis
 
 ## Crear la vista de formulari (form) personalitzada
 
-Fins ara tenim una vista de llistat (tree) per veure totes les patinadores d’un colp d’ull. Quan volem crear o editar un registre, Odoo usa una vista de formulari (form). La vista automàtica és funcional però plana: mostra tots els camps seguits, sense ordre ni estructura clara. Ara definirem la nostra vista form.
+Fins ara tenim una vista de llistat (list) per veure totes les patinadores d’un colp d’ull. Quan volem crear o editar un registre, Odoo usa una vista de formulari (form). La vista automàtica és funcional però plana: mostra tots els camps seguits, sense ordre ni estructura clara. Ara definirem la nostra vista form.
 
 ### Què és una vista form
 Serveix per a mostrar o editar un sol registre d’un model. Permet veure tots els detalls i camps d’una patinadora concreta. És la vista que s’usa per a:   
@@ -305,10 +305,10 @@ Serveix per a mostrar o editar un sol registre d’un model. Permet veure tots e
   - Editar un registre existent,
   - Consultar totes les dades d’un registre concret.
 
-A diferència de la vista tree (molts registres), la form mostra un sol registre amb tots els seus camps.
+A diferència de la vista list (molts registres), la form mostra un sol registre amb tots els seus camps.
 
 ### Definir la vista form amb `ir.ui.view`
-Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indicant model i arquitectura (`arch`). Afig al fitxer `views/patinatge_patinadora_views.xml`, just davall de la vista tree:
+Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indicant model i arquitectura (`arch`). Afig al fitxer `views/patinatge_patinadora_views.xml`, just davall de la vista list:
 
 ```xml
 <!-- Vista de formulari (form) per a patinadores -->
@@ -353,16 +353,16 @@ Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indica
 ### No cal tocar l’acció (encara)
 Mantín:
 ```xml
-<field name="view_mode">tree,form</field>
+<field name="view_mode">list,form</field>
 ```
 Odoo:
-- Buscarà la vista tree definida,
+- Buscarà la vista list definida,
 - Buscarà la vista form definida,
 - Les usarà en este ordre.
 Si no trobés form, mostraria una automàtica. Com que ja la tenim, utilitzarà la nostra.
 
 ### Resultat final
-Ara, en Patinatge → Patinadores veuràs la vista tree personalitzada, i, en Crear o obrir un registre, la vista form personalitzada.
+Ara, en Patinatge → Patinadores veuràs la vista list personalitzada, i, en Crear o obrir un registre, la vista form personalitzada.
 
 ```{image} /_static/assets/img/Tema6/vista-Crear-Patinadora-personalitzada.png
 :alt: Vista Crear Patinadora Personalitzada
@@ -402,5 +402,5 @@ En aquest cas el camp es mostra, però no es pot modificar des del formulari. Ú
 
 
 ## Resum i pròxims passos
-En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (tree) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic: Vistes per als models Grup i Entrenament](../../Annexos/crearvista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de patinatge.
+En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (list) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic: Vistes per als models Grup i Entrenament](../../Annexos/Tema5_prac7_CrearVista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de patinatge.
 <!-- En el següent tema, continuarem explorant les possibilitats de personalització de vistes en Odoo, incloent la creació de vistes kanban, calendaris i gràfics, així com l’ús de filtres i grups per a millorar la navegació i gestió de dades. -->
