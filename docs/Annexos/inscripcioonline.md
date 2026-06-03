@@ -214,7 +214,7 @@ No es firma ni es generen PDFs encara. Un pas = una acció.
 
 :::{admonition} 🧠 Per què un fitxer *_templates.xml?
 :class: tip
-És tracta de website (frontend), no backend. Implica que aquestes plantilles s’usen amb `request.render(...)`, no apareixen en menús d’Odoo i qualsevol persona ho pot vore des del navegador.
+És tracta de website (frontend), no backend. Implica que aquestes plantilles s’usen amb `request.render(...)`, no apareixen en menús d’Odoo i qualsevol persona ho pot veure des del navegador.
 :::
 
 
@@ -1670,11 +1670,11 @@ A `patinatge_inscripcio/views/inscripcio_ok.xml` tenim la plantilla que mostra a
 
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
 
-                    <!-- 👀 VORE -->
+                    <!-- 👀 VEURE -->
                     <a t-att-href="'/inscripcio/pdf/%s' % inscripcio.id"
                        class="btn btn-outline-primary"
                        target="_blank">
-                        👀 Vore el justificant
+                        👀 Veure el justificant
                     </a>
 
                     <!-- 📄 DESCARREGAR -->
@@ -1726,9 +1726,9 @@ A `patinatge_inscripcio/views/inscripcio_ok.xml` tenim la plantilla que mostra a
 
 S'ha creat un flux complet d’inscripció amb, a més es pot verificar la signatura i la integritat del document signat. Al link http://localhost:8069/verificar/INS-2025-0094-JVVruk8b es pot comprovar la validesa del document signat mitjançant el codi segur de verificació (CSV). Al peu de pàgina del PDF signat també es mostra aquest codi i l'enllaç de verificació. Així si s'imprimeix el document signat, es pot verificar en qualsevol moment la seva autenticitat i integritat.
 
-Per a poder vore el pdf signat i verificar-lo, s'ha creat una nova ruta al controlador que rep el CSV com a paràmetre i busca l'inscripció corresponent. Si la troba, genera una pàgina web que mostra l'estat de la verificació (si el document és vàlid o no) i permet descarregar el PDF signat.
+Per a poder veure el pdf signat i verificar-lo, s'ha creat una nova ruta al controlador que rep el CSV com a paràmetre i busca l'inscripció corresponent. Si la troba, genera una pàgina web que mostra l'estat de la verificació (si el document és vàlid o no) i permet descarregar el PDF signat.
 ```python
-    # 🔹 Ruta per a VORE el PDF (iframe / justificant)
+    # 🔹 Ruta per a VEURE el PDF (iframe / justificant)
     @http.route('/inscripcio/pdf/<int:inscripcio_id>', type='http', auth='public', website=True)
     def veure_pdf_inscripcio(self, inscripcio_id, **kw):
         inscripcio = request.env['patinatge.inscripcio'].sudo().browse(inscripcio_id)
@@ -1812,7 +1812,7 @@ El resultat es mostra en una vista QWeb senzilla   `views/verificacio_ok.xml` qu
           class="btn btn-primary mt-3"
           target="_blank"
         >
-          📄 Vore document signat
+          📄 Veure document signat
         </a>
       </div>
     </t>

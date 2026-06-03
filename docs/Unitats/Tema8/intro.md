@@ -232,7 +232,7 @@ Després d’assignar grups a un usuari, cal tancar sessió i tornar a entrar pe
 
 
 ## Verificació i diagnòstic ràpid
-En entrar en facturació, si tot ha anat bé, hauríem de vore el pla comptable, els diaris i altres menús relacionats amb la comptabilitat sense errors. 
+En entrar en facturació, si tot ha anat bé, hauríem de veure el pla comptable, els diaris i altres menús relacionats amb la comptabilitat sense errors. 
 
 :::{image} /_static/assets/img/Tema9/menu-facturacio.png
 :alt: Pla comptable OK
@@ -349,7 +349,7 @@ Aquest problema apareix quan la vista fa referència a camps d’un mòdul que e
 ```
 
 ``` {tip}
-Si tornes a vore l’error, repeteix el pas de neteja i assegura l’ordre: primer `account_asset_management`, després `l10n_es_aeat`.
+Si tornes a veure l’error, repeteix el pas de neteja i assegura l’ordre: primer `account_asset_management`, després `l10n_es_aeat`.
 ```
 
 

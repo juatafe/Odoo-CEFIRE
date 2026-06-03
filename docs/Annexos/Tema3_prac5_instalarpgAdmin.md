@@ -402,7 +402,7 @@ Amb això, ja podem explorar la base de dades `morrallaodoo` creada per Odoo din
 
 ### 🧭 Interfície de pgAdmin4
 
-Quan accedim a pgAdmin4, podem vore totes les bases de dades disponibles dins del servidor PostgreSQL.  
+Quan accedim a pgAdmin4, podem veure totes les bases de dades disponibles dins del servidor PostgreSQL.  
 Per defecte, apareixen dues:
 
 | Nom de la base de dades | Origen | Funció | Pots esborrar-la? |

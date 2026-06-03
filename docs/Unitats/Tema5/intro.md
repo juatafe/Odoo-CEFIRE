@@ -2,7 +2,7 @@
 ## Introducció 
 
 Fins ara hem treballat la part que **no es veu**, però que és fonamental:  
-hem creat el mòdul, els models, les relacions i els permisos. Tot això ja funciona, encara que **encara no ho puguem vore des de la interfície d’usuari**.
+hem creat el mòdul, els models, les relacions i els permisos. Tot això ja funciona, encara que **encara no ho puguem veure des de la interfície d’usuari**.
 
 És habitual que, en este punt, aparega la pregunta:
 
@@ -61,7 +61,7 @@ Aquest fitxer XML conté un menú principal per al mòdul de gestió del club de
 
 ``` 
 
-Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis. Com es pot observar a la imatge  , ara ja apareix el menú "Patinatge".
+Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Com es pot observar a la imatge  , ara ja apareix el menú "Patinatge".
 
 
 ```{image} /_static/assets/img/Tema6/menus-Pat.png
@@ -176,7 +176,7 @@ El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
 </template>
 ```
 
-És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a vore amb les vistes internes(backend) d’Odoo (list, form, kanban, etc) i no forma part d'aquest tema.
+És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a veure amb les vistes internes(backend) d’Odoo (list, form, kanban, etc) i no forma part d'aquest tema.
 :::
 
 El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (list).
@@ -286,7 +286,7 @@ En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `pa
 ```
 :::
 
-Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a vore els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (list) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
+Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (list) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
 
 ```{image} /_static/assets/img/Tema6/vista-Patinadores-personalitzada.png
 :alt: Vista Patinadores Personalitzada

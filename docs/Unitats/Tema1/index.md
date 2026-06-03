@@ -9,5 +9,4 @@ Benvinguts a **Sistemes de Gestió Empresarial (SGE)**. En aquesta unitat explor
 
 introduccio_erp
 per_que_odoo
-.. cas_practic_morralla_odoo
 cas_practic_scale_up

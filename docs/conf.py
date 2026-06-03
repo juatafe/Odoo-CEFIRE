@@ -187,7 +187,8 @@ latex_elements = {
         if is_pdf
         else r"\usepackage[a4paper,margin=2cm]{geometry}"
     ),
-    "sphinxsetup": "verbatimwrapslines=true",
+    "sphinxsetup": "verbatimwrapslines=true,verbatimwithframe=true",
+
     "fontpkg": "",
     "fncychap": "",
     "maketitle": "" if is_paperback else r"\maketitle",

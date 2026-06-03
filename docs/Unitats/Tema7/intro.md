@@ -130,15 +130,15 @@ access_inscripcio_patinadora,inscripcio patinadora,model_patinatge_inscripcio,pa
 :::{admonition} 🧠 Traducció clara (i realista)
 :class: tip
 👑 Administrador → ho veu i ho fa tot (no precisa CSV).  
-👩‍💼 Directiva → crear, vore, editar i esborrar.  
-👩‍🏫 Entrenadora → vore i editar (sense crear ni esborrar).  
-🛼 Patinadora → crear i vore la seua inscripció (sense editar ni esborrar).  
+👩‍💼 Directiva → crear, veure, editar i esborrar.  
+👩‍🏫 Entrenadora → veure i editar (sense crear ni esborrar).  
+🛼 Patinadora → crear i veure la seua inscripció (sense editar ni esborrar).  
 :::
 
 Traducció ràpida:
 - La **directiva** ho pot fer tot.
-- L’**entrenadora** pot vore i editar.
-- La **patinadora** només pot vore (i crear la seua).
+- L’**entrenadora** pot veure i editar.
+- La **patinadora** només pot veure (i crear la seua).
 
 ::: {caution} 
 

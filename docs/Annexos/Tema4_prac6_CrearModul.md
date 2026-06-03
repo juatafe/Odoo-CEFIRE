@@ -6,7 +6,7 @@ Aquesta pràctica té com a objectiu crear un mòdul senzill d’Odoo utilitzant
 - Crear manualment l’estructura bàsica d’un mòdul d’Odoo.
 - Entendre i configurar el fitxer `__manifest__.py`.
 - Crear models en Python i relacionar-los (Many2one / One2many) incloent una relació ternària amb model associatiu.- Aplicar **herència per delegació** (`_inherits`) per a reutilitzar `res.partner`, i saber quins camps cal declarar manualment perquè el partner no els té.
-- Aplicar criteris d'**integritat referencial** (`ondelete`) adequats a cada relació: `restrict` per a enllaços estructurals i `cascade` per a entitats dèbils.- Generar el fitxer de permisos `ir.model.access.csv`.
+- Aplicar criteris d’**integritat referencial** (`ondelete`) adequats a cada relació: `restrict` per a enllaços estructurals i `cascade` per a entitats dèbils.- Generar el fitxer de permisos `ir.model.access.csv`.
 - Instal·lar el mòdul i observar les vistes automàtiques que genera Odoo.
 - Deixar preparat el mòdul per a afegir vistes XML en el següent exercici.
 
@@ -106,7 +106,11 @@ Interpretació pràctica: per a una combinació concreta `(músic, acte)` només
 - Versió: 19.0.1.0.0
 - Llicència: LGPL-3
 - Instal·lable i aplicació: Sí
-- Models: `agrupaciomusical.music`, `agrupaciomusical.grup`, `agrupaciomusical.acte`, `agrupaciomusical.participacio`
+- Models: 
+    * `agrupaciomusical.music`, 
+    * `agrupaciomusical.grup`, 
+    * `agrupaciomusical.acte`, 
+    * `agrupaciomusical.participacio`
 - Vistes: Generades automàticament per Odoo (sense vistes XML en aquest exercici)
 - Permisos: Accés complet als models per a usuaris interns
 - Estructura mínima preparada per a afegir vistes en el següent exercici
@@ -147,14 +151,22 @@ Gràcies a `_inherits`, la majoria de camps personals s'hereten automàticament 
 | `street`, `phone`, `email` | Heritats de `res.partner` | No (opcionals) |
 | `cognoms` | Declarat manualment | No |
 | `dni` | Declarat manualment | **Sí (VNN)** – clau natural del negoci |
-| `data_naixement` | Declarat manualment | No |
+| `data_inici` | Declarat manualment | No |
 
-:::{admonition} Per què `dni` i `data_naixement` no s'hereten?
+:::{admonition} Per què `dni` i `data_inici` no s'hereten?
 :class: warning
-`res.partner` és un model **genèric** d'Odoo dissenyat per a clients, proveïdors, empreses... i molta altra gent que no té per què tindre un DNI ni una data de naixement rellevant en el context del sistema. Per això, aquests camps simplement **no existeixen** al partner estàndard i els hem d'afegir manualment al nostre model `agrupaciomusical.music`. Res a vore amb màgia negra! 😄
+`res.partner` és un model **genèric** d'Odoo dissenyat per a clients, proveïdors, empreses... i molta altra gent que no té per què tindre un DNI ni una data de inici rellevant en el context del sistema. Per això, aquests camps simplement **no existeixen** al partner estàndard i els hem d'afegir manualment al nostre model `agrupaciomusical.music`. Res a veure amb màgia negra! 😄
 :::
 
-**Nivell (segons línies de la colla):**
+**Instrument:**
+- Dolçaina
+- Percussió
+- Tarota
+- Tuba
+- Altres
+
+**Nivell:**
+- Educando
 - Iniciació
 - Intermig
 - Professional
@@ -185,13 +197,33 @@ Cada grup es defineix per:
 Cada acte és una eixida amb característiques pròpies:
 - `name` – Char  
 - `data` – Date  
-- `duracio` – Integer  
+- `duracio` – Integer
+- `localitat` – Char
+- `hora_inici` – Date  
+- `num_musics` – Integer
+- `repertori` – Char
+- `tipus` – Selection
 - `grup_id` – Many2one  
   (el grup que participa en l'acte)
 
-**Participants de l 'esdeveniment:**
+**Participants de l’esdeveniment:**
 - `participacio_ids` – One2many  
   (registre de participacions de músics en eixe acte)
+
+**Tipus** (implementat amb un camp `Selection`):
+- Albades
+- Assaig
+- Ballet
+- Banda
+- Cercavila
+- Concert
+- Correfoc
+- Dansà
+- Entrada moros
+- Processó
+- Trobada
+- Altres
+
 
 ### Model `agrupaciomusical.participacio` (relació ternària)
 
@@ -256,6 +288,13 @@ NIVELL_SELECTION = [
     ('professional', 'Professional')
 ]
 
+INSTRUMENT_SELECTION = [
+    ('dolcaina', 'Dolçaina'), 
+    ('percussio','Percussió'),
+    ('tarota','Tarota'),
+    ('tuba','Tuba'),
+    ('altres','Altres')
+]
 
 class Music(models.Model):
     _name = 'agrupaciomusical.music'
@@ -286,10 +325,10 @@ class Music(models.Model):
         required=True,
     )
 
-    # data_naixement: opcional, per saber si és major d'edat
+    # data_inici: obligatori, per saber si ja ha passat 1 any de la seua entrada en la colla
     # Tampoc existeix al partner estandard d'Odoo.
-    data_naixement = fields.Date(
-        string="Data de naixement"
+    data_inici = fields.Date(
+        string="Data de inici"
     )
 
     # cognoms: camp addicional per a facilitar l'ordenacio per cognom.
@@ -297,7 +336,7 @@ class Music(models.Model):
 
     # -- Camps propis de la colla ----
     instrument = fields.Selection(
-        MODALITAT_SELECTION,
+        INSTRUMENT_SELECTION,
         string="Instrument",
     )
 
@@ -322,10 +361,16 @@ class Music(models.Model):
 
     # -- Restriccions SQL -----
     _sql_constraints = [
-        ('dni_unique', 'unique(dni)',
-         'Ja existeix un músic amb aquest DNI. Comprova que no el registres dos vegades!'),
-        ('partner_unique', 'unique(partner_id)',
-         'Aquest contacte ja és un músic. Un músic, un contacte!'),
+        (
+            'dni_unique',
+            'unique(dni)',
+            'Ja existeix un músic amb aquest DNI. Comprova que no el registres dos vegades!'
+        ),         
+        (
+            'partner_unique',
+            'unique(partner_id)',
+            'Aquest contacte ja és un músic. Un músic, un contacte!'
+        )
     ]
 ```
 
@@ -338,7 +383,7 @@ from odoo.exceptions import ValidationError
 
 class Participacio(models.Model):
     _name = 'agrupaciomusical.participacio'
-    _description = "Participacio d'un músic en un acte (ternaria)"
+    _description = "Participació d'un músic en un acte (ternaria)"
 
     # -- Entitat debil: ondelete='cascade' en tots els camps ---
     # Una participacio no té sentit per si sola: depèn del músic,
@@ -372,9 +417,8 @@ class Participacio(models.Model):
         (
             'uniq_music_acte',
             'unique(music_id, acte_id)',
-            'Aquesta músic ja participa en eixe acte. '
-            'Comprova que no esteu registrant-lo dues vegades!',
-        ),
+            'Aquest músic ja participa en eixe acte. Comprova que no esteu registrant-lo dues vegades!'
+        )
     ]
 
     # -- Integritat de negoci -----
@@ -386,7 +430,7 @@ class Participacio(models.Model):
         for rec in self:
             if rec.acte_id.grup_id and rec.grup_id != rec.acte_id.grup_id:
                 raise ValidationError(
-                    "El grup de la participacio (%s) no coincideix amb el grup "
+                    "El grup de la participació (%s) no coincideix amb el grup "
                     "convocat de l'acte (%s). Revisa-ho!" % (
                         rec.grup_id.name,
                         rec.acte_id.grup_id.name,
@@ -418,21 +462,22 @@ _(Els models `grup` i `acte` s'implementen igual, afegint els seus camps i el `O
 
 ## Crear el fitxer de permisos
 
-`security/ir.model.access.csv`:
+`security/ir.model.access.csv`
 
-```
+```python
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_agrupaciomusical_music,access_agrupaciomusical_music,model_agrupaciomusical_music,base.group_user,1,1,1,1
-access_agrupaciomusical_grup,access_agrupaciomusical_grup,model_agrupaciomusical_grup,base.group_user,1,1,1,1
-access_agrupaciomusical_acte,access_agrupaciomusical_acte,model_agrupaciomusical_acte,base.group_user,1,1,1,1
-access_agrupaciomusical_participacio,access_agrupaciomusical_participacio,model_agrupaciomusical_participacio,base.group_user,1,1,1,1
+access_agrupaciomusical_music,"accés a músic",model_agrupaciomusical_music,base.group_user,1,1,1,1
+access_agrupaciomusical_grup,"accés a grup",model_agrupaciomusical_grup,base.group_user,1,1,1,1
+access_agrupaciomusical_acte,"accés a acte",model_agrupaciomusical_acte,base.group_user,1,1,1,1
+access_agrupaciomusical_participacio,"accés a participació",model_agrupaciomusical_participacio,base.group_user,1,1,1,1
 ```
 
 ## Instal·lació i vistes automàtiques
 
 1. Reiniciar Odoo  
-2. Instal·lar el mòdul  
-3. Buscar el model, al menú **Tècnic > Models**. Voreu que no existeixen vistes XML definides per als models. Ara cal parar atenció a les vistes automàtiques que genera Odoo però com que no tenim ni un menú ni una acció de finestra, no podrem veure-les des de la interfície d’usuari. A la propera pràctica afegirem menús i abans de veure les vistes XML personalitzades, podrem observar les vistes automàtiques generades per Odoo. 
+2. Instal·lar el mòdul
+3. Accedir al menú en mode Debug (http://localhost:8069/web?debug=1)  
+4. Buscar el model, al menú **Configuració > Tècnic > Models**. Veureu que no existeixen vistes XML definides per als models. Ara cal parar atenció a les vistes automàtiques que genera Odoo però com que no tenim ni un menú ni una acció de finestra, no podrem veure-les des de la interfície d’usuari. A la propera pràctica afegirem menús i abans de veure les vistes XML personalitzades, podrem observar les vistes automàtiques generades per Odoo. 
 
 Consell pràctic: per no treballar “a cegues”, després d’instal·lar el mòdul aneu a **Configuració > Tècnic > Estructures de dades > Models**, busqueu `agrupaciomusical.music` i podreu observar els camps que s'han creat.
 

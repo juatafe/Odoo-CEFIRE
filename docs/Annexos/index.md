@@ -29,11 +29,6 @@
 :maxdepth: 1
 :titlesonly:
 
-.. Apache_ReverseProxy
-.. Docker_Operations
-.. Configuracio_Avancada
-.. Annex_CICD
-.. Annex_Redis
 Tema2_prac1_InstOdooServer
 Tema2_prac2_InstOdooDocker
 Tema2_prac3_MailHogOdoo

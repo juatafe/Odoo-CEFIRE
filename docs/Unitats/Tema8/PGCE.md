@@ -1611,7 +1611,7 @@ Eixos diners ixen del banc.
 “Registrem la comissió com a despesa”  
 La despesa es compensa contra el banc.
 
-Aquest assentament és només la comissió, res a vore amb socis.
+Aquest assentament és només la comissió, res a veure amb socis.
 
 #### 🔴 9. CABK/2026/00002 – 572001 Banc – 100 € (HAVER)
 “El banc diu: aquest rebut NO”  

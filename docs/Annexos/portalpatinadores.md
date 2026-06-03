@@ -145,7 +145,7 @@ Instruccions:
 
 
 Verificació:
-- Actualitza el mòdul i obri `/my/patinatge` → ja has de vore la pàgina.
+- Actualitza el mòdul i obri `/my/patinatge` → ja has de veure la pàgina.
 
 ```{image} /_static/assets/img/Tema7/vista-personalitzada-basica.png
 :alt: Vista frontend pàgina personalitzada bàsica

@@ -610,7 +610,7 @@ Per tant, la pràctica recomanada és:
 Perquè `nia` es comporte “com una PK” de cara al negoci, aplica sempre les dues regles:
 
 1. `required=True` (equivalent a NOT NULL)
-2. `_sql_constraints` amb `UNIQUE` (no repetits)
+2. `_sql_constraints ` amb `UNIQUE` (no repetits)
 
 Exemple:
 
@@ -626,7 +626,11 @@ class Alumne(models.Model):
     ...
 
     _sql_constraints = [
-        ('nia_unique', 'unique(nia)', "El NIA ja existeix. Ha de ser únic."),
+        (
+            'nia_unique',
+            'unique(nia)',
+            'El NIA ja existeix. Ha de ser únic.'
+        )
     ]
 ```
 
@@ -652,9 +656,13 @@ class Alumne(models.Model):
     curs = fields.Selection(
         [('1eso','1r ESO'), ('2eso','2n ESO')],
         string="Curs"
-    )
+    )  
     _sql_constraints = [
-        ('nia_unique', 'unique(nia)', "El NIA ja existeix. Ha de ser únic."),
+        (
+            'nia_unique',
+            'unique(nia)',
+            'El NIA ja existeix. Ha de ser únic.'
+        )
     ]
 
     tutor_id = fields.Many2one('res.partner', string="Tutor/a")
@@ -889,9 +897,9 @@ A = (\underline{a_0}, a_1, a_0', r)
 \mathrm{si}\;\mathrm{nul}(a_0') \rightarrow \mathrm{nul}(r)
 ```
 
-Esta traducció formal és la que Odoo aplica internament. En els pròxims apartats voreu que eixa clau aliena ($a_0'$) es programa en Python mitjançant un camp de tipus `Many2one` que apunta al mateix model, i que la restricció d'integritat ($RI$) la controlarem més avant amb la lògica de negoci del mòdul.
+Esta traducció formal és la que Odoo aplica internament. En els pròxims apartats veureu que eixa clau aliena ($a_0'$) es programa en Python mitjançant un camp de tipus `Many2one` que apunta al mateix model, i que la restricció d'integritat ($RI$) la controlarem més avant amb la lògica de negoci del mòdul.
 
-De moment, el que ens interessa és vore com podem posar en pràctica este disseny utilitzant l'herència, per a no haver de recrear de zero tota la infraestructura de contactes que Odoo ja ens ofereix.
+De moment, el que ens interessa és veure com podem posar en pràctica este disseny utilitzant l'herència, per a no haver de recrear de zero tota la infraestructura de contactes que Odoo ja ens ofereix.
 
 ### Herència de models en Odoo
 
@@ -968,10 +976,13 @@ class Alumne(models.Model):
     curs = fields.Selection(
         [('1eso','1r ESO'), ('2eso','2n ESO')],
         string="Curs"
-    )
-
+    )   
     _sql_constraints = [
-        ('nia_unique', 'unique(nia)', "El NIA ja existeix. Ha de ser únic."),
+        (
+            'nia_unique',
+            'unique(nia)',
+            'El NIA ja existeix. Ha de ser únic.'
+        )
     ]
 ```
 
@@ -1112,7 +1123,7 @@ class AssignacioDocent(models.Model):
             'uniq_assignacio',
             'unique(professor_id, modul_id, grup_id)',
             'Esta assignació ja existeix.'
-        ),
+        )
     ]
 ```
 
@@ -1160,7 +1171,7 @@ L’estructura d’una `_sql_constraints` és una llista de tuples amb tres elem
 
 - `uniq_assignacio`: nom intern de la restricció en la BD. Ha de ser únic.
 - `unique(...)`: clau única composta. Ací diem a PostgreSQL que no permeta dos registres amb la mateixa combinació de professor, mòdul i grup.
-- Missatge d’error: text que Odoo mostra a l’usuari si intenta duplicar una assignació.
+- `Missatge d’error`: text que Odoo mostra a l’usuari si intenta duplicar una assignació.
 
 Per què és important en esta relació associativa?
 
@@ -1513,7 +1524,7 @@ from odoo import models, fields
 
 class Music(models.Model):
     _name = 'agrupaciomusical.music'
-    _description = 'Músic de l''agrupació'
+    _description = 'Músic de l’agrupació'
 
     name = fields.Char(string="Nom", required=True)
     # Relació One2many per a llistar totes les seues adreces
@@ -1548,7 +1559,7 @@ class MusicAdreca(models.Model):
         (
             'uniq_music_adreca',
             'unique(music_id, carrer, numero, poblacio)',
-            "Esta adreça ja està registrada per a este músic."
+            'Esta adreça ja està registrada per a este músic.'
         )
     ]
 ```
@@ -1832,8 +1843,10 @@ En el nostre cas, la **Convocatòria** té un triangle **blanc** (cardinalitat 1
 A nivell de base de dades, la restricció d'unicitat més estricta per a aquest esquema seria:
 ```python
 _sql_constraints = [
-    ('uniq_participacio', 'unique(music_id, acte_id)', 
-     'Aquest músic ja està inscrit en aquest acte!')
+    (
+        'uniq_participacio', 
+        'unique(music_id, acte_id)', 
+        'Aquest músic ja està inscrit en aquest acte!')
 ]
 ```
 
@@ -2286,8 +2299,10 @@ Aquest cas cada registre només pot estar relacionat amb un únic altre del mate
 soci_id = fields.Many2one('centre.empleat', string="Soci assignat")
 
 _sql_constraints = [
-    ('soci_unique', 'unique(soci_id)',
-     'Cada empleat només pot tindre un soci assignat!'),
+    (
+        'soci_unique', 
+        'unique(soci_id)',
+        'Cada empleat només pot tindre un soci assignat!'),
 ]
 ```
 
@@ -2916,9 +2931,10 @@ class Docencia(models.Model):
     assignatura_id = fields.Many2one('centre.assignatura', required=True)
 
     _sql_constraints = [
-        ('uk_professor_assignatura',
-         'UNIQUE(professor_id, assignatura_id)',
-         'Un professor no pot tindre assignada la mateixa assignatura dues vegades.'),
+        (
+            'uk_professor_assignatura',
+            'UNIQUE(professor_id, assignatura_id)',
+            'Un professor no pot tindre assignada la mateixa assignatura dues vegades.'),
     ]
 
 class Horari(models.Model):
@@ -3236,13 +3252,13 @@ class Alumne(models.Model):
 ```
 Al fitxer `security/ir.model.access.csv`, afegim la línia següent per donar permisos complets als usuaris interns (`base.group_user`) dotant-los de permisos de lectura, escriptura, creació i esborrat:
 Fitxer `security/ir.model.access.csv`:
-```text
+```python
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_centre_alumne_user,access_centre_alumne_user,model_centre_alumne,base.group_user,1,1,1,1
 ```
 
 Si vols només lectura, canvia els permisos:
-```text
+```python
 access_centre_alumne_read,access_centre_alumne_read,model_centre_alumne,base.group_user,1,0,0,0
 ```
 

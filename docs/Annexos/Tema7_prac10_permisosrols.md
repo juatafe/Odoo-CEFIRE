@@ -6,7 +6,7 @@ Ara la directiva s’ha cansat del “tothom ho veu tot” i vol posar ordre:
 
 - La directiva mana (com sempre 😅).
 - Les entrenadores gestionen, però amb límits.
-- Les patinadores només poden vore i crear el que és seu.
+- Les patinadores només poden veure i crear el que és seu.
 
 ::: {admonition} Avís important sobre els menús
 :class: warning
@@ -129,7 +129,7 @@ En acabar la pràctica sabràs:
 - Crear grups reals d’usuaris.
 - Assignar permisos amb `ir.model.access.csv`.
 - Comprovar què passa quan falten permisos.
-- Aplicar record rules i vore la diferència abans/després.
+- Aplicar record rules i veure la diferència abans/després.
 - Entendre per què amagar botons no és seguretat.
 :::
 
@@ -335,7 +335,7 @@ En `model_id:id` usa el prefix `model_` i guions baixos:
 Actualitza el mòdul i prova amb cada usuari:
 
 - 👑 Directiva → pot crear, editar i esborrar inscripcions.
-- 👩‍🏫 Entrenadora → pot vore i editar; ❌ no pot crear ni esborrar.
+- 👩‍🏫 Entrenadora → pot veure i editar; ❌ no pot crear ni esborrar.
 - 🛼 Patinadora → pot crear; ❌ no pot editar ni esborrar.
 
 👉 Pregunta clau: La patinadora veu totes les inscripcions?  

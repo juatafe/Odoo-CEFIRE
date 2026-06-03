@@ -37,7 +37,7 @@ Els mostra en una **interfície web** que podrem obrir al navegador.
 
 ### 🔹 Pas 1: Entendre què farem
 Afegirem un **nou servei Docker** al nostre projecte, anomenat `mailhog`.
-Aquest servei actuarà com a **servidor SMTP local** i tindrà una **interfície web** per vore els missatges enviats.
+Aquest servei actuarà com a **servidor SMTP local** i tindrà una **interfície web** per veure els missatges enviats.
 
 Per a fer-ho, modificarem el fitxer `docker-compose.yml`.
 
