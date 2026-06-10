@@ -33,7 +33,7 @@ Ara farem un pas més: veurem **com implantar un ERP dins d’una empresa real**
 http://IP_servidor:8069
 ```
 
-```{image} /_static/assets/img/Tema3/img1_T3.png
+```{image} /_static/assets/img/T3_img1.png
 :alt: Pantalla inicial d’Odoo
 :width: 70%
 :align: center
@@ -49,7 +49,7 @@ Quan entrem per primera vegada hem de:
 :::
 
 ### 2.2 Còpia de seguretat
-```{image} /_static/assets/img/Tema3/img3_T3.png
+```{image} /_static/assets/img/T3_img3.png
 :alt: Còpia de seguretat de la BD
 :width: 70%
 :align: center
@@ -86,7 +86,7 @@ Odoo genera un fitxer `.zip` que podem guardar per restaurar-lo si hi ha problem
 ### 4.1 Mòduls propis
 Odoo ja porta mòduls bàsics com **CRM, Vendes, Inventari, Facturació**.  
 
-```{image} /_static/assets/img/Tema3/img5_T3.png
+```{image} /_static/assets/img/T3_img5.png
 :alt: Llista de mòduls d’Odoo
 :width: 100%
 :align: center

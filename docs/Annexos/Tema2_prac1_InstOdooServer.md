@@ -77,7 +77,7 @@ Abans d'instal·lar VirtualBox, comprova que el teu ordinador compleix els requi
 2. Ves a la pestanya "Rendiment" → "CPU"
 3. Comprova que apareix "Virtualització: Activada"
 
-```{image} /_static/assets/img/Tema2/virtuHabi.PNG
+```{image} /_static/assets/img/T2_virtuHabi.PNG
 :alt: Virtualització habilitada al Gestor de tasques de Windows
 :width: 60%
 :align: center
@@ -194,7 +194,7 @@ Abans d'instal·lar Ubuntu, configurem la xarxa per poder accedir remotament:
 | SSH  | TCP      | 2222      | 22         |
 | Odoo | TCP      | 8069      | 8069       |
 
-```{image} /_static/assets/img/Tema2/redericcionament.png
+```{image} /_static/assets/img/T2_redericcionament.png
 :alt: Configurar socket de connexió. La MV sempre la mateixa ip assignada per NAT.
 :width: 60%
 :align: center

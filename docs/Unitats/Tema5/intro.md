@@ -1,8 +1,6 @@
-
 ## Introducció 
 
-Fins ara hem treballat la part que **no es veu**, però que és fonamental:  
-hem creat el mòdul, els models, les relacions i els permisos. Tot això ja funciona, encara que **encara no ho puguem veure des de la interfície d’usuari**.
+Fins ara hem treballat la part que **no es veu**, però que és fonamental: hem creat el mòdul, els models, les relacions i els permisos. Tot això ja funciona, encara que **encara no ho puguem veure des de la interfície d’usuari**.
 
 És habitual que, en este punt, aparega la pregunta:
 
@@ -24,63 +22,60 @@ Si fins ara hem muntat el motor, ara toca **posar el volant** 🚗
 
 
 ## Creació del fitxer XML per a menús i vistes
-Per a crear menús i vistes personalitzades, cal crear un fitxer XML nou dins de la carpeta `views/` del mòdul. Anomenarem el fitxer `patinatge_menus.xml`. El contingut inicial del fitxer serà el següent:
+Per a crear menús i vistes personalitzades, cal crear un fitxer XML nou dins de la carpeta `views/` del mòdul. Anomenarem el fitxer `agrupaciomusical_menus.xml`. El contingut inicial del fitxer serà el següent:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <!-- Acció de finestra mínima -->
-    <record id="action_patinatge_patinadores" model="ir.actions.act_window">
-        <field name="name">Patinadores</field>
-        <field name="res_model">patinatge.patinadora</field>
+    <record id="action_agrupaciomusical_musics" model="ir.actions.act_window">
+        <field name="name">Músics</field>
+        <field name="res_model">agrupaciomusical.music</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú principal -->
-    <menuitem id="menu_patinatge_root"
-              name="Patinatge"
+    <menuitem id="menu_agrupaciomusical_root"
+              name="Agrupació Musical"
               sequence="10"/>
 
     <!-- Submenú amb acció -->
-    <menuitem id="menu_patinatge_patinadores"
-              name="Patinadores"
-              parent="menu_patinatge_root"
-              action="action_patinatge_patinadores"/>
-
+    <menuitem id="menu_agrupaciomusical_musics"
+              name="Músics"
+              parent="menu_agrupaciomusical_root"
+              action="action_agrupaciomusical_musics"/>
 </odoo>
 
 ```
 
-Aquest fitxer XML conté un menú principal per al mòdul de gestió del club de patinatge. També defineix una acció de finestra que permet accedir al model `patinatge.patinadora` des d’un submenú anomenat "Patinadores". Açò és clau per a que Odoo mostre el menú, si no hi ha una acció associada no mostra res. Per tal que Odoo reconega aquest nou fitxer, cal afegir-lo a la llista de fitxers de dades en el fitxer `__manifest__.py`.
+Aquest fitxer XML conté un menú principal per al mòdul de gestió de la colla. També defineix una acció de finestra que permet accedir al model `agrupaciomusical.music` des d’un submenú anomenat "Músics". Açò és clau per a que Odoo mostre el menú, si no hi ha una acció associada no mostra res. Per tal que Odoo reconega aquest nou fitxer, cal afegir-lo a la llista de fitxers de dades en el fitxer `__manifest__.py`.
 
 ```python
 'data': [
         'security/ir.model.access.csv',
-        'views/patinatge_menus.xml',
-
+        'views/agrupaciomusical_menus.xml',
 ``` 
 
-Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Com es pot observar a la imatge  , ara ja apareix el menú "Patinatge".
+Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Com es pot observar a la imatge  , ara ja apareix el menú "Agrupació Musical".
 
 
-```{image} /_static/assets/img/Tema6/menus-Pat.png
-:alt: menú Patinatge
+```{image} /_static/assets/img/T5_MenuPrincipal.png
+:alt: menú Agrupació Musical
 :width: 30%
 :align: center
 ```
 
-Al fer clic al menú "Patinatge", Odoo ens mostra la vista de llistat (list view) per defecte del model `patinatge.patinadora`, encara que sense cap registre, ja que no n’hem creat cap.
+Al fer clic al menú "Agrupació Musical", Odoo ens mostra la vista de llistat (list view) per defecte del model `agrupaciomusical.music`, encara que sense cap registre, ja que no n’hem creat cap.
 
-```{image} /_static/assets/img/Tema6/vista-Patinadores.png
-:alt: Vista Patinadores
+```{image} /_static/assets/img/T5_VistaMusics.png
+:alt: Vista Músics
 :width: 80%
 :align: center
 ```
-Si ara fem clic en el botó "NOU", Odoo ens mostra la vista de formulari (form view) per defecte del model `patinatge.patinadora`, on podem introduir les dades d’una nova patinadora.
+Si ara fem clic en el botó "NOU", Odoo ens mostra la vista de formulari (form view) per defecte del model `agrupaciomusical.music`, on podem introduir les dades d’un nou music, però també totes les dades definidies en el model `res.partner` que és el model del que hereta. Quan heretem d'un altre model Odoo reutilitza directament la vista completa d'eixem model, per tant apareixen tots els camps del model de qui heretem i tots els camps propis que hem definit al nostre model. 
 
-```{image} /_static/assets/img/Tema6/vista-Crear-Patinadora.png
-:alt: Vista Crear Patinadora
+```{image} /_static/assets/img/T5_VistaCrearMusic.png
+:alt: Vista Crear Músic
 :width: 80%
 :align: center
 ``` 
@@ -90,7 +85,7 @@ Les vistes que Odoo genera automàticament a partir del model són funcionals, p
 
 ## L’acció `ir.actions.act_window`: què fa i per què és necessària 
 
-Ara anem al detall què és `ir.actions.act_window` i com funciona. Aquest registre defineix una acció que obri una finestra amb una vista específica del model `patinatge.patinadora`. El camp `view_mode` indica que primer es mostrarà la vista de llistat (list) i després la vista de formulari (form) quan es seleccione un registre. Aquesta acció s’associa al submenú "Patinadores" mitjançant l’atribut `action`, permetent als usuaris accedir fàcilment a la gestió de patinadores des del menú principal del mòdul.    
+Ara anem al detall què és `ir.actions.act_window` i com funciona. Aquest registre defineix una acció que obri una finestra amb una vista específica del model `agrupaciomusical.music`. El camp `view_mode` indica que primer es mostrarà la vista de llistat (list) i després la vista de formulari (form) quan es seleccione un registre. Aquesta acció s’associa al submenú "Músics" mitjançant l’atribut `action`, permetent als usuaris accedir fàcilment a la gestió de músics des del menú principal del mòdul.    
 
 En Odoo, els **menús no executen accions per si mateixos**.  
 Un menú és només un punt d’entrada: allò que realment fa que s’obriga una pantalla és una **acció**.
@@ -100,31 +95,34 @@ El tipus d’acció més habitual és `ir.actions.act_window`, que serveix per a
 En el nostre cas, hem definit la següent acció:
 
 ```xml
-<record id="action_patinatge_patinadores" model="ir.actions.act_window">
-    <field name="name">Patinadores</field>
-    <field name="res_model">patinatge.patinadora</field>
+<record id="action_agrupaciomusical_musics" model="ir.actions.act_window">
+    <field name="name">Músics</field>
+    <field name="res_model">agrupaciomusical.music</field>
     <field name="view_mode">list,form</field>
 </record>
 
 ```
-Aquesta acció indica a Odoo què ha de fer quan l’usuari accedeix al submenú "Patinadores":
+Aquesta acció indica a Odoo què ha de fer quan l’usuari accedeix al submenú "Músics":
 
 ### Camps principals d’una acció de finestra
 
 Anem a analitzar els camps més importants d’aquesta acció.
 
-- `model="ir.actions.act_window"` 
-  Indica que estem creant una acció de finestra, és a dir, una acció que obri una vista dins de la interfície web d’Odoo. Aquest tipus d’acció és la base per a llistar registres, crear-ne de nous, editar-los i consultar-los.
+- `model`
+  ```xml
+  <record id="action_agrupaciomusical_musics" model="ir.actions.act_window">
+  ```  
+  `ir.actions.act_window` indica que estem creant una acció de finestra, és a dir, una acció que obri una vista dins de la interfície web d’Odoo. Aquest tipus d’acció és la base per a llistar registres, crear-ne de nous, editar-los i consultar-los.
 
 - `name`  
   ```xml
-  <field name="name">Patinadores</field>
+  <field name="name">Músics</field>
   ```  
   Títol de la finestra que veu l’usuari. No canvia el funcionament, però afecta la claredat i usabilitat.
 
 - `res_model`  
   ```xml
-  <field name="res_model">patinatge.patinadora</field>
+  <field name="res_model">agrupaciomusical.music</field>
   ```  
   Model al qual aplica l’acció. Sense aquest camp, Odoo no sap quines dades mostrar.
 
@@ -139,13 +137,13 @@ Anem a analitzar els camps més importants d’aquesta acció.
 Una acció per si sola no és visible. Perquè l’usuari la puga executar, cal associar-la a un menú mitjançant l’atribut `action` del `menuitem`:
 
 ```xml
-<menuitem id="menu_patinatge_patinadores"
-          name="Patinadores"
-          parent="menu_patinatge_root"
-          action="action_patinatge_patinadores"/>
+<menuitem id="menu_agrupaciomusical_musics"
+          name="Músics"
+          parent="menu_agrupaciomusical_root"
+          action="action_agrupaciomusical_musics"/>
 ```
 
-Això fa que, en fer clic a Patinatge, Odoo execute l’acció `action_patinatge_patinadores` i òbriga la finestra amb les vistes del model.
+Això fa que, en fer clic a 'Agrupació Musical', Odoo execute l’acció `action_agrupaciomusical_musics` i òbriga la finestra amb les vistes del model.
 
 ## Ús de record i menuitem en fitxers XML
 
@@ -164,7 +162,7 @@ En aquest punt el mòdul té:
 - Una acció de finestra associada.
 - Vistes automàtiques (list i form) generades per Odoo.
 
-Aquestes vistes funcionen però són bàsiques: mostren pocs camps, sense estructura ni disseny específic. En el següent apartat definirem vistes XML pròpies, començant per la vista de llistat (list) del model `patinatge.patinadora`
+Aquestes vistes funcionen però són bàsiques: mostren pocs camps, o massa com en el cas de músic, sense estructura ni disseny específic. En el següent apartat definirem vistes XML pròpies, començant per la vista de llistat (list) del model `agrupaciomusical.music`
 
 :::{danger} 
 El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
@@ -176,18 +174,18 @@ El comandament `scaffold` genera `templates.xml` de moment, NI TOCAR-LO!
 </template>
 ```
 
-És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a veure amb les vistes internes(backend) d’Odoo (list, form, kanban, etc) i no forma part d'aquest tema.
+És un fitxer de plantilles QWeb, portals web, frontend, website... No té res a veure amb les vistes internes (backend) d’Odoo (list, form, kanban, etc) i no forma part d'aquest tema.
 :::
 
-El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (patinatge.patinantge), camps inventats (value, value2), menús i accions que no quadren amb res. Per això, en els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (list).
+El fitxer `views.xml` que crea scaffold són exemples genèrics que no s’ajusten a les necessitats del nostre mòdul amb models que no existeixen (`agrupaciomusical.music`), camps inventats (value, value2), menús i accions que no quadren amb res.
 
 :::{caution} 
 El codi que crea scaffold no és per a usar-lo directament, és només un exemple genèric, una guia visual de les estructures bàsiques que podem definir en XML.
-No cal copiar-lo ni utilitzar-lo directament, ja que no s’ajusta a les necessitats del nostre mòdul. En els següents apartats crearem vistes XML pròpies per al model `patinatge.patinadora`, començant per la vista de llistat (list).
+No cal copiar-lo ni utilitzar-lo directament, ja que no s’ajusta a les necessitats del nostre mòdul. En els següents apartats crearem vistes XML pròpies per al model `agrupaciomusical.music`, començant per la vista de llistat (list).
 :::
 
 ## Crear la vista de llistat (list) personalitzada
-Per a crear una vista de llistat (list) personalitzada per al model `patinatge.patinadora`, cal afegir un nou registre de tipus `ir.ui.view` en el fitxer XML de vistes del mòdul. El model `ir.ui.view` s’utilitza en Odoo per a definir com es mostren les dades d’un model a la interfície d’usuari. És el mecanisme que permet decidir quins camps es veuen, en quin ordre apareixen, i amb quin tipus de vista (llistat, formulari, etc.).
+Per a crear una vista de llistat (list) personalitzada per al model `agrupaciomusical.music`, cal afegir un nou registre de tipus `ir.ui.view` en el fitxer XML de vistes del mòdul. El model `ir.ui.view` s’utilitza en Odoo per a definir com es mostren les dades d’un model a la interfície d’usuari. És el mecanisme que permet decidir quins camps es veuen, en quin ordre apareixen, i amb quin tipus de vista (llistat, formulari, etc.).
 
 Dit d’una manera senzilla:
 si el model defineix les dades, la vista defineix com es veuen.
@@ -197,20 +195,19 @@ si el model defineix les dades, la vista defineix com es veuen.
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- Vista de llistat (list) per a patinadores -->
-<record id="view_patinadora_list" model="ir.ui.view">
-    <field name="name">patinatge.patinadora.list</field>
-    <field name="model">patinatge.patinadora</field>
-    <field name="arch" type="xml">
-        <list>
-            <field name="name"/>
-            <field name="cognoms"/>
-            <field name="grup_id"/>
-        </list>
-    </field>
-</record>
-
+    <!-- Vista de llistat (list) per a músics -->
+    <record id="view_music_list" model="ir.ui.view">
+        <field name="name">agrupaciomusical.music.list</field>
+        <field name="model">agrupaciomusical.music</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="cognoms"/>
+                <field name="instrument"/>
+                <field name="grup_id"/>
+            </list>
+        </field>
+    </record>
 </odoo>
 
 ```
@@ -219,27 +216,27 @@ Quan al fitxer XML escrivim:
 
 
 ```xml
-<record id="view_patinadora_list" model="ir.ui.view">
+<record id="view_music_list" model="ir.ui.view">
 ```
-Estem creant un nou registre en`ir.ui.view`, que defineix una vista específica per al model `patinatge.patinadora`. El record és el registre i `ir.ui.view` és el model on s’emmagatzemen les vistes.
+Estem creant un nou registre en `ir.ui.view`, que defineix una vista específica per al model `agrupaciomusical.music`. El record és el registre i `ir.ui.view` és el model on s’emmagatzemen les vistes.
 
-| Element       | Model                   | Registre                         |
-| ---------- | ----------------------- | -------------------------------- |
-| Patinadora | `patinatge.patinadora`  | Una patinadora concreta          |
-| Vista      | `ir.ui.view`            | Una vista concreta (list, form…) |
-| Acció      | `ir.actions.act_window` | Una acció concreta               |
-| Menú       | `ir.ui.menu`            | Un menú concret                  |
+| Element    | Model                     | Registre                         |
+| ---------- | ------------------------- | -------------------------------- |
+| Músic      | `agrupaciomusical.music`  | Un músic concret                |
+| Vista      | `ir.ui.view`              | Una vista concreta (list, form…) |
+| Acció      | `ir.actions.act_window`   | Una acció concreta               |
+| Menú       | `ir.ui.menu`              | Un menú concret                  |
 
 
 Dins del registre de la vista, els camps més importants són:   
 - `name`  
   ```xml
-  <field name="name">patinatge.patinadora.list</field>
+  <field name="name">agrupaciomusical.music.list</field>
   ```  
   Nom descriptiu de la vista. No afecta el funcionament, però ajuda a identificar-la.
 - `model`  
   ```xml
-  <field name="model">patinatge.patinadora</field>
+  <field name="model">agrupaciomusical.music</field>
   ````  
   Model al qual s’aplica la vista. Sense aquest camp, Odoo no sap quines dades mostrar.
 - `arch`  
@@ -248,11 +245,12 @@ Dins del registre de la vista, els camps més importants són:
       <list>
           <field name="name"/>
           <field name="cognoms"/>
+          <field name="instrument"/>
           <field name="grup_id"/>
       </list>
   </field>
   ```  
-  Definició XML de l’estructura de la vista. En aquest cas, una vista de llistat (list) que mostra els camps `name`, `cognoms` i `grup_id` del model `patinatge.patinadora`. L'arquitectura de la vista es defineix dins de l’etiqueta `<arch>`, utilitzant l’estructura XML específica per a vistes d’Odoo. El `<arch>` no defineix dades, només decideix com es mostren les dades del model.
+  Definició XML de l’estructura de la vista. En aquest cas, una vista de llistat (list) que mostra els camps `name`, `cognoms`, `instrument` i `grup_id` del model `agrupaciomusical.music`. L'arquitectura de la vista es defineix dins de l’etiqueta `<arch>`, utilitzant l’estructura XML específica per a vistes d’Odoo. El `<arch>` no defineix dades, només decideix com es mostren les dades del model.
 
 :::{danger} 
 **No cal tocar l’acció (de moment)**
@@ -271,7 +269,7 @@ Per això no cal tocar l’acció.
 
 :::
 
-En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `patinatge_menus.xml` conté menús i accions, mentre que el fitxer `patinatge_patinadora_views.xml` conté les vistes per al model `patinatge.patinadora`. Això facilita la lectura i manteniment del codi.
+En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `agrupaciomusical_menus.xml` conté menús i accions, mentre que el fitxer `agrupaciomusical_music_views.xml` conté les vistes per al model `agrupaciomusical.music`. Això facilita la lectura i manteniment del codi.
 
 :::{caution}
 **No oblides el manifest (important!)**.
@@ -280,41 +278,41 @@ En Odoo cal tenir un fitxer per cada responsabilitat clara. Així, el fitxer `pa
 ```python
 'data': [
     'security/ir.model.access.csv',
-    'views/patinatge_menus.xml',
-    'views/patinatge_patinadora_views.xml',
+    'views/agrupaciomusical_menus.xml',
+    'views/agrupaciomusical_music_views.xml',
 ],
 ```
 :::
 
-Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Ara, quan accedim al menú "Patinadores", Odoo utilitza la nova vista de llistat (list) que hem definit, mostrant els camps `name`, `cognoms` i `grup_id` en lloc de la vista automàtica generada per defecte.
+Amb això, ja podem reiniciar Odoo i actualitzar el mòdul per a veure els canvis. Ara, quan accedim al menú "Músics", Odoo utilitza la nova vista de llistat (list) que hem definit, mostrant els camps `name`, `cognoms`, `instrument` i `grup_id` en lloc de la vista automàtica generada per defecte.
 
-```{image} /_static/assets/img/Tema6/vista-Patinadores-personalitzada.png
-:alt: Vista Patinadores Personalitzada
+```{image} /_static/assets/img/T5_VistaMusicsPersonalitzada.png
+:alt: Vista Músics Personalitzada
 :width: 80%
 :align: center
 ```
 
 ## Crear la vista de formulari (form) personalitzada
 
-Fins ara tenim una vista de llistat (list) per veure totes les patinadores d’un colp d’ull. Quan volem crear o editar un registre, Odoo usa una vista de formulari (form). La vista automàtica és funcional però plana: mostra tots els camps seguits, sense ordre ni estructura clara. Ara definirem la nostra vista form.
+Fins ara tenim una vista de llistat (list) per veure tots els  músics d’un colp d’ull. Quan volem crear o editar un registre, Odoo usa una vista de formulari (form). La vista automàtica és funcional però plana: mostra tots els camps seguits, sense ordre ni estructura clara. Ara definirem la nostra vista form.
 
 ### Què és una vista form
-Serveix per a mostrar o editar un sol registre d’un model. Permet veure tots els detalls i camps d’una patinadora concreta. És la vista que s’usa per a:   
+Serveix per a mostrar o editar un sol registre d’un model. Permet veure tots els detalls i camps d’un músic concret. És la vista que s’usa per a:   
 
   - Crear un registre nou,
   - Editar un registre existent,
   - Consultar totes les dades d’un registre concret.
 
-A diferència de la vista list (molts registres), la form mostra un sol registre amb tots els seus camps.
+A diferència de la vista list (molts registres), la vista form mostra un sol registre amb tots els seus camps.
 
 ### Definir la vista form amb `ir.ui.view`
-Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indicant model i arquitectura (`arch`). Afig al fitxer `views/patinatge_patinadora_views.xml`, just davall de la vista list:
+Com la vista de llistat, la vista form es crea amb un registre `ir.ui.view` indicant model i arquitectura (`arch`). Afig al fitxer `views/agrupaciomusical_music_views.xml`, just davall de la vista list:
 
 ```xml
-<!-- Vista de formulari (form) per a patinadores -->
-<record id="view_patinadora_form" model="ir.ui.view">
-    <field name="name">patinatge.patinadora.form</field>
-    <field name="model">patinatge.patinadora</field>
+<!-- Vista de formulari (form) per a músics -->
+<record id="view_music_form" model="ir.ui.view">
+    <field name="name">agrupaciomusical.music.form</field>
+    <field name="model">agrupaciomusical.music</field>
     <field name="arch" type="xml">
         <form>
             <sheet>
@@ -322,19 +320,36 @@ Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indica
                     <group>
                         <field name="name"/>
                         <field name="cognoms"/>
-                        <field name="data_naixement"/>
+                        <field name="data_inici"/>                        
                         <field name="dni"/>
+                        <field name="phone"/>
+                        <field name="email"/>
                     </group>
                     <group>
-                        <field name="telefon"/>
-                        <field name="email"/>
-                        <field name="adreca"/>
+                        <field name="instrument"/>
+                        <field name="nivell"/>
                         <field name="grup_id"/>
                     </group>
                 </group>
+                <group>
+                    <group string="Adreça">                        
+                        <field name="street"/>
+                        <field name="street2"/>
+
+                        <group>
+                            <field name="zip"/>
+                            <field name="city"/>
+                        </group>
+
+                        <group>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                        </group>                       
+                    </group>
+                </group>
                 <notebook>
-                    <page string="Entrenaments">
-                        <field name="entrenaments_ids"/>
+                    <page string="Actes">
+                        <field name="participacio_ids"/>
                     </page>
                 </notebook>
             </sheet>
@@ -346,9 +361,17 @@ Com la vista de llistat, la form es crea amb un registre d’`ir.ui.view` indica
 ### Explicació de l’estructura del formulari
 - `<form>`: definix que és una vista de formulari.  
 - `<sheet>`: contenidor principal que aplica disseny i marges correctes; pràcticament tots els forms van dins d’un `sheet`, ja que garanteix una aparença coherent amb la resta del sistema.  
-- `<group>`: organitza visualment els camps. Ací usem un grup principal amb dos subgrups per a mostrar dues columnes (més llegible).  
-- `<field>`: cada `<field>` correspon a un camp real del model `patinatge.patinadora`. Si el camp no existeix en Python, no es pot usar en la vista.  
-- `<notebook>` i `<page>`: amb `<notebook>` es crea el contenidor de pestanyes i amb `<page>` es creen pestanyes. Separem informació principal de la relació amb entrenaments; la pestanya “Entrenaments” mostra `entrenaments_ids` (Many2many).
+- `<group>`: organitza visualment els camps. Ací usem un grup principal amb dos subgrups per a mostrar dues columnes (més llegible), i després un altre grup amb 2 camps i 2 subgrups per mostrar l'adreça.  
+- `<field>`: cada `<field>` correspon a un camp real del model `agrupaciomusical.music` o camps del model `res.partner` del que hereta. Si el camp no existeix en Python, no es pot usar en la vista.  
+- `<notebook>` i `<page>`: amb `<notebook>` es crea el contenidor de pestanyes i amb `<page>` es creen pestanyes. Separem informació principal de la relació amb actes (participacions); la pestanya “Actes” mostra `participacio_ids` (One2many).
+
+Per saber quins camps es poden utilitzar del model partner podem saber-ho, bé accedint a la base de dades (columnes de la taula `res_partner`), o bé consultant el model desde la web, amb el menú Configuració → Tècnic → Models → res.partner.
+
+```{image} /_static/assets/img/T5_CampsResPartner.png
+:alt: Propietats taula rest_partner
+:width: 80%
+:align: center
+```
 
 ### No cal tocar l’acció (encara)
 Mantín:
@@ -359,13 +382,13 @@ Odoo:
 - Buscarà la vista list definida,
 - Buscarà la vista form definida,
 - Les usarà en este ordre.
-Si no trobés form, mostraria una automàtica. Com que ja la tenim, utilitzarà la nostra.
+Si no trobara la vista form, mostraria una automàtica. Com que ja la tenim, utilitzarà la nostra.
 
 ### Resultat final
-Ara, en Patinatge → Patinadores veuràs la vista list personalitzada, i, en Crear o obrir un registre, la vista form personalitzada.
+Ara, en Agrupació Musical → Músics veuràs la vista list personalitzada, i, en Nou o Obrir un registre, la vista form personalitzada.
 
-```{image} /_static/assets/img/Tema6/vista-Crear-Patinadora-personalitzada.png
-:alt: Vista Crear Patinadora Personalitzada
+```{image} /_static/assets/img/T5_CrearMusicPersonalitzat.png
+:alt: Vista Crear Músic Personalitzada
 :width: 80%
 :align: center
 ``` 
@@ -381,10 +404,10 @@ Amb el sistema de vistes d’Odoo, les possibilitats de personalització són mo
 
 En una vista de formulari podem indicar que un camp siga obligatori (`required="1"`) o no editable (`readonly="1"`) sense modificar el model Python. Açò només afecta a la interfície, no a la base de dades.
 
-Exemple: fer obligatori el DNI i el grup
+Exemple: fer obligatori el DNI i l'instrument
 ```xml
 <field name="dni" required="1"/>
-<field name="grup_id" required="1"/>
+<field name="instrument" required="1"/>
 ```
 Amb això, l’usuari no podrà guardar el registre si no ompli aquests camps i Odoo mostrarà un avís visual.
 
@@ -402,5 +425,5 @@ En aquest cas el camp es mostra, però no es pot modificar des del formulari. Ú
 
 
 ## Resum i pròxims passos
-En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (list) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic: Vistes per als models Grup i Entrenament](../../Annexos/Tema5_prac7_CrearVista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de patinatge.
+En aquest capítol hem après a crear menús i vistes personalitzades en Odoo. Hem vist com definir una acció de finestra (`ir.actions.act_window`) per a obrir vistes específiques d’un model, i com crear vistes de llistat (list) i formulari (form) amb `ir.ui.view`. Això ens permet controlar completament com es mostren les dades als usuaris, millorant l’experiència i funcionalitat del mòdul. Si no ho has fet encara convidria realitzar [l'Exercici pràctic: Vistes per als models Grup i Acte](../../Annexos/Tema5_prac7_CrearVista.md), on aplicarem els coneixements adquirits per a crear vistes personalitzades per als altres models del mòdul de `agrupaciomusical`.
 <!-- En el següent tema, continuarem explorant les possibilitats de personalització de vistes en Odoo, incloent la creació de vistes kanban, calendaris i gràfics, així com l’ús de filtres i grups per a millorar la navegació i gestió de dades. -->

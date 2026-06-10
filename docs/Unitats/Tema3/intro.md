@@ -16,7 +16,7 @@ http://IP_servidor:8069
 
 Aquesta URL et portarà a la **pantalla inicial d’Odoo**, on podràs veure el formulari d’inici de sessió:
 
-```{image} /_static/assets/img/Tema3/img1_T3.png
+```{image} /_static/assets/img/T3_img1.png
 :alt: Pantalla inicial d’Odoo
 :width: 100%
 :align: center
@@ -32,7 +32,7 @@ Per gestionar bases de dades (crear, duplicar o eliminar), cal accedir directame
 ```{code-block} bash
 http://localhost:8069/web/database/manager
 ```
-```{image} /_static/assets/img/Tema3/manager.png
+```{image} /_static/assets/img/T3_manager.png
 :alt: Gestió de les bases de dades
 :width: 100%
 :align: center
@@ -46,12 +46,12 @@ Aquesta opció és útil si necessites crear, duplicar o eliminar bases de dades
 Per accedir a les aplicacions i configuracions, fes clic a la icona dels 9 quadrets (app switcher) situada a la part superior esquerra.
 Des d’allí veuràs el menú principal amb tots els mòduls disponibles i podràs:
 
-  - Accedir a la configuració de l’empresa **(Configuració > Usuaris i Empreses > Empreses)**.
+  - Accedir a la configuració de l’empresa **(Configuració → Usuaris i Empreses → Empreses)**.
   - Instal·lar mòduls nous des del menú **Aplicacions**.
   - Gestionar dades bàsiques i paràmetres generals.
 
 
-```{image} /_static/assets/img/Tema3/mycompany.png
+```{image} /_static/assets/img/T3_mycompany.png
 :alt: Administració d'Odoo
 :width: 100%
 :align: center
@@ -68,7 +68,7 @@ Aquesta interfície web permet controlar totes les funcionalitats d’Odoo de ma
 Odoo porta de sèrie aplicacions com **CRM, Vendes, Inventari, Facturació**.  
 Aquests es poden activar directament des del menú **Aplicacions**.
 
-```{image} /_static/assets/img/Tema3/img5_T3.png
+```{image} /_static/assets/img/T3_img5.png
 :alt: Llista de mòduls d’Odoo
 :width: 100%
 :align: center
@@ -128,7 +128,7 @@ Quan instal·lem el mòdul **Website (Lloc web)**, Odoo llança un **assistent i
 - Triar colors i tipografia corporativa.  
 - Generar una primera pàgina editable amb el **Website Builder**.
 
-```{image} /_static/assets/img/Tema3/assistent.png
+```{image} /_static/assets/img/T3_assistent.png
 :alt: Assistent de selecció de tema en Website
 :width: 100%
 :align: center
@@ -142,7 +142,7 @@ Encara que l’assistent només apareix la primera vegada, hi ha diverses manere
 
 1. **Crear una web nova**  
    - A partir d’Odoo 16 es permet tenir més d’una web per base de dades.  
-   - Menú: **Webs > Configuració > Webs > Crear**.  
+   - Menú: **Webs → Configuració → Webs → Crear**.  
    - En crear-ne una de nova, s’activa de nou l’assistent de selecció de tema.
 
 2. **Reinstal·lar el mòdul Website**  

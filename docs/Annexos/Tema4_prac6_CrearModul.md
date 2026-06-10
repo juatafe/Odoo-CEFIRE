@@ -477,9 +477,9 @@ access_agrupaciomusical_participacio,"accés a participació",model_agrupaciomus
 1. Reiniciar Odoo  
 2. Instal·lar el mòdul
 3. Accedir al menú en mode Debug (http://localhost:8069/web?debug=1)  
-4. Buscar el model, al menú **Configuració > Tècnic > Models**. Veureu que no existeixen vistes XML definides per als models. Ara cal parar atenció a les vistes automàtiques que genera Odoo però com que no tenim ni un menú ni una acció de finestra, no podrem veure-les des de la interfície d’usuari. A la propera pràctica afegirem menús i abans de veure les vistes XML personalitzades, podrem observar les vistes automàtiques generades per Odoo. 
+4. Buscar el model, al menú **Configuració → Tècnic → Models**. Veureu que no existeixen vistes XML definides per als models. Ara cal parar atenció a les vistes automàtiques que genera Odoo però com que no tenim ni un menú ni una acció de finestra, no podrem veure-les des de la interfície d’usuari. A la propera pràctica afegirem menús i abans de veure les vistes XML personalitzades, podrem observar les vistes automàtiques generades per Odoo. 
 
-Consell pràctic: per no treballar “a cegues”, després d’instal·lar el mòdul aneu a **Configuració > Tècnic > Estructures de dades > Models**, busqueu `agrupaciomusical.music` i podreu observar els camps que s'han creat.
+Consell pràctic: per no treballar “a cegues”, després d’instal·lar el mòdul aneu a **Configuració → Tècnic → Estructures de la base de dades → Models**, busqueu `agrupaciomusical.music` i podreu observar els camps que s'han creat.
 
 
 ::::{admonition} Nota

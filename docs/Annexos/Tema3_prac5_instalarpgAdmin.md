@@ -334,7 +334,7 @@ A VirtualBox:
 
 > 💡 Això permet que quan accedim a `http://127.0.0.1:8080` al nostre navegador, el trànsit es redirigisca al port `80` de la màquina virtual (10.0.2.15).
 
-```{image} /_static/assets/img/Tema4/pgadmin-4.png
+```{image} /_static/assets/img/T4_pgadmin-4.png
 :alt: pgadmin-4
 :width: 80%
 :align: center
@@ -369,7 +369,7 @@ http://127.0.0.1:8080/
 Això obrirà la interfície web de pgAdmin4, servida per la màquina virtual Ubuntu mitjançant Apache i WSGI.
 
 
-```{image} /_static/assets/img/Tema4/pgadminlogin.png
+```{image} /_static/assets/img/T4_pgadminlogin.png
 :alt: pgadminlogin
 :width: 80%
 :align: center
@@ -377,7 +377,7 @@ Això obrirà la interfície web de pgAdmin4, servida per la màquina virtual Ub
 
 ### Connexió amb el contenidor de PostgreSQL
 
-```{image} /_static/assets/img/Tema4/pgadminnuevo.png
+```{image} /_static/assets/img/T4_pgadminnuevo.png
 :alt: pgadminnuevo
 :width: 80%
 :align: center
@@ -394,7 +394,7 @@ Una vegada dins de pgAdmin4, creem una nova connexió amb el servidor Docker:
 Amb això, ja podem explorar la base de dades `morrallaodoo` creada per Odoo dins del contenidor PostgreSQL.
 
 
-```{image} /_static/assets/img/Tema4/pgadminnuevoconfig.png
+```{image} /_static/assets/img/T4_pgadminnuevoconfig.png
 :alt: pgadminnuevoconfig
 :width: 80%
 :align: center
@@ -422,7 +422,7 @@ Des de la pestanya **Tablero** (Dashboard), pgAdmin mostra informació en temps 
 - **Lectures i escriptures** de blocs de dades.  
 - **Insercions, actualitzacions i esborrats** recents.
 
-```{image} /_static/assets/img/Tema4/pgadmintablero.png
+```{image} /_static/assets/img/T4_pgadmintablero.png
 :alt: pgadmintablero
 :width: 100%
 :align: center
@@ -443,7 +443,7 @@ Des de la pestanya **Tablero** (Dashboard), pgAdmin mostra informació en temps 
 Una vegada connectats, veurem totes les bases de dades disponibles.  
 Seleccionem la que hem creat (per exemple, `morrallaodoo`) per explorar-ne les taules:
 
-```{image} /_static/assets/img/Tema4/img4-T4.png
+```{image} /_static/assets/img/T4_img4.png
 :alt: img4-T4
 :width: 100%
 :align: center
@@ -454,7 +454,7 @@ Odoo utilitza un esquema per a cada mòdul instal·lat:
 - Les del mòdul *sale* per `sale_`.  
 - Les del mòdul *crm* per `crm_`, etc.
 
-```{image} /_static/assets/img/Tema4/img5-T4.png
+```{image} /_static/assets/img/T4_img5.png
 :alt: img5-T4
 :width: 100%
 :align: center
@@ -462,7 +462,7 @@ Odoo utilitza un esquema per a cada mòdul instal·lat:
 
 Podem veure els **camps de cada taula**:
 
-```{image} /_static/assets/img/Tema4/img6-T4.png
+```{image} /_static/assets/img/T4_img6.png
 :alt: img6-T4
 :width: 100%
 :align: center
@@ -470,7 +470,7 @@ Podem veure els **camps de cada taula**:
 
 I també **consultar les dades** fent la consulta corresponent:
 
-```{image} /_static/assets/img/Tema4/img8-T4.png
+```{image} /_static/assets/img/T4_img8.png
 :alt: img8-T4
 :width: 100%
 :align: center
@@ -482,7 +482,7 @@ Així visualitzem, per exemple, els productes registrats a Odoo.
 
 També podem veure i modificar els usuaris existents des del menú lateral:
 
-```{image} /_static/assets/img/Tema4/img9_T4.png
+```{image} /_static/assets/img/T4_img9.png
 :alt: img9_T4
 :width: 25%
 :align: center
@@ -490,7 +490,7 @@ També podem veure i modificar els usuaris existents des del menú lateral:
 
 L’usuari per defecte amb el qual Odoo es connecta és **odoo**.
 
-```{image} /_static/assets/img/Tema4/img10_T4.png
+```{image} /_static/assets/img/T4_img10.png
 :alt: img10_T4
 :width: 70%
 :align: center
@@ -498,7 +498,7 @@ L’usuari per defecte amb el qual Odoo es connecta és **odoo**.
 
 Des de *Propietats* podem revisar permisos i contrasenyes:
 
-```{image} /_static/assets/img/Tema4/img11-T4.png
+```{image} /_static/assets/img/T4_img11.png
 :alt: img11-T4
 :width: 100%
 :align: center

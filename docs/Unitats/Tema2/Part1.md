@@ -901,7 +901,7 @@ echo "   - Estat del servei: $(sudo systemctl is-active odoo)"
 
 2. **Pantalla de gestió de bases de dades:**
 
-```{image} /_static/assets/img/Tema2/img2_T2_1.png
+```{image} /_static/assets/img/T2_loginIniciOdoo.png
 :alt: Pantalla d'inici d'Odoo
 :width: 70%
 :align: center

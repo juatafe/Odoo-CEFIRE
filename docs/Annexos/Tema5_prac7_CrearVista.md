@@ -1,11 +1,10 @@
-# Exercici pràctic: Vistes per als models Grup i Entrenament
+# Vistes per als models Grup i Acte
+## Objectiu de l'exercici
 
-## 1. Objectiu de l'exercici
+Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta pràctica és **completar el mòdul `agrupaciomusical`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
 
-Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta pràctica és **completar el mòdul `patinatge`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
-
-- `patinatge.grup`
-- `patinatge.entrenament`
+- `agrupaciomusical.grup`
+- `agrupaciomusical.acte`
 
 L’alumnat haurà de:
 - Crear accions de finestra,
@@ -16,278 +15,260 @@ L’alumnat haurà de:
 
 Per això, esta activitat s’ha separat en dos exercicis: primer es crea la base del mòdul i després s’amplia de manera incremental amb les vistes i els menús.
 
----
+## Models amb els quals treballarem
+### Model `agrupaciomusical.grup`
 
-## 2. Models amb els quals treballarem
-
-### 2.1 Model `patinatge.grup`
-
-El model `patinatge.grup` disposa dels següents camps principals:
+El model `agrupaciomusical.grup` disposa dels següents camps principals:
 - `name`
-- `entrenadora`
-- `modalitat`
-- `categoria`
-- `patinadores_ids` (One2many)
+- `instruments`
+- `musics_ids` (One2many)
+- `participacio_ids` (One2many cap a `agrupaciomusical.participacio`) 
 
----
+### Model `agrupaciomusical.acte`
 
-### 2.2 Model `patinatge.entrenament`
-
-El model `patinatge.entrenament` inclou:
+El model `agrupaciomusical.acte` inclou:
 - `name`
 - `data`
 - `duracio`
+- `localitat`
+- `hora_inici`
+- `num_musics`
+- `repetori`
+- `tipus`
 - `grup_id` (Many2one)
-- `participacio_ids` (One2many cap a `patinatge.participacio`)
+- `participacio_ids` (One2many cap a `agrupaciomusical.participacio`)
 
----
+## Crear les accions i els menús
 
-## 3. Crear les accions i els menús
+En el fitxer `views/agrupaciomusical_menus.xml`, cal afegir **dues accions de finestra noves** i **dos submenús** dins del menú principal *agrupaciomusical*.
 
-En el fitxer `views/patinatge_menus.xml`, cal afegir **dues accions de finestra noves** i **dos submenús** dins del menú principal *Patinatge*.
-
-### 3.1 Acció i menú per a Grups
+### Acció i menú per a Grups
 
 - Acció:
-  - Model: `patinatge.grup`
+  - Model: `agrupaciomusical.grup`
   - Vistes: `list,form`
 - Submenú:
   - Nom: **Grups**
-  - Penjat del menú **Patinatge**
+  - Penjat del menú **Agrupació Musical**
 
 ```xml
-<record id="action_patinatge_grups" model="ir.actions.act_window">
+<record id="action_agrupaciomusical_grups" model="ir.actions.act_window">
     <field name="name">Grups</field>
-    <field name="res_model">patinatge.grup</field>
+    <field name="res_model">agrupaciomusical.grup</field>
     <field name="view_mode">list,form</field>
 </record>
 
-<menuitem id="menu_patinatge_grups"
+<menuitem id="menu_agrupaciomusical_grups"
           name="Grups"
-          parent="menu_patinatge_root"
-          action="action_patinatge_grups"/>
+          parent="menu_agrupaciomusical_root"
+          action="action_agrupaciomusical_grups"/>
 ```
 
----
-
-### 3.2 Acció i menú per a Entrenaments
+### Acció i menú per a Actes
 
 - Acció:
-  - Model: `patinatge.entrenament`
+  - Model: `agrupaciomusical.acte`
   - Vistes: `list,form`
 - Submenú:
-  - Nom: **Entrenaments**
-  - Penjat del menú **Patinatge**
+  - Nom: **Actes**
+  - Penjat del menú **Agrupació Musical**
 
 ```xml
-<record id="action_patinatge_entrenaments" model="ir.actions.act_window">
-    <field name="name">Entrenaments</field>
-    <field name="res_model">patinatge.entrenament</field>
+<record id="action_agrupaciomusical_actes" model="ir.actions.act_window">
+    <field name="name">Actes</field>
+    <field name="res_model">agrupaciomusical.acte</field>
     <field name="view_mode">list,form</field>
 </record>
 
-<menuitem id="menu_patinatge_entrenaments"
-          name="Entrenaments"
-          parent="menu_patinatge_root"
-          action="action_patinatge_entrenaments"/>
+<menuitem id="menu_agrupaciomusical_actes"
+          name="Actes"
+          parent="menu_agrupaciomusical_root"
+          action="action_agrupaciomusical_actes"/>
 ```
 
 :::{admonition} Per què no hi ha menú per a Participació?
 :class: tip
-El model `patinatge.participacio` és una **entitat associativa** (model de la relació ternària). No té sentit accedir-hi directament: les participacions es creen i consulten des dels formularis de Patinadora i Entrenament, a través dels camps `participacio_ids`. Per tant, **no cal crear-li cap acció ni submenú propi**.
+El model `agrupaciomusical.participacio` és una **entitat associativa** (model de la relació ternària). No té sentit accedir-hi directament: les participacions es creen i consulten des dels formularis de Músic i Acte, a través dels camps `participacio_ids`. Per tant, **no cal crear-li cap acció ni submenú propi**.
 :::
 
-### 3.3 Estat final del fitxer `patinatge_menus.xml`
+### Estat final del fitxer `agrupaciomusical_menus.xml`
 
 Amb les dues incorporacions anteriors, el fitxer complet queda així:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <!-- Accions de finestra -->
-    <record id="action_patinatge_patinadores" model="ir.actions.act_window">
-        <field name="name">Patinadores</field>
-        <field name="res_model">patinatge.patinadora</field>
+    <record id="action_agrupaciomusical_musics" model="ir.actions.act_window">
+        <field name="name">Músics</field>
+        <field name="res_model">agrupaciomusical.music</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <record id="action_patinatge_grups" model="ir.actions.act_window">
+    <record id="action_agrupaciomusical_grups" model="ir.actions.act_window">
         <field name="name">Grups</field>
-        <field name="res_model">patinatge.grup</field>
+        <field name="res_model">agrupaciomusical.grup</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <record id="action_patinatge_entrenaments" model="ir.actions.act_window">
-        <field name="name">Entrenaments</field>
-        <field name="res_model">patinatge.entrenament</field>
+    <record id="action_agrupaciomusical_actes" model="ir.actions.act_window">
+        <field name="name">Actes</field>
+        <field name="res_model">agrupaciomusical.acte</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú principal -->
-    <menuitem id="menu_patinatge_root"
-              name="Patinatge"
+    <menuitem id="menu_agrupaciomusical_root"
+              name="Agrupació Musical"
               sequence="10"/>
 
     <!-- Submenús -->
-    <menuitem id="menu_patinatge_patinadores"
-              name="Patinadores"
-              parent="menu_patinatge_root"
-              action="action_patinatge_patinadores"/>
+    <menuitem id="menu_agrupaciomusical_musics"
+              name="Músics"
+              parent="menu_agrupaciomusical_root"
+              action="action_agrupaciomusical_musics"/>
 
-    <menuitem id="menu_patinatge_grups"
+    <menuitem id="menu_agrupaciomusical_grups"
               name="Grups"
-              parent="menu_patinatge_root"
-              action="action_patinatge_grups"/>
+              parent="menu_agrupaciomusical_root"
+              action="action_agrupaciomusical_grups"/>
 
-    <menuitem id="menu_patinatge_entrenaments"
-              name="Entrenaments"
-              parent="menu_patinatge_root"
-              action="action_patinatge_entrenaments"/>
+    <menuitem id="menu_agrupaciomusical_actes"
+              name="Actes"
+              parent="menu_agrupaciomusical_root"
+              action="action_agrupaciomusical_actes"/>
 
 </odoo>
 ```
 
 
-## 4. Crear les vistes per al model Grup
+## Crear les vistes per al model Grup
 
 Crea un fitxer nou dins de la carpeta `views/`:
 
 ```
-patinatge_grup_views.xml
+agrupaciomusical_grup_views.xml
 ```
 
-### 4.1 Vista de llistat (list) de Grups
+### Vista de llistat (list) de Grups
 
-La vista *list* ha de mostrar com a mínim:
+La vista *list* ha de mostrar:
 - `name`
-- `modalitat`
-- `categoria`
-- `entrenadora`
+- `instruments`
 
----
-
-### 4.2 Vista de formulari (form) de Grups
+### Vista de formulari (form) de Grups
 
 El formulari ha d’estar ben organitzat:
-- camps principals en dues columnes,
-- una pestanya amb les patinadores del grup (`patinadores_ids`).
+- camps principals,
+- una pestanya amb les musics del grup (`musics_ids`).
 
-💡 *Consell:* utilitza `<group>` i `<notebook>` com ja has fet amb Patinadores.
+💡 *Consell:* utilitza `<group>` i `<notebook>` com ja has fet amb Músics.
 
 
 ### 👥 Resultat final – model Grup
 
 Vista de llistat (*list*) de Grups:
-```{image} /_static/assets/img/Tema6/vista-grups.png
-:alt: Vista Grups
+```{image} /_static/assets/img/T5_prac7_VistaGrupList.png
+:alt: Vista Grup list
 :class: img-fluid
 :width: 80%
 :align: center
 ```
 
-Vista de formulari (*form*) de Grup, amb pestanya de patinadores:
-```{image} /_static/assets/img/Tema6/vista-grup-form.png
+Vista de formulari (*form*) de Grup, amb pestanya de músics:
+```{image} /_static/assets/img/T5_prac7_VistaGrupForm.png
 :alt: Vista Grup form
 :class: img-fluid
 :width: 80%
 :align: center
 ```
 
----
-
-## 5. Crear les vistes per al model Entrenament
+## Crear les vistes per al model Acte
 
 Crea un fitxer nou dins de `views/`:
 
 ```
-patinatge_entrenament_views.xml
+agrupaciomusical_acte_views.xml
 ```
 
-### 5.1 Vista de llistat (list) d’Entrenaments
+### Vista de llistat (list) d’Actes
 
 La vista *list* ha de mostrar:
 - `name`
 - `data`
 - `duracio`
-- `grup_id`
+- `localitat`
+- `repertori`
 
----
-
-### 5.2 Vista de formulari (form) d’Entrenaments
+### Vista de formulari (form) d’Actes
 
 El formulari ha d’incloure:
-- Dades bàsiques de l’entrenament,
+- Dades bàsiques de l’acte,
 - El grup associat,
-- Una pestanya amb les participacions de la sessió (`participacio_ids`), que mostrarà la patinadora i el grup de cada participació.
+- Una pestanya amb les participacions de l'acte (`participacio_ids`), que mostrarà els músics i el grup de cada participació.
 
 :::{admonition} Recorda
 :class: tip
-No hi ha cap camp `patinadores_ids` al model `patinatge.entrenament`. La relació amb les patinadores es fa a través del model associatiu `patinatge.participacio`, que és el que reflecteix la relació ternària del diagrama. Usa `participacio_ids` com a `One2many` en la pestanya.
+No hi ha cap camp `musics_ids` al model `agrupaciomusical.acte`. La relació amb els músics es fa a través del model associatiu `agrupaciomusical.participacio`, que és el que reflecteix la relació ternària del diagrama. Usa `participacio_ids` com a `One2many` en la pestanya.
 :::
 
-### 🏋️ Resultat final – model Entrenament
+### 🏋️ Resultat final – model Acte
 
-Vista de llistat (*list*) d’Entrenaments:
-```{image} /_static/assets/img/Tema6/vista-entrenaments.png
-:alt: Vista Entrenaments
+Vista de llistat (*list*) d’Actes:
+```{image} /_static/assets/img/T5_prac7_VistaActeList.png
+:alt: Vista Actes
 :class: img-fluid
 :width: 80%
 :align: center
 ```
 
-Vista de formulari (*form*) d’Entrenament amb grup i patinadores:
-```{image} /_static/assets/img/Tema6/vista-entrenaments-form.png
-:alt: Vista Entrenament form
+Vista de formulari (*form*) d’Acte amb grup i músics:
+```{image} /_static/assets/img/T5_prac7_VistaActeForm.png
+:alt: Vista Acte form
 :class: img-fluid
 :width: 80%
 :align: center
 ```
 
----
-
-## 6. Actualitzar el manifest
+## Actualitzar el manifest
 
 Com que s’han creat fitxers XML nous, cal afegir-los al `__manifest__.py`:
 
 ```python
 'data': [
     'security/ir.model.access.csv',
-    'views/patinatge_menus.xml',
-    'views/patinatge_patinadora_views.xml',
-    'views/patinatge_grup_views.xml',
-    'views/patinatge_entrenament_views.xml',
+    'views/agrupaciomusical_menus.xml',
+    'views/agrupaciomusical_music_views.xml',
+    'views/agrupaciomusical_grup_views.xml',
+    'views/agrupaciomusical_acte_views.xml',
 ],
 ```
 
----
 
-## 7. Comprovacions finals
+## Comprovacions finals
 
 Abans de donar l’activitat per bona, comprova que:
 
-- Apareixen els menús **Patinadores**, **Grups** i **Entrenaments**.
+- Apareixen els menús **Músics**, **Grups** i **Actes**.
 - Cada menú obri la seua vista *list* personalitzada.
 - En crear o obrir un registre es mostra la vista *form* definida.
 - Odoo **no utilitza vistes automàtiques**.
 
 Si tot això funciona, l’activitat està correcta.
 
----
 
-## 8. Entrega
+## Entrega
 
 Ara sí, en acabar este segon exercici, ja es pot fer l’entrega completa de l’activitat.
 
 Cal entregar:
 
-- El mòdul `patinatge` complet en format `.zip`,
+- El mòdul `agrupaciomusical` complet en format `.zip`,
 - Un PDF amb:
   - Captures de pantalla de:
     - vista *list* i *form* de **Grups**,
-    - vista *list* i *form* d’**Entrenaments**,
+    - vista *list* i *form* d’**Actes**,
   - Una breu explicació del treball realitzat, problemes trobats i solucions implementades.
 
----
 
 😏 *Si açò et funciona, ja no estàs fent proves… estàs fent mòduls d’Odoo com cal.*

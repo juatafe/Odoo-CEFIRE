@@ -121,7 +121,7 @@ Exemple:
 #### Com funciona?
 Si la base de dades es crea amb “Load demo data” → sí que es carreguen. Load demo data està en la pantalla de creació de bases de dades.
 
-```{image} /_static/assets/img/Tema5/load_demo_data.png
+```{image} /_static/assets/img/T5_load_demo_data.png
 :alt: Load demo data
 :width: 40%
 :align: center
@@ -568,7 +568,7 @@ Això garantix, absència de xocs amb altres mòduls, identificació clara dels 
 
 Al fixer models/alumne.py hem definit un model anomenat `centre.alumne` amb tres camps: `name`, `edat` i `curs`. Aquest model es traduirà en una taula a la base de dades amb les columnes corresponents. Cada camp és una instància d’una classe de `fields` que defineix el tipus de dada i les característiques del camp (per exemple, `required=True` indica que el camp és obligatori). A més, el camp `curs` és un camp de selecció que només pot prendre els valors definits en la llista de tuples. Si partim del diagrama ER, aquest model es representaria com una entitat `ALUMNE` amb els atributs `name`, `edat` i `curs`, on `name` és un atribut requerit.
 
-:::{image} /_static/assets/img/Tema5/curs-alumne2.png
+:::{image} /_static/assets/img/T5_curs-alumne2.png
 :alt: Model centre.alumne
 :width: 200px
 :align: center

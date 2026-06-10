@@ -40,7 +40,7 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
             <list create="false" edit="true">
                 <field name="reference" string="Ref"/>
                 <field name="nom_patinadora" string="Nom patinadora"/>
-                <field name="data_naixement" string="Data naixement"/>
+                <field name="data_inici" string="Data de inici"/>
                 <field name="categoria"
                     decoration-info="categoria == 'iniciacio'"
                     decoration-primary="categoria == 'federades'"/>

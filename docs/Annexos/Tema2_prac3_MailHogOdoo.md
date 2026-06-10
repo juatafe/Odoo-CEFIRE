@@ -133,7 +133,7 @@ Ara anem dins de l’aplicació Odoo:
 Fes clic a **Provar connexió**. Si tot està bé, apareixerà el missatge:
  *Prova de connexió correcta!* 
 
-```{image} /_static/assets/img/Tema3/mailhog-test.png
+```{image} /_static/assets/img/T3_mailhog-test.png
 :alt: Virtualització del correu en MaiHog
 :width: 60%
 :align: center
@@ -155,7 +155,7 @@ Fes clic a **Enviar missatge** al peu de la fitxa i escriu un text senzill, com 
 
 Fes clic a **Enviar**.
 
-```{image} /_static/assets/img/Tema3/mailhog-test2.png
+```{image} /_static/assets/img/T3_mailhog-test2.png
 :alt: Enviar missatge des de Contactes
 :width: 60%
 :align: center
@@ -178,7 +178,7 @@ Fes clic sobre el missatge per obrir-lo i podràs veure:
 - L’**assumpte** i el contingut del missatge
 - Les diferents pestanyes: *HTML*, *Plain text*, *Source*, *MIME*
 
-```{image} /_static/assets/img/Tema3/mailhog-test3.png
+```{image} /_static/assets/img/T3_mailhog-test3.png
 :alt: Missatge complet a MailHog
 :width: 60%
 :align: center

@@ -167,7 +167,6 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
 latex_additional_files = [
-#  '_static/assets/img/logos/logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf',
   '_static/scripts/comptabilitat.sh',
   '_static/scripts/main.py',
   '_static/scripts/scriptsetupodoo.sh',
@@ -386,14 +385,6 @@ Odoo: entorn, desenvolupament de mòduls i projectes reals
     \fill[white]
       (current page.south west)
       rectangle ([yshift=3.8cm]current page.south east);
-
-    % ───── LOGOS (grans) ─────
-    \node[
-      anchor=south,
-      yshift=1.8cm
-    ] at (current page.south) {
-      \includegraphics[width=1.3\textwidth]{logo_Ministerio_UE_GeneralitatConselleria_FPCefire.pdf}
-    };
 
   \end{tikzpicture}
 
