@@ -1,8 +1,9 @@
-# Exercici pràctic: Portal de patinadores
+# Exercici pràctic: Portal de la colla
 
 ## Context de la pràctica
-El club de patinatge vol que les patinadores puguen consultar les seues dades des del portal d’usuari, sense entrar al backend d’Odoo. Ja tenim:
-- Un mòdul `patinatge`
+La colla de dolçaines i tabals vol que els músics puguen consultar les seues actuacions des del portal d’usuari (/my), sense necessitat d’accedir al backend d’Odoo.
+- Un mòdul `agrupaciomusical`
+- Un model `music`
 - Un portal (`/my`)
 - Nocions de QWeb i de controladors
 
