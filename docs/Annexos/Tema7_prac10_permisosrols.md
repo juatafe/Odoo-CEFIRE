@@ -1,12 +1,12 @@
-# Exercici pràctic: Permisos i rols en Odoo (club de patinatge)
+# Permisos i rols en Odoo per a la colla
 
 ## Context de la pràctica
-El club de patinatge ja utilitza Odoo per gestionar inscripcions, grups i patinadores.  
+La colla de dolçaines i tabals ja utilitza Odoo per gestionar músics, grups i actes.
 Ara la directiva s’ha cansat del “tothom ho veu tot” i vol posar ordre:
 
 - La directiva mana (com sempre 😅).
-- Les entrenadores gestionen, però amb límits.
-- Les patinadores només poden veure i crear el que és seu.
+- Els responsables gestionen, però amb límits.
+- Els músics només poden veure i crear el que és seu.
 
 ::: {admonition} Avís important sobre els menús
 :class: warning
@@ -23,7 +23,7 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 :::
 
 ### Requisits previs
-👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `patinatge.inscripcio` tinga almenys una vista list i una form** per poder provar els permisos. Si el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
+👉 En esta pràctica NO crearem vistes noves, només seguretat real (grups, ACL i record rules). No crearem vistes noves, però **necessitem que el model `agrupaciomusical.inscripcio` tinga almenys una vista list i una form** per poder provar els permisos. Si el teu mòdul `patinatge_inscripcio` no les té definides, usa la vista següent a `views/patinatge_inscripcio_views.xml` 
 
 :::{admonition} Codi complet de la vista `patinatge_inscripcio_views.xml`
 :class-container: tip
@@ -34,8 +34,8 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 <odoo>
 
     <record id="view_patinatge_inscripcio_list" model="ir.ui.view">
-        <field name="name">patinatge.inscripcio.list</field>
-        <field name="model">patinatge.inscripcio</field>
+        <field name="name">agrupaciomusical.inscripcio.list</field>
+        <field name="model">agrupaciomusical.inscripcio</field>
         <field name="arch" type="xml">
             <list create="false" edit="true">
                 <field name="reference" string="Ref"/>
@@ -59,8 +59,8 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
     </record>
 
     <record id="view_patinatge_inscripcio_form" model="ir.ui.view">
-        <field name="name">patinatge.inscripcio.form</field>
-        <field name="model">patinatge.inscripcio</field>
+        <field name="name">agrupaciomusical.inscripcio.form</field>
+        <field name="model">agrupaciomusical.inscripcio</field>
         <field name="arch" type="xml">
             <form string="Inscripció al club">
                 <header>
@@ -105,7 +105,7 @@ Aquesta pràctica està pensada perquè detectes i entengues aquest comportament
 
     <record id="action_patinatge_inscripcio" model="ir.actions.act_window">
         <field name="name">Inscripcions</field>
-        <field name="res_model">patinatge.inscripcio</field>
+        <field name="res_model">agrupaciomusical.inscripcio</field>
         <field name="view_mode">list,form</field>
     </record>
 
@@ -140,7 +140,7 @@ Abans de començar la pràctica, cal tindre clar com està organitzat el project
 En aquesta pràctica no treballem amb un únic mòdul, sinó amb dos mòduls relacionats:
 
 📦 Mòduls del projecte
-- patinatge
+- agrupaciomusical
   - Mòdul base del projecte. Conté:
       - Models generals (patinadores, grups, entrenaments…)
       - Vistes de backend
@@ -148,14 +148,14 @@ En aquesta pràctica no treballem amb un únic mòdul, sinó amb dos mòduls rel
 
 - patinatge_inscripcio
   - Mòdul específic per gestionar:
-      - El model patinatge.inscripcio
+      - El model agrupaciomusical.inscripcio
       - Les inscripcions al club
       - La lògica associada a l’alta de patinadores
 
 👉 Tot i ser mòduls diferents, treballen junts i comparteixen dades.
 Requisits:
 - Mòdul “patinatge” instal·lat.
-- Model `patinatge.inscripcio` operatiu.
+- Model `agrupaciomusical.inscripcio` operatiu.
 - Almenys 3 usuaris de prova:
   - `directiva_test`
   - `entrenadora_test`
@@ -237,7 +237,7 @@ Des del terminal de VS Code:
 - Situa’t en el directori del projecte i executa:
 
 ```bash
-./odoo-bin -u patinatge -d <nom_bd>
+./odoo-bin -u agrupaciomusical -d <nom_bd>
 ```
 
 Substitueix `<nom_bd>` pel nom de la teua base de dades.
@@ -251,35 +251,52 @@ Objectiu:
 - Definir els rols: Directiva, Entrenadora, Patinadora.
 
 Tasca:
-- Crea (o revisa) el fitxer `security/security.xml` i afig els grups del club de patinatge (els mateixos del tema teòric). En el mòdul `patinatge_inscripcio` no en `patinatge`.
+- Crea (o revisa) el fitxer `security/security.xml` i afig els grups del club de agrupaciomusical (els mateixos del tema teòric). En el mòdul `patinatge_inscripcio` no en `agrupaciomusical`.
 
 
 ```xml
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="0">
-    <record id="module_category_patinatge" model="ir.module.category">
-      <field name="name">Club de Patinatge</field>
-      <field name="description">Gestió de rols del club</field>
-      <field name="sequence">10</field>
+    <!--Definició de la categoria-->
+    <record id="module_category_agrupaciomusical" model="ir.module.category">
+        <field name="name">Agrupació Musical</field>
+        <field name="description">Gestió de rols i permisos per a la colla de dolçaines i tabals.</field>
+        <field name="sequence">10</field>
+    </record>
+    <!--Definició de la categoria-->
+    <record id="res_groups_privilege_agrupacionmusical" model="res.groups.privilege">
+        <field name="name">Agrupació Musical</field>
+        <field name="category_id" ref="module_category_agrupaciomusical"/>
+        <field name="sequence">70</field>
+    </record>
+    <!--El Rol de Músic (Usuari Base)-->
+    <record id="group_musics" model="res.groups">
+        <field name="name">Músic de la colla</field>
+        <field name="privilege_id" ref="res_groups_privilege_agrupacionmusical"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+<!--El Rol de Directiu (Administrador del Mòdul)-->
+    <record id="group_responsable" model="res.groups">
+        <field name="name">Responsable d'actes</field>
+        <field name="privilege_id" ref="res_groups_privilege_agrupacionmusical"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+
+    </record>
+    <!--El Rol de Directiu (Administrador del Mòdul)-->
+    <record id="group_directiu" model="res.groups">
+        <field name="name">Directiu</field>
+        <field name="privilege_id" ref="res_groups_privilege_agrupacionmusical"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 
-    <record id="group_patinatge_directiva" model="res.groups">
-      <field name="name">Directiva</field>
-      <field name="category_id" ref="module_category_patinatge"/>
-      <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    <!-- Un músic només veu els actes en els que participa-->
+    <record id="rule_music_veure_seus_actes" model="ir.rule">
+    <field name="name">Músic: veure els seus actes</field>
+    <field name="model_id" ref="model_agrupaciomusical_participacio"/>
+    <field name="domain_force">[('music_id.partner_id.id', '=', user.partner_id.id)]</field>
     </record>
 
-    <record id="group_patinatge_entrenadora" model="res.groups">
-      <field name="name">Entrenadora</field>
-      <field name="category_id" ref="module_category_patinatge"/>
-    </record>
-
-    <record id="group_patinatge_patinadora" model="res.groups">
-      <field name="name">Patinadora</field>
-      <field name="category_id" ref="module_category_patinatge"/>
-    </record>
-
-    </data>
 </odoo>
 ```
 
@@ -305,7 +322,7 @@ Verificació:
 
 
 :::{image} /_static/assets/img/Tema8/grups-filtre.png
-:alt: Grups de seguretat del club de patinatge.
+:alt: Grups de seguretat del club de agrupaciomusical.
 :width: 100%
 :::
 
@@ -314,7 +331,7 @@ Verificació:
 ## 3) Definir permisos al model (ACL · `ir.model.access.csv`)
 
 Objectiu:
-- Controlar què pot fer cada grup sobre `patinatge.inscripcio`.
+- Controlar què pot fer cada grup sobre `agrupaciomusical.inscripcio`.
 
 Tasca:
 - Obri `security/ir.model.access.csv` i afig les regles següents:
@@ -329,7 +346,7 @@ access_inscripcio_patinadora,inscripcio patinadora,model_patinatge_inscripcio,pa
 ::: {admonition} Precisió tècnica (CSV)
 :class: tip
 En `model_id:id` usa el prefix `model_` i guions baixos:  
-`patinatge.inscripcio` → `model_patinatge_inscripcio`
+`agrupaciomusical.inscripcio` → `model_patinatge_inscripcio`
 :::
 
 Actualitza el mòdul i prova amb cada usuari:
@@ -450,14 +467,14 @@ Sense grup:
 ---
 
 ## 4) Prerequisit per a les record rules: afegir `partner_id` al model
-Per poder filtrar “el que és meu”, el model ha de saber qui és el contacte (partner) que fa la inscripció. Afig el camp `partner_id` a `patinatge.inscripcio`. Açò és provisional per a la pràctica ja que caldria acceptar la inscripció per a convertir-la en patinadora però cal tenir un camp relacionat amb res.partner per a la record rule.
+Per poder filtrar “el que és meu”, el model ha de saber qui és el contacte (partner) que fa la inscripció. Afig el camp `partner_id` a `agrupaciomusical.inscripcio`. Açò és provisional per a la pràctica ja que caldria acceptar la inscripció per a convertir-la en patinadora però cal tenir un camp relacionat amb res.partner per a la record rule.
 
 ```python
 # filepath: patinatge_inscripcio/models/patinatge_inscripcio.py
 from odoo import api, fields, models
 
 class PatinatgeInscripcio(models.Model):
-    _name = 'patinatge.inscripcio'
+    _name = 'agrupaciomusical.inscripcio'
     # ...existing code...
 
     partner_id = fields.Many2one(
