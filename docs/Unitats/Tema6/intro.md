@@ -144,7 +144,7 @@ Una vegada entesos aquests conceptes, es pot aplicar la modificació d’una pla
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="portal_my_layout_inherit" inherit_id="portal.portal_layout" name="Portal Layout - Customizations">
-        <xpath expr="//div[contains(@class, 'o_portal_wrap')]//h3" position="replace">       
+        <xpath expr="//div[hasclass('o_portal_wrap')]//h3" position="replace">       
             <h3 class="my-3">Benvingut al teu portal personalitzat!</h3>
         </xpath>
     </template>
@@ -156,12 +156,12 @@ Anem a desglossar aquest codi:
 L’expressió XPath indica **exactament quin element del portal volem modificar**.
 
 ```xml
-<xpath expr="//div[contains(@class, 'o_portal_wrap')]//h3"
+<xpath expr="//div[hasclass('o_portal_wrap')]//h3"
 ```
 
 - `//`  Indica que la cerca es fa **des de qualsevol punt del document XML**, no només des del node arrel immediat.
 
-- `contains(@class, ...)` permet seleccionar elements que contenen una classe CSS concreta. És una expressió XPath estàndard i més robusta davant canvis en l’estructura HTML.
+- `hasclass(...)` permet seleccionar elements que contenen una classe CSS concreta. És una expressió XPath estàndard i més robusta davant canvis en l’estructura HTML.
 
 - `/h3`  Selecciona l’element `<h3>` que es troba **dins** d’aquest `<div>`.
 
@@ -232,8 +232,10 @@ Primer afegirem el link a la pàgina principal del portal d’usuari. Per a aix�
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="portal_my_home_inherit" inherit_id="portal.portal_my_home" name="Portal Home - Customizations">
-        <xpath expr="//div[contains(@class, 'o_portal_my_home')]" position="inside">       
+    <template id="portal_my_home_inherit" 
+        inherit_id="portal.portal_my_home" 
+        name="Portal Home - Customizations">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="inside">       
             <a href="/my/custom_page" class="btn btn-primary mt-3">Pàgina Personalitzada</a>
         </xpath>
     </template>    
@@ -392,7 +394,7 @@ El primer pas és preparar el portal (QWeb), i per això tenim que crear una n
 També hem d'afegir el botó per a accedir a esta nova plantilla:
 ```xml
     <template id="portal_my_home_inherit" inherit_id="portal.portal_my_home" name="Portal Home - Customizations">
-        <xpath expr="//div[contains(@class, 'o_portal_my_home')]" position="inside">       
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="inside">       
             <a href="/my/actuacions" class="btn btn-primary mt-3">Actuacions</a>
         </xpath>
     </template>
@@ -466,10 +468,17 @@ Per a crear la plantilla OWL hem de crear un nou fitxer xml en `static/src/xml` 
             <div class="card-body">
                 <t t-if="state.actes.length">
                     <ul class="list-group">
-                        <t t-foreach="state.actes" t-as="acte" t-key="acte.id">
+                        <t t-foreach="state.actes" 
+                           t-as="acte" 
+                           t-key="acte.id">
                             <li class="list-group-item">
-                                <strong><t t-esc="acte.name"/></strong>
-                                <br/><t t-esc="acte.data"/> - <t t-esc="acte.hora"/>                                
+                                <strong>
+                                    <t t-esc="acte.name"/>
+                                </strong>
+                                <br/>
+                                <t t-esc="acte.data"/>
+                                 - 
+                                <t t-esc="acte.hora"/>                                
                             </li>
                         </t>
                     </ul>
@@ -496,8 +505,10 @@ Finalmente definim una ruta que retorne dades en format JSON. Per això tornem 
             {
                 'id': acte.id,
                 'name': acte.name,
-                'data': acte.data.strftime('%d/%m/%Y') if acte.data else '',
-                'hora': acte.hora_inici.strftime('%H:%M') if acte.hora_inici else '',                
+                'data': acte.data.strftime('%d/%m/%Y') 
+                    if acte.data else '',
+                'hora': acte.hora_inici.strftime('%H:%M') 
+                    if acte.hora_inici else '',                
             }
             for acte in actes
         ]
@@ -512,7 +523,13 @@ I con fins ara, no hi ha que oblidar afegir estos nous fitxers al manifest. En e
     ],
 },
 ```
-
+Quan executem el portal i accedim a la pàgina de les actuacions podem veure totes les actucions que tenim creades:
+```{image} /_static/assets/img/T6_PaginaActuacions.png
+:alt: Pàgina actuacions inicial
+:class: img-fluid
+:align: center
+:width: 80%
+```
 
 **FINAL**
 Ara és el moment de realitzar l'exercici [Portal de la colla](../../Annexos/Tema6_prac8_portalcolla.md) per a posar en pràctica tot el que hem vist en aquest capítol i assolir els coneixements.
