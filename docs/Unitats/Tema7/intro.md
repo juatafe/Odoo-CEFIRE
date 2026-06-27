@@ -66,11 +66,12 @@ En les versions actuals d'Odoo, la jerarquia d'accés s'estructura en tres nivel
 
 La categoria és el contenidor de nivell més alt. Serveix per a agrupar visualment tots els permisos relacionats amb el nostre mòdul dins de la configuració d'Odoo, separant-los de les aplicacions estàndard (com Vendes o Facturació).
 ```xml
-<record 
-  id="module_category_agrupaciomusical" 
-  model="ir.module.category">
+<record id="module_category_agrupaciomusical" 
+        model="ir.module.category">
     <field name="name">Agrupació Musical</field>
-    <field name="description">Gestió de rols i permisos per a la colla de dolçaines i tabals.</field>
+    <field name="description">
+      Gestió de rols i permisos per a la colla de dolçaines i tabals.
+    </field>
     <field name="sequence">10</field>
 </record>
 ```
@@ -83,11 +84,11 @@ La categoria és el contenidor de nivell més alt. Serveix per a agrupar visualm
 
 En l'arquitectura d'Odoo, els grups no s'enllacen directament a la categoria global, sinó que es vinculen a un **Privilegi**. Aquest model actua com un pont o connector que permet orquestrar de manera precisa com interactuaran els rols de seguretat sota la mateixa categoria d'aplicació.
 ```xml
-<record 
-  id="res_groups_privilege_agrupacionmusical" 
-  model="res.groups.privilege">
+<record id="res_groups_privilege_agrupacionmusical" 
+        model="res.groups.privilege">
     <field name="name">Agrupació Musical</field>
-    <field name="category_id" ref="module_category_agrupaciomusical"/>
+    <field name="category_id" 
+           ref="module_category_agrupaciomusical"/>
     <field name="sequence">70</field>
 </record>
 ```
@@ -140,8 +141,7 @@ C) El Rol de Directiu (Administrador del Mòdul)
            eval="[(4, ref('base.group_user'))]"/>
     <field name="user_ids" 
            eval="[(4, ref('base.user_root')), 
-                  (4, ref('base.user_admin'))
-            ]"/>
+                  (4, ref('base.user_admin'))]"/>
 </record>
 ```
 - `user_ids`: Permet preassignar usuaris de manera automàtica en instal·lar el mòdul. Utilitzant el mètode `(4, ID)`, estem indicant a Odoo que afija l'usuari superadministrador del sistema (`base.user_root`) i l'usuari administrador per defecte (`base.user_admin`) directament dins del grup Directiu, assegurant-nos que l'administrador del sistema puga testejat i tindre control total des del primer segon.
@@ -196,7 +196,7 @@ Codi complet per al fitxer `security.xml`:
 El fitxer `ir.model.access.csv` és obligatori si el mòdul crea models. Si un model no apareix ací, per a l’usuari “no existix”.
 
 Format obligatori:
-```xml
+```text
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 ```
 
@@ -208,7 +208,7 @@ Què significa cada columna:
 - `perm_read/write/create/unlink`: 1 sí, 0 no
 
 Exemple real:
-```xml
+```text
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_directiva_participacio,accés de directiva a participació,model_agrupaciomusical_participacio,agrupaciomusical.group_directiu,1,1,1,1
 access_responsable_participacio,accés de responsable a participació",model_agrupaciomusical_participacio,agrupaciomusical.group_responsable,1,1,0,0

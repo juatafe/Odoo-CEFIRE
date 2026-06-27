@@ -18,7 +18,7 @@ Unitats/Tema5/index
 Unitats/Tema6/index
 Unitats/Tema7/index
 .. Unitats/Tema8/index
-.. Unitats/Tema9/index
+Unitats/Tema9/index
 Annexos/index
 llicencia
 ```

@@ -40,13 +40,13 @@ flowchart LR
 
 ## Concepte d’API 
 
-Una **API**(Application Programming Interface) és una interfície que permet que **un programa utilitze funcionalitats d’un altre programa** sense conéixer la seua implementació interna.
+Una **API** (Application Programming Interface) és una interfície que permet que **un programa utilitze funcionalitats d’un altre programa** sense conéixer la seua implementació interna.
 
 Dit d’una manera formal:
 
 > "Una API defineix **com** es pot accedir a les dades i operacions d’un sistema."
 
-En el cas d’Odoo, l’API permet consultar dades (clients, factures, productes…), crear o modificar registres, executar operacions del negoci sense utilitzar la interfície web. Açò facilita la integració amb altres sistemes (botigues en línia, facturació electrònica, etc.), però també pot suposar un risc de seguretat si no es gestiona adequadament. En aquest capíto treballarem directament amb l’API d’Odoo per comprendre el seu funcionament bàsic; més endavant veurem com protegir-ne l’accés mitjançant tokens i una API intermitja que actue com a capa de seguretat i control encara que no la desenvoluparem en aquest tema.
+En el cas d’Odoo, l’API permet consultar dades (clients, factures, productes…), crear o modificar registres, executar operacions del negoci sense utilitzar la interfície web. Açò facilita la integració amb altres sistemes (botigues en línia, facturació electrònica, etc.), però també pot suposar un risc de seguretat si no es gestiona adequadament. En aquest capítol treballarem directament amb l’API d’Odoo per comprendre el seu funcionament bàsic; més endavant veurem com protegir-ne l’accés mitjançant tokens i una API intermitja que actue com a capa de seguretat i control encara que no la desenvoluparem en aquest tema.
 
 
 
@@ -55,9 +55,9 @@ En el cas d’Odoo, l’API permet consultar dades (clients, factures, productes
 
 Odoo utilitza una arquitectura **client-servidor** amb les següents capes:
 - Base de dades (PostgreSQL),
-- Capa ORM,
+- Capa ORM (Object Relational Mapping),
 - Lògica de negoci (models),
-- Interfície web,
+- Interfície web (QWeb i OWL),
 - **API d’accés remot**.
 
 ```{mermaid}
@@ -179,8 +179,10 @@ La API d’Odoo és un sistema de **Remote Procedure Call (RPC)**, mentre que mo
 | Especificació | Sense contracte estàndard | Sovint OpenAPI/Swagger |
 | Autenticació | Usuari + clau API d’Odoo | Token Bearer / API Keys / OAuth2 |
 
-
-
+::: {admonition} Nota
+:class: note
+En les versions modernes d'Odoo es poden dissenyar endpoints REST de manera nativa utilitzant els controladors web de l'ecosistema o l'eina de Webhooks en les accions automatitzades
+:::
 ### Model de seguretat recomanat en producció
 
 En un entorn professional es recomana seguir les següents pràctiques per a una integració segura amb Odoo:
@@ -206,47 +208,59 @@ Les claus d’API:
 - Limiten riscos en cas de filtració.
 
 ### Generació de clau API (pas a pas)
-1. Inicia sessió i ves a "El meu perfil" (icona superior dreta).
+1. Inicia sessió i ves a "Les meves preferències" (icona superior dreta al menú de l'avatar).
 
-::::{image} /_static/assets/img/Tema10/elmeuperfil.png
-:alt: El meu perfil
+::::{image} /_static/assets/img/T10_preferencies.png
+:alt: Les meves preferències
 :class: img-fluid
-:height: 7cm
+:height: 5cm
+:align: center
 ::::    
 
-1. Obri la pestanya "Seguretat del compte" i entra a "Claus API".
+2. Obri la pestanya "Seguretat" i veuràs una secció per a les claus API "Claus API".
    
-::::{image} /_static/assets/img/Tema10/seguretat.png
+::::{image} /_static/assets/img/T10_seguretat.png
 :alt: Seguretat del compte
 :class: img-fluid
+:align: center
+:width: 80%
 ::::
 
-1. Clica "Nova clau API" i escriu una descripció clara (p. ex. "Connexió API").
+3. Clica en "Add API Key" i confirma amb la teua contrasenya d’Odoo per poder crear-la.
 
-::::{image} /_static/assets/img/Tema10/NomClau.png
-:alt: Nova clau API
-:class: img-fluid
-::::
-
-2. Confirma amb la teua contrasenya d’Odoo per crear-la.
-
-::::{image} /_static/assets/img/Tema10/password.png
+::::{image} /_static/assets/img/T10_password.png
 :alt: Confirma contrasenya
 :class: img-fluid
+:align: center
+:width: 80%
 ::::
 
-3. Guarda la clau generada en un gestor de secrets. No es pot recuperar més endavant.
+4. Escriu una descripció clara (p. ex. "Connexió API")
 
-::::{image} /_static/assets/img/Tema10/NovaClauCreada.png
+::::{image} /_static/assets/img/T10_NomClau.png
+:alt: Nova clau API
+:class: img-fluid
+:align: center
+:width: 80%
+::::
+
+
+5. Guarda la clau generada en un gestor de secrets. No es pot recuperar més endavant.
+
+::::{image} /_static/assets/img/T10_NovaClauCreada.png
 :alt: Clau generada
 :class: img-fluid
+:align: center
+:width: 80%
 ::::
 
-4. Consulta, renova o elimina claus des de la mateixa secció.
+6. Consulta, renova o elimina claus des de la mateixa secció.
 Per motius de seguretat, només es mostra la clau un cop generada. Podràs eliminar-la i crear-ne una de nova si la perds.
-::::{image} /_static/assets/img/Tema10/clausAPi.png
+::::{image} /_static/assets/img/T10_clausAPi.png
 :alt: Gestió de claus
 :class: img-fluid
+:align: center
+:width: 80%
 ::::
 
 
@@ -290,7 +304,7 @@ production:
         port: 443
         db: nom_bd
         user: usuari@example.com
-        password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # clau API
+        password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # clau API
 
 development:
     connection:
@@ -298,10 +312,10 @@ development:
         port: 8069
         db: nom_bd
         user: usuari@example.com
-        password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # clau API
+        password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # clau API
 ```
 
-Per canviar d’entorn en el codi, ajusta la variable `env` (p. ex. `env = "development"` o `env = "production"`).
+Per canviar d’entorn en el codi, ajusta la variable `env` (p. ex. `env="development"` o `env="production"`).
 
 ### Obtenir el nom de la base de dades
 Si no recordes el nom de la BD, consulta el gestor de BDs d’Odoo:
@@ -314,7 +328,7 @@ https://www.dominiodoo.es/web/database/manager
 http://localhost:8069/web/database/manager
 ```
 ### Instal·lació i execució
-Per executar el projecte, assegura’t de tenir Python 3.8+ i les llibreries `requests` i `pyyaml` instal·lades. Primer crearem un entorn virtual i instal·larem les dependències:
+Per executar el projecte, assegura’t de tenir Python 3.12+ i les llibreries `requests` i `pyyaml` instal·lades. Primer crearem un entorn virtual i instal·larem les dependències:
 
 ```bash
 python3 -m venv api-odoo-venv
@@ -353,23 +367,156 @@ Aquestes operacions actuen sobre els **mateixos models** que s’utilitzen al ba
 ### Exemple pràctic amb XML-RPC (autenticació + lectura)
 Exemple mínim per autenticar i llegir contactes (`res.partner`) utilitzant `search_read`:
 
-:::{tip} 
+A continuació tens un script d'exemple que realitza aquestes operacions bàsiques de connexió i consulta a l'API d'Odoo.
+```python
+# -*- coding: utf-8 -*-
+"""
+Mòdul d'interconnexió amb Odoo via XML-RPC.
+Aquest script facilita les operacions CRUD (Create, Read, Update, Delete)
+reutilitzant la sessió per a optimitzar el rendiment.
+"""
 
-Si vols provar ràpidament, pots descarregar un script d'exemple que realitza aquestes operacions bàsiques de connexió i consulta a l'API d'Odoo.
+import xmlrpc.client
+import ssl
+import sys
+import yaml
 
-```{raw} latex
-[Descarrega main.py](../../_static/scripts/main.py)
+# ------------------------------------------------------
+# 1. GESTIÓ DE CONFIGURACIÓ
+# ------------------------------------------------------
+
+def read_app_props(env: str) -> dict:
+    """
+    Llegeix el fitxer YAML de configuració.    
+    Args:
+        env (str): L'entorn a carregar ('development', 'production').
+    Returns:
+        dict: Diccionari amb les claus 'url', 'port', 'db', 'user', 'password'.
+    """
+    # Path(__file__).resolve().parent ens assegura localitzar exactament
+    # la carpeta on està guardat aquest script, siga quin siga el SO (Windows/Linux)
+    current_dir = Path(__file__).resolve().parent
+    config_file = current_dir / "config.yml"
+   
+    with open(configFile, 'r', encoding='utf-8') as f:
+        # safe_load evita l'execució de codi arbitrari dins del YAML
+        configData = yaml.safe_load(f).get(env)        
+    return configData
+
+# ------------------------------------------------------
+# 2. CLIENTS DE CONNEXIÓ (PROXIES)
+# ------------------------------------------------------
+
+def get_client(props: dict, service: str):
+    """
+    Crea un servidor proxy per a un servei específic d'Odoo.    
+    Args:
+        props (dict): Propietats de connexió.
+        service (str): 'common' per login/versió o 'object' per a dades.
+    """
+    conn = props.get('connection')
+    url = f"{conn['url']}:{conn['port']}/xmlrpc/2/{service}"
+    
+    # allow_none=True permet rebre valors nuls des d'Odoo
+    # context=ssl._create_unverified_context() ignora certificats SSL no vàlids
+    return xmlrpc.client.ServerProxy(
+        url,
+        allow_none=True,
+        context=ssl._create_unverified_context()
+    )
+
+# ------------------------------------------------------
+# 3. AUTENTICACIÓ I CONSULTES
+# ------------------------------------------------------
+
+def getuid(props: dict) -> int:
+    """
+    Realitza el procés de login.
+    Retorna el User ID (uid) necessari per a totes les operacions posteriors.
+    """
+    conn = props.get('connection')
+    common = get_client(props, 'common')
+    
+    # El mètode login retorna un enter (UID) si té èxit o False si falla
+    return common.login(
+        conn['db'],
+        conn['user'],
+        conn['password']     # S'utilitza la Clau d'API en lloc de la contrasenya real
+    )
+
+def request_props(props: dict, uid: int, tablename: str, operation: str,
+                  args: list = [], kwargs: dict = {}):
+    """
+    Funció mestra per executar qualsevol operació a Odoo (execute_kw).    
+    Args:
+        uid (int): L'identificador d'usuari obtingut amb getuid().
+        tablename (str): El model d'Odoo (ex: 'res.partner', 'sale.order').
+        operation (str): El mètode (ex: 'search', 'read', 'create', 'write', 'unlink').
+        args (list): Llista de filtres o IDs (sempre dins d'una llista).
+        kwargs (dict): Paràmetres addicionals (camps, límits, ordres).
+    """
+    conn = props.get('connection')
+    models = get_client(props, 'object')
+
+    # Estructura obligatòria d'Odoo: (db, uid, password, model, mètode, arguments)
+    return models.execute_kw(
+        conn['db'],
+        uid,
+        conn['password'],   # Passem la clau d'API com a mètode d'autenticació
+        tablename,
+        operation,
+        args,
+        kwargs
+    )
+
+# ------------------------------------------------------
+# 4. EXEMPLES D'OPERACIONS (CRUD)
+# ------------------------------------------------------
+
+def main_test():
+    """Proves basades en les operacions d'A2Systems."""
+    
+    # Carreguem dades de l'entorn
+    props = read_app_props("development")
+    
+    if not props:
+        print("Error: No s'ha pogut carregar la configuració de l'entorn.")
+        return
+
+    uid = getuid(props)
+    
+    if not uid:
+        print("Error en l'autenticació! Revisa l'usuari, la base de dades o la Clau d'API.")
+        return
+
+    print(f"✅ Connexió establerta amb èxit. El teu UID d'usuari és: {uid}")
+
+    # --- EXEMPLE 1: SEARCH (Cercar IDs) ---
+    # Busquem IDs de contactes que són persones (no empreses)
+    person_ids = request_props(props, uid, 'res.partner', 'search', 
+                             [[['is_company', '=', False]]], 
+                             {'limit': 5})
+    print(f"IDs de persones: {person_ids}")
+
+    # --- EXEMPLE 2: READ (Llegir dades d'IDs coneguts) ---
+    if person_ids:
+        data = request_props(props, uid, 'res.partner', 'read', [person_ids], {'fields': ['name', 'email']})
+        print(f"📖 Dades llegides del model res.partner: {data}")
+
+    # --- EXEMPLE 3: CREATE (Crear un nou registre) ---
+    # (Descomenta per provar-ho)
+    # new_id = request_props(props, uid, 'res.partner', 'create', [{'name': 'Nou Client de Prova'}])
+    # print(f"Nou client creat amb ID: {new_id}")
+
+if __name__ == "__main__":
+    main_test()
 ```
-Descarrega'l, dona-li permisos d'execució i adapta'l al teu entorn.
-
-:::
-
 
 ### Gestió d’errors comuns
 Errors habituals i com abordar-los:
 - "Autenticació fallida": revisa clau API, usuari i DB.
 - Endpoint incorrecte: assegura `/xmlrpc/2/common` i derivació a `/object`.
-- Permisos insuficients: comprova `check_access_rights` i rols.
+- Permisos insuficients: comprova permisos i rols, tenint en compte que a partir de les versions recents, els privilegis dels grups es gestionen a través d'una capa intermèdia (`res.groups.privilege`) i no directament sobre el grup.
 - Problemes de xarxa/SSL: revisa ports (8069/443) i certificats.
 
 

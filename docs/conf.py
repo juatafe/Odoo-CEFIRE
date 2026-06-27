@@ -166,17 +166,7 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
-latex_additional_files = [
-  '_static/scripts/comptabilitat.sh',
-  '_static/scripts/main.py',
-  '_static/scripts/scriptsetupodoo.sh',
-  '_static/scripts/deploy-odoo-docker.sh',
-  '_static/scripts/test-docker-installation.sh',
-  '_static/scripts/diagnostic.sh',
-  '_static/scripts/monitor.sh',
-  '_static/scripts/backup-docker.sh',
-  '_static/scripts/restore-docker.sh'
-]
+latex_additional_files = []
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
     "extraclassoptions": "oneside",
@@ -218,6 +208,14 @@ latex_elements = {
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,positioning,calc}
 
+% ───── Forçar que Pygments NO elimine indentació ─────
+\usepackage{fvextra}
+\fvset{
+  obeytabs=true,
+  tabsize=2,
+  gobble=0
+}
+
 % ───── Capítols ─────
 \usepackage{titlesec}
 % \AtBeginDocument{
@@ -242,10 +240,17 @@ latex_elements = {
 
   
 % ───── Marques de capçalera per a Fancyhdr (Sphinx fix) ─────
-\makeatletter
+\makeatletter  
 
-% Capítol
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% Capítol → leftmark
+\renewcommand{\chaptermark}[1]{%
+    \markboth{\chaptername\ \thechapter\ - #1}{}%
+}
+
+% Secció → rightmark
+%\renewcommand{\sectionmark}[1]{%
+%  \markright{#1}%
+%}
 
 \makeatother
 
@@ -278,11 +283,18 @@ latex_elements = {
 \pagestyle{fancy}
 \fancyhf{} % neteja tot
 
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small\itshape \leftmark}
+    \fancyfoot[R]{\thepage}
+}
+
 % ─── Capçaleres ───
 \fancyhead[L]{\small\itshape \leftmark}
 
+
 % ─── Peu de pàgina ───
-% Número de pàgina al centre
+% Número de pàgina a la dreta
 \fancyfoot[L]{\small\itshape \leftmark}
 \fancyfoot[R]{\thepage}
 
@@ -366,72 +378,6 @@ Odoo: entorn, desenvolupament de mòduls i projectes reals
 }
 \makeatother
 
-% ───── Contraportada morada estil Odoo (robusta) ─────
-\AtEndDocument{
-  \clearpage
-  \thispagestyle{empty}
-
-  % Colors
-  \definecolor{odoopurple}{RGB}{113,75,103}
-
-  \begin{tikzpicture}[remember picture,overlay]
-
-    % ───── FONS COMPLET MORAT ODOO ─────
-    \fill[odoopurple]
-      (current page.north west)
-      rectangle (current page.south east);
-
-    % ───── FRANJA BLANCA INFERIOR ─────
-    \fill[white]
-      (current page.south west)
-      rectangle ([yshift=3.8cm]current page.south east);
-
-  \end{tikzpicture}
-
-  % ───── TEXT ─────
-  \color{white}
-  \begin{center}
-    \vspace*{2.8cm}
-
-    {\Large\bfseries Sistemes de Gestió Empresarial\par}
-    \vspace{0.9cm}
-
-    {\large
-    Aquest material recull els continguts del mòdul de
-    \textbf{Sistemes de Gestió Empresarial} del cicle de
-    \textbf{Desenvolupament d’Aplicacions Multiplataforma (DAM)}.
-    \par}
-
-    \vspace{0.7cm}
-
-    {\large
-    El llibre ofereix una aproximació pràctica als sistemes
-    \textbf{ERP--CRM}, amb especial atenció a \textbf{Odoo},
-    abordant tant la configuració de l’entorn com el
-    desenvolupament de mòduls i la realització de projectes reals.
-    \par}
-
-    \vspace{0.7cm}
-
-    {\large
-    Està pensat com a suport docent i d’aprenentatge,
-    amb exemples contextualitzats, pràctiques guiades
-    i una orientació clarament aplicada a l’aula.
-    \par}
-
-    \vspace{1.8cm}
-
-    % ───── QR BLANC ─────
-    {\color{white}
-    \qrcode[height=3.5cm]{https://github.com/juatafe/Odoo-CEFIRE}
-    }
-
-    \vspace{0.5cm}
-
-    {\small Accés al repositori oficial del curs (GitHub)\par}
-
-  \end{center}
-}
 % ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
 \AtBeginDocument{
 \makeatletter
