@@ -39,5 +39,7 @@ Tema5_prac7_CrearVista
 Tema6_prac8_portalcolla
 .. Tema6_prac9_contratsonline
 Tema7_prac10_permisosrols
+Ampliacio_1
 Tema8_prac11_apiodoo
+Ampliacio_2
 ```

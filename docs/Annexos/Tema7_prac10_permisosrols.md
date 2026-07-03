@@ -281,7 +281,7 @@ Dins de la carpeta del teu mòdul, entra al directori `security/` i crea un fitx
 
 Recorda que la primera línia d'aquest fitxer ha de contindre sempre les capçaleres obligatòries d'Odoo:
 
-```text
+```
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 ```
 

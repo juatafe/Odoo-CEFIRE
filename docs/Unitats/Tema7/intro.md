@@ -196,7 +196,7 @@ Codi complet per al fitxer `security.xml`:
 El fitxer `ir.model.access.csv` és obligatori si el mòdul crea models. Si un model no apareix ací, per a l’usuari “no existix”.
 
 Format obligatori:
-```text
+```csv
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 ```
 

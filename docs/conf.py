@@ -167,6 +167,7 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
 latex_additional_files = []
+
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
     "extraclassoptions": "oneside",
@@ -176,7 +177,9 @@ latex_elements = {
         if is_pdf
         else r"\usepackage[a4paper,margin=2cm]{geometry}"
     ),
-    "sphinxsetup": "verbatimwrapslines=true,verbatimwithframe=true",
+    
+    # Configuració oficial de Sphinx per a forçar el tall de línia
+    "sphinxsetup": "verbatimwrapslines=true, verbatimwithframe=true",
 
     "fontpkg": "",
     "fncychap": "",
@@ -208,26 +211,14 @@ latex_elements = {
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,positioning,calc}
 
-% ───── Forçar que Pygments NO elimine indentació ─────
-\usepackage{fvextra}
-\fvset{
-  obeytabs=true,
-  tabsize=2,
-  gobble=0
-}
-
 % ───── Capítols ─────
 \usepackage{titlesec}
-% \AtBeginDocument{
-%   \frontmatter
-% }
+
 % ───── Netejar numeració estranya del TOC ─────
 \usepackage{tocloft}
-
 \renewcommand{\cftsecnumwidth}{2.5em}
 \renewcommand{\cftsubsecnumwidth}{3.5em}
 \renewcommand{\cftsubsubsecnumwidth}{4.5em}
-
 
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
@@ -238,22 +229,6 @@ latex_elements = {
   {1em}
   {\Huge}
 
-  
-% ───── Marques de capçalera per a Fancyhdr (Sphinx fix) ─────
-\makeatletter  
-
-% Capítol → leftmark
-\renewcommand{\chaptermark}[1]{%
-    \markboth{\chaptername\ \thechapter\ - #1}{}%
-}
-
-% Secció → rightmark
-%\renewcommand{\sectionmark}[1]{%
-%  \markright{#1}%
-%}
-
-\makeatother
-
 % ───── Convertir Mermaid en no-flotant ─────
 \usepackage{float}
 \makeatletter
@@ -262,45 +237,67 @@ latex_elements = {
   {\par\medskip}
 \makeatother
 
+% ───── Portada estil Odoo amb logos ─────
+\usepackage{xcolor}
+\usepackage{pagecolor}
 
-% ───── Silenciador de caràcters perduts (evita '?') ─────
-\makeatletter
-\tracinglostchars=0
-\makeatother
+\definecolor{odoopurple}{RGB}{113,75,103}
+\definecolor{odoopurplelight}{RGB}{245,240,243}
 
-% ───── WARNING sense icones ni emojis (PDF net) ─────
-\usepackage{etoolbox}
-\makeatletter
-\renewenvironment{sphinxwarning}[1]
-  {\begin{sphinxadmonition}{warning}{Advertència}{}}
-  {\end{sphinxadmonition}}
-\makeatother
-
-% ───── Estil de pàgina ─────
-%\pagestyle{plain}
-% ───── Capçaleres i peus de pàgina professionals ─────
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{} % neteja tot
-
-\fancypagestyle{plain}{
-    \fancyhf{}
-    \fancyfoot[L]{\small\itshape \leftmark}
-    \fancyfoot[R]{\thepage}
+\renewcommand{\maketitle}{
+\begin{titlepage}
+\pagecolor{odoopurple}
+\color{white}
+\vspace{2cm}
+\centering
+{\Huge\bfseries Sistemes de Gestió Empresarial\par}
+\vspace{1cm}
+{\Large Odoo: entorn, desenvolupament de mòduls i projectes reals\par}
+\vfill
+{\Large Reina del Carmen Peiró Arnau\par}
+\vspace{1cm}
+{\large 2026\par}
+\vspace*{1.2cm}
+{\Large Material adaptat del curs SGE dels autors: \par}
+{\Large Juan Bautista Talens i Alicia González \par}
+\end{titlepage}
+\nopagecolor
 }
 
-% ─── Capçaleres ───
-\fancyhead[L]{\small\itshape \leftmark}
+% ───── Capçaleres i peus de pàgina professionals (Solució Definitiva per a 'make pdf') ─────
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
 
+\AtBeginDocument{
+  % 1. Forcem a que Sphinx NO convertisca el text a majúscules
+  \patchcmd{\chaptermark}{\MakeUppercase}{}{}{}
+  \patchcmd{\sectionmark}{\MakeUppercase}{}{}{}
 
-% ─── Peu de pàgina ───
-% Número de pàgina a la dreta
-\fancyfoot[L]{\small\itshape \leftmark}
-\fancyfoot[R]{\thepage}
+  % 2. Congelem les marques: el capítol escriurà a la banda esquerra (leftmark)
+  % i anul·lem completament que les seccions (apartats) escriguen res.
+  \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ - #1}{}}
+  \renewcommand{\sectionmark}[1]{}
+  \renewcommand{\subsectionmark}[1]{}
 
-% ─── Línies fines (elegant, no escandalós) ───
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.2pt}
+  % 3. Redefinim 'plain' (l'estil de Sphinx per als inicis de capítol)
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small\itshape\leftmark}  % Nom del capítol
+    \fancyfoot[R]{\thepage}                 % Número de pàgina
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.2pt}
+  }
+
+  % 4. Redefinim 'normal' (l'estil secret que Sphinx aplica a la resta de pàgines)
+  \fancypagestyle{normal}{
+    \fancyhf{}
+    \fancyfoot[L]{\small\itshape\leftmark}  % El mateix nom del capítol congelat
+    \fancyfoot[R]{\thepage}                 % El mateix número
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.2pt}
+  }
+}
+
 
 % ───── Suport per a llistes molt profundes (fins a 20 nivells) ─────
 \usepackage{enumitem}
@@ -309,7 +306,6 @@ latex_elements = {
 \setlist[itemize]{label=\textbullet}
 
 \usepackage{float}
-% ───── Ajust fi d'espais de figures (Mermaid, Graphviz, etc.) ─────
 \setlength{\floatsep}{8pt}
 \setlength{\textfloatsep}{10pt}
 \setlength{\intextsep}{8pt}
@@ -320,80 +316,22 @@ latex_elements = {
 \usepackage{graphicx}
 \setkeys{Gin}{width=1\linewidth,keepaspectratio}
 
-% ───── Portada estil Odoo amb logos ─────
-\usepackage{xcolor}
-\usepackage{pagecolor}
-\usepackage{tikz}
-\usepackage{graphicx}
-
-% ───── Portada en color Odoo (LaTeX pur) ─────
-\definecolor{odoopurple}{RGB}{113,75,103}
-\definecolor{odoopurplelight}{RGB}{245,240,243}
-
-\renewcommand{\maketitle}{
-\begin{titlepage}
-\pagecolor{odoopurple}
-\color{white}
-
-
-\vspace{2cm}
-\centering
-
-% ───── Títol principal ─────
-{\Huge\bfseries Sistemes de Gestió Empresarial\par}
-
-\vspace{1cm}
-
-% ───── Subtítol ─────
-{\Large
-Odoo: entorn, desenvolupament de mòduls i projectes reals
-\par}
-
-\vfill
-
-% ───── Autoria ─────
-{\Large Reina del Carmen Peiró Arnau\par}
-
-\vspace{1cm}
-
-% ───── Any ─────
-{\large 2026\par}
-
-\vspace*{1.2cm}
-
-{\Large Material adaptat del curs SGE dels autors: \par}
-{\Large Juan Bautista Talens i Alicia González \par}
-
-\end{titlepage}
-
-% ───── Tornar a estat normal ─────
-\nopagecolor
-% \clearpage
-% \pagenumbering{arabic}
-}
-% ───── Annexos: que diga "Exercici pràctic" i no "Capítol" ─────
 \makeatletter
 \g@addto@macro\appendix{%
   \renewcommand{\chaptername}{Exercici pràctic}
 }
 \makeatother
 
-% ───── FIX TÍTOLS ADMONITIONS (SAFE) ─────
 \AtBeginDocument{
 \makeatletter
-
 \def\sphinx@note@title{Nota}
 \def\sphinx@tip@title{Consell}
 \def\sphinx@warning@title{Advertència}
 \def\sphinx@important@title{Important}
 \def\sphinx@caution@title{Precaució}
 \def\sphinx@danger@title{Perill}
-
 \makeatother
 }
-
-
-
 """,
 }
 

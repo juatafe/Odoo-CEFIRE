@@ -1772,11 +1772,11 @@ _sql_constraints = [
 
 %  6. CONNEXIONS (Relació ternària 1:M:N) 
 % Costat A (cardinalitat 1)
-\draw[thick] (A.east) -- (-1.20,0.90) node[pos=0.74, above] {1};
+\draw[thick] (A.east) -- (-1.20,0.90) node[pos=0.74, above] {m};
 % Costat B (cardinalitat m)
-\draw[thick] (B.west) -- (1.20,0.90) node[pos=0.74, above] {m};
+\draw[thick] (B.west) -- (1.20,0.90) node[pos=0.74, above] {n};
 % Costat C (cardinalitat n)
-\draw[thick] (C.north) -- (0,-1.20) node[pos=0.74, right] {n};
+\draw[thick] (C.north) -- (0,-1.20) node[pos=0.74, right] {1};
 
 %  7. EXPLICACIÓ DE LA RESTRICCIÓ 1:M:N
 \node[draw, dashed, fill=white, font=\scriptsize, align=left] (Const) at (3.35,-2.25) {
