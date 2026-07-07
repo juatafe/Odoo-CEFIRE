@@ -166,7 +166,11 @@ latex_toplevel_sectioning = os.getenv("LATEX_TOPLEVEL_SECTIONING", "chapter")
 # Detectem build PDF (suficient per a ús normal)
 is_pdf = "latex" in sys.argv or "latexpdf" in sys.argv
 is_paperback = os.getenv("SPHINX_PAPERBACK", "0") == "1"
-latex_additional_files = []
+latex_additional_files = [
+      '_static/assets/img/logos/logoUPVGandia.png',
+      '_static/assets/img/logos/Logo_Morralla.png',
+      '_static/assets/img/logos/imatgeCentralLlibreSGE.png',
+]
 
 latex_elements = {
     "pointsize": "10pt" if is_pdf else "11pt",
@@ -241,27 +245,83 @@ latex_elements = {
 \usepackage{xcolor}
 \usepackage{pagecolor}
 
+% Definició de colors
 \definecolor{odoopurple}{RGB}{113,75,103}
 \definecolor{odoopurplelight}{RGB}{245,240,243}
+\definecolor{BlauUPV}{HTML}{005C84}
 
 \renewcommand{\maketitle}{
-\begin{titlepage}
-\pagecolor{odoopurple}
-\color{white}
-\vspace{2cm}
-\centering
-{\Huge\bfseries Sistemes de Gestió Empresarial\par}
-\vspace{1cm}
-{\Large Odoo: entorn, desenvolupament de mòduls i projectes reals\par}
-\vfill
-{\Large Reina del Carmen Peiró Arnau\par}
-\vspace{1cm}
-{\large 2026\par}
-\vspace*{1.2cm}
-{\Large Material adaptat del curs SGE dels autors: \par}
-{\Large Juan Bautista Talens i Alicia González \par}
-\end{titlepage}
-\nopagecolor
+    \begin{titlepage}
+        % Fons decoratiu suau per a un estil modern
+        \begin{tikzpicture}[remember picture, overlay]
+            \fill[BlauUPV] (current page.north west) rectangle (current page.south east);
+            \fill[white] (current page.north west) rectangle ([yshift=-3cm]current page.north east);
+        \end{tikzpicture}
+        
+        \centering
+        \vspace{-2cm}
+        
+        % Capsçalera amb el logo de la UPV a la dreta
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \flushleft
+            \includegraphics[height=2cm]{logoUPVGandia.png }  \hspace{2cm} \\
+        \end{minipage}
+        \hspace{2cm}
+        \begin{minipage}{0.4\textwidth}
+            \flushright       
+            \includegraphics[height=1.8cm]{Logo_Morralla.png} % Logo La Morralla
+        \end{minipage}
+        
+        \vspace{2cm}
+        % Bloc de títols emmarcat
+        \begin{minipage}{0.8\textwidth}
+            \flushleft     
+            \color{white}
+            {\fontsize{35}{42}\selectfont \textbf{Dossier d'activitats d'SGE amb Odoo 19} \par} 
+            \vspace{1cm}
+            \centering
+            {\LARGE \textit{Desenvolupament d'un mòdul de gestió per a una colla de dolçaines i tabals}} \\
+            \vspace{0.6cm}        
+        \end{minipage}
+        
+        
+        % --- IMATGE CENTRAL DE LA INFOGRAFIA ---        
+        \begin{tikzpicture}
+            \node[inner sep=0pt] (imatge) at (0,0) {\includegraphics[width=0.75\textwidth]{imatgeCentralLlibreSGE.png}};
+            \draw[BlauUPV, line width=2pt] (imatge.north west) -- (imatge.north east);
+            \draw[BlauUPV, line width=2pt] (imatge.south west) -- (imatge.south east);
+        \end{tikzpicture}
+        
+        %\vspace{2cm}
+        \vfill        
+        % Detalls de l'autora i any
+        \begin{minipage}{0.85\textwidth}
+            \centering
+            \color{white}
+            {\large \textbf{Reina del Carmen Peiró Arnau}} \\
+            \vspace{0.4cm}
+            {\large 2026}
+        \end{minipage}
+        
+        \vspace{2cm}
+        
+        
+        % Nota de crèdits
+        \begin{minipage}{1\textwidth}
+            \centering            
+            \begin{minipage}{0.95\textwidth}
+                \centering \vspace{0.8cm}
+                \color{white}
+                {\large Material adaptat del curs SGE dels autors: \\ \textbf{Juan Bautista Talens i Alicia González}}
+                \vspace{-0.6cm}
+            \end{minipage}        
+        \end{minipage}
+        
+        
+    
+    \end{titlepage}
+    \nopagecolor
 }
 
 % ───── Capçaleres i peus de pàgina professionals (Solució Definitiva per a 'make pdf') ─────
