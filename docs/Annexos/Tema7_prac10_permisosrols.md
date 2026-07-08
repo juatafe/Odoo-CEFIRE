@@ -1,7 +1,7 @@
 # Permisos i rols en Odoo per a la colla
 
 
-## Context de la pràctica
+## Context de la tasca
 La colla de dolçaines i tabals ja utilitza Odoo per gestionar músics, grups i actes.
 Ara la directiva s’ha cansat del “tothom ho veu tot” i vol posar ordre:
 
@@ -41,11 +41,11 @@ Encara que:
 
 👉 Si l’usuari no té el grup correcte, **el menú desapareix sense donar cap error**.
 
-Aquesta pràctica està pensada perquè detectes i entengues aquest comportament.
+Aquesta tasca està pensada perquè detectes i entengues aquest comportament.
 :::
 
-**Objectius de la pràctica**
-En acabar la pràctica sabràs:
+**Objectius de la tasca**
+En acabar la tasca sabràs:
 
 - Crear categories i grups reals d'usuaris adaptats a Odoo 19.
 - Assignar permisos estructurats amb ir.model.access.csv.
@@ -54,7 +54,7 @@ En acabar la pràctica sabràs:
 - Entendre la diferència real entre la interfície de gestió (backend) i la d'usuaris externs (portal).
 
 ## Preparació de l’entorn
-En aquesta pràctica **NO crearem models nous**, sinó que configurarem la seguretat real (grups, ACL i *record rules*) sobre la infraestructura que ja tenim. No obstant això, per a poder implementar el flux de treball de la colla (convocatòria, triatge i anul·lació), necessitem assegurar-nos que els nostres models en Python tenen els camps necessaris i que disposem d'una interfície gràfica (vistes) on es mostren aquests canvis.
+En aquesta tasca **NO crearem models nous**, sinó que configurarem la seguretat real (grups, ACL i *record rules*) sobre la infraestructura que ja tenim. No obstant això, per a poder implementar el flux de treball de la colla (convocatòria, triatge i anul·lació), necessitem assegurar-nos que els nostres models en Python tenen els camps necessaris i que disposem d'una interfície gràfica (vistes) on es mostren aquests canvis.
 
 ### Ampliació dels models en Python (`models/`)
 Abans de tocar la seguretat, revisa els teus fitxers `.py` i assegura't que els models d'**Acte** i de **Participacio** incorporen els següents camps clau per a la lògica de negoci:
@@ -628,7 +628,7 @@ A partir d'aquest moment, si crees tres usuaris l'Odoo amb els logis `directiu_t
 
 ## Conclusions
 
-En acabar aquesta pràctica, hem transformat una aplicació on "tothom ho veia tot" en un sistema empresarial blindat, modular i adaptat als estàndards moderns d'**Odoo 19**. Les lliçons clau que has d'endur-te d'aquest exercici són:
+En acabar aquesta tasca, hem transformat una aplicació on "tothom ho veia tot" en un sistema empresarial blindat, modular i adaptat als estàndards moderns d'**Odoo 19**. Les lliçons clau que has d'endur-te d'aquest exercici són:
 
 1. **La seguretat d'Odoo 19 és modular:** A diferència de versions anteriors, ja no lliguem els grups directament a les categories. Hem après a utilitzar els **Privilegis (`res.groups.privilege`)** com a capa intermediària, el que permet una gestió de rols molt més neta i escalable en projectes reals.
 2. **El CSV és el "Què" i el Record Rule és el "Qui":** L'ACL (`ir.model.access.csv`) ens ha servit per a definir quines accions globals (llegir, crear, editar) té permés cada grup per taula. Després, les *Record Rules* ens han permés filar més prim i decidir, fila per fila, quins registres exactes pot veure cada usuari.
@@ -640,7 +640,7 @@ En acabar aquesta pràctica, hem transformat una aplicació on "tothom ho veia t
 
 ## Entrega
 
-Per a donar per finalitzada i avaluada aquesta pràctica de seguretat, s'haurà de lliurar la següent documentació:
+Per a donar per finalitzada i avaluada aquesta tasca de seguretat, s'haurà de lliurar la següent documentació:
 
 - **El codi font del mòdul**
 
@@ -672,4 +672,4 @@ Al final del teu document PDF, respon de manera breu a les següents preguntes a
 
 * Quina impressió tens ara sobre la flexibilitat de la seguretat en Odoo en comparació amb el que coneixies de les bases de dades tradicionals?
 * T'ha resultat complex entendre com interactuen el fitxer CSV (ACL) i el fitxer XML (Record Rules) de manera combinada?
-* Quin ha sigut el problema més gran amb el qual t'has trobat durant el desplegament de la pràctica (errors de sintaxi als dominis, dependències al manifest, problemes amb els usuaris de prova) i com l'has aconseguit resoldre?
+* Quin ha sigut el problema més gran amb el qual t'has trobat durant el desplegament de la tasca (errors de sintaxi als dominis, dependències al manifest, problemes amb els usuaris de prova) i com l'has aconseguit resoldre?

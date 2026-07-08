@@ -12,14 +12,14 @@ La gestió econòmica d'aquesta colla de dolçaines es basa en les següents reg
 2. **Despeses associades:** De l'import total que paga el client per l'acte, s'han de restar una sèrie de despeses logístiques reals abans de fer el repartiment. Aquestes despeses inclouen el quilometratge dels vehicles, el lloguer de furgonetes de transport de percussió en alguns casos o el cost dels arrastradors (normalment són xiquets que arrastren el carro dels timbals i bombo gran).
 3. **El pot net i repartiment equitatiu:** Els diners restants (Preu de l'acte menys el total de despeses) es divideixen a parts iguals **únicament entre els músics que realment han assistit a tocar** (és a dir, aquells la participació dels quals estiga en estat *Acceptat*). Esta repartició proporcional i entre els participants és una simplificació de la realitat, que es fa per a tindre un primer contacte amb la gestió econòmica.
 
-**L'objectiu d'aquesta pràctica** és ampliar els teus models en Python i dissenyar les vistes necessàries per a automatitzar aquest flux de caixa, de manera que en tancar un acte es genere automàticament la liquidació individual per a cada músic assistent, suplint la falta del mòdul de comptabilitat Enterprise.
+**L'objectiu d'aquesta tasca** és ampliar els teus models en Python i dissenyar les vistes necessàries per a automatitzar aquest flux de caixa, de manera que en tancar un acte es genere automàticament la liquidació individual per a cada músic assistent, suplint la falta del mòdul de comptabilitat Enterprise.
 
 En esta part del curs ja has de ser capaç de fer la teua propia solució, sense cap codi adicional, basant-te en tot el que has fet fins ara.
 
 
 ## Requisits detallats del sistema
 
-Per a donar la pràctica per vàlida, la teua solució ha de complir de manera estricta els següents requisits de dades:
+Per a donar la tasca per vàlida, la teua solució ha de complir de manera estricta els següents requisits de dades:
 
 #### Ampliació del model d'acte (`agrupaciomusical.acte`)
 

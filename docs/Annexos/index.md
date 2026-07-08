@@ -8,7 +8,7 @@
 \vspace*{\fill}
 
 \begin{center}
-{\Huge\bfseries Exercicis pràctics}
+{\Huge\bfseries Activitats}
 \end{center}
 
 \vspace*{\fill}
@@ -16,7 +16,7 @@
 \clearpage
 \nopagecolor
 
-\addcontentsline{toc}{chapter}{Exercicis pràctics}
+\addcontentsline{toc}{chapter}{Activitats}
 
 \appendix
 \setcounter{chapter}{0}

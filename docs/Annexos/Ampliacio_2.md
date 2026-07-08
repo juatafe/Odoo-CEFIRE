@@ -4,7 +4,7 @@
 
 En l'ampliació I hem resolt un repartiment proporcional simple. No obstant això, en el dia a dia d'una agrupació musical, el repartiment és fix i depén de variables de formació, logística individual i col·laboracions externes. A més, com a entitat jurídica, la colla necessita un tancament econòmic global (ingressos reals vs. despeses estructurals i corrents) per a justificar la seua viabilitat o presentar els comptes a l'assemblea.
 
-Com que continuem utilitzant **Odoo Community**, manquem d'un mòdul de nòmines (*Payroll*) o de comptabilitat analítica *Enterprise*. L'objectiu d'aquesta pràctica és utilitzar la potència del disseny de models relacionals de l'ORM d'Odoo per a estructurar un sistema de nòmina interna de la colla i generar un **model de Balanç Anual**.
+Com que continuem utilitzant **Odoo Community**, manquem d'un mòdul de nòmines (*Payroll*) o de comptabilitat analítica *Enterprise*. L'objectiu d'aquesta tasca és utilitzar la potència del disseny de models relacionals de l'ORM d'Odoo per a estructurar un sistema de nòmina interna de la colla i generar un **model de Balanç Anual**.
 
 ## Nous requisits detallats del sistema
 
@@ -54,7 +54,7 @@ Aquest nou model de l'aplicació centralitzarà els comptes generals de la colla
 - *Total Despeses:* Camp calculat amb el sumatori de totes les despeses anteriors.
 
 
-3. **Resultat de l'Exercici:** Camp calculat que determine el Benefici o Pèrdua anual de la colla (Total Ingressos - Total Despeses).
+3. **Resultat de la tasca:** Camp calculat que determine el Benefici o Pèrdua anual de la colla (Total Ingressos - Total Despeses).
 
 ## Guia de desenvolupament (Passos conceptuals)
 
@@ -110,7 +110,7 @@ Per a validar que tota la xarxa de dependències de dades funciona en viu, haur�
 4. Un músic de reforç extern llogat amb el seu import fix independent.
 
 
-* **d) El Panell del balanç anual:** Captura del formulari del model `agrupaciomusical.balanc` del present exercici, on es comprove el correcte funcionament dels camps calculats: el sumatori automatitzat dels ingressos per actes i de les despeses per liquidacions de músics, així com el resultat net final (Benefici/Pèrdua) de la colla després d'introduir manualment les subvencions i les despeses estructurals (local, director, etc.).
+* **d) El Panell del balanç anual:** Captura del formulari del model `agrupaciomusical.balanc` de la present tasca, on es comprove el correcte funcionament dels camps calculats: el sumatori automatitzat dels ingressos per actes i de les despeses per liquidacions de músics, així com el resultat net final (Benefici/Pèrdua) de la colla després d'introduir manualment les subvencions i les despeses estructurals (local, director, etc.).
 
 
 2. **Un fitxer ZIP** que continga l'estructura de fitxers completa del teu mòdul actualitzat (codi Python, fitxers XML de vistes i menús, i fitxers de seguretat si s'han modificat) per a la seua revisió i execució en el Docker del docent.

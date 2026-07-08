@@ -1,6 +1,6 @@
 # Desplegament d'Odoo amb Docker Compose
 ## Introducció
-En l'exercici pràctic opcional s'aborda instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
+En la tasca opcional s'aborda instal·lar Odoo 16 manualment sobre un servidor Ubuntu, configurant PostgreSQL, usuaris i serveis.
 
 En aquest exercici explorarem una alternativa molt utilitzada en entorns professionals: Docker Compose, que permet desplegar aplicacions multi-contenidor d’una forma ràpida i portable.
 
@@ -15,7 +15,7 @@ A més de la possibilitat de comparar els dos mètodes, aprendràs a gestionar c
 - Personalitzar la configuració d'Odoo
 - Comparar avantatges i inconvenients respecte a la instal·lació manual
 
-L'objectiu general d'esta pràctica és aprendre a desplegar **Odoo 19** utilitzant Docker i Docker Compose de manera pràctica i guiada.
+L'objectiu general d'esta tasca és aprendre a desplegar **Odoo 19** utilitzant Docker i Docker Compose de manera pràctica i guiada.
 :::
 
 :::{admonition} Temps estimat i dificultat
@@ -306,7 +306,7 @@ docker system prune -a # Neteja completa
 
 ## Mini entrega
 
-Per a donar per finalitzada la pràctica, lliura:
+Per a donar per finalitzada la tasca, lliura:
 
 - **1 o 2 captures de pantalla** (per exemple, `docker compose ps` i/o Odoo funcionant al navegador).
 - **Respostes breus** a aquestes preguntes:
@@ -316,4 +316,4 @@ Per a donar per finalitzada la pràctica, lliura:
 
 ---
 
-🎉 **Felicitats! Has completat la Pràctica 2**
+🎉 **Felicitats! Has completat l'activitat 2**

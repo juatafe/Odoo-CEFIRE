@@ -1,17 +1,17 @@
 Instal·lació tradicional d'Odoo en Ubuntu Server
 ================================================
 
-:::{admonition} Sobre aquest document i les pràctiques associades
+:::{admonition} Sobre aquest document i les tasques associades
 :class: important
 Aquest tema **no pretén ser una guia pas a pas** per a la instal·lació d'Odoo. El seu objectiu és proporcionar una **visió teòrica i conceptual** dels passos que cal seguir, els components implicats i les decisions tècniques rellevants.
 
-La posada en pràctica d'aquests continguts es realitza a través de **pràctiques específiques** que acompanyen cadascun dels apartats d'aquest tema. Cada pràctica inclou:
+La posada en pràctica d'aquests continguts es realitza a través de **tasques específiques** que acompanyen cadascun dels apartats d'aquest tema. Cada tasca inclou:
 
 - 📋 **Instruccions pas a pas** per a completar la tasca concreta
 - ✅ **Bones pràctiques** recomanades per a cada fase del procés
 - 🔍 **Checklist de verificació** al final per confirmar que la instal·lació s'ha realitzat correctament
 
-Si estàs buscant les instruccions detallades per instal·lar Odoo, consulta directament les **pràctiques recomanades** associades a aquest apartat.
+Si estàs buscant les instruccions detallades per instal·lar Odoo, consulta directament les **tasques recomanades** associades a aquest apartat.
 :::
 
 Aquest apartat aborda la instal·lació d’**Odoo 19** mitjançant el mètode tradicional en **Ubuntu Server**, analitzant des d'un punt de vista tècnic i conceptual cada fase del procés: des de la preparació del sistema fins a la posada en marxa del servei. Es recomana no utilitzar aquest mètode per a entorns de proves o desenvolupament inicial, ja que és més complex i consumeix més temps que altres alternatives com Docker o Odoo.sh. No obstant això, és ideal per a aquells que volen un control total sobre la configuració, seguretat i rendiment del seu sistema Odoo.

@@ -38,7 +38,7 @@ Abans de continuar, comprova que:
 8. **Cicle de desenvolupament**: reiniciar, instal·lar i actualitzar mòduls.
 
 :::{tip}
-Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús). De l'ER al model Odoo conté molts conceptes i definicions de base de dades que poden resultar confusos al principi, així que és millor anar pas a pas i veure com es tradueix cada element a la pràctica. Realitza l'exercici pràctic 6 abans de continuar amb el tema de creació de vistes.
+Si estàs aprenent, no intentes “fer-ho tot” el primer dia: crea primer un mòdul mínim que s’instal·le bé, i després vas afegint peces (models → seguretat → vistes → menús). De l'ER al model Odoo conté molts conceptes i definicions de base de dades que poden resultar confusos al principi, així que és millor anar pas a pas i veure com es tradueix cada element a la pràctica. Realitza l'activitat 6 abans de continuar amb el tema de creació de vistes.
 :::
 
 ## Què és un mòdul en Odoo?
@@ -404,7 +404,7 @@ Ara bé, **açò no sol compensar**:
 - Es carrega el contenidor amb fitxers que **no s’utilitzen en execució**.
 - Complica el manteniment i l’enteniment de l’entorn.
 
-Per això, en pràctica, **crear el mòdul a mà és igual de vàlid i molt més net**.  
+Per això, en la pràctica, **crear el mòdul a mà és igual de vàlid i molt més net**.  
 `scaffold` només genera carpetes i fitxers bàsics: no aporta cap funcionalitat extra.
 :::
 
@@ -1342,7 +1342,7 @@ B = (\underline{a_0, a_1})
     > En Odoo: el cas 1:M se soluciona amb `One2many` + `Many2one` en el model fill (`telèfon_id = Many2one('client')`), no amb un camp text repetit. El cas M:M es modela amb `Many2many` o amb un model intermedi explícit si la relació té atributs propis.
 
 
-Aplicat al nostre exemple de la pràctica 6, amb el model de **Music** (atribut multivalent *telèfon*), la traducció queda exactament igual que el patró anterior:
+Aplicat al nostre exemple de l'activitat 6, amb el model de **Music** (atribut multivalent *telèfon*), la traducció queda exactament igual que el patró anterior:
 
 - **Entitat principal (A):** `agrupaciomusical.music` (guarda les dades atòmiques de cada music de la colla).
 - **Taula/Model del multivalent (B):** `agrupaciomusical.music.phone` (una fila per cada telèfon).
@@ -2418,7 +2418,7 @@ Ara bé, convé no confondre dues idees:
 - **participació total**: la línia ha d'estar relacionada obligatòriament amb una factura;
 - **entitat dèbil**: a més de dependre existencialment de la factura, la seua identificació conceptual depén del context de l'entitat pare.
 
-En la pràctica d'Odoo, sovint expliquem els dos conceptes junts perquè el patró capçalera-línies s'hi assembla molt, encara que el model relacional real no sempre reproduïsca tota la teoria ER al peu de la lletra.
+En la activitat d'Odoo, sovint expliquem els dos conceptes junts perquè el patró capçalera-línies s'hi assembla molt, encara que el model relacional real no sempre reproduïsca tota la teoria ER al peu de la lletra.
 
 :::{note}
 **Què significa la doble ratlla, exactament?**
@@ -3079,7 +3079,7 @@ Dissenyar correctament en Odoo utilitzant **models relacionats + herència** en 
 
 Aquesta secció ha sigut una introducció al disseny de models en Odoo, centrada en com les bones pràctiques de normalització es reflecteixen en la manera com Odoo ens obliga a estructurar les dades. No s'ha de prendre com una guia exhaustiva de totes les tècniques de disseny, sinó com un punt de partida per a entendre per què Odoo funciona com funciona i com aprofitar-ho per a crear models robustos i ben estructurats. 
 
-Abans de realitzar l'exercici pràctic 6, anem a veure com es creen les vistes i els permisos d'accés, que són els següents passos després de definir els models.
+Abans de realitzar l'activitat 6, anem a veure com es creen les vistes i els permisos d'accés, que són els següents passos després de definir els models.
 
 ## Crear les vistes
 Les vistes són fitxers XML que defineixen com es mostra la informació a l’usuari. Sense vistes, Odoo no sap com presentar els formularis ni els llistats dels teus models.
@@ -3208,7 +3208,7 @@ Fitxer: `views/alumne_view.xml`
 - `centre_menu_alumnes`: Submenu que enllaça l'acció, mostrant "Alumnes"
 
 
-Ara que tenim una visió general del que fa aquest XML i tot i que encara no coneixem els detalls, anem a veure els permisos d'accés, que són el següent pas després de crear els model y les vistes. Després d'aixo serà el moment de realitzar l'exercici pràctic, on posarem en pràctica tot el que hem vist fins ara sobre la creació de models. Les vistes les abordarem en el proper capítol, on veurem com personalitzar-les i fer-les més amigables per a l'usuari.
+Ara que tenim una visió general del que fa aquest XML i tot i que encara no coneixem els detalls, anem a veure els permisos d'accés, que són el següent pas després de crear els model y les vistes. Després d'aixo serà el moment de realitzar la tasca, on posarem en pràctica tot el que hem vist fins ara sobre la creació de models. Les vistes les abordarem en el proper capítol, on veurem com personalitzar-les i fer-les més amigables per a l'usuari.
 
 ## Permisos: `ir.model.access.csv`
 Odoo té un sistema de seguretat molt estricte.  Fins i tot si has creat un model i les vistes corresponents, **els usuaris no podran accedir fins que no definisques permisos d’accés**. 
@@ -3648,4 +3648,4 @@ Regla ràpida:
 - Primera vegada que poses el mòdul → install
 
 ## Resum del capítol i recomanacions
-En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'Exercici pràctic 6: Creació d’un mòdul bàsic en Odoo per a la colla](../../Annexos/Tema4_prac6_CrearModul.md) per posar en pràctica aquests conceptes.
+En aquest capítol hem vist com crear un mòdul bàsic en Odoo, amb models, vistes i permisos. També hem parlat de les diferències entre reiniciar el servidor, instal·lar i actualitzar un mòdul, i quan usar cada acció. Ara convidria realitzar [l'activitat 6: Creació d’un mòdul bàsic en Odoo per a la colla](../../Annexos/Tema4_prac6_CrearModul.md) per posar en pràctica aquests conceptes.

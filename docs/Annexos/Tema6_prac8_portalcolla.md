@@ -1,6 +1,6 @@
 # Portal de la colla
 
-## Context de la pràctica
+## Context de la tasca
 La colla de dolçaines i tabals vol que els músics puguen consultar les seues dades de les futures actuacions, sense necessitat d'accedir al backend administratiu d'Odoo.  
 Per a fer-ho possible, partirem del mòdul ja existent `agrupaciomusical` i dels coneixements adquirits sobre controladors web, QWeb i la llibreria OWL.  
 
@@ -194,7 +194,7 @@ registry.category("public_components").add(
 
 
 ## Crear la Plantilla d'OWL i enllaçar amb QWeb
-**Objectiu:** Definir la plantilla XML reactiva del component que renderitzarà les dades en bucle (`t-foreach`) i cridar el component des de la pàgina principal de la pràctica.
+**Objectiu:** Definir la plantilla XML reactiva del component que renderitzarà les dades en bucle (`t-foreach`) i cridar el component des de la pàgina principal de la tasca.
 **Instruccions:**
 1) Crea la carpeta `static/src/xml/` dins del teu mòdul.
 2) Crea el fitxer `static/src/xml/actuacionsfutures_template.xml`.
@@ -238,7 +238,7 @@ Recorda que cal indicar a Odoo que ha de compilar i carregar els fitxers de Java
 
 ## Verificació Final i Proves
 
-Abans de donar la pràctica per finalitzada, realitza les següents comprovacions en el teu entorn:
+Abans de donar la tasca per finalitzada, realitza les següents comprovacions en el teu entorn:
 - El botó de "Les meues actuacions" apareix en la home del portal (`/my`).
 - En clicar-lo, obre correctament la URL `/my/actuacionsfutures` sense errors web.
 - La pàgina manté el disseny original d'Odoo gràcies al layout.

@@ -1,7 +1,7 @@
 Desplegament d'Odoo amb Docker
 ==============================
 
-Aquest document cobreix el desplegament complet d’Odoo 19 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, es recomana realitzar l’Exercici pràctic — Desplegament d’Odoo amb Docker Compose, on es pot trobar una proposta pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
+Aquest document cobreix el desplegament complet d’Odoo 19 mitjançant contenidors Docker i Docker Compose. Aquesta metodologia ofereix avantatges significatius en portabilitat, escalabilitat i gestió d’entorns, i és especialment valuosa per al desenvolupament ràpid i els desplegaments professionals. Tot i això, es recomana realitzar la tasca  — Desplegament d’Odoo amb Docker Compose, on es pot trobar una proposta pas a pas per desplegar Odoo amb Docker, incloent scripts d’automatització i configuracions avançades.
 
 ## Introducció
 

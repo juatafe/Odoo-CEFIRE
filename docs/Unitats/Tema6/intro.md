@@ -532,4 +532,4 @@ Quan executem el portal i accedim a la pàgina de les actuacions podem veure tot
 ```
 
 **FINAL**
-Ara és el moment de realitzar l'exercici [Portal de la colla](../../Annexos/Tema6_prac8_portalcolla.md) per a posar en pràctica tot el que hem vist en aquest capítol i assolir els coneixements.
+Ara és el moment de realitzar la tasca [Portal de la colla](../../Annexos/Tema6_prac8_portalcolla.md) per a posar en pràctica tot el que hem vist en aquest capítol i assolir els coneixements.

@@ -1,11 +1,11 @@
 # Afegir servidor de correu a l’entorn Docker d’Odoo
 ## Introducció
-Com hem vist al Capítol 2, quan configurem les dades de l’empresa en Odoo cal definir un servidor de correu d'eixida (SMTP) per a notificacions, factures i validacions. En desenvolupament no és recomanable usar un servidor real: convé utilitzar una ferramenta de simulació que intercepte els correus per a provar plantilles i fluxos sense enviaments reals. En esta pràctica integrarem MailHog per a fer aquesta simulació de manera segura dins de Docker.
+Com hem vist al Capítol 2, quan configurem les dades de l’empresa en Odoo cal definir un servidor de correu d'eixida (SMTP) per a notificacions, factures i validacions. En desenvolupament no és recomanable usar un servidor real: convé utilitzar una ferramenta de simulació que intercepte els correus per a provar plantilles i fluxos sense enviaments reals. En esta activitat integrarem MailHog per a fer aquesta simulació de manera segura dins de Docker.
 
 :::{admonition} Objectius d'aprenentatge
 :class: note
 
-En aquesta pràctica aprendrem a **simular un servidor de correu electrònic** dins del nostre entorn Docker d’Odoo utilitzant **MailHog**.
+En aquesta activitat aprendrem a **simular un servidor de correu electrònic** dins del nostre entorn Docker d’Odoo utilitzant **MailHog**.
 
 MailHog ens permet:
 - Comprovar que Odoo **envia correus correctament** (com factures, notificacions o missatges automàtics).
@@ -28,12 +28,12 @@ Els mostra en una **interfície web** que podrem obrir al navegador.
 
 :::{admonition} Materials i requisits
 :class: important
-- Tenir Docker ja instal·lat (com en la pràctica base del servidor Odoo).
+- Tenir Docker ja instal·lat (com en la tasca base del servidor Odoo).
 - Tindre un projecte amb el fitxer `docker-compose.yml` funcional.
 - Accés a Odoo des de `http://localhost:8069`.
 :::
 
-## Passos de la pràctica
+## Passos de la tasca
 
 ### 🔹 Pas 1: Entendre què farem
 Afegirem un **nou servei Docker** al nostre projecte, anomenat `mailhog`.

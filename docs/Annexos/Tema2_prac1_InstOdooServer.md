@@ -1,13 +1,13 @@
 # Instal·lació i configuració d'Odoo en Ubuntu Server
 ## Introducció
 
-En aquest exercici pràctic aprendràs a instal·lar i configurar **Odoo**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Odoo és una plataforma modular que permet gestionar diferents aspectes d'una empresa: vendes, compres, inventari, comptabilitat, recursos humans, etc.
+En aquesta tasca aprendràs a instal·lar i configurar **Odoo**, un dels sistemes de gestió empresarial (ERP) més populars i utilitzats actualment. Odoo és una plataforma modular que permet gestionar diferents aspectes d'una empresa: vendes, compres, inventari, comptabilitat, recursos humans, etc.
 
 Com a futur tècnic superior en Desenvolupament d'Aplicacions Multiplataforma, és important que coneguis aquestes eines, ja que moltes empreses les utilitzen per gestionar els seus processos de negoci. A més, treballaràs amb tecnologies com Linux, bases de dades PostgreSQL i aplicacions web, competències clau en el teu perfil professional.
 
 :::{admonition} Objectius d'aprenentatge
 :class: note
-Al final d'aquesta pràctica hauràs après a:
+Al final d'aquesta tasca hauràs après a:
 
 - **Configurar una màquina virtual** amb Ubuntu Server 24.04 LTS
 - **Instal·lar i configurar un sistema ERP** (Odoo 19) en un entorn Linux
@@ -466,7 +466,7 @@ Envia un únic fitxer (PDF ) que inclogua:
 
 2. Respostes breus (2-4 línies cadascuna) a LES DUES preguntes següents:
    a) Com podríeu utilitzar aquesta instal·lació per introduir conceptes d'instal·lació i gestió de serveis en altres mòduls (que no imparteixin SGE)? Indica activitats concretes o fragments pràctics per a classe.
-   b) Quins conceptes clau de sistemes operatius i administració de serveis es poden treballar amb aquesta pràctica? Proposa almenys 3 conceptes i com els introduiries a classe.
+   b) Quins conceptes clau de sistemes operatius i administració de serveis es poden treballar amb aquesta tasca? Proposa almenys 3 conceptes i com els introduiries a classe.
 
 Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 línies).
 
@@ -483,13 +483,13 @@ Explicita, si escau, una incidència principal trobada i com l'has resolt (1-3 l
 
 - **Fitxer**: PDF amb el nom `Cognom_Nom_Practica1_Odoo_short.pdf`.
 - **Contingut**: 1-2 captures + respostes a les dues preguntes + (opcional) una línia sobre una incidència.
-- **On lliurar**: Aules, secció de la pràctica.
+- **On lliurar**: Aules, secció de les tasques.
 - **Termini**: Consulta la data a Aules.
 
 :::{admonition} Consells ràpids
 :class: tip
 - Captures clares: enfoca la finestra del navegador o el terminal, sense informació innecessària.
-- Sigues concret en les respostes: proposa una activitat pràctica i indica els conceptes que s'introdueixen.
+- Sigues concret en les respostes: proposa una activitat i indica els conceptes que s'introdueixen.
 - Documenta una incidència si n'hi ha (fes-ho en 1 línia).
 :::
 :::{admonition} Recursos addicionals

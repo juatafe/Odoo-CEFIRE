@@ -74,7 +74,7 @@ Punts clau:
 - La `password` ha de ser la clau API (no la contrasenya real).
 
 ## Operacions bàsiques (CRUD)
-En aquesta pràctica, en lloc d'utilitzar models genèrics com res.partner, s'utilitzaran models del projecte propi per a reforçar l'aprenentatge contextualitzat.
+En aquesta tasca, en lloc d'utilitzar models genèrics com res.partner, s'utilitzaran models del projecte propi per a reforçar l'aprenentatge contextualitzat.
 
 ### Lectura (`search_read`)
 Serveix per buscar registres i obtenir els seus camps en una sola crida.
@@ -99,7 +99,7 @@ Crea un nou registre.
 `res.partner` (contactes), `sale.order` (comandes), `product.product` (productes), `account.move` (factures).
 ```
 
-## Codi de la pràctica (main.py)
+## Codi de la tasca (main.py)
 
 L’script es guardarà a `apiOdoo/main.py` i utilitza el `config.yml` d’eixa carpeta.
 

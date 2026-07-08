@@ -1,7 +1,7 @@
 # Vistes per als models Grup i Acte
 ## Objectiu de l'exercici
 
-Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta pràctica és **completar el mòdul `agrupaciomusical`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
+Este exercici és la continuació directa de l’anterior. L’objectiu d’aquesta tasca és **completar el mòdul `agrupaciomusical`** aplicant als altres models el que ja s’ha treballat prèviament amb les vistes i els menús, concretament:
 
 - `agrupaciomusical.grup`
 - `agrupaciomusical.acte`

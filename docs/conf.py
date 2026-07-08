@@ -378,7 +378,7 @@ latex_elements = {
 
 \makeatletter
 \g@addto@macro\appendix{%
-  \renewcommand{\chaptername}{Exercici pràctic}
+  \renewcommand{\chaptername}{Activitat}
 }
 \makeatother
 
